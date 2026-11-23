@@ -1,0 +1,33 @@
+plugins { id "com.android.application" version "8.9.1" }
+
+android {
+    namespace "io.github.kimhoring.speakingcards"
+    compileSdk 35
+    defaultConfig {
+        applicationId "io.github.kimhoring.speakingcards"
+        minSdk 26
+        targetSdk 35
+        versionCode 1
+        versionName "1.0"
+    }
+    compileOptions { sourceCompatibility JavaVersion.VERSION_17; targetCompatibility JavaVersion.VERSION_17 }
+    signingConfigs {
+        release {
+            if (System.getenv("KS_FILE")) {
+                storeFile file(System.getenv("KS_FILE"))
+                storeType "PKCS12"
+                storePassword System.getenv("KS_PASS")
+                keyAlias "app"
+                keyPassword System.getenv("KS_PASS")
+            }
+        }
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            if (System.getenv("KS_FILE")) signingConfig signingConfigs.release
+        }
+    }
+    androidResources { noCompress "woff2" }
+    lint { abortOnError false }
+}

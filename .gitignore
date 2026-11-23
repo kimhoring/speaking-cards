@@ -1,0 +1,11 @@
+*.pdf
+keystore/
+/dist/
+/app/
+.claude/
+__pycache__/
+src/cards.json
+src/static/fonts/
+android/app/src/main/assets/
+android/**/build/
+android/.gradle/

@@ -1,0 +1,65 @@
+name: 안드로이드 앱
+# 앱 껍데기(android 폴더)를 고쳤을 때만 새 APK 를 만든다
+on:
+  push:
+    branches: [main]
+    paths: ["android/**", ".github/workflows/apk.yml", ".github/emu.sh"]
+  workflow_dispatch:
+permissions: { contents: read }
+concurrency: { group: apk, cancel-in-progress: true }
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: { python-version: "3.12" }
+      - uses: actions/setup-java@v4
+        with: { distribution: temurin, java-version: "17" }
+      - uses: gradle/actions/setup-gradle@v4
+        with: { gradle-version: "8.11.1" }
+      - name: 내용 묶음
+        run: |
+          bash src/fonts.sh
+          # 내장 내용의 번호는 커밋 시각. 이후 배포되는 내용이 항상 더 새롭다
+          BUILD_TIME=$(git log -1 --format=%ct) python src/build.py
+          mkdir -p android/app/src/main/assets/www
+          cp -r app/index.html app/version.json app/fonts android/app/src/main/assets/www/
+      - name: 시험용 빌드 (옛 내용을 넣어 내부 업데이트를 시험)
+        run: |
+          cd android/app/src/main/assets/www
+          sed -i -E 's/"n": [0-9]+/"n": 1000/' version.json
+          sed -i 's/const BUILD = [0-9]*/const BUILD = 1000/' index.html
+          python3 - <<'PY'
+          import json, hashlib
+          v = json.load(open("version.json")); b = open("index.html", "rb").read()
+          v["files"]["index.html"] = {"sha256": hashlib.sha256(b).hexdigest(), "size": len(b)}
+          json.dump(v, open("version.json", "w"))
+          PY
+          cd $GITHUB_WORKSPACE/android && gradle --no-daemon -q :app:assembleDebug
+          cp app/build/outputs/apk/debug/app-debug.apk ../test.apk
+          ls -la ../test.apk
+      - uses: actions/upload-artifact@v4
+        with: { name: apk, path: "*.apk" }
+  emulator:
+    needs: build
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/download-artifact@v4
+        with: { name: apk }
+      - run: |
+          echo 'KERNEL=="kvm", GROUP="kvm", MODE="0666", OPTIONS+="static_node=kvm"' | sudo tee /etc/udev/rules.d/99-kvm4all.rules
+          sudo udevadm control --reload-rules && sudo udevadm trigger --name-match=kvm
+      - uses: reactivecircus/android-emulator-runner@v2
+        with:
+          api-level: 34
+          target: google_apis
+          arch: x86_64
+          profile: pixel_6
+          disable-animations: true
+          script: bash .github/emu.sh
+      - if: always()
+        uses: actions/upload-artifact@v4
+        with: { name: emulator, path: out }

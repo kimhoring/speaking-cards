@@ -1,0 +1,447 @@
+<meta name="claude:viewport-fit-sides" content="cover">
+<title>3초 만능문장</title>
+<!--FONT-->
+<style>/*__CSS__*/</style>
+<div id="app"></div>
+<script>
+"use strict";
+const SECS = /*__DATA__*/[];
+const PARTS = {"PART 1":"기본 동사","PART 2":"형용사·부사","PART 3":"핵심 구문","PART 4":"직장·학교·기술","PART 5":"쇼핑·주거·트렌드·여행·환경"};
+const ALL = new Map();              // id -> 대표 카드 (같은 문장은 진도를 공유)
+SECS.forEach(s => s.cards.forEach(c => { c.sec = s; if (!ALL.has(c.id)) ALL.set(c.id, c); }));
+const TOTAL = ALL.size;
+const ALIAS = {"79e8c7": "0ed83d", "ed21fb": "509c9e"};   // 문장을 고쳐도 진도를 잇는다 (옛 id -> 새 id)
+const uniq = a => { const s = new Set(); return a.filter(c => !s.has(c.id) && s.add(c.id)); };
+
+/* ───────── 저장 ───────── */
+const KEY = "mn-speaking-v1";
+const DEF = {goal:20, order:"seq", sec:3, auto:1, rate:.95, voice:"", dir:"ko", gap:3, rep:2, look:"paper", st:0};
+const IV = [0,1,3,7,14,30,60];      // 상자별 복습 간격(일)
+const blank = () => ({v:1, c:{}, s:{}, d:{}, set:{...DEF}, r:0});
+const N = window.Native || null;     // 안드로이드 앱 안에서만 존재
+const BUILD = /*__BUILD__*/0;
+let S = load();
+function load(){
+  for (const f of [() => localStorage.getItem(KEY), () => N && N.load()]) try { const o = JSON.parse(f()); if (valid(o)) return fix({...blank(), ...o, set:{...DEF, ...o.set}}); } catch(e){}
+  return blank();
+}
+function fix(o){ for (const a in ALIAS) for (const k of ["c","s"]) if (o[k][a]) { if (!o[k][ALIAS[a]]) o[k][ALIAS[a]] = o[k][a]; delete o[k][a]; } return o; }
+function valid(o){ return !!o && o.v === 1 && typeof o.c === "object" && typeof o.s === "object" && typeof o.d === "object" && !!o.c && !!o.s && !!o.d; }
+function save(){
+  const j = JSON.stringify(S);
+  try { localStorage.setItem(KEY, j); } catch(e){ }
+  if (N) N.save(j);
+  cloudSave();
+}
+const ROLL = 4*3600e3;              // 하루 기준은 새벽 4시
+function dayNo(t = Date.now()){ const d = new Date(t - ROLL); return Math.floor(Date.UTC(d.getFullYear(), d.getMonth(), d.getDate())/864e5); }
+const C = id => S.c[id];            // [상자, 복습일, 틀린횟수, 시각]
+const isDue = id => C(id) && C(id)[1] <= dayNo();
+const known = id => C(id) && C(id)[0] >= 3;
+const starred = id => !!(S.s[id] && S.s[id][0]);
+const weak = id => C(id) && C(id)[2] > 0 && C(id)[0] < 3;
+function merge(a, b){
+  const r = Math.max(a.r||0, b.r||0), o = blank(); o.r = r;
+  for (const x of [a, b]) {
+    for (const k in x.c) if (Array.isArray(x.c[k]) && x.c[k][3] >= r && (!o.c[k] || x.c[k][3] > o.c[k][3])) o.c[k] = x.c[k];
+    for (const k in x.s) if (Array.isArray(x.s[k]) && x.s[k][1] >= r && (!o.s[k] || x.s[k][1] > o.s[k][1])) o.s[k] = x.s[k];
+    if ((x.r||0) === r) for (const k in x.d) { const p = o.d[k] || [0,0], q = x.d[k]; o.d[k] = [Math.max(p[0], +q[0]||0), Math.max(p[1], +q[1]||0)]; }
+  }
+  const A = {...DEF, ...a.set}, B = {...DEF, ...b.set};
+  o.set = (B.st||0) > (A.st||0) ? B : A;
+  return fix(o);
+}
+
+/* 계정 동기화: claude.ai 에서 열었을 때만. 그 밖에서는 기기에만 저장 */
+let cloud = null, cloudT = 0, cloudBusy = false, cloudAgain = false;
+async function cloudInit(){
+  if (!window.claude || !window.claude.use) return;
+  try {
+    const [db, user] = await Promise.all([window.claude.use("db"), window.claude.use("user")]);
+    if (!db || !user) return;
+    const id = await user.id(); if (!id) return;
+    const ref = db.collection("data/users/" + id).doc("progress");
+    const snap = await ref.get();
+    const raw = snap.exists && snap.data();
+    if (raw && raw.json) { const o = JSON.parse(raw.json); if (valid(o)) { S = merge(S, o); try { localStorage.setItem(KEY, JSON.stringify(S)); } catch(e){} applyLook(); if (!sess && !L.on) render(); } }
+    cloud = ref; cloudSave();
+  } catch(e){ }
+}
+function cloudSave(){ if (!cloud) return; clearTimeout(cloudT); cloudT = setTimeout(cloudPush, 2500); }
+async function cloudPush(){
+  if (!cloud) return;
+  if (cloudBusy) { cloudAgain = true; return; }
+  cloudBusy = true;
+  try { await cloud.set({json: JSON.stringify(S)}); } catch(e){ }
+  cloudBusy = false;
+  if (cloudAgain) { cloudAgain = false; cloudSave(); }
+}
+async function cloudPull(){
+  if (!cloud || sess || L.on) return;
+  try { const n = await cloud.get(), raw = n.exists && n.data(); if (raw && raw.json) { const o = JSON.parse(raw.json); if (valid(o)) { S = merge(S, o); save(); applyLook(); if (!sess && !L.on) render(); } } } catch(e){ }
+}
+document.addEventListener("visibilitychange", () => { if (document.hidden) { clearTimeout(cloudT); cloudPush(); } else cloudPull(); });
+
+/* ───────── 소리 ───────── */
+const TTS = N ? null : "speechSynthesis" in window && "SpeechSynthesisUtterance" in window ? window.speechSynthesis : null;
+let voices = [];
+function readVoices(){ if (TTS) try { voices = TTS.getVoices() || []; } catch(e){} }
+readVoices(); if (TTS) try { TTS.addEventListener("voiceschanged", readVoices); } catch(e){}
+const enVoices = () => voices.filter(v => /^en[-_]/i.test(v.lang));
+function pick(lang){
+  if (lang === "en") { const L2 = enVoices(); return L2.find(v => v.voiceURI === S.set.voice) || L2.find(v => /^en[-_]US/i.test(v.lang) && /google|natural|siri|samantha|aria|jenny/i.test(v.name)) || L2.find(v => /^en[-_]US/i.test(v.lang)) || L2[0]; }
+  return voices.find(v => /^ko/i.test(v.lang));
+}
+let say = 0, ttsEnd = null;
+window.__tts = id => { if (ttsEnd && ttsEnd.id === id) ttsEnd.end(); };
+window.__noVoice = l => toast((l === "en" ? "영어" : "한국어") + " 음성이 없어요. 휴대폰 설정의 텍스트 음성 변환에서 내려받아 주세요.");
+function hush(){ say++; if (N) N.hush(); if (TTS) try { TTS.cancel(); } catch(e){} }
+function speak(text, lang, done){
+  hush(); const my = say; let fin = false;
+  const end = () => { if (fin) return; fin = true; clearTimeout(wd); if (my === say && done) done(); };
+  // 일부 휴대폰은 종료 신호를 주지 않으므로 시간으로도 넘긴다
+  const wd = setTimeout(end, 2500 + text.length * 130 / S.set.rate);
+  if (N) { ttsEnd = {id:String(my), end}; N.speak(text.replace(/\(.*?\)/g, ""), lang, lang === "en" ? S.set.rate : 1.05, String(my)); return; }
+  if (!TTS) return;
+  const u = new SpeechSynthesisUtterance(text.replace(/\(.*?\)/g, ""));
+  u.lang = lang === "en" ? "en-US" : "ko-KR";
+  const v = pick(lang); if (v) u.voice = v;
+  u.rate = lang === "en" ? S.set.rate : 1.05;
+  u.onend = end; u.onerror = end;
+  window.__u = u;                    // 가비지 컬렉션으로 onend 가 사라지는 현상 방지
+  setTimeout(() => { if (my === say) try { TTS.resume(); TTS.speak(u); } catch(e){ end(); } }, 60);
+}
+
+/* ───────── 화면 도우미 ───────── */
+const app = document.getElementById("app");
+function h(tag, props, ...kids){
+  const e = document.createElement(tag);
+  for (const k in props || {}) {
+    const v = props[k]; if (v == null || v === false) continue;
+    if (k === "cls") e.className = v; else if (k.startsWith("on")) e.addEventListener(k.slice(2), v);
+    else if (k === "value" || k === "disabled" || k === "checked") e[k] = v; else e.setAttribute(k, v);
+  }
+  for (const c of kids.flat(Infinity)) if (c != null && c !== false) e.append(c.nodeType ? c : document.createTextNode(String(c)));
+  return e;
+}
+const ICON = {
+  home:"M4 6h13a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H4zM8 6V3h13v12M8 11h7M8 15h4", ear:"M4 14v-2a8 8 0 0 1 16 0v2M4 14h3v6H5a1 1 0 0 1-1-1zM20 14h-3v6h2a1 1 0 0 0 1-1z",
+  list:"M8 6h12M8 12h12M8 18h12M4 6h.01M4 12h.01M4 18h.01", log:"M5 20V10M12 20V4M19 20v-7", x:"M6 6l12 12M18 6L6 18", undo:"M9 7L4 12l5 5M4 12h10a6 6 0 0 1 6 6",
+  star:"M12 3.5l2.6 5.4 5.9.8-4.3 4.1 1 5.9-5.2-2.8-5.2 2.8 1-5.9-4.3-4.1 5.9-.8z", snd:"M4 9v6h4l5 4V5L8 9zM16.5 9a4 4 0 0 1 0 6M19 6.5a8 8 0 0 1 0 11",
+  back:"M15 5l-7 7 7 7", prev:"M18 6l-9 6 9 6zM6 6v12", next:"M6 6l9 6-9 6zM18 6v12", play:"M8 5l11 7-11 7z", pause:"M8 5v14M16 5v14", go:"M9 5l7 7-7 7", ox:"M6 6l12 12M18 6L6 18", tri:"M12 4.5L20.5 19.5H3.5z", o:"M12 3.5c5 0 8.6 3.6 8.5 8.6-.1 5-3.8 8.5-8.7 8.4-4.9-.1-8.4-3.7-8.3-8.6C3.600 7 7.200 3.500 12.600 3.600"
+};
+function ic(n, on){ const s = document.createElementNS("http://www.w3.org/2000/svg","svg"); s.setAttribute("viewBox","0 0 24 24"); s.setAttribute("class","i"+(on?" on":"")); s.setAttribute("aria-hidden","true"); const p = document.createElementNS(s.namespaceURI,"path"); p.setAttribute("d",ICON[n]); s.append(p); return s; }
+function marked(c){ const out = []; let p = 0; for (const [a,b] of c.h) { out.push(c.en.slice(p,a), h("mark",{},c.en.slice(a,b))); p = b; } out.push(c.en.slice(p)); return out; }
+function toast(t){ document.querySelectorAll(".toast").forEach(e => e.remove()); const e = h("div",{cls:"toast",role:"status"},t); document.body.append(e); setTimeout(() => e.remove(), 2200); }
+function seg(opts, cur, fn, label){ return h("div",{cls:"seg",role:"group","aria-label":label}, opts.map(([v,t]) => h("button",{"aria-pressed":String(v===cur),onclick:() => fn(v)},h("span",{},t)))); }
+function applyLook(){ document.documentElement.setAttribute("data-look", S.set.look); if (N) { const b = getComputedStyle(document.documentElement); N.bars(b.getPropertyValue("--bg").trim(), b.colorScheme.includes("dark")); } }
+function setOpt(k, v){ S.set[k] = v; S.set.st = Date.now(); save(); applyLook(); if (N && L.on) N.listenOpts(S.set.gap, S.set.rep, S.set.rate); render(); }
+function starBtn(c, after){ const on = starred(c.id); return h("button",{cls:"ib star","aria-label":"별표","aria-pressed":String(on),onclick:e => { e.stopPropagation(); S.s[c.id] = [starred(c.id)?0:1, Date.now()]; save(); const n = starBtn(c, after); e.currentTarget.replaceWith(n); if (after) after(); }}, ic("star",on)); }
+const sndBtn = c => h("button",{cls:"ib","aria-label":"발음 듣기",onclick:e => { e.stopPropagation(); if (!TTS && !N) toast("이 화면에서는 소리를 낼 수 없어요. Chrome이나 Safari에서 열어 주세요."); speak(c.en,"en"); }}, ic("snd"));
+function shuffle(a){ a = a.slice(); for (let i = a.length-1; i > 0; i--) { const j = Math.floor(Math.random()*(i+1)); [a[i],a[j]] = [a[j],a[i]]; } return a; }
+
+let tab = "home", openSec = null, veil = true, query = "", sess = null;
+function go(t){ tab = t; openSec = null; if (t !== "ear") stopListen(); hush(); render(); }
+function render(){
+  if (sess) return renderStudy();
+  const keep = app.querySelector("main"), y = keep && keep.dataset.k === tab+openSec ? keep.scrollTop : 0;
+  const body = {home:viewHome, ear:viewEar, list:openSec ? viewSec : viewList, log:viewLog}[tab]();
+  const m = h("main",{cls:"wrap","data-k":tab+openSec}, body);
+  app.replaceChildren(m, h("nav",{"aria-label":"메뉴"}, [["home","오늘"],["ear","듣기"],["list","단원"],["log","기록"]].map(([k,t]) => h("button",{"aria-current":tab===k?"page":null,onclick:() => go(k)}, h("span",{},t)))));
+  m.scrollTop = y;
+}
+
+/* ───────── 오늘 ───────── */
+function plan(extra = 0){
+  const due = [...ALL.values()].filter(c => isDue(c.id));
+  const fresh0 = [...ALL.values()].filter(c => !C(c.id));
+  const left = extra || Math.max(0, S.set.goal - ((S.d[dayNo()]||[0])[0]));
+  return {due, fresh:(S.set.order === "mix" ? shuffle(fresh0) : fresh0).slice(0, left), rest:fresh0.length};
+}
+function mixQueue(due, fresh){   // 복습 사이사이에 새 카드를 섞는다
+  due = shuffle(due); const out = [], n = due.length + fresh.length; let i = 0, j = 0;
+  for (let k = 0; k < n; k++) { if (j < fresh.length && (i >= due.length || j/fresh.length <= i/due.length)) out.push(fresh[j++]); else out.push(due[i++]); }
+  return out;
+}
+function streak(){ let d = dayNo(), n = 0; if (!S.d[d]) d--; while (S.d[d]) { n++; d--; } return n; }
+const holes = () => h("div",{cls:"holes"},h("i",{}),h("i",{}));
+const lvl = id => known(id) ? "l2" : C(id) ? "l1" : "";
+function boxes(list){ return h("div",{cls:"grid"}, list.map(c => h("i",{cls:lvl(c.id)}))); }
+let queue = null;                 // 홈에 보이는 첫 카드와 실제 시작 카드를 맞춘다
+function viewHome(){
+  const p = plan(), n = p.due.length + p.fresh.length, today = (S.d[dayNo()]||[0,0])[1], A = [...ALL.values()];
+  const kn = A.filter(c => known(c.id)).length, wk = A.filter(c => weak(c.id)), st = A.filter(c => starred(c.id)), seen = A.filter(c => C(c.id));
+  const min = Math.max(1, Math.round(n*14/60)), dt = new Date(Date.now()-ROLL);
+  queue = n ? mixQueue(p.due,p.fresh) : p.rest ? plan(10).fresh : null;
+  const c = queue && queue[0], name = n ? "오늘 학습" : "추가 학습";
+  const parts = [p.due.length && `복습 ${p.due.length}개`, p.fresh.length && `새 문장 ${p.fresh.length}개`].filter(Boolean).join(", ");
+  const head = n ? (today ? `${parts} 남았어요` : `오늘은 ${parts}`) : p.rest ? "오늘 몫을 다 했어요" : "모든 문장을 한 번 이상 봤어요";
+  const run = () => begin(queue,name);
+  return [
+    h("div",{cls:"hello"}, h("p",{cls:"num"},`${dt.getMonth()+1}월 ${dt.getDate()}일 ${"일월화수목금토"[dt.getDay()]}요일${streak() > 1 ? ` · ${streak()}일째` : ""}`),
+      h("h1",{},head), h("p",{},n ? `${min}분쯤 걸려요` : p.rest ? "더 하고 싶으면 새 문장 10개를 미리 볼 수 있어요" : "복습할 때가 되면 여기에 다시 나타나요")),
+    c && h("div",{cls:"start"}, h("button",{cls:"sheet deck",onclick:run}, holes(), h("div",{cls:"in"}, h("span",{cls:"lab"},c.sec.name), h("span",{cls:S.set.dir === "ko" ? "ko" : "en"},S.set.dir === "ko" ? c.ko : S.set.dir === "en" ? c.en : "잘 듣고 뜻을 떠올려 보세요"))),
+      h("button",{cls:"btn p",id:"start",onclick:run}, n ? (today ? "이어서 하기" : "시작하기") : "10개 더 하기")),
+    h("section",{}, h("h2",{},"카드 앞면"), seg([["ko","한국어"],["en","영어"],["ear","소리만"]], S.set.dir, v => setOpt("dir",v), "카드 앞면")),
+    h("section",{}, h("h2",{},"잠깐 짬이 날 때"), h("div",{cls:"rows num"},
+      [["자주 막히는 문장",wk.length+"개",wk.length,() => begin(shuffle(wk).slice(0,20),"막히는 문장")],["별표한 문장",st.length+"개",st.length,() => begin(shuffle(st).slice(0,30),"별표한 문장")],["아무거나 열 장","",1,() => begin(shuffle(seen.length >= 10 ? seen : A).slice(0,10),"아무거나 열 장")]]
+        .map(([t,d,ok,f]) => h("button",{cls:"row",disabled:!ok,onclick:f}, h("span",{cls:"g"},t), h("span",{cls:"d"},d), ic("go"))))),
+    h("section",{cls:"boxes num"}, h("div",{cls:"top"}, h("h1",{style:"font-size:20px"},"암기 체크"), h("span",{},`${kn} / ${TOTAL}`)),
+      h("div",{cls:"key"}, h("span",{},h("i",{}),"아직"), h("span",{},h("i",{cls:"l1"}),"외우는 중"), h("span",{},h("i",{cls:"l2"}),"외움")),
+      Object.keys(PARTS).map(k => { const cs = uniq(SECS.filter(s => s.part===k).flatMap(s => s.cards)); return h("button",{onclick:() => go("list"),"aria-label":`${PARTS[k]} 단원 보기`}, h("div",{cls:"cap"},h("span",{},PARTS[k]),h("span",{},`${cs.filter(c => known(c.id)).length} / ${cs.length}`)), boxes(cs)); }))
+  ];
+}
+
+/* ───────── 학습 ───────── */
+function begin(q, name){
+  q = uniq(q); if (!q.length) return;
+  stopListen();
+  sess = {q, i:0, name, total:q.length, done:0, res:{b:0,m:0,g:0}, undo:[], again:new Set(), missed:[]};
+  if (location.hash !== "#study") location.hash = "study";
+  newCard();
+}
+function quit(){ if (!sess) return; clearTimers(); hush(); sess = null; if (location.hash === "#study") history.back(); render(); applyPatch(); }
+addEventListener("hashchange", () => { if (location.hash !== "#study" && sess) { clearTimers(); hush(); sess = null; render(); } });
+let tmr = 0;
+function clearTimers(){ clearTimeout(tmr); }
+function newCard(){ clearTimers(); hush(); Object.assign(sess,{flip:false,hint:0,late:false,noTimer:false}); render(); }
+function skeleton(en){ return en.replace(/[A-Za-zé']+/g, w => w.length < 2 ? w : w[0] + "_".repeat(w.length-1)); }
+function nextBox(c, g){   // -> [상자, 며칠 뒤]
+  const s = C(c.id), b = s ? s[0] : -1, notDue = s && s[1] > dayNo();
+  if (g === "b") return [0,0];
+  if (notDue) return [b, s[1]-dayNo()];           // 미리 연습한 것은 일정을 당기거나 늘리지 않음
+  if (g === "m") { const nb = Math.max(1,b); return [nb, Math.max(1, Math.ceil(IV[nb]/2))]; }
+  const nb = b < 0 ? 2 : Math.min(6, b+1); return [nb, IV[nb]];
+}
+const when = n => n === 0 ? "잠시 후" : n === 1 ? "내일" : n + "일 뒤";
+function grade(g){
+  if (!sess || !sess.flip) return;
+  const c = sess.q[sess.i], s = C(c.id), dn = dayNo(), day = S.d[dn] || [0,0];
+  sess.undo.push({i:sess.i, q:sess.q.slice(), c:s && s.slice(), id:c.id, day:S.d[dn] && day.slice(), dn, done:sess.done, res:{...sess.res}, again:new Set(sess.again), missed:sess.missed.slice()});
+  const [b,n] = nextBox(c,g);
+  S.c[c.id] = [b, dn+n, (s?s[2]:0) + (g==="b"?1:0), Date.now()];
+  S.d[dn] = [day[0] + (s?0:1), day[1]+1];
+  sess.res[g]++;
+  if (g === "b") { sess.q.splice(Math.min(sess.q.length, sess.i+5),0,c); if (!sess.missed.includes(c)) sess.missed.push(c); }
+  else if (g === "m" && !sess.again.has(c.id) && (!s || s[0] <= 1)) { sess.again.add(c.id); sess.q.splice(Math.min(sess.q.length, sess.i+9),0,c); }
+  sess.i++; save();
+  if (navigator.vibrate) try { navigator.vibrate(8); } catch(e){}
+  newCard();
+}
+function undo(){
+  const u = sess.undo.pop(); if (!u) return;
+  if (u.c) S.c[u.id] = [u.c[0],u.c[1],u.c[2],Date.now()]; else delete S.c[u.id];
+  if (u.day) S.d[u.dn] = u.day; else delete S.d[u.dn];
+  Object.assign(sess,{i:u.i,q:u.q,res:u.res,again:u.again,missed:u.missed}); save(); newCard();
+}
+function flip(){
+  if (!sess || sess.flip || sess.i >= sess.q.length) return;
+  clearTimers(); sess.flip = true; renderStudy();
+  if (S.set.auto || S.set.dir === "ear") speak(sess.q[sess.i].en,"en");
+}
+function renderStudy(){
+  clearTimers();
+  if (sess.i >= sess.q.length) return renderDone();
+  const c = sess.q[sess.i], d = S.set.dir, f = sess.flip, left = sess.q.length - sess.i;
+  const expr = () => h("div",{cls:"expr"}, h("b",{},c.x), h("span",{},c.m));
+  const maxHint = d === "en" ? 1 : 2, timed = !f && d === "ko" && S.set.sec > 0;
+  const bar = h("i",{}), tm = timed && !sess.noTimer ? h("div",{cls:"tm"},bar) : null;
+  let body;
+  if (!f) {
+    if (d === "ko") body = [h("p",{cls:"ko"},c.ko), tm, sess.hint >= 1 && h("div",{cls:"expr"},h("b",{},c.x),h("span",{},c.m)), sess.hint >= 2 && h("p",{cls:"hint"},skeleton(c.en)), h("p",{cls:"late",hidden:sess.late?null:""},"")];
+    else if (d === "en") body = [h("p",{cls:"en"},c.en), sess.hint >= 1 && expr()];
+    else body = [h("p",{cls:"ko"},"잘 듣고 뜻을 떠올려 보세요"), sess.hint >= 1 && h("p",{cls:"hint"},skeleton(c.en)), sess.hint >= 2 && h("p",{cls:"en"},c.en)];
+  } else body = [h("p",{cls:"ko small"},c.ko), h("p",{cls:"en",lang:"en"},marked(c)), expr()];
+  const face = h("div",{cls:"face",tabindex:"0",role:"button","aria-label":f?"정답":"눌러서 정답 보기"},
+    holes(),
+    h("div",{cls:"hd"}, h("span",{cls:"lab"}, c.sec.name), (f || d !== "ko") && sndBtn(c), starBtn(c)),
+    h("div",{cls:"bd"}, h("div",{},body)),
+    h("span",{cls:"tag g"},ic("o")), h("span",{cls:"tag b"},ic("ox")));
+  const iv = g => when(nextBox(c,g)[1]);
+  const acts = f
+    ? h("div",{cls:"acts a"}, h("button",{cls:"gr b",onclick:() => grade("b")},ic("ox"),"다시",h("span",{},iv("b"))), h("button",{cls:"gr m",onclick:() => grade("m")},ic("tri"),"애매함",h("span",{},iv("m"))), h("button",{cls:"gr g",onclick:() => grade("g")},ic("o"),"바로 나옴",h("span",{},iv("g"))))
+    : h("div",{cls:"acts q"}, h("button",{cls:"btn s",disabled:sess.hint>=maxHint,onclick:() => { sess.hint++; sess.noTimer = true; renderStudy(); }},"힌트"), h("button",{cls:"btn p",onclick:flip},"정답 보기"));
+  app.replaceChildren(h("div",{cls:"study wrap"},
+    h("div",{cls:"sbar"}, h("button",{cls:"ib","aria-label":"그만하기",onclick:quit},ic("x")), h("span",{cls:"num"},`${left}장 남음`), h("button",{cls:"ib","aria-label":"되돌리기",disabled:!sess.undo.length,onclick:undo},ic("undo"))),
+    h("div",{cls:"stack"},face), acts));
+  if (timed && !sess.late && !sess.noTimer) {
+    const ms = S.set.sec*1000;
+    if (bar.animate) bar.animate([{transform:"scaleX(1)"},{transform:"scaleX(0)"}],{duration:ms,fill:"forwards"});
+    tmr = setTimeout(() => { sess.late = true; const l = face.querySelector(".late"); if (l) { l.textContent = `${S.set.sec}초가 지났어요. 그래도 소리 내어 말해 보세요`; l.hidden = false; } }, ms);
+  } else if (timed) bar.style.width = "0";
+  const lt = face.querySelector(".late"); if (lt) { lt.textContent = `${S.set.sec}초가 지났어요. 그래도 소리 내어 말해 보세요`; if (!timed) lt.hidden = true; }
+  if (!f && d === "ear" && !sess.hint) speak(c.en,"en");
+  swipe(face);
+}
+function swipe(el){
+  let x0 = 0, y0 = 0, dx = 0, on = false, moved = false;
+  const tg = el.querySelector(".tag.g"), tb = el.querySelector(".tag.b");
+  el.addEventListener("pointerdown", e => { if (e.target.closest("button")) return; on = true; moved = false; x0 = e.clientX; y0 = e.clientY; dx = 0; });
+  el.addEventListener("pointermove", e => {
+    if (!on) return; dx = e.clientX-x0;
+    if (Math.abs(dx) > 8 || Math.abs(e.clientY-y0) > 8) moved = true;
+    if (!sess || !sess.flip || Math.abs(dx) < 12) return;
+    el.style.transform = `translateX(${dx}px) rotate(${dx/40}deg)`;
+    tg.style.opacity = dx > 30 ? Math.min(1,dx/100) : 0; tb.style.opacity = dx < -30 ? Math.min(1,-dx/100) : 0;
+  });
+  const end = cancel => () => {
+    if (!on) return; on = false; el.style.transform = ""; tg.style.opacity = tb.style.opacity = 0;
+    if (cancel || !sess) return;
+    if (sess.flip) { if (dx > 90) grade("g"); else if (dx < -90) grade("b"); }
+    else if (!moved) flip();
+  };
+  el.addEventListener("pointerup", end(false)); el.addEventListener("pointercancel", end(true)); el.addEventListener("pointerleave", end(true));
+}
+addEventListener("keydown", e => {
+  if (!sess || e.target.closest("input,textarea,select") || sess.i >= sess.q.length) return;
+  if ((e.key === " " || e.key === "Enter") && !sess.flip && !e.target.closest("button")) { e.preventDefault(); flip(); }
+  else if (sess.flip && "123".includes(e.key) && e.key.length === 1) grade(["b","m","g"][+e.key-1]);
+});
+function renderDone(){
+  const r = sess.res, ms = sess.missed, n = r.b+r.m+r.g, p = plan();
+  const more = p.due.length + p.fresh.length;
+  app.replaceChildren(h("div",{cls:"study wrap"}, h("div",{cls:"done"},
+    h("h1",{},`${sess.name}, 다 했어요`),
+    h("div",{cls:"marks num"}, h("span",{style:"color:var(--good)"},ic("o"),r.g), h("span",{style:"color:var(--mid)"},ic("tri"),r.m), h("span",{style:"color:var(--bad)"},ic("ox"),r.b)),
+    ms.length ? h("section",{}, h("h2",{},"막힌 문장"), h("div",{cls:"rows",style:"max-height:40vh;overflow:auto"}, ms.map(c => h("div",{cls:"item"}, h("div",{cls:"g"}, h("span",{cls:"e"},marked(c)), h("span",{cls:"x"},c.ko)), sndBtn(c))))) : null,
+    h("div",{style:"display:grid;gap:10px"},
+      ms.length ? h("button",{cls:"btn s",onclick:() => begin(shuffle(ms),"막힌 문장")},`막힌 ${ms.length}문장 다시`) : null,
+      more ? h("button",{cls:"btn s",onclick:() => begin(mixQueue(p.due,p.fresh),"오늘 학습")},`오늘 남은 ${more}장`) : null,
+      h("button",{cls:"btn p",onclick:quit},"마치기")))));
+}
+
+/* ───────── 듣기 ───────── */
+const L = {src:"today", list:[], i:0, on:false, ph:"", t:0, wl:null};
+function srcCards(k){
+  const A = [...ALL.values()];
+  if (k === "today") { const p = plan(), t0 = A.filter(c => C(c.id) && dayNo(C(c.id)[3]) === dayNo()); const x = uniq([...p.due,...t0,...p.fresh]); return x.length ? x : A; }
+  if (k === "weak") return A.filter(c => weak(c.id));
+  if (k === "star") return A.filter(c => starred(c.id));
+  if (k === "all") return A;
+  if (PARTS[k]) return uniq(SECS.filter(s => s.part === k).flatMap(s => s.cards));
+  const s = SECS.find(s => s.id === k); return s ? uniq(s.cards) : A;
+}
+function loadSrc(k){ stopListen(); L.src = k; L.list = srcCards(k); L.i = 0; }
+function stopListen(){ if (N && L.on) N.listenStop(); L.on = false; L.ph = ""; clearTimeout(L.t); hush(); if (L.wl) { try { L.wl.release(); } catch(e){} L.wl = null; } }
+async function playListen(){
+  if (!L.list.length) return;
+  L.on = true;
+  if (N) { hush(); N.listen(JSON.stringify({items:L.list.map(c => [c.ko.replace(/\(.*?\)/g, ""), c.en]), i:L.i, gap:S.set.gap, rep:S.set.rep, rate:S.set.rate})); paintEar(); return; }
+  step(0); paintEar();
+  try { if (navigator.wakeLock && !L.wl) L.wl = await navigator.wakeLock.request("screen"); if (!L.on && L.wl) { L.wl.release(); L.wl = null; } } catch(e){}
+}
+window.__listen = (i, ph, on) => { if (!L.list.length) return; L.i = i % L.list.length; L.ph = on ? ph : ""; L.on = on; paintEar(); if (!on) applyPatch(); };
+function step(k){   // 0 한국어 → 1 말하는 시간 → 2.. 영어 반복 → 다음
+  if (!L.on) return; clearTimeout(L.t);
+  const c = L.list[L.i], rep = S.set.rep;
+  if (k === 0) { L.ph = "ko"; paintEar(); speak(c.ko,"ko",() => step(1)); }
+  else if (k === 1) { L.ph = "gap"; paintEar(); L.t = setTimeout(() => step(2), S.set.gap*1000); }
+  else if (k < 2+rep) { L.ph = "en"; paintEar(); speak(c.en,"en",() => { L.t = setTimeout(() => step(k+1), 700); }); }
+  else { L.i = (L.i+1) % L.list.length; step(0); }
+}
+function jump(n){ if (N && L.on) { N.listenJump(n); return; } const on = L.on; clearTimeout(L.t); hush(); L.i = (L.i+n+L.list.length) % L.list.length; if (on) step(0); else { L.ph = ""; paintEar(); } }
+function paintEar(){ const el = document.getElementById("earcard"); if (el) { el.replaceWith(earCard()); const b = document.getElementById("playb"); b.replaceChildren(ic(L.on?"pause":"play",!L.on)); b.setAttribute("aria-label",L.on?"멈춤":"재생"); } }
+function earCard(){
+  const c = L.list[L.i];
+  if (!c) return h("div",{cls:"sheet deck",id:"earcard"}, holes(), h("div",{cls:"in"}, h("p",{cls:"ko"},"아직 모인 문장이 없어요"), h("p",{cls:"note"},"학습하면서 별표를 누르거나 ‘다시’로 표시한 문장이 여기에 모입니다.")));
+  const show = L.ph === "en" || !L.on;
+  return h("div",{cls:"sheet deck",id:"earcard"}, holes(), h("div",{cls:"in"},
+    h("p",{cls:"phase"}, {ko:"들어 보세요",gap:"지금 영어로 말하세요",en:"정답"}[L.ph] || ""),
+    h("p",{cls:"ko"},c.ko), h("p",{cls:"en",lang:"en",style:show?"":"visibility:hidden"},marked(c)),
+    h("div",{cls:"foot"}, h("span",{cls:"note num"},`${L.i+1} / ${L.list.length}`), starBtn(c))));
+}
+function viewEar(){
+  if (!L.list.length && L.src === "today") L.list = srcCards("today");
+  return h("div",{cls:"lis"},
+    h("div",{cls:"top"}, h("h1",{},"듣고 말하기")),
+    !TTS && !N && h("p",{cls:"warn"},"이 화면에서는 소리를 낼 수 없습니다. 휴대폰의 Chrome 또는 Safari에서 열어 주세요."),
+    h("select",{id:"src","aria-label":"들을 문장",onchange:e => { loadSrc(e.target.value); render(); }},
+      [["today","오늘 볼 문장"],["weak","자주 막히는 문장"],["star","별표한 문장"],["all","전체"]].map(([v,t]) => h("option",{value:v},t)),
+      h("optgroup",{label:"파트"}, Object.keys(PARTS).map(k => h("option",{value:k},PARTS[k]))),
+      h("optgroup",{label:"단원"}, SECS.map(s => h("option",{value:s.id},s.name)))),
+    earCard(),
+    h("div",{cls:"ctl"}, h("button",{"aria-label":"이전",onclick:() => L.list.length && jump(-1)},ic("prev")), h("button",{cls:"play",id:"playb","aria-label":L.on?"멈춤":"재생",onclick:() => { if (L.on) { stopListen(); paintEar(); } else playListen(); }},ic(L.on?"pause":"play",!L.on)), h("button",{"aria-label":"다음",onclick:() => L.list.length && jump(1)},ic("next"))),
+    h("div",{}, h("div",{cls:"opt"},h("span",{},"말하는 시간"),seg([[2,"2초"],[3,"3초"],[5,"5초"],[7,"7초"]],S.set.gap,v => setOpt("gap",v),"말하는 시간")),
+      h("div",{cls:"opt"},h("span",{},"영어 반복"),seg([[1,"1번"],[2,"2번"],[3,"3번"]],S.set.rep,v => setOpt("rep",v),"영어 반복")),
+      h("div",{cls:"opt"},h("span",{},"순서"),h("button",{cls:"btn s sm",onclick:() => { const on = L.on; clearTimeout(L.t); hush(); L.list = shuffle(L.list); L.i = 0; if (on) { if (N) playListen(); else step(0); } else paintEar(); toast("순서를 섞었어요"); }},"섞기")),
+      h("p",{cls:"note",style:"padding-top:10px"},N ? "화면을 끄거나 다른 앱을 써도 계속 재생됩니다. 알림과 이어폰 버튼으로 멈추거나 넘길 수 있어요." : "재생 중에는 화면이 꺼지지 않습니다. 화면을 직접 잠그면 소리가 멈춥니다.")));
+}
+
+/* ───────── 단원 ───────── */
+function viewList(){
+  const box = h("div",{});
+  const fill = () => {
+    const q = query.trim().toLowerCase();
+    if (q) { const r = uniq(SECS.flatMap(s => s.cards).filter(c => (c.en+" "+c.ko+" "+c.x+" "+c.m).toLowerCase().includes(q))); box.replaceChildren(h("p",{cls:"note",style:"padding-top:14px"},`${r.length}개 찾음`), ...r.slice(0,80).map(c => itemRow(c,false))); return; }
+    let last = ""; box.replaceChildren(h("div",{cls:"rows"}, SECS.map(s => { const cs = uniq(s.cards), k = cs.filter(c => known(c.id)).length, out = []; if (s.part !== last) { last = s.part; out.push(h("div",{cls:"part"},`${s.part} · ${PARTS[s.part]}`)); }
+      out.push(h("button",{cls:"row",onclick:() => { openSec = s.id; render(); app.querySelector("main").scrollTop = 0; }}, h("span",{cls:"g"},s.name), h("span",{cls:"d num"},`${k}/${cs.length}`), ic("go"))); return out; })));
+  };
+  fill();
+  return [h("div",{cls:"top"},h("h1",{},"단원"),h("span",{cls:"num"},`${SECS.length}개 단원`)), h("input",{type:"search",id:"q",placeholder:"한국어나 영어로 찾기","aria-label":"문장 찾기",value:query,oninput:e => { query = e.target.value; fill(); }}), box];
+}
+function itemRow(c, hide){
+  const l = known(c.id) ? " l2" : C(c.id) ? " l1" : "";
+  const e = h("span",{cls:"e"+(hide?" veil":""),lang:"en"},marked(c));
+  return h("div",{cls:"item"}, h("i",{cls:"dot"+l,title:known(c.id)?"외움":C(c.id)?"학습 중":"아직 안 봄"}),
+    h("button",{cls:"g",onclick:() => { if (hide) e.classList.toggle("veil"); if (!e.classList.contains("veil")) speak(c.en,"en"); }}, h("span",{cls:"k"},c.ko), e, h("span",{cls:"x"},`${c.x} · ${c.m}`)), sndBtn(c), starBtn(c));
+}
+function viewSec(){
+  const s = SECS.find(s => s.id === openSec), cs = uniq(s.cards), k = cs.filter(c => known(c.id)).length;
+  return [h("div",{cls:"head2"}, h("button",{cls:"ib","aria-label":"단원 목록",onclick:() => { openSec = null; hush(); render(); }},ic("back")), h("h1",{},s.name), h("span",{cls:"note num"},`${k}/${cs.length} 외움`)),
+    h("div",{cls:"pair"}, h("button",{cls:"btn p",onclick:() => begin(shuffle(cs),s.name)},"카드 학습"), h("button",{cls:"btn s",onclick:() => { loadSrc(s.id); tab = "ear"; openSec = null; render(); document.getElementById("src").value = s.id; playListen(); }},"이어 듣기")),
+    seg([[true,"영어 가리기"],[false,"모두 보기"]],veil,v => { veil = v; render(); },"영어 표시"),
+    h("div",{}, s.cards.map(c => itemRow(c,veil)))];
+}
+
+/* ───────── 기록·설정 ───────── */
+let armed = 0;
+function verText(){ const d = new Date(BUILD*1000), z = n => String(n).padStart(2,"0"); return `${d.getFullYear()}.${z(d.getMonth()+1)}.${z(d.getDate())} ${z(d.getHours())}:${z(d.getMinutes())}`; }
+function viewLog(){
+  const dn = dayNo(), A = [...ALL.keys()], kn = A.filter(known).length, ln = A.filter(id => C(id)).length-kn;
+  const tot = Object.values(S.d).reduce((a,b) => a+b[1],0);
+  const dayLabel = n => new Date(n*864e5).getUTCDate();
+  const io = h("textarea",{id:"io","aria-label":"백업 코드",placeholder:"다른 기기에서 복사한 백업 코드를 붙여 넣으세요"});
+  return [h("div",{cls:"top"},h("h1",{},"기록"),h("span",{cls:"num"},streak() ? `${streak()}일 연속` : "")),
+    h("section",{}, h("h2",{},"최근 14일"), h("div",{cls:"days num"}, Array.from({length:14},(_,i) => dn-13+i).map(n => h("div",{cls:S.d[n]?"on":"",title:S.d[n]?`${S.d[n][1]}장`:"쉼"},dayLabel(n))))),
+    h("p",{cls:"num"},`${kn}문장을 외웠고 ${ln}문장을 외우는 중이에요. 지금까지 카드를 ${tot}번 넘겼습니다.`),
+    h("section",{}, h("h2",{},"설정"),
+      h("div",{cls:"opt"},h("span",{},"화면"),seg([["paper","종이"],["night","밤"],["auto","휴대폰 따라"]],S.set.look,v => setOpt("look",v),"화면")),
+      h("div",{cls:"opt"},h("span",{},"하루 새 문장"),seg([[10,"10"],[20,"20"],[30,"30"],[50,"50"]],S.set.goal,v => setOpt("goal",v),"하루 새 문장")),
+      h("div",{cls:"opt"},h("span",{},"새 문장 순서"),seg([["seq","책 순서"],["mix","섞어서"]],S.set.order,v => setOpt("order",v),"새 문장 순서")),
+      h("div",{cls:"opt"},h("span",{},"말하기 제한 시간"),seg([[0,"없음"],[3,"3초"],[5,"5초"],[8,"8초"]],S.set.sec,v => setOpt("sec",v),"제한 시간")),
+      h("div",{cls:"opt"},h("span",{},"정답 자동 발음"),seg([[1,"켜기"],[0,"끄기"]],S.set.auto,v => setOpt("auto",v),"자동 발음")),
+      h("div",{cls:"opt"},h("span",{},"발음 속도"),seg([[.75,"느리게"],[.95,"보통"],[1.15,"빠르게"]],S.set.rate,v => { setOpt("rate",v); speak("I can get to my destination quickly.","en"); },"발음 속도")),
+      enVoices().length > 1 && h("div",{cls:"opt"},h("label",{for:"voice"},"영어 목소리"),h("select",{id:"voice",onchange:e => { setOpt("voice",e.target.value); speak("I can get to my destination quickly.","en"); }},h("option",{value:""},"자동"),enVoices().map(v => { const o = h("option",{value:v.voiceURI},`${v.name.replace(/^Microsoft |^Google /,"")} (${v.lang})`); if (v.voiceURI === S.set.voice) o.selected = true; return o; })))),
+    h("section",{}, h("h2",{},"외운 정도를 정하는 방식"), h("p",{cls:"note"},"‘바로 나옴’을 누를 때마다 다음 복습이 3일, 7일, 14일, 30일, 60일 뒤로 늦춰집니다. 7일 뒤 복습까지 올라간 문장을 ‘외움’으로 셉니다. ‘다시’를 누르면 처음부터 쌓습니다.")),
+    h("section",{}, h("h2",{},"진도 옮기기"), h("p",{cls:"note",style:"margin-bottom:10px"}, cloud ? "Claude 계정에 자동으로 저장되고 있습니다. 다른 기기에서 같은 계정으로 열면 이어집니다." : N ? "진도는 이 휴대폰에 저장됩니다. 웹 버전에서 공부했다면 그쪽에서 코드를 복사해 여기에 붙여 넣으세요." : "진도는 이 휴대폰에 저장됩니다. 기기를 바꿀 때는 코드를 복사해 옮기세요."), io,
+      h("div",{cls:"pair",style:"margin-top:10px"}, h("button",{cls:"btn s sm",onclick:async () => { const t = JSON.stringify(S); io.value = t; try { if (N) N.copy(t); else await navigator.clipboard.writeText(t); toast("백업 코드를 복사했어요"); } catch(e){ io.select(); toast("코드를 길게 눌러 복사하세요"); } }},"코드 복사"),
+        h("button",{cls:"btn s sm",onclick:() => { try { const o = JSON.parse(io.value); if (!valid(o)) throw 0; S = merge(S,o); save(); render(); toast("진도를 합쳤어요"); } catch(e){ toast("백업 코드가 아닙니다. 전체를 복사했는지 확인하세요."); } }},"코드 불러오기"))),
+    N && h("section",{}, h("h2",{},"업데이트"), h("p",{cls:"note",style:"margin-bottom:10px"},"앱을 켤 때마다 새 문장과 화면을 알아서 받아 옵니다."), h("button",{cls:"btn s sm",style:"width:100%",onclick:() => { toast("확인하는 중이에요"); N.check(); }},"지금 확인")),
+    BUILD ? h("p",{cls:"note num"},`내용 버전 ${verText()} · ${TOTAL}문장`) : null,
+    h("section",{}, h("button",{cls:"btn s sm",style:"width:100%;color:var(--bad)",onclick:() => { if (Date.now()-armed > 4000) { armed = Date.now(); toast("한 번 더 누르면 모든 진도가 지워집니다"); return; } const set = S.set; S = blank(); S.set = set; S.r = Date.now(); armed = 0; save(); render(); toast("진도를 지웠어요"); }},"진도 모두 지우기"))];
+}
+
+/* ───────── 앱: 내부 업데이트·뒤로 가기 ───────── */
+let patch = false;
+function applyPatch(){ if (patch && N && !sess && !L.on) { patch = false; toast("새 내용으로 바꾸는 중이에요"); setTimeout(() => N.apply(), 900); } }
+window.__upd = st => {
+  if (st === "ready") { patch = true; applyPatch(); }
+  else if (st === "latest") toast("이미 최신 내용이에요");
+  else if (st === "fail") toast("업데이트를 확인하지 못했어요. 인터넷 연결을 확인하세요.");
+  else if (st === "shell") toast("앱을 새로 설치해야 받을 수 있는 업데이트가 있어요");
+};
+window.__back = () => {
+  if (sess) { quit(); return true; }
+  if (openSec) { openSec = null; hush(); render(); return true; }
+  if (tab !== "home") { go("home"); return true; }
+  return false;
+};
+if (location.hash === "#study") { try { history.replaceState(null,"",location.pathname+location.search); } catch(e){} }
+L.list = srcCards("today");
+applyLook();
+render();
+cloudInit();
+if (!window.claude && navigator.storage && navigator.storage.persist) navigator.storage.persist().catch(() => {});
+if (window.__PWA && !N && navigator.serviceWorker) navigator.serviceWorker.register("sw.js").catch(() => {});
+if (N) N.ready();
+</script>
