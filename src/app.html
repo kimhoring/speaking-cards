@@ -15,7 +15,7 @@ const uniq = a => { const s = new Set(); return a.filter(c => !s.has(c.id) && s.
 
 /* ───────── 저장 ───────── */
 const KEY = "mn-speaking-v1";
-const DEF = {goal:20, order:"seq", sec:3, auto:1, rate:.95, voice:"", dir:"ko", gap:3, rep:2, look:"paper", p5w:"say", prep:45, st:0};
+const DEF = {goal:20, order:"seq", sec:3, auto:1, rate:.95, voice:"", dir:"ko", gap:3, rep:2, look:"paper", p5w:"say", p5g:"base", prep:45, st:0};
 const IV = [0,1,3,7,14,30,60];      // 상자별 복습 간격(일)
 const blank = () => ({v:1, c:{}, s:{}, d:{}, p:{}, set:{...DEF}, r:0});
 const N = window.Native || null;     // 안드로이드 앱 안에서만 존재
@@ -323,7 +323,8 @@ function srcCards(k){
   if (k === "weak") return A.filter(c => weak(c.id));
   if (k === "star") return A.filter(c => starred(c.id));
   if (k === "all") return A;
-  if (k === "p5") return p5sent;
+  if (k === "p5") return p5sent.filter(c => topic(c.t).g === "base");
+  if (k === "p5q") return p5sent.filter(c => topic(c.t).g === "q");
   if (k.startsWith("p5-")) return p5sent.filter(c => c.t === k.slice(3));
   if (PARTS[k]) return uniq(SECS.filter(s => s.part === k).flatMap(s => s.cards));
   const s = SECS.find(s => s.id === k); return s ? uniq(s.cards) : A;
@@ -365,7 +366,8 @@ function viewEar(){
     !TTS && !N && h("p",{cls:"warn"},"이 화면에서는 소리를 낼 수 없습니다. 휴대폰의 Chrome 또는 Safari에서 열어 주세요."),
     h("select",{id:"src","aria-label":"들을 문장",onchange:e => { loadSrc(e.target.value); render(); }},
       [["today","오늘 볼 문장"],["weak","자주 막히는 문장"],["star","별표한 문장"],["all","전체"]].map(([v,t]) => h("option",{value:v},t)),
-      h("optgroup",{label:"파트 5 답변"}, [["p5","모든 주제"], ...P5.map(t => ["p5-"+t.id, t.name])].map(([v,t]) => h("option",{value:v},t))),
+      h("optgroup",{label:"파트 5 기본 답안"}, [["p5","기본 답안 모두"], ...P5.filter(t => t.g === "base").map(t => ["p5-"+t.id, t.name])].map(([v,t]) => h("option",{value:v},t))),
+      h("optgroup",{label:"파트 5 빈출 질문"}, [["p5q","빈출 질문 모두"], ...P5.filter(t => t.g === "q").map(t => ["p5-"+t.id, t.name])].map(([v,t]) => h("option",{value:v},t))),
       h("optgroup",{label:"파트"}, Object.keys(PARTS).map(k => h("option",{value:k},PARTS[k]))),
       h("optgroup",{label:"단원"}, SECS.map(s => h("option",{value:s.id},s.name)))),
     earCard(),

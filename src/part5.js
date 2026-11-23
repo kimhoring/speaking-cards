@@ -2,7 +2,7 @@
    한글 → 영작을 네 단계로: 끊어서 → 한 문장씩 → 이어서 → 실전(준비·답변 시간) */
 const P5 = /*__P5DATA__*/[];
 const STEP = [
-  ["입장", "찬성·반대·선택을 먼저 밝힙니다", ["I agree / disagree that ~", "I prefer ~"]],
+  ["입장", "찬성·반대·선택을 먼저 밝힙니다", ["I agree / disagree that ~", "I think ~", "I prefer ~"]],
   ["이유", "입장을 뒷받침하는 핵심 이유 한 가지", ["That's because ~"]],
   ["추가", "이유에 따른 장점이나 결과. 시간이 없으면 생략해도 됩니다", ["So, we can ~", "So, it is easier to ~"]],
   ["도입", "경험한 때와 곳, 또는 과거 상황", ["Last year, I ~", "About six months ago, ~", "In the past, ~"]],
@@ -15,7 +15,7 @@ const MODES = [
   ["fl", "이어 말하기", "한글을 한 줄씩 넘기며 여섯 문장을 쉬지 않고 말합니다"],
   ["rl", "실전", "질문만 보고 준비한 뒤 60초 동안 답합니다"]
 ];
-const FREE = {id:"x", area:"자유 주제", name:"내가 정한 주제", type:"", q:"", qko:"", steps:null, keys:[]};
+const FREE = {id:"x", g:"base", area:"자유 주제", name:"내가 정한 주제", type:"", q:"", qko:"", s:null, o:[], i:[], base:"", steps:null, keys:[]};
 const topic = id => id === "x" ? FREE : P5.find(t => t.id === id);
 const p5sent = P5.flatMap(t => t.steps.map((s, i) => ({id:`p5-${t.id}-${i+1}`, t:t.id, ko:s.ko, en:s.en, h:s.h, x:STEP[i][0], m:t.name})));
 const pr = id => S.p[id] || (S.p[id] = {m:["","","","","",""], mt:[0,0,0,0,0,0], done:{}, mine:["","","","","",""], my:0, q:""});
@@ -35,20 +35,25 @@ function done5(id, k){ pr(id).done[k] = Date.now(); tick5(); save(); }
 const weak5 = id => peek(id).m.map((g, i) => g === "b" || g === "m" ? i : -1).filter(i => i >= 0);
 const SHAPE = {g:"o", m:"tri", b:"ox"};
 function minis(id){ const m = peek(id).m; return h("span",{cls:"minis"}, STEP.map((_, i) => m[i] ? h("i",{cls:"mk "+m[i]},ic(SHAPE[m[i]])) : h("i",{}))); }
-function next5(){ return P5.find(t => !peek(t.id).done.st) || P5.find(t => weak5(t.id).length) || P5.find(t => !peek(t.id).done.rl) || P5[0]; }
+function next5(g){ const A = g ? P5.filter(t => t.g === g) : P5; return A.find(t => !peek(t.id).done.st) || A.find(t => weak5(t.id).length) || A.find(t => !peek(t.id).done.rl) || A[0]; }
+const qText = t => [t.q || peek(t.id).q, t.s && t.s[0], ...t.o.map(o => o[0] + ".")].filter(Boolean).join(" ");   // 읽어 줄 질문 전체
 
 /* 목록·주제 화면 */
 let p5 = null;   // {t, v}
 function open5(t, v = "topic"){ p5 = {t, v}; hush(); render(); app.querySelector("main").scrollTop = 0; }
 function viewP5(){
   if (p5) return {topic:p5Topic, model:p5Model, mine:p5Mine, tmpl:p5Tmpl}[p5.v]();
-  const nx = next5();
+  const g = S.set.p5g, nx = next5(g), list = P5.filter(t => t.g === g), dn = list.filter(t => peek(t.id).done.st).length;
+  const row = t => h("button",{cls:"row",onclick:() => open5(t.id)}, h("span",{cls:"g"}, t.name, h("span",{cls:"x5"}, g === "base" ? `${t.area} · ${t.type}` : t.base ? `${t.type} · 기본 답안 활용` : t.type)), minis(t.id), ic("go"));
   return [
     h("div",{cls:"hello"}, h("h1",{},"파트 5 의견 말하기"), h("p",{},"한글을 보고 영작하며 60초 답변을 완성합니다")),
+    seg([["base","기본 답안 6"],["q","빈출 질문 24"]], g, v => setOpt("p5g",v), "문제 모음"),
     h("div",{cls:"start"}, h("button",{cls:"sheet deck",onclick:() => open5(nx.id)}, holes(), h("div",{cls:"in"}, h("span",{cls:"lab"},`이어서 할 주제 · ${nx.area}`), h("span",{cls:"ko"},nx.name))),
       h("button",{cls:"btn p",onclick:() => open5(nx.id)},"이 주제 연습하기")),
-    h("section",{}, h("h2",{},"주제"), h("div",{cls:"rows"}, P5.map(t => h("button",{cls:"row",onclick:() => open5(t.id)}, h("span",{cls:"g"}, t.name, h("span",{cls:"x5"},`${t.area} · ${t.type}`)), minis(t.id), ic("go"))),
-      h("button",{cls:"row",onclick:() => open5("x")}, h("span",{cls:"g"}, peek("x").q || FREE.name, h("span",{cls:"x5"},"질문과 답변을 직접 써서 연습")), ic("go")))),
+    g === "q" && h("section",{}, h("div",{cls:"rows"}, h("button",{cls:"row",onclick:() => { const r = shuffle(list)[0]; p5 = {t:r.id, v:"topic"}; run5(r.id,"rl"); }}, h("span",{cls:"g"},"아무 질문이나 실전", h("span",{cls:"x5"},"24문항 중 하나가 시험처럼 나옵니다")), ic("go")))),
+    g === "base" ? h("section",{}, h("h2",{},"주제"), h("div",{cls:"rows"}, list.map(row),
+      h("button",{cls:"row",onclick:() => open5("x")}, h("span",{cls:"g"}, peek("x").q || FREE.name, h("span",{cls:"x5"},"질문과 답변을 직접 써서 연습")), ic("go"))))
+      : h("section",{}, h("p",{cls:"note num"},`영작을 마친 질문 ${dn} / ${list.length}`), [...new Set(list.map(t => t.area))].map(a => h("div",{cls:"rows"}, h("div",{cls:"part"},a), list.filter(t => t.area === a).map(row)))),
     h("section",{}, h("h2",{},"답변 틀"), h("button",{cls:"row",onclick:() => open5("1","tmpl")}, h("span",{cls:"g"},"6단계 만능 틀과 시작 표현"), ic("go")))
   ];
 }
@@ -57,12 +62,18 @@ const toList = () => { p5 = null; hush(); render(); };
 function say5(text){ return h("button",{cls:"ib","aria-label":"발음 듣기",onclick:e => { e.stopPropagation(); speak(text,"en"); }}, ic("snd")); }
 function ask5(t){
   const q = t.q || peek(t.id).q;
-  return h("div",{cls:"ask"}, h("div",{cls:"g"}, h("p",{cls:"en5",lang:"en"}, q || "아직 질문이 없습니다. ‘내 답변 쓰기’에서 질문을 적어 주세요."), t.qko && h("p",{cls:"note"},t.qko)), q && say5(q));
+  return h("div",{cls:"ask"}, h("div",{cls:"g"}, h("p",{cls:"en5",lang:"en"}, q || "아직 질문이 없습니다. ‘내 답변 쓰기’에서 질문을 적어 주세요."), t.s && h("p",{cls:"en5 stm",lang:"en"},t.s[0]), opts5(t),
+    t.qko && h("p",{cls:"note"},t.qko, t.s && h("span",{cls:"sko"},t.s[1]), t.o.length ? h("span",{cls:"sko"},t.o.map(o => o[1]).join(" / ")) : null)), q && say5(qText(t)));
 }
+function opts5(t){ return t.o.length ? h("ul",{cls:"opts5",lang:"en"}, t.o.map(o => h("li",{},o[0]))) : null; }
+let idea = "";   // 우리말 아이디어를 펼친 주제
 function p5Topic(){
   const t = topic(p5.t), p = peek(t.id), wk = weak5(t.id), mineN = p.mine.filter(Boolean).length;
   const modes = t.steps ? MODES : MODES.slice(3);
+  const shown = idea === t.id;
   return [head5(t.name, toList), ask5(t),
+    t.base && h("p",{cls:"note"},`기본 답안 ‘${topic(t.base).name}’과 같은 흐름입니다. 입장 문장만 다르니 외운 답변을 그대로 쓰세요.`),
+    t.i.length ? h("section",{}, h("h2",{},"먼저 우리말로 구상해 보세요"), shown ? h("div",{cls:"idea"}, ["입장","이유","예시"].map((n, k) => h("p",{}, h("span",{},n), t.i[k]))) : h("button",{cls:"btn s sm",style:"width:100%",onclick:() => { idea = t.id; render(); }},"답변 아이디어 보기")) : null,
     h("section",{}, h("h2",{}, t.steps ? "순서대로 하면 60초 답변이 됩니다" : "연습"), h("div",{cls:"rows"}, modes.map(([k, n, d]) => h("button",{cls:"row mode",disabled:!t.steps && !p.q,onclick:() => run5(t.id, k)},
       h("i",{cls:"tick"+(p.done[k]?" l2":"")}), h("span",{cls:"g"}, n, h("span",{cls:"x5"}, k === "rl" ? `질문만 보고 ${S.set.prep}초 준비, 60초 답변` : d)), ic("go"))),
       wk.length ? h("button",{cls:"row mode",onclick:() => run5(t.id,"st",wk)}, h("i",{cls:"mk b"},ic("ox")), h("span",{cls:"g"},"막힌 문장만", h("span",{cls:"x5"},`${wk.map(i => STEP[i][0]).join(", ")} 다시 영작`)), ic("go")) : null)),
@@ -182,7 +193,7 @@ function drawSt(){
       : h("div",{cls:"acts q"}, h("button",{cls:"btn s",disabled:run.hint >= 2,onclick:() => { run.hint++; draw5(); }},"힌트"), h("button",{cls:"btn p",onclick:reveal}, wr ? "답 확인" : "영어 보기")),
     !f && !wr ? reveal : null);
 }
-function starter5(en){ const m = en.match(/^(I agree that|I prefer|That's because|So,|As a result,|Last year,|About six months ago,|Two years ago,|In the past,)/); return m ? m[0] + " ~" : en.split(" ").slice(0,2).join(" ") + " ~"; }
+function starter5(en){ const m = en.match(/^(I (?:dis)?agree that|I prefer|I don't think|I think|That's because|So,|If my income[^,]*,|When I was[^,]*,|[A-Z][a-z]+(?: [a-z]+){0,3},)/); return m ? m[0] + " ~" : en.split(" ").slice(0,2).join(" ") + " ~"; }
 
 // 3. 이어 말하기
 function drawFl(){
@@ -215,7 +226,7 @@ function drawRl(){
   const ck = h("b",{cls:"big num"}, String(len)), fill = h("i",{});
   const nextPh = () => { stop5(); if (prep) run.ph = "ans"; else { run.ph = "rev"; done5(run.id,"rl"); } run.tm = false; draw5(); };
   screen5(bar5(prep ? "준비 시간" : "답변 시간", qBtnTmpl()),
-    [h("div",{cls:"mid5"}, h("p",{cls:"en5 q",lang:"en"},t.q || p.q), h("div",{cls:"cd"}, ck, h("span",{},"초"), h("div",{cls:"tm"},fill)), run.tm && h("div",{cls:"tmpl5"}, STEP.map(([n,,ex]) => h("p",{}, h("span",{},n), ex[0]))))],
+    [h("div",{cls:"mid5"}, h("p",{cls:"en5 q",lang:"en"},t.q || p.q), t.s && h("p",{cls:"en5 q stm",lang:"en"},t.s[0]), opts5(t), h("div",{cls:"cd"}, ck, h("span",{},"초"), h("div",{cls:"tm"},fill)), run.tm && h("div",{cls:"tmpl5"}, STEP.map(([n,,ex], k) => h("p",{}, h("span",{},n), k || t.s || /agree or disagree/.test(t.q) ? ex[0] : /prefer/.test(t.q) ? ex[2] : ex[1]))))],
     h("div",{cls:"acts one"}, h("button",{cls:"btn "+(prep?"s":"p"),onclick:nextPh}, prep ? "바로 답변하기" : "답변 끝")));
   const start = () => {
     if (!run || run.mode !== "rl" || run.ph !== (prep?"prep":"ans")) return;
