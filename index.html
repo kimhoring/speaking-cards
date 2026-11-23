@@ -1,0 +1,601 @@
+<!doctype html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="robots" content="noindex"><meta name="theme-color" content="#ece2d0"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="3초 만능문장"><link rel="manifest" href="manifest.webmanifest"><link rel="icon" href="icon-192.png"><link rel="apple-touch-icon" href="icon-192.png"><style>:root{padding:env(safe-area-inset-top,0px) 0 env(safe-area-inset-bottom,0px)}[hidden]{display:none!important}</style><script>window.__PWA=1</script></head><body><meta name="claude:viewport-fit-sides" content="cover">
+<title>3초 만능문장</title>
+<link rel="stylesheet" crossorigin href="https://fonts.googleapis.com/css2?family=Gowun+Dodum&family=Nunito:wght@400;700&display=swap">
+<style>/* 콘셉트: 스탠드 불빛 아래 종이 단어장과 색연필.
+   굵기 대신 크기와 여백으로 위계를 만들고, 순백·순흑·파랑을 쓰지 않는다.
+   한 손 조작: 읽는 것은 위, 누르는 것은 아래. */
+:root{
+  --bg:#ece2d0; --card:#faf4e7; --under:#f2e9d8; --sunk:#e2d6c0; --line:#d3c4aa; --hole:#d8cab2;
+  --ink:#43382c; --sub:#5f5140; --pri:#586a3e; --on-pri:#fbf7ea;
+  --mark:#f6d488; --bad:#a84a35; --mid:#8f6414; --good:#586a3e; --box:#c9b998;
+  --shade:0 1px 1px rgba(92,70,40,.10),0 8px 22px rgba(92,70,40,.12);
+  --ui:"Nunito","Gowun Dodum","Apple SD Gothic Neo","Noto Sans KR","Malgun Gothic",system-ui,sans-serif;
+  color-scheme:light;
+}
+:root[data-look="night"]{
+  --bg:#262019; --card:#332b22; --under:#2d261e; --sunk:#3f362b; --line:#4d4235; --hole:#211b15;
+  --ink:#e6d6bc; --sub:#b3a189; --pri:#b5c088; --on-pri:#2a2a18;
+  --mark:#7a5a22; --bad:#e39a82; --mid:#dfb767; --good:#b5c088; --box:#5b4f3f;
+  --shade:0 1px 1px rgba(0,0,0,.25),0 8px 22px rgba(0,0,0,.22);
+  color-scheme:dark;
+}
+@media (prefers-color-scheme:dark){:root[data-look="auto"]{
+  --bg:#262019; --card:#332b22; --under:#2d261e; --sunk:#3f362b; --line:#4d4235; --hole:#211b15;
+  --ink:#e6d6bc; --sub:#b3a189; --pri:#b5c088; --on-pri:#2a2a18;
+  --mark:#7a5a22; --bad:#e39a82; --mid:#dfb767; --good:#b5c088; --box:#5b4f3f;
+  --shade:0 1px 1px rgba(0,0,0,.25),0 8px 22px rgba(0,0,0,.22);
+  color-scheme:dark}}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html{height:100%;background:var(--bg);overscroll-behavior:none}
+body{height:100%;margin:0;background:var(--bg);color:var(--ink);font:400 16px/1.6 var(--ui);font-synthesis:none;-webkit-text-stroke:.28px;word-break:keep-all;overflow-wrap:anywhere;overflow:hidden}
+button,input,select,textarea{font:inherit;color:inherit}
+button{border:0;background:none;padding:0;cursor:pointer;touch-action:manipulation}
+button:focus-visible,input:focus-visible,select:focus-visible,.face:focus-visible{outline:2px solid var(--pri);outline-offset:3px}
+h1,h2,p{margin:0;font-weight:400}
+b{font-weight:700}
+.num{font-variant-numeric:tabular-nums}
+#app{height:100%;display:flex;flex-direction:column;max-width:560px;margin:0 auto}
+.wrap{padding-left:max(22px,env(safe-area-inset-left,0px));padding-right:max(22px,env(safe-area-inset-right,0px))}
+main{isolation:isolate;flex:1;min-height:0;overflow-y:auto;-webkit-overflow-scrolling:touch;padding-block:24px 36px;display:flex;flex-direction:column;gap:30px;scrollbar-width:none}
+main::-webkit-scrollbar{display:none}
+nav{display:flex;padding-inline:14px;border-top:1px solid var(--line)}
+nav button{flex:1;min-height:56px;font-size:15px;color:var(--sub)}
+nav button span{padding-bottom:3px;border-bottom:3px solid transparent}
+nav button[aria-current="page"]{color:var(--ink)}
+nav button[aria-current="page"] span{border-color:var(--pri)}
+svg.i{width:23px;height:23px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round;flex:none}
+svg.i.on{fill:currentColor}
+
+.top{display:flex;align-items:baseline;justify-content:space-between;gap:12px}
+.top h1{font-size:24px;line-height:1.35}
+.top span{color:var(--sub);font-size:15px}
+.hello{display:flex;flex-direction:column;gap:2px}
+.hello h1{font-size:25px;line-height:1.45;text-wrap:balance}
+.hello p{color:var(--sub);font-size:15px}
+.btn{display:flex;align-items:center;justify-content:center;gap:8px;min-height:54px;padding:8px 18px;border-radius:10px;font-size:17px}
+.btn.p{background:var(--pri);color:var(--on-pri)}
+.btn.s{background:var(--sunk);color:var(--ink)}
+.btn.sm{min-height:44px;font-size:15px;padding:6px 14px}
+.btn:disabled{opacity:.45;cursor:default}
+h2{font-size:15px;color:var(--sub);margin-bottom:8px}
+.note{font-size:15px;color:var(--sub)}
+.warn{border:1px solid var(--mid);color:var(--mid);border-radius:10px;padding:12px 14px;font-size:15px}
+
+/* 종이 카드: 겹친 낱장 + 링 구멍 두 개 */
+.sheet{position:relative;background:var(--card);border-radius:8px;box-shadow:var(--shade)}
+.sheet::before{content:"";position:absolute;inset:0;border-radius:8px;background:var(--under);box-shadow:0 1px 3px rgba(92,70,40,.12);transform:rotate(1.3deg);z-index:-1}
+.holes{display:flex;justify-content:center;gap:64px;padding-top:14px;flex:none}
+.holes i{width:13px;height:13px;border-radius:50%;background:var(--hole);box-shadow:inset 0 1px 2px rgba(60,42,18,.28)}
+.deck{display:flex;flex-direction:column;width:100%;text-align:left}
+.deck .in{display:flex;flex-direction:column;gap:14px;padding:20px 24px 24px}
+.deck .lab{font-size:15px;color:var(--sub)}
+.start{display:flex;flex-direction:column;gap:18px}
+
+.ko{font-size:clamp(22px,6.4vw,26px);line-height:1.6;text-wrap:pretty}
+.ko.small{font-size:17px;color:var(--sub)}
+.en{font-size:clamp(23px,6.8vw,28px);line-height:1.5;font-weight:700;word-break:normal;text-wrap:pretty}
+mark{color:inherit;background:linear-gradient(transparent 56%,var(--mark) 56%,var(--mark) 92%,transparent 92%);padding:0 .08em;margin:0 -.04em;-webkit-box-decoration-break:clone;box-decoration-break:clone}
+
+/* PDF의 암기 체크박스를 그대로 옮긴 진도표 */
+.boxes{display:flex;flex-direction:column;gap:16px}
+.boxes button{display:block;width:100%;text-align:left}
+.boxes .cap{display:flex;justify-content:space-between;gap:12px;font-size:15px;margin-bottom:6px}
+.boxes .cap span:last-child{color:var(--sub);font-size:14px;white-space:nowrap}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(9px,1fr));gap:4px}
+.grid i{aspect-ratio:1;border:1.3px solid var(--box);border-radius:2px}
+.grid i.l1{background:var(--mark);border-color:var(--mark)}
+.grid i.l2{background:var(--good);border-color:var(--good)}
+.key{display:flex;gap:16px;font-size:15px;color:var(--sub);flex-wrap:wrap}
+.key span{display:flex;align-items:center;gap:6px}
+.key i{width:11px;height:11px;border:1.3px solid var(--box);border-radius:2px}
+.key i.l1{background:var(--mark);border-color:var(--mark)} .key i.l2{background:var(--good);border-color:var(--good)}
+
+.seg{display:flex;gap:18px;flex-wrap:wrap}
+.seg button{min-height:44px;color:var(--sub);font-size:16px}
+.seg button span{padding-bottom:2px;border-bottom:3px solid transparent}
+.seg button[aria-pressed="true"]{color:var(--ink)}
+.seg button[aria-pressed="true"] span{border-color:var(--pri)}
+.rows{display:flex;flex-direction:column}
+.row{display:flex;align-items:center;gap:12px;padding:12px 0;border-bottom:1px solid var(--line);width:100%;text-align:left;min-height:54px}
+.row:disabled{opacity:.6;cursor:default}
+.row .g{flex:1;min-width:0}
+.row .d{font-size:15px;color:var(--sub)}
+.part{font-size:15px;color:var(--sub);padding-top:22px}
+
+/* 학습 */
+.study{height:100%;display:flex;flex-direction:column;padding-block:8px 16px;gap:16px;isolation:isolate}
+.sbar{display:flex;align-items:center;gap:6px;margin-inline:-10px}
+.sbar .num{flex:1;text-align:center;font-size:15px;color:var(--sub)}
+.ib{width:44px;height:44px;display:grid;place-items:center;color:var(--sub);flex:none}
+.ib:disabled{opacity:.3}
+.ib.star[aria-pressed="true"]{color:var(--mid)}
+.stack{position:relative;flex:1;min-height:0;display:flex;margin-inline:2px}
+.stack::before{content:"";position:absolute;inset:0;border-radius:8px;background:var(--under);box-shadow:0 1px 3px rgba(92,70,40,.12);transform:rotate(1deg);z-index:-1}
+.face{position:relative;flex:1;min-width:0;background:var(--card);border-radius:8px;box-shadow:var(--shade);overflow:hidden;display:flex;flex-direction:column;cursor:pointer;touch-action:pan-y;user-select:none;-webkit-user-select:none}
+.face .hd{display:flex;align-items:center;padding:6px 10px 0 24px;flex:none;min-height:50px}
+.face .hd .lab{flex:1;font-size:15px;color:var(--sub)}
+.face .bd{flex:1;min-height:0;overflow-y:auto;padding:8px 24px 34px;display:flex;flex-direction:column}
+.face .bd>div{margin-block:auto;display:flex;flex-direction:column;gap:18px}
+.tm{height:3px;border-radius:2px;overflow:hidden;flex:none;margin-top:-4px}
+.tm i{display:block;height:100%;width:100%;border-radius:2px;background:var(--mark);transform-origin:left}
+.expr{border-top:1px solid var(--line);padding-top:14px;display:flex;flex-direction:column}
+.expr b{font-size:18px}
+.expr span{color:var(--sub)}
+.hint{font-size:19px;color:var(--sub);word-break:normal;line-height:1.7}
+.late{font-size:15px;color:var(--mid)}
+.tag{position:absolute;top:50%;left:50%;width:96px;height:96px;margin:-48px;opacity:0;pointer-events:none}
+.tag svg{width:96px;height:96px;stroke-width:1.4}
+.tag.g{color:var(--good)} .tag.b{color:var(--bad)}
+.acts{display:grid;gap:10px}
+.acts.q{grid-template-columns:1fr 2fr}
+.acts.a{grid-template-columns:repeat(3,1fr)}
+.acts .btn{min-height:74px}
+/* 시험지 채점 표시 ○ △ ✕ */
+.gr{min-height:74px;border-radius:10px;background:var(--sunk);display:flex;flex-direction:column;align-items:center;justify-content:center;font-size:16px;line-height:1.3;padding-block:7px}
+.gr svg{width:26px;height:26px;stroke-width:2.3;margin-bottom:2px}
+.gr span{font-size:13px;color:var(--sub)}
+.gr.b svg{color:var(--bad)} .gr.m svg{color:var(--mid)} .gr.g svg{color:var(--good)}
+.btn:active:not(:disabled),.gr:active{filter:brightness(.96)}
+
+.lis{flex:1;display:flex;flex-direction:column;gap:22px}
+.lis .deck{min-height:290px}
+.lis .deck .in{flex:1;justify-content:center}
+.ctl{display:flex;align-items:center;justify-content:center;gap:26px}
+.ctl button{width:58px;height:58px;display:grid;place-items:center;color:var(--sub)}
+.ctl .play{width:74px;height:74px;border-radius:50%;background:var(--pri);color:var(--on-pri)}
+.phase{font-size:15px;color:var(--mid);min-height:24px}
+.foot{display:flex;align-items:center;justify-content:space-between}
+.opt{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:6px 0;border-bottom:1px solid var(--line);flex-wrap:wrap}
+.opt .seg{justify-content:flex-end}
+select,input[type=search],textarea{background:var(--card);border:1px solid var(--line);border-radius:8px;padding:10px 12px;min-height:48px;max-width:100%;font-size:16px}
+input[type=search],.lis>select{width:100%}
+.opt select{width:204px;min-width:0}
+textarea{width:100%;font-size:13px;min-height:84px;resize:vertical}
+::placeholder{color:var(--sub);opacity:1}
+.item{padding:14px 0;border-bottom:1px solid var(--line);display:flex;align-items:flex-start}
+.item .g{flex:1;min-width:0;text-align:left;display:flex;flex-direction:column;gap:3px}
+.item .e{font-weight:700;font-size:17px;word-break:normal}
+.item .x{font-size:15px;color:var(--sub)}
+.item .veil{color:transparent;background:var(--sunk);border-radius:4px}
+.item .veil mark{background:none;color:transparent}
+.dot{width:12px;height:12px;border:1.3px solid var(--box);border-radius:2px;margin-top:7px;flex:none;margin-right:12px}
+.dot.l1{background:var(--mark);border-color:var(--mark)} .dot.l2{background:var(--good);border-color:var(--good)}
+.days{display:grid;grid-template-columns:repeat(7,1fr);gap:8px}
+.days div{aspect-ratio:1.3;display:grid;place-items:center;color:var(--sub);font-size:15px;position:relative}
+.days .on{color:var(--ink)}
+.days .on::after{content:"";position:absolute;width:34px;height:34px;border:2px solid var(--bad);border-radius:52% 48% 55% 45%;transform:rotate(-12deg)}
+.pair{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.head2{display:flex;align-items:center;gap:4px;margin-left:-12px}
+.head2 h1{font-size:22px;flex:1;min-width:0}
+.toast{position:fixed;left:50%;bottom:calc(96px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);background:var(--ink);color:var(--bg);padding:10px 18px;border-radius:10px;font-size:15px;z-index:20;width:max-content;max-width:86vw;text-align:center}
+.done{margin:auto 0;display:flex;flex-direction:column;gap:22px}
+.done h1{font-size:26px}
+.marks{display:flex;gap:26px;font-size:19px}
+.marks span{display:flex;align-items:center;gap:8px}
+.marks svg{width:26px;height:26px;stroke-width:2.3}
+@media (max-height:600px){.ko{font-size:21px}.en{font-size:22px}.face .bd{padding-block:0 12px}.gr,.acts .btn{min-height:62px}.study{gap:10px}}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+<div id="app"></div>
+<script>
+"use strict";
+const SECS = [{"id":"take","part":"PART 1","name":"기본 동사 take","cards":[{"id":"c53694","x":"It takes about + 시간","m":"시간이 어느 정도 걸리다","ko":"집에 가는데 두 시간 정도 걸립니다.","en":"It takes about two hours to go home.","h":[[0,14]]},{"id":"4914df","x":"take notes","m":"필기하다","ko":"그녀는 필기를 하고 있습니다.","en":"She is taking notes.","h":[[7,19]]},{"id":"d31f62","x":"take + 교통수단","m":"교통수단을 이용하다","ko":"저는 버스를 하루에 두 번 탑니다.","en":"I take a bus twice a day.","h":[[2,12]]},{"id":"6354b7","x":"take place","m":"열리다","ko":"회의는 오전 10시에 열릴 것입니다.","en":"The meeting will take place at 10 A.M.","h":[[17,27]]},{"id":"50b8a9","x":"take a lecture / take a class","m":"강의/수업을 듣다","ko":"저는 온라인 강의를 들었습니다.","en":"I took an online lecture.","h":[[2,9],[17,24]]},{"id":"e2e70a","x":"take a picture","m":"사진을 찍다","ko":"한 여자가 사진을 찍고 있습니다.","en":"A woman is taking a picture.","h":[[11,27]]},{"id":"c3f866","x":"a picture was taken","m":"사진이 찍히다","ko":"이 사진은 로비에서 찍힌 것 같습니다.","en":"I think this picture was taken in a lobby.","h":[[13,30]]},{"id":"9f542e","x":"take an order","m":"주문을 받다","ko":"한 남자가 주문을 받고 있습니다.","en":"A man is taking an order.","h":[[9,24]]},{"id":"f03457","x":"take a walk","m":"산책을 하다","ko":"저는 주로 공원에서 산책을 합니다.","en":"I usually take a walk in a park.","h":[[10,21]]},{"id":"d36dba","x":"take a break","m":"잠시 쉬다","ko":"그들은 직장에서 잠시 쉬고 있습니다.","en":"They are taking a break at work.","h":[[9,23]]},{"id":"4ed476","x":"take out a loan","m":"대출을 받다","ko":"그녀는 은행에서 대출을 받았습니다.","en":"She took out a loan from a bank.","h":[[4,19]]},{"id":"25f9ec","x":"take a nap","m":"낮잠을 자다","ko":"저는 30분 정도 낮잠을 잤습니다.","en":"I took a nap for about 30 minutes.","h":[[2,12]]}]},{"id":"get","part":"PART 1","name":"기본 동사 get","cards":[{"id":"261f56","x":"get a job","m":"취업을 하다","ko":"그는 취업을 하기 위해 열심히 공부했습니다.","en":"He studied hard to get a job.","h":[[19,28]]},{"id":"fd68ff","x":"get a high score / get good grades","m":"높은 점수 / 좋은 성적을 받다","ko":"저는 토익에서 높은 점수를 받았습니다.","en":"I got a high score on the TOEIC.","h":[[2,18]]},{"id":"9ea541","x":"get a refund","m":"환불 받다","ko":"저는 셔츠를 환불 받았습니다.","en":"I got a refund on my shirt.","h":[[2,14]]},{"id":"065c33","x":"get a discount","m":"할인을 받다","ko":"당신은 20달러를 할인 받을 수 있습니다.","en":"You can get a $20 discount.","h":[[8,13],[18,26]]},{"id":"0adc4c","x":"get feedback","m":"피드백을 받다","ko":"저는 선생님께 자주 피드백을 받았습니다.","en":"I got feedback often from my teacher.","h":[[2,14]]},{"id":"5e5fe9","x":"get help / get support","m":"도움/지원을 받다","ko":"우리는 트레이너에게 도움을 받을 수 있습니다.","en":"We can get help from a trainer.","h":[[7,15]]},{"id":"5fe7c5","x":"get + 형용사","m":"~한 상태가 되다","ko":"저는 결과에 실망했습니다.","en":"I got disappointed with the result.","h":[[2,18]]},{"id":"fdf1d5","x":"get promoted","m":"승진하다","ko":"그는 작년에 승진했습니다.","en":"He got promoted last year.","h":[[3,15]]},{"id":"ca59de","x":"get paid","m":"월급을 받다","ko":"그는 제때에 월급을 받지 못했습니다.","en":"He didn't get paid on time.","h":[[10,18]]},{"id":"7e4d98","x":"get along with A","m":"A와 잘 지내다","ko":"그녀는 모두와 잘 지냈습니다.","en":"She got along with everyone.","h":[[4,18]]},{"id":"c1a68b","x":"get used to A","m":"A에 익숙해지다","ko":"저는 업무에 익숙해졌습니다.","en":"I got used to my work.","h":[[2,13]]}]},{"id":"do","part":"PART 1","name":"기본 동사 do","cards":[{"id":"055f61","x":"do business","m":"사업을 하다","ko":"그녀는 사업을 하기 위해 소셜미디어를 이용했습니다.","en":"She used social media to do business.","h":[[25,36]]},{"id":"c44af2","x":"do an internship","m":"인턴 근무를 하다","ko":"저는 IT 회사에서 인턴 근무를 했습니다.","en":"I did an internship at an IT company.","h":[[2,19]]},{"id":"aa2ca8","x":"do a task","m":"업무를 하다","ko":"그는 직장에서 다양한 업무를 했습니다.","en":"He did a variety of tasks at work.","h":[[3,8],[20,25]]},{"id":"9709b9","x":"do exercise","m":"운동을 하다","ko":"우리는 헬스장에서 다양한 운동을 할 수 있습니다.","en":"We can do various exercises at the gym.","h":[[7,9],[18,27]]},{"id":"2cbda5","x":"do yoga / do weight training","m":"요가/웨이트 트레이닝을 하다","ko":"그는 매일 요가를 했습니다.","en":"He did yoga every day.","h":[[3,11]]},{"id":"acd442","x":"do the shopping","m":"쇼핑을 하다","ko":"저는 온라인에서 식료품 쇼핑을 합니다.","en":"I do the grocery shopping online.","h":[[2,8],[17,25]]},{"id":"f54ead","x":"do housework","m":"집안일을 하다","ko":"저는 집안일을 혼자 해야 했습니다.","en":"I had to do housework alone.","h":[[9,21]]},{"id":"ca3402","x":"do the dishes / do the laundry","m":"설거지/빨래를 하다","ko":"저는 식사 후에 설거지를 하지 않아도 됩니다.","en":"I don't have to do the dishes after eating.","h":[[16,29]]},{"id":"c88ef0","x":"do volunteer work","m":"봉사활동을 하다","ko":"제가 어렸을 때, 저는 자주 봉사활동을 했습니다.","en":"When I was young, I did volunteer work often.","h":[[20,38]]},{"id":"a96b1e","x":"do an experiment","m":"실험을 하다","ko":"한 남자가 실험을 하고 있습니다.","en":"A man is doing an experiment.","h":[[9,28]]},{"id":"c93de5","x":"do a project","m":"프로젝트를 진행하다","ko":"저는 AI에 관한 팀 프로젝트를 진행했습니다.","en":"I did a team project on AI.","h":[[2,7],[13,20]]}]},{"id":"go","part":"PART 1","name":"기본 동사 go","cards":[{"id":"80e3ee","x":"go on a trip","m":"여행을 하다","ko":"저는 가족과 함께 시드니로 여행을 갔습니다.","en":"I went on a trip to Sydney with my family.","h":[[2,16]]},{"id":"ad8660","x":"go on a package tour","m":"패키지 여행을 하다","ko":"저는 상하이로 패키지 투어를 갔습니다.","en":"I went on a package tour to Shanghai.","h":[[2,24]]},{"id":"fa57dc","x":"go on a vacation","m":"휴가를 가다","ko":"그는 파리로 휴가를 갔습니다.","en":"He went on a vacation to Paris.","h":[[3,21]]},{"id":"f4cf3f","x":"go on a business trip","m":"출장을 가다","ko":"저는 런던으로 출장을 갔습니다.","en":"I went on a business trip to London.","h":[[2,25]]},{"id":"b1b965","x":"go to school / go to work","m":"통학/출근하다","ko":"저는 지하철로 출근합니다.","en":"I go to work by subway.","h":[[2,12]]},{"id":"836020","x":"go to the movies","m":"영화를 보러 가다","ko":"저는 한 달에 한 번 정도 영화관에 갑니다.","en":"I go to the movies about once a month.","h":[[2,18]]},{"id":"4e0127","x":"go for a walk / go for a run","m":"산책/달리기를 하다","ko":"저는 저녁에 자주 산책을 합니다.","en":"I often go for a walk in the evening.","h":[[8,21]]},{"id":"bed707","x":"go swimming / hiking / jogging","m":"수영/등산/조깅을 하다","ko":"저는 운동을 위해 등산을 합니다.","en":"I go hiking for exercise.","h":[[2,11]]},{"id":"12813f","x":"go shopping","m":"쇼핑을 하러 가다","ko":"저는 보통 주말에 쇼핑하러 갑니다.","en":"I usually go shopping on weekends.","h":[[10,21]]},{"id":"34a59f","x":"go up the stairs","m":"계단을 올라가다","ko":"한 남자가 계단을 올라가고 있습니다.","en":"A man is going up the stairs.","h":[[9,28]]},{"id":"5cef1b","x":"go along A","m":"A를 따라 가다","ko":"보트가 강을 따라 가고 있습니다.","en":"A boat is going along the river.","h":[[10,21]]},{"id":"6ce849","x":"go bankrupt","m":"파산하다","ko":"그 회사는 파산했습니다.","en":"The company went bankrupt.","h":[[12,25]]}]},{"id":"make","part":"PART 1","name":"기본 동사 make","cards":[{"id":"7ccaa4","x":"make friends","m":"친구를 만들다","ko":"저는 학교에서 많은 친구를 사귀었습니다.","en":"I made many friends at school.","h":[[2,6],[12,19]]},{"id":"4ad905","x":"make mistakes","m":"실수를 하다","ko":"저는 직장에서 자주 실수를 했습니다.","en":"I often made mistakes at work.","h":[[8,21]]},{"id":"5ba510","x":"make an investment","m":"투자를 하다","ko":"저는 한 스타트업 회사에 투자를 했습니다.","en":"I made an investment in a startup company.","h":[[2,20]]},{"id":"e53f3b","x":"make a reservation","m":"예약을 하다","ko":"저는 온라인으로 예약을 했습니다.","en":"I made a reservation online.","h":[[2,20]]},{"id":"df348a","x":"make A + 형용사","m":"A를 ~하게 만들다","ko":"그 영화는 저를 슬프게 만들었습니다.","en":"The movie made me sad.","h":[[10,21]]},{"id":"fcef1e","x":"make a + 형용사 + impression","m":"~한 인상을 주다","ko":"그는 우리에게 좋은 인상을 주었습니다.","en":"He made a good impression on us.","h":[[3,9],[15,25]]},{"id":"f16f03","x":"make a decision","m":"결정을 내리다","ko":"그는 어려운 결정을 내렸습니다.","en":"He made a difficult decision.","h":[[3,9],[20,28]]},{"id":"d10a8a","x":"make a plan","m":"계획을 세우다","ko":"저는 일본여행 계획을 세웠습니다.","en":"I made a plan to travel to Japan.","h":[[2,13]]},{"id":"c71499","x":"make an effort","m":"노력을 하다","ko":"그들은 손님을 끌기 위해 노력했습니다.","en":"They made an effort to attract customers.","h":[[5,19]]},{"id":"f5b960","x":"make a profit","m":"수익을 내다","ko":"수익을 내기가 어려웠습니다.","en":"It was difficult to make a profit.","h":[[20,33]]},{"id":"0bc21e","x":"make money","m":"돈을 벌다","ko":"그는 많은 돈을 벌었습니다.","en":"He made a lot of money.","h":[[3,7],[17,22]]}]},{"id":"have","part":"PART 1","name":"기본 동사 have","cards":[{"id":"d0481a","x":"have breakfast / lunch / dinner","m":"아침/점심/저녁을 먹다","ko":"저는 주로 집에서 저녁을 먹습니다.","en":"I usually have dinner at home.","h":[[10,21]]},{"id":"ba0687","x":"have a meeting / discussion","m":"회의/토론을 하다","ko":"그들은 회의를 하고 있습니다.","en":"They are having a meeting.","h":[[9,25]]},{"id":"4a3043","x":"have homework / assignment","m":"숙제/과제가 있다","ko":"저는 과제가 많았습니다.","en":"I had a lot of assignments.","h":[[2,5],[15,26]]},{"id":"e10b5b","x":"have a part-time job","m":"아르바이트를 하다","ko":"저는 레스토랑에서 아르바이트를 했습니다.","en":"I had a part-time job at a restaurant.","h":[[2,21]]},{"id":"0cd80c","x":"have been to A","m":"A에 가본 적 있다","ko":"저는 유럽에 가본 적이 있습니다.","en":"I have been to Europe.","h":[[2,14]]},{"id":"943417","x":"have difficulty v-ing","m":"~하는데 어려움을 겪다","ko":"그녀는 신제품 홍보에 어려움을 겪었습니다.","en":"She had difficulty promoting new products.","h":[[4,18]]},{"id":"f0ee90","x":"have a video call","m":"영상통화를 하다","ko":"한 남자가 영상통화를 하고 있습니다.","en":"A man is having a video call.","h":[[9,28]]},{"id":"b17614","x":"have a chance to V","m":"~할 기회가 있다","ko":"저는 해외에서 공부할 기회가 있었습니다.","en":"I had a chance to study abroad.","h":[[2,17]]},{"id":"bf9999","x":"have enough time to V","m":"~할 시간이 충분하다","ko":"저는 공부할 시간이 충분하지 않았습니다.","en":"I didn't have enough time to study.","h":[[9,28]]},{"id":"080545","x":"have experience in A","m":"A에 경험이 있다","ko":"그는 마케팅 업무 경험이 있습니다.","en":"He has experience in marketing.","h":[[3,20]]},{"id":"f8512c","x":"have a + 형용사 + lifestyle","m":"~한 생활습관을 갖다","ko":"저는 건강하지 않은 생활습관을 가지고 있었습니다.","en":"I had an unhealthy lifestyle.","h":[[2,8],[19,28]]},{"id":"380fb3","x":"have a habit of v-ing","m":"~하는 습관이 있다","ko":"저는 늦게 자는 습관이 있습니다.","en":"I have a habit of sleeping late.","h":[[2,17]]},{"id":"430585","x":"have different tastes in A","m":"A에 대한 취향이 다르다","ko":"사람들은 패션에 대한 취향이 다릅니다.","en":"People have different tastes in fashion.","h":[[7,31]]}]},{"id":"adj","part":"PART 2","name":"필수 형용사","cards":[{"id":"40926f","x":"bored","m":"지루한","ko":"저는 강의를 듣는 동안 지루했습니다.","en":"I was bored during the lecture.","h":[[6,11]]},{"id":"a2bb0b","x":"boring","m":"지루하게 만드는","ko":"그 강의는 지루했습니다.","en":"The lecture was boring.","h":[[16,22]]},{"id":"ddc90b","x":"comfortable / uncomfortable","m":"신체적·정신적으로 편안한 / 불편한","ko":"책상과 의자가 편안했습니다.","en":"The desks and chairs were comfortable.","h":[[26,37]]},{"id":"2c8017","x":"competitive","m":"경쟁이 심한","ko":"대도시에서 사업을 운영하는 것은 경쟁이 심합니다.","en":"It is competitive to run a business in a big city.","h":[[6,17]]},{"id":"c40c95","x":"confused","m":"혼란스러운","ko":"우리는 새로운 규정에 혼란을 겪었습니다.","en":"We got confused by the new rules.","h":[[7,15]]},{"id":"6d6549","x":"convenient / inconvenient","m":"이용이 쉽고 편리한 / 어렵고 불편한","ko":"아파트에 사는 것은 편리합니다.","en":"It is convenient to live in an apartment.","h":[[6,16]]},{"id":"9358cd","x":"crowded","m":"붐비는","ko":"그 공원은 사람들로 붐볐습니다.","en":"The park was crowded with people.","h":[[13,20]]},{"id":"5d1010","x":"creative","m":"창의적인","ko":"많은 회사들이 창의적인 직원을 선호합니다.","en":"Many companies prefer creative employees.","h":[[22,30]]},{"id":"d35185","x":"detailed","m":"자세한, 세부적인","ko":"그는 세부적인 계획을 세웠습니다.","en":"He made a detailed plan.","h":[[10,18]]},{"id":"4609f0","x":"disappointed","m":"실망한","ko":"저는 서비스에 실망했습니다.","en":"I was disappointed with the service.","h":[[6,18]]},{"id":"3f64e9","x":"disappointing","m":"실망하게 만드는","ko":"그 공연은 실망스러웠습니다.","en":"The show was disappointing.","h":[[13,26]]},{"id":"06f2af","x":"durable","m":"튼튼한, 내구성 있는","ko":"저는 튼튼한 스마트폰이 필요합니다.","en":"I need a durable smartphone.","h":[[9,16]]},{"id":"833aea","x":"effective","m":"효과적인","ko":"그것은 스트레스 해소에 효과적입니다.","en":"It is effective in relieving stress.","h":[[6,15]]},{"id":"e4643a","x":"excellent","m":"훌륭한, 뛰어난","ko":"저는 훌륭한 고객 서비스를 받았습니다.","en":"I received excellent customer service.","h":[[11,20]]},{"id":"f102ee","x":"exciting","m":"흥미진진한, 신나는","ko":"그 영화는 흥미진진했습니다.","en":"The movie was exciting.","h":[[14,22]]},{"id":"6e08bf","x":"experienced","m":"경험이 많은","ko":"우리는 경험 많은 직원을 채용했습니다.","en":"We hired an experienced employee.","h":[[12,23]]},{"id":"7a35d0","x":"enjoyable","m":"즐거운, 유익한 (차분하고 격식 있는)","ko":"그 강의는 즐거웠습니다.","en":"The lecture was enjoyable.","h":[[16,25]]},{"id":"ef19fe","x":"fun","m":"재미있는 (가볍고 신나는)","ko":"그 여행은 정말 재미있었습니다.","en":"The trip was really fun.","h":[[20,23]]},{"id":"6ee896","x":"funny","m":"사람을 웃게 만드는","ko":"그는 자주 재미있는 농담을 했습니다.","en":"He often told funny jokes.","h":[[14,19]]},{"id":"ebaa74","x":"healthy / unhealthy","m":"건강한 / 건강하지 않은","ko":"우리는 건강한 식습관을 가질 수 있습니다.","en":"We can have healthy eating habits.","h":[[12,19]]},{"id":"ef6386","x":"helpful","m":"도움이 되는","ko":"그의 조언은 매우 도움이 되었습니다.","en":"His advice was very helpful.","h":[[20,27]]},{"id":"e0c414","x":"historical","m":"역사적인, 역사와 관련된","ko":"제 고향에는 역사적인 장소가 많습니다.","en":"My hometown has many historical places.","h":[[21,31]]},{"id":"564e88","x":"interested","m":"흥미, 관심이 있는","ko":"그녀는 공부에 관심이 없었습니다.","en":"She was not interested in studying.","h":[[12,22]]},{"id":"dca180","x":"local","m":"현지의","ko":"저는 유명한 현지 식당들을 방문했습니다.","en":"I visited famous local restaurants.","h":[[17,22]]},{"id":"365daa","x":"luxurious","m":"호화로운","ko":"우리는 호화로운 분위기에서 식사할 수 있습니다.","en":"We can have a meal in a luxurious atmosphere.","h":[[24,33]]},{"id":"052363","x":"modern","m":"현대적인","ko":"이것은 현대적인 미술 갤러리의 사진 같습니다.","en":"I think this is a picture of a modern art gallery.","h":[[31,37]]},{"id":"982218","x":"necessary","m":"필요한","ko":"그러실 필요는 없습니다.","en":"That won't be necessary.","h":[[14,23]]},{"id":"4ee7f9","x":"nervous","m":"초조한, 긴장한","ko":"저는 면접 전에 많이 긴장했습니다.","en":"I was very nervous before the interview.","h":[[11,18]]},{"id":"2abace","x":"old-looking","m":"오래되어 보이는","ko":"한 남자가 오래되어 보이는 건물에 들어가고 있습니다.","en":"A man is entering an old-looking building.","h":[[21,32]]},{"id":"b23317","x":"passionate","m":"열정적인","ko":"그는 자기 일에 열정적이었습니다.","en":"He was passionate about his job.","h":[[7,17]]},{"id":"28a22c","x":"popular","m":"인기 있는","ko":"그는 인기 있는 지역에 카페를 열었습니다.","en":"He opened a café in a popular area.","h":[[22,29]]},{"id":"547450","x":"practical","m":"실용적인","ko":"우리는 인턴십 동안 실용적인 기술을 배울 수 있습니다.","en":"We can learn practical skills during internships.","h":[[13,22]]},{"id":"9a3245","x":"professional","m":"전문적인","ko":"유튜브에는 전문적인 운동 영상이 많습니다.","en":"There are many professional exercise videos on YouTube.","h":[[15,27]]},{"id":"8038b5","x":"quiet","m":"조용한","ko":"우리는 조용한 분위기에서 책을 읽을 수 있습니다.","en":"We can read books in a quiet atmosphere.","h":[[23,28]]},{"id":"00a948","x":"reasonable","m":"합리적인","ko":"그 매장은 합리적인 가격에 가구를 판매합니다.","en":"The store sells furniture at a reasonable price.","h":[[31,41]]},{"id":"7bc515","x":"relaxed","m":"느긋한, 여유로운","ko":"우리는 여유로운 환경에서 일할 수 있습니다.","en":"We can work in a relaxed environment.","h":[[17,24]]},{"id":"ae55b5","x":"responsible","m":"책임감 있는","ko":"그녀는 책임감이 매우 강했습니다.","en":"She was very responsible.","h":[[13,24]]},{"id":"d0bd4e","x":"satisfied","m":"만족한","ko":"저는 새 직장에 만족합니다.","en":"I'm satisfied with my new job.","h":[[4,13]]},{"id":"0a0856","x":"serious","m":"심각한","ko":"그는 많은 심각한 실수를 저질렀습니다.","en":"He made many serious mistakes.","h":[[13,20]]},{"id":"217582","x":"stable","m":"안정적인","ko":"우리는 재정적으로 안정된 삶을 살 수 있습니다.","en":"We can have a financially stable life.","h":[[26,32]]},{"id":"9bb0e3","x":"terrible","m":"끔찍한, 매우 나쁜","ko":"제 기말고사 성적은 끔찍했습니다.","en":"My final exam grades were terrible.","h":[[26,34]]},{"id":"945129","x":"tired","m":"피곤한","ko":"저는 학교에서 항상 피곤했습니다.","en":"I was always tired at school.","h":[[13,18]]},{"id":"72dd91","x":"traditional","m":"기존의, 전통적인","ko":"우리는 그들의 전통 문화를 경험할 수 있습니다.","en":"We can experience their traditional culture.","h":[[24,35]]},{"id":"5cf1dc","x":"unique","m":"독특한","ko":"그 동물원에는 독특한 동물이 많습니다.","en":"The zoo has many unique animals.","h":[[17,23]]},{"id":"8ed758","x":"useful","m":"유용한","ko":"그 스마트폰에는 유용한 기능이 많습니다.","en":"The smartphone has many useful functions.","h":[[24,30]]},{"id":"ed2c52","x":"various","m":"다양한","ko":"그녀는 직장에서 다양한 업무를 처리했습니다.","en":"She handled various tasks at work.","h":[[12,19]]},{"id":"1059c2","x":"well-known","m":"잘 알려진","ko":"잘 알려진 브랜드는 편리한 고객 서비스를 제공합니다.","en":"Well-known brands provide convenient customer service.","h":[[0,10]]}]},{"id":"adv","part":"PART 2","name":"필수 부사","cards":[{"id":"2862f1","x":"often","m":"자주","ko":"그는 자주 식사를 거르곤 했습니다.","en":"He often skipped meals.","h":[[3,8]]},{"id":"d86259","x":"sometimes","m":"가끔","ko":"저는 가끔 밤을 새웠습니다.","en":"I sometimes stayed up all night.","h":[[2,11]]},{"id":"048e62","x":"usually","m":"보통, 주로","ko":"저는 보통 머릿속을 정리하기 위해 산책을 합니다.","en":"I usually go for a walk to clear my head.","h":[[2,9]]},{"id":"12558b","x":"rarely","m":"드물게","ko":"그녀는 사무실에서 거의 말을 하지 않았습니다.","en":"She rarely talked in the office.","h":[[4,10]]},{"id":"0062a0","x":"accidentally","m":"우연히, 실수로","ko":"저는 실수로 노트북에 커피를 쏟았습니다.","en":"I accidentally spilled coffee on my laptop.","h":[[2,14]]},{"id":"e4ca87","x":"clearly","m":"분명히","ko":"그는 자신의 의견을 분명하게 표현하지 않았습니다.","en":"He didn't express his opinion clearly.","h":[[30,37]]},{"id":"9ea2d2","x":"comfortably","m":"편안하게","ko":"그들은 편안하게 쉴 수 있습니다.","en":"They can rest comfortably.","h":[[14,25]]},{"id":"c99031","x":"conveniently","m":"편리하게","ko":"우리는 편리하게 식료품을 쇼핑할 수 있습니다.","en":"We can shop for groceries conveniently.","h":[[26,38]]},{"id":"5d01e1","x":"confidently","m":"자신 있게","ko":"그녀는 자신 있게 프레젠테이션을 했습니다.","en":"She gave the presentation confidently.","h":[[26,37]]},{"id":"fbc165","x":"creatively","m":"창의적으로","ko":"직원들은 더 창의적으로 일할 수 있습니다.","en":"Employees can work more creatively.","h":[[24,34]]},{"id":"031266","x":"early","m":"일찍","ko":"저는 아침 일찍 일어나지 않아도 됩니다.","en":"I don't have to wake up early in the morning.","h":[[24,29]]},{"id":"a405f6","x":"late","m":"늦게","ko":"저는 매일 늦게 잠자리에 들었습니다.","en":"I went to bed late every day.","h":[[14,18]]},{"id":"52b126","x":"easily","m":"쉽게","ko":"우리는 스마트폰으로 쉽게 음식을 주문할 수 있습니다.","en":"We can easily order food on a smartphone.","h":[[7,13]]},{"id":"43262f","x":"hard","m":"열심히","ko":"우리는 보너스를 받기 위해 열심히 일했습니다.","en":"We worked hard to get a bonus.","h":[[10,14]]},{"id":"374c6d","x":"effectively","m":"효과적으로","ko":"우리는 효과적으로 스트레스를 완화할 수 있습니다.","en":"We can effectively relieve stress.","h":[[7,18]]},{"id":"d5189a","x":"efficiently","m":"효율적으로","ko":"우리는 시간을 더 효율적으로 사용할 수 있습니다.","en":"We can use our time more efficiently.","h":[[25,36]]},{"id":"2e647d","x":"eventually","m":"결국에는","ko":"그는 결국 작년에 그 식당을 닫았습니다.","en":"He eventually closed the restaurant last year.","h":[[3,13]]},{"id":"4951c8","x":"enjoyably","m":"즐겁게","ko":"그녀는 수업을 즐겁게 진행했습니다.","en":"She taught the class enjoyably.","h":[[21,30]]},{"id":"e57701","x":"fortunately","m":"다행히도","ko":"다행히도, 우리는 마감 기한을 지켰습니다.","en":"Fortunately, we met the deadline.","h":[[0,11]]},{"id":"3f8d4b","x":"fast / quickly","m":"빠르게","ko":"우리는 업무에 빠르게 적응할 수 있습니다.","en":"We can adapt to our work quickly.","h":[[25,32]]},{"id":"316ee2","x":"freely","m":"자유롭게","ko":"우리는 자유롭게 의견을 표현할 수 있었습니다.","en":"We were able to express our opinions freely.","h":[[37,43]]},{"id":"1d066c","x":"gradually","m":"점차, 서서히","ko":"제 성적이 점점 향상되었습니다.","en":"My grades improved gradually.","h":[[19,28]]},{"id":"01e54d","x":"honestly","m":"솔직하게","ko":"그는 자신의 실수를 솔직하게 보고했습니다.","en":"He reported his mistake honestly.","h":[[24,32]]},{"id":"905797","x":"leisurely","m":"여유롭게","ko":"우리는 더 여유롭게 여행할 수 있습니다.","en":"We can travel more leisurely.","h":[[19,28]]},{"id":"88353c","x":"professionally","m":"전문적으로, 능숙하게","ko":"그는 불만사항을 능숙하게 처리했습니다.","en":"He handled complaints professionally.","h":[[22,36]]},{"id":"9333f7","x":"recently","m":"최근에","ko":"저는 최근에 새 집으로 이사했습니다.","en":"I recently moved to a new house.","h":[[2,10]]},{"id":"819548","x":"regularly","m":"규칙적으로","ko":"저는 건강을 유지하기 위해 규칙적으로 운동합니다.","en":"I exercise regularly to stay healthy.","h":[[11,20]]},{"id":"e85c6b","x":"repeatedly","m":"반복적으로","ko":"우리는 영상을 반복해서 볼 수 있습니다.","en":"We can watch the videos repeatedly.","h":[[24,34]]},{"id":"787146","x":"sincerely","m":"진심으로","ko":"그녀는 학생들의 고민을 진심으로 들어주었습니다.","en":"She sincerely listened to students' worries.","h":[[4,13]]},{"id":"efef40","x":"specifically","m":"구체적으로","ko":"구체적으로 말하면, 우리는 출퇴근 시간을 절약할 수 있습니다.","en":"Specifically, we can save time on commuting.","h":[[0,12]]},{"id":"632244","x":"systematically","m":"체계적으로","ko":"우리는 체계적으로 일하는 법을 배울 수 있습니다.","en":"We can learn to work systematically.","h":[[21,35]]}]},{"id":"can","part":"PART 3","name":"can + 동사원형","cards":[{"id":"cb37ce","x":"can + V","m":"~할 수 있다","ko":"저는 책에 필기를 할 수 있습니다.","en":"I can take notes in a book.","h":[[2,5]]},{"id":"f51a78","x":"can + V","m":"~할 수 있다","ko":"저는 목적지에 빨리 도착할 수 있습니다.","en":"I can get to my destination quickly.","h":[[2,5]]},{"id":"712220","x":"can + V","m":"~할 수 있다","ko":"저는 직접 옷을 입어볼 수 있습니다.","en":"I can try on clothes in person.","h":[[2,5]]},{"id":"071cc5","x":"can + V","m":"~할 수 있다","ko":"저는 적은 비용으로 여행할 수 있습니다.","en":"I can travel at a low cost.","h":[[2,5]]},{"id":"93d059","x":"can + V","m":"~할 수 있다","ko":"저는 스마트폰으로 쇼핑을 할 수 있습니다.","en":"I can shop on my smartphone.","h":[[2,5]]},{"id":"351409","x":"can + V","m":"~할 수 있다","ko":"저는 다양한 브랜드를 비교할 수 있습니다.","en":"I can compare various brands.","h":[[2,5]]},{"id":"08c5c8","x":"can + V","m":"~할 수 있다","ko":"저는 요리에 드는 시간을 절약할 수 있습니다.","en":"I can save time on cooking.","h":[[2,5]]},{"id":"7ac675","x":"can + V","m":"~할 수 있다","ko":"저는 늦은 밤에도 운동할 수 있습니다.","en":"I can exercise late at night.","h":[[2,5]]},{"id":"5702b0","x":"can + V","m":"~할 수 있다","ko":"저는 돈을 낭비하는 것을 피할 수 있습니다.","en":"I can avoid wasting money.","h":[[2,5]]},{"id":"62b891","x":"can + V","m":"~할 수 있다","ko":"저는 일을 제시간에 끝낼 수 있습니다.","en":"I can finish work in time.","h":[[2,5]]},{"id":"4b4c29","x":"can + V","m":"~할 수 있다","ko":"저는 무료로 책을 읽을 수 있습니다.","en":"I can read books for free.","h":[[2,5]]},{"id":"d9693c","x":"can + V","m":"~할 수 있다","ko":"저는 취향에 맞는 책을 고를 수 있습니다.","en":"I can choose books that suit my taste.","h":[[2,5]]},{"id":"5e5fe9","x":"can + V","m":"~할 수 있다","ko":"우리는 트레이너에게 도움을 받을 수 있습니다.","en":"We can get help from a trainer.","h":[[3,6]]},{"id":"a368de","x":"can + V","m":"~할 수 있다","ko":"우리는 직장에서 인간관계를 넓힐 수 있습니다.","en":"We can expand our social network at work.","h":[[3,6]]},{"id":"ed5d08","x":"can + V","m":"~할 수 있다","ko":"우리는 아름다운 야경을 즐길 수 있습니다.","en":"We can enjoy a beautiful night view.","h":[[3,6]]},{"id":"ed50fb","x":"can + V","m":"~할 수 있다","ko":"우리는 시간과 장소에 상관없이 쇼핑할 수 있습니다.","en":"We can shop regardless of time and place.","h":[[3,6]]},{"id":"8038b5","x":"can + V","m":"~할 수 있다","ko":"우리는 조용한 분위기에서 책을 읽을 수 있습니다.","en":"We can read books in a quiet atmosphere.","h":[[3,6]]},{"id":"547450","x":"can + V","m":"~할 수 있다","ko":"우리는 인턴십 동안 실용적인 기술을 배울 수 있습니다.","en":"We can learn practical skills during internships.","h":[[3,6]]},{"id":"57229d","x":"can + V","m":"~할 수 있다","ko":"우리는 편안한 환경에서 일할 수 있습니다.","en":"We can work in a comfortable environment.","h":[[3,6]]},{"id":"fb6fc0","x":"can + V","m":"~할 수 있다","ko":"우리는 음악을 더 편리하게 구매할 수 있습니다.","en":"We can buy music more conveniently.","h":[[3,6]]},{"id":"15ec97","x":"can + V","m":"~할 수 있다","ko":"우리는 운동 영상을 여러 번 볼 수 있습니다.","en":"We can watch exercise videos multiple times.","h":[[3,6]]},{"id":"edd1ba","x":"can + V","m":"~할 수 있다","ko":"우리는 이메일을 반복해서 확인할 수 있습니다.","en":"We can check emails repeatedly.","h":[[3,6]]},{"id":"581809","x":"can + V","m":"~할 수 있다","ko":"우리는 직장에서 실수를 줄일 수 있습니다.","en":"We can reduce mistakes at work.","h":[[3,6]]},{"id":"66d3e8","x":"can + V","m":"~할 수 있다","ko":"우리는 다양한 업무를 경험할 수 있습니다.","en":"We can experience a variety of tasks.","h":[[3,6]]},{"id":"3f8d4b","x":"can + V","m":"~할 수 있다","ko":"우리는 업무에 빠르게 적응할 수 있습니다.","en":"We can adapt to our work quickly.","h":[[3,6]]},{"id":"217582","x":"can + V","m":"~할 수 있다","ko":"우리는 재정적으로 안정된 삶을 살 수 있습니다.","en":"We can have a financially stable life.","h":[[3,6]]},{"id":"790d2a","x":"can + V","m":"~할 수 있다","ko":"우리는 다양한 현지 음식을 즐길 수 있습니다.","en":"We can enjoy various local foods.","h":[[3,6]]},{"id":"84fd92","x":"can + V","m":"~할 수 있다","ko":"그들은 다른 학생들로부터 동기부여를 받을 수 있습니다.","en":"They can be motivated by other students.","h":[[5,11]]},{"id":"fa32a5","x":"can + V","m":"~할 수 있다","ko":"그들은 더 나은 수준의 교육을 받을 수 있습니다.","en":"They can have a higher quality of education.","h":[[5,8]]},{"id":"d206dd","x":"can + V","m":"~할 수 있다","ko":"그들은 좋은 공부 습관을 기를 수 있습니다.","en":"They can develop good study habits.","h":[[5,8]]},{"id":"e3b34d","x":"can + V","m":"~할 수 있다","ko":"그들은 스마트폰으로 인해 산만해질 수 있습니다.","en":"They can be distracted by their smartphones.","h":[[5,11]]},{"id":"ff231b","x":"can + V","m":"~할 수 있다","ko":"학생들은 학교에서 많은 친구를 사귈 수 있습니다.","en":"Students can make many friends at school.","h":[[9,12]]},{"id":"7f8932","x":"can + V","m":"~할 수 있다","ko":"학생들은 공부에 쉽게 집중할 수 있습니다.","en":"Students can focus on their studies easily.","h":[[9,12]]},{"id":"16d840","x":"can + V","m":"~할 수 있다","ko":"학생들이 자신의 적성을 발견할 수 있습니다.","en":"Students can find their aptitude.","h":[[9,12]]},{"id":"0d26ec","x":"can + V","m":"~할 수 있다","ko":"학생들은 다양한 사회성을 배울 수 있습니다.","en":"Students can learn various social skills.","h":[[9,12]]},{"id":"2d7db8","x":"can + V","m":"~할 수 있다","ko":"학생들은 공부로 인한 스트레스를 해소할 수 있습니다.","en":"Students can relieve stress from studies.","h":[[9,12]]}]},{"id":"itis","part":"PART 3","name":"It is ~ to 동사원형","cards":[{"id":"909627","x":"It is + 형용사 + to V","m":"~하는 것은 ~하다","ko":"출퇴근(또는 통학)하는 것이 불편했습니다.","en":"It was inconvenient to commute.","h":[[0,6],[20,22]]},{"id":"a91d24","x":"It is + 형용사 + to V","m":"~하는 것은 ~하다","ko":"다양한 브랜드를 비교하기 편리합니다.","en":"It is convenient to compare various brands.","h":[[0,5],[17,19]]},{"id":"5b086c","x":"It is + 형용사 + to V","m":"~하는 것은 ~하다","ko":"규칙적으로 운동하는 것이 중요합니다.","en":"It is important to exercise regularly.","h":[[0,5],[16,18]]},{"id":"af06a4","x":"It is + 형용사 + to V","m":"~하는 것은 ~하다","ko":"집에서는 공부에 집중하기 어렵습니다.","en":"It is difficult to focus on studying at home.","h":[[0,5],[16,18]]},{"id":"aa1d14","x":"It is + 형용사 + to V","m":"~하는 것은 ~하다","ko":"대도시에서는 취업 정보를 얻기가 쉽습니다.","en":"It is easy to get job information in a big city.","h":[[0,5],[11,13]]},{"id":"4c7766","x":"It is + 형용사 + to V","m":"~하는 것은 ~하다","ko":"요즘 사업을 운영하는 것은 경쟁이 심합니다.","en":"It is competitive to run a business nowadays.","h":[[0,5],[18,20]]},{"id":"2dd181","x":"It is + 형용사 + to V","m":"~하는 것은 ~하다","ko":"쇼핑 리스트를 작성해 두는 것은 유용합니다.","en":"It is useful to make a shopping list.","h":[[0,5],[13,15]]},{"id":"e3d26d","x":"It is + 형용사 + to V","m":"~하는 것은 ~하다","ko":"혼자 캠핑을 가는 것은 위험합니다.","en":"It is dangerous to go camping alone.","h":[[0,5],[16,18]]},{"id":"5278de","x":"It is + 형용사 + to V","m":"~하는 것은 ~하다","ko":"호텔 레스토랑에서 식사하는 것은 비쌉니다.","en":"It is expensive to eat at a hotel restaurant.","h":[[0,5],[16,18]]},{"id":"001257","x":"It is + 형용사 + to V","m":"~하는 것은 ~하다","ko":"한국에서 대중교통을 이용하는 것은 저렴합니다.","en":"It is cheap to use public transportation in Korea.","h":[[0,5],[12,14]]},{"id":"4ae386","x":"It is + 형용사 + to V","m":"~하는 것은 ~하다","ko":"친구들과 함께 쇼핑하는 것이 더 즐겁습니다.","en":"It is more fun to shop with my friends.","h":[[0,5],[15,17]]},{"id":"abbf6c","x":"It is + 형용사 + to V","m":"~하는 것은 ~하다","ko":"낯선 사람과 일하는 것은 불편합니다.","en":"It is uncomfortable to work with strangers.","h":[[0,5],[20,22]]},{"id":"065422","x":"It is + 형용사 + to V","m":"~하는 것은 ~하다","ko":"투자에 대해 배우는 것은 도움이 됩니다.","en":"It is helpful to learn about investing.","h":[[0,5],[14,16]]}]},{"id":"there","part":"PART 3","name":"There is / are","cards":[{"id":"9cfee2","x":"There is (are) + 명사","m":"~가 있다 / 없다","ko":"제 고향에는 유명한 랜드마크가 없습니다.","en":"There is no famous landmark in my hometown.","h":[[0,11]]},{"id":"c2545a","x":"There is (are) + 명사","m":"~가 있다 / 없다","ko":"요즘에는 학습을 위한 스마트폰 앱이 많습니다.","en":"There are many smartphone apps for learning.","h":[[0,9]]},{"id":"a1b3df","x":"There is (are) + 명사","m":"~가 있다 / 없다","ko":"백화점에는 많은 명품 브랜드가 있습니다.","en":"There are many luxury brands in department stores.","h":[[0,9]]},{"id":"91c346","x":"There is (are) + 명사","m":"~가 있다 / 없다","ko":"헬스장에는 많은 종류의 운동 기구가 있습니다.","en":"There are many kinds of exercise equipment in fitness centers.","h":[[0,9]]},{"id":"2d9d77","x":"There is (are) + 명사","m":"~가 있다 / 없다","ko":"유튜브에는 운동 영상이 많습니다.","en":"There are many exercise videos on YouTube.","h":[[0,9]]},{"id":"d4a0e7","x":"There is (are) + 명사","m":"~가 있다 / 없다","ko":"거리에 차가 너무 많습니다.","en":"There are too many cars on the street.","h":[[0,9]]},{"id":"4d4644","x":"There is (are) + 명사","m":"~가 있다 / 없다","ko":"집에는 집중을 방해하는 요소가 너무 많습니다.","en":"There are too many distractions at home.","h":[[0,9]]},{"id":"454671","x":"There is (are) + 명사","m":"~가 있다 / 없다","ko":"우리 도시에는 자전거를 타는 사람이 많지 않습니다.","en":"There are not many bicycle riders in my city.","h":[[0,13]]}]},{"id":"need","part":"PART 3","name":"need to / should","cards":[{"id":"71d8e9","x":"need to (should) + V","m":"~해야 한다","ko":"저는 더 건강한 식습관을 가져야 합니다.","en":"I need to have healthier eating habits.","h":[[2,9]]},{"id":"891b01","x":"need to (should) + V","m":"~해야 한다","ko":"저는 계속 외국어를 공부해야 합니다.","en":"I need to keep studying foreign languages.","h":[[2,9]]},{"id":"2948cc","x":"need to (should) + V","m":"~해야 한다","ko":"저는 스마트폰을 덜 사용해야 합니다.","en":"I need to use my smartphone less.","h":[[2,9]]},{"id":"3cef93","x":"need to (should) + V","m":"~해야 한다","ko":"저는 일찍 자야 합니다.","en":"I need to go to bed early.","h":[[2,9]]},{"id":"72472f","x":"need to (should) + V","m":"~해야 한다","ko":"우리는 종이와 플라스틱을 재활용해야 합니다.","en":"We should recycle paper and plastic.","h":[[3,9]]},{"id":"fbd3df","x":"need to (should) + V","m":"~해야 한다","ko":"우리는 직장에 늦지 말아야 합니다.","en":"We should not be late for work.","h":[[3,13]]},{"id":"5adb14","x":"need to (should) + V","m":"~해야 한다","ko":"우리는 규칙적으로 운동해야 합니다.","en":"We should exercise regularly.","h":[[3,9]]},{"id":"976fb2","x":"need to (should) + V","m":"~해야 한다","ko":"우리는 대중교통을 더 자주 이용해야 합니다.","en":"We should take public transportation more often.","h":[[3,9]]}]},{"id":"dont","part":"PART 3","name":"don't have to","cards":[{"id":"a8b62c","x":"don't have to + V","m":"~할 필요가 없다","ko":"우리는 여행 중에 서두르지 않아도 됩니다.","en":"We don't have to hurry while traveling.","h":[[3,16]]},{"id":"6100d2","x":"don't have to + V","m":"~할 필요가 없다","ko":"우리는 쇼핑을 하기 위해 돌아다니지 않아도 됩니다.","en":"We don't have to walk around to go shopping.","h":[[3,16]]},{"id":"548d6a","x":"don't have to + V","m":"~할 필요가 없다","ko":"우리는 통근에 시간을 낭비하지 않아도 됩니다.","en":"We don't have to waste time commuting.","h":[[3,16]]},{"id":"7e90c9","x":"don't have to + V","m":"~할 필요가 없다","ko":"저는 층간 소음을 걱정할 필요가 없습니다.","en":"I don't have to worry about noise between floors.","h":[[2,15]]},{"id":"fa9fba","x":"don't have to + V","m":"~할 필요가 없다","ko":"저는 은행에 직접 가지 않아도 됩니다.","en":"I don't have to go to a bank in person.","h":[[2,15]]},{"id":"7e8c88","x":"don't have to + V","m":"~할 필요가 없다","ko":"저는 환승을 하지 않아도 됩니다.","en":"I don't have to transfer.","h":[[2,15]]},{"id":"e04b20","x":"don't have to + V","m":"~할 필요가 없다","ko":"저는 주말에 일을 하지 않아도 됩니다.","en":"I don't have to work on weekends.","h":[[2,15]]},{"id":"513e21","x":"don't have to + V","m":"~할 필요가 없다","ko":"저는 영화를 선택하기 위해 다른 사람과 상의하지 않아도 됩니다.","en":"I don't have to discuss with anyone to select a movie.","h":[[2,15]]},{"id":"978ecb","x":"don't have to + V","m":"~할 필요가 없다","ko":"저는 식사 후에 설거지를 할 필요가 없습니다.","en":"I don't have to do the dishes after having a meal.","h":[[2,15]]},{"id":"2da4e4","x":"don't have to + V","m":"~할 필요가 없다","ko":"저는 교통비에 많은 돈을 쓰지 않아도 됩니다.","en":"I don't have to spend a lot of money on transportation costs.","h":[[2,15]]},{"id":"c50a3f","x":"don't have to + V","m":"~할 필요가 없다","ko":"저는 비싼 운동 장비를 구매할 필요가 없습니다.","en":"I don't have to buy expensive exercise equipment.","h":[[2,15]]}]},{"id":"interested","part":"PART 3","name":"be interested in","cards":[{"id":"0389fa","x":"be interested in + 명사 / 동명사","m":"~에 관심이 있다 / 없다","ko":"저는 새로운 문화를 경험하는 데 관심이 있습니다.","en":"I'm interested in experiencing new cultures.","h":[[1,17]]},{"id":"194268","x":"be interested in + 명사 / 동명사","m":"~에 관심이 있다 / 없다","ko":"저는 악기 연주에 관심이 있습니다.","en":"I'm interested in playing musical instruments.","h":[[1,17]]},{"id":"4ae012","x":"be interested in + 명사 / 동명사","m":"~에 관심이 있다 / 없다","ko":"저는 인테리어 디자인에 관심이 많습니다.","en":"I'm very interested in interior design.","h":[[1,22]]},{"id":"1ccced","x":"be interested in + 명사 / 동명사","m":"~에 관심이 있다 / 없다","ko":"저는 캠핑에 관심이 없습니다.","en":"I'm not interested in camping.","h":[[1,21]]},{"id":"d1782f","x":"be interested in + 명사 / 동명사","m":"~에 관심이 있다 / 없다","ko":"저는 요리에 전혀 관심이 없습니다.","en":"I'm not interested in cooking at all.","h":[[1,21]]},{"id":"f7b674","x":"be interested in + 명사 / 동명사","m":"~에 관심이 있다 / 없다","ko":"저는 역사에 관심이 없었습니다.","en":"I was not interested in history.","h":[[2,23]]},{"id":"7a96f2","x":"be interested in + 명사 / 동명사","m":"~에 관심이 있다 / 없다","ko":"저는 스타트업 회사에 별로 관심이 없었습니다.","en":"I was not very interested in startups.","h":[[2,28]]}]},{"id":"like","part":"PART 3","name":"like + 동명사","cards":[{"id":"771d74","x":"like + v-ing","m":"~하는 것을 좋아하다 / 좋아하지 않다","ko":"저는 책에 메모하는 것을 좋아합니다.","en":"I like taking notes in books.","h":[[2,13]]},{"id":"011873","x":"like + v-ing","m":"~하는 것을 좋아하다 / 좋아하지 않다","ko":"저는 강을 따라 걷는 것을 좋아합니다.","en":"I like walking along the river.","h":[[2,14]]},{"id":"962a63","x":"like + v-ing","m":"~하는 것을 좋아하다 / 좋아하지 않다","ko":"저는 아침으로 빵을 먹는 것을 좋아합니다.","en":"I like having bread for breakfast.","h":[[2,13]]},{"id":"99c792","x":"like + v-ing","m":"~하는 것을 좋아하다 / 좋아하지 않다","ko":"저는 혼자 여행하는 것을 좋아합니다.","en":"I like traveling alone.","h":[[2,16]]},{"id":"938634","x":"like + v-ing","m":"~하는 것을 좋아하다 / 좋아하지 않다","ko":"저는 일하면서 음악을 듣는 것을 좋아합니다.","en":"I like listening to music while working.","h":[[2,16]]},{"id":"23de25","x":"like + v-ing","m":"~하는 것을 좋아하다 / 좋아하지 않다","ko":"저는 집에서 요리하는 것을 좋아하지 않습니다.","en":"I don't like cooking at home.","h":[[2,20]]},{"id":"801b09","x":"like + v-ing","m":"~하는 것을 좋아하다 / 좋아하지 않다","ko":"저는 매운 음식을 먹는 것을 좋아하지 않습니다.","en":"I don't like eating spicy food.","h":[[2,19]]},{"id":"9a05ee","x":"like + v-ing","m":"~하는 것을 좋아하다 / 좋아하지 않다","ko":"저는 아침에 공부하는 것을 좋아하지 않습니다.","en":"I don't like studying in the morning.","h":[[2,21]]}]},{"id":"work","part":"PART 4","name":"직장","cards":[{"id":"e7494c","x":"look for a job","m":"구직 활동을 하다","ko":"저는 1년간 구직 활동을 했습니다.","en":"I looked for a job for a year.","h":[[2,18]]},{"id":"f13db9","x":"job seeker","m":"구직자","ko":"대부분의 구직자들은 대기업을 선호합니다.","en":"Most job seekers prefer large companies.","h":[[5,16]]},{"id":"d1595c","x":"prepare for a job interview","m":"취업 면접을 준비하다","ko":"저는 혼자서 취업 면접을 준비했습니다.","en":"I prepared for a job interview alone.","h":[[2,30]]},{"id":"5992a6","x":"get a job","m":"취업하다","ko":"그는 쉽게 취업을 했습니다.","en":"He got a job easily.","h":[[3,12]]},{"id":"815a19","x":"enter A","m":"A에 입사하다","ko":"그녀는 교육 회사에 들어갔습니다.","en":"She entered an education company.","h":[[4,11]]},{"id":"9ee909","x":"start A","m":"A를 창업하다","ko":"그녀는 온라인 쇼핑몰을 차렸습니다.","en":"She started an online shopping mall.","h":[[4,11]]},{"id":"8a0929","x":"work overtime","m":"야근을 하다","ko":"그녀는 거의 매일 야근을 했습니다.","en":"She worked overtime almost every day.","h":[[4,19]]},{"id":"c81d53","x":"get promoted","m":"승진하다","ko":"그녀는 팀 매니저로 승진했습니다.","en":"She got promoted to the team manager.","h":[[4,16]]},{"id":"91335c","x":"get fired","m":"해고되다","ko":"그는 해고되었습니다.","en":"He got fired.","h":[[3,12]]},{"id":"0d9da0","x":"quit the job","m":"퇴사하다","ko":"그녀는 지난 달에 퇴사했습니다.","en":"She quit the job last month.","h":[[4,16]]},{"id":"327b52","x":"go to work","m":"출근하다","ko":"저는 주로 지하철로 출근합니다.","en":"I usually go to work by subway.","h":[[10,20]]},{"id":"f7646b","x":"make a mistake","m":"실수를 하다","ko":"그는 업무 중에 자주 실수를 했습니다.","en":"He often made mistakes while working.","h":[[9,22]]},{"id":"03afbc","x":"receive a complaint","m":"컴플레인을 받다","ko":"우리는 고객들로부터 많은 컴플레인을 받았습니다.","en":"We received many complaints from customers.","h":[[3,11],[17,27]]},{"id":"84c4ac","x":"do a task","m":"업무를 하다","ko":"그는 혼자서 여러 업무를 했습니다.","en":"He did various tasks alone.","h":[[3,6],[15,20]]},{"id":"45c60c","x":"be late for work","m":"회사에 지각하다","ko":"저는 회사에 자주 지각했습니다.","en":"I was late for work often.","h":[[2,19]]},{"id":"6902c9","x":"change jobs","m":"이직하다","ko":"그는 작년에 이직했습니다.","en":"He changed jobs last year.","h":[[3,15]]},{"id":"57416b","x":"intern at A","m":"A에서 인턴 근무를 하다","ko":"저는 스타트업 회사에서 인턴 근무를 했습니다.","en":"I interned at a start-up company.","h":[[2,13]]},{"id":"bb8d49","x":"employee benefits","m":"직원 혜택","ko":"대기업에는 다양한 직원 혜택이 있습니다.","en":"Large companies have various employee benefits.","h":[[29,46]]},{"id":"b04075","x":"receive a salary","m":"월급을 받다","ko":"그녀는 높은 월급을 받았습니다.","en":"She received a high salary.","h":[[4,14],[20,26]]},{"id":"0329b9","x":"sales increase / decrease","m":"매출이 늘다/줄다","ko":"매출이 많이 늘었습니다.","en":"The sales increased a lot.","h":[[4,19]]},{"id":"edea59","x":"go on a business trip","m":"출장을 가다","ko":"저는 자주 출장을 갔습니다.","en":"I often went on business trips.","h":[[8,30]]},{"id":"ecdf57","x":"go on a vacation","m":"휴가를 가다","ko":"그는 런던으로 휴가를 갔습니다.","en":"He went on a vacation to London.","h":[[3,21]]},{"id":"1d63c3","x":"lunch break","m":"점심시간","ko":"저는 점심시간에 산책을 합니다.","en":"I take a walk during lunch break.","h":[[21,32]]},{"id":"77dede","x":"working hours","m":"근무 시간","ko":"저의 근무 시간은 매우 길었습니다.","en":"My working hours were very long.","h":[[3,16]]},{"id":"1b628b","x":"finish A in time","m":"A를 제 시간에 마치다","ko":"우리는 제 시간에 프로젝트를 마쳤습니다.","en":"We finished the project in time.","h":[[3,11],[24,31]]},{"id":"bd6398","x":"meet the deadline","m":"마감기한을 지키다","ko":"우리는 마감기한을 지키지 못했습니다.","en":"We couldn't meet the deadline.","h":[[12,29]]},{"id":"dfc029","x":"have a video call","m":"화상 통화를 하다","ko":"저는 매일 아침 화상 통화를 했습니다.","en":"I had a video call every morning.","h":[[2,18]]},{"id":"a368de","x":"expand social network","m":"인간관계를 넓히다","ko":"우리는 직장에서 인간관계를 넓힐 수 있습니다.","en":"We can expand our social network at work.","h":[[7,13],[18,32]]},{"id":"18b6d2","x":"performance evaluation","m":"인사 평가","ko":"그녀는 훌륭한 인사 평가를 받았습니다.","en":"She received an excellent performance evaluation.","h":[[26,48]]},{"id":"b04101","x":"experienced employee","m":"경력직 사원","ko":"우리 회사는 경력직 사원 두 명을 채용했습니다.","en":"Our company hired two experienced employees.","h":[[22,43]]},{"id":"6b6988","x":"flexible work system","m":"유연근무제","ko":"우리 회사는 유연근무제를 도입했습니다.","en":"Our company introduced a flexible work system.","h":[[25,45]]}]},{"id":"school","part":"PART 4","name":"학교 · 교육","cards":[{"id":"560447","x":"focus on studies","m":"공부에 집중하다","ko":"공부에 집중하기가 어려웠습니다.","en":"It was hard to focus on my studies.","h":[[15,23],[27,34]]},{"id":"517201","x":"under stress","m":"스트레스를 받다","ko":"저는 시험 전에 많은 스트레스를 받았습니다.","en":"I was under a lot of stress before exams.","h":[[6,11],[21,27]]},{"id":"2d7db8","x":"relieve stress","m":"스트레스를 해소하다","ko":"학생들은 공부로 인한 스트레스를 해소할 수 있습니다.","en":"Students can relieve stress from studies.","h":[[13,27]]},{"id":"84fd92","x":"be motivated by A","m":"A로부터 동기부여를 받다","ko":"그들은 다른 학생들로부터 동기부여를 받을 수 있습니다.","en":"They can be motivated by other students.","h":[[9,24]]},{"id":"1a5b54","x":"lose interest","m":"흥미를 잃다","ko":"저는 공부에 흥미를 잃었습니다.","en":"I lost interest in studying.","h":[[2,15]]},{"id":"2b07cb","x":"self-control","m":"자제력","ko":"어린 아이들은 자제력이 부족합니다.","en":"Young children lack self-control.","h":[[20,32]]},{"id":"14f35e","x":"receive feedback","m":"피드백을 받다","ko":"저는 수업 중에 피드백을 자주 받았습니다.","en":"I often received feedback in class.","h":[[8,25]]},{"id":"a2ac75","x":"take a class / take a lecture","m":"수업/강의를 듣다","ko":"저는 집에서 온라인 수업을 들었습니다.","en":"I took an online class at home.","h":[[2,9],[17,22]]},{"id":"3b7400","x":"go on a field trip","m":"현장 학습을 가다","ko":"저는 박물관으로 현장 학습을 갔습니다.","en":"I went on a field trip to a museum.","h":[[2,22]]},{"id":"20e178","x":"make friends","m":"친구들을 사귀다","ko":"저는 고등학생 때 많은 친구들을 사귈 수 있었습니다.","en":"I was able to make many friends in high school.","h":[[14,18],[24,31]]},{"id":"49136a","x":"get along with A","m":"A와 잘 지내다","ko":"그는 대부분의 학생들과 잘 지냈습니다.","en":"He got along well with most of the students.","h":[[3,12],[18,22]]},{"id":"9258a7","x":"learn how to V","m":"~하는 법을 배우다","ko":"저는 다른 학생들과 협력하는 방법을 배웠습니다.","en":"I learned how to cooperate with other students.","h":[[2,16]]},{"id":"bfe0af","x":"learn the importance of A","m":"A의 중요성을 배우다","ko":"학생들은 환경의 중요성을 배울 필요가 있습니다.","en":"Students need to learn the importance of the environment.","h":[[17,40]]},{"id":"bf20a1","x":"interpersonal skills","m":"대인관계 기술","ko":"학생들은 학교에서 대인관계 기술을 배울 수 있습니다.","en":"Students can learn interpersonal skills at school.","h":[[19,39]]},{"id":"7704e3","x":"improve skills","m":"실력을 향상시키다","ko":"그녀는 수학 실력을 빠르게 향상시켰습니다.","en":"She improved her math skills quickly.","h":[[4,12],[22,28]]},{"id":"5e1e63","x":"get an education","m":"교육을 받다","ko":"학생들은 더 나은 교육을 받을 수 있습니다.","en":"Students can get a better education.","h":[[13,16],[26,35]]},{"id":"25a370","x":"distract A from -ing","m":"A가 ~하는 것을 방해하다","ko":"전자 기기는 학생들이 공부하는 것을 방해할 수 있습니다.","en":"Electronic devices can distract students from studying.","h":[[23,31],[41,45]]},{"id":"d206dd","x":"develop a habit","m":"습관을 기르다","ko":"그들은 좋은 공부 습관들을 기를 수 있습니다.","en":"They can develop good study habits.","h":[[9,16],[28,34]]},{"id":"16d840","x":"find an aptitude","m":"적성을 발견하다","ko":"학생들이 자신의 적성을 발견할 수 있습니다.","en":"Students can find their aptitude.","h":[[13,17],[24,32]]},{"id":"e1d169","x":"choose a career path","m":"진로를 선택하다","ko":"그 수업은 학생들이 진로를 선택하는 데 도움이 되었습니다.","en":"The class helped students choose a career path.","h":[[26,46]]},{"id":"4035e8","x":"pass / fail the exam","m":"시험에 합격하다/불합격하다","ko":"그는 쉽게 시험에 합격했습니다.","en":"He passed the exam easily.","h":[[3,18]]},{"id":"03acd9","x":"school uniform","m":"교복","ko":"저는 고등학교 때 교복을 입었습니다.","en":"I wore a school uniform in high school.","h":[[9,23]]},{"id":"ebc1a0","x":"cram school","m":"입시 학원","ko":"저는 매일 입시 학원에서 공부했습니다.","en":"I studied at a cram school every day.","h":[[15,26]]},{"id":"edcaea","x":"take notes","m":"필기를 하다","ko":"저는 아이패드에 필기를 했습니다.","en":"I took notes on my iPad.","h":[[2,12]]},{"id":"52db2d","x":"do volunteer work","m":"봉사활동을 하다","ko":"저는 일주일에 한 번 봉사활동을 했습니다.","en":"I did volunteer work once a week.","h":[[2,20]]},{"id":"05c3a1","x":"get into a university","m":"대학에 들어가다","ko":"저는 좋은 대학에 들어갈 수 있었습니다.","en":"I could get into a good university.","h":[[8,18],[24,34]]},{"id":"6fae4b","x":"major in A","m":"A를 전공하다","ko":"그녀는 회계학을 전공했습니다.","en":"She majored in accounting.","h":[[4,14]]},{"id":"0b7127","x":"commute to A","m":"A로 통학하다","ko":"저는 학교에 버스로 통학했습니다.","en":"I commuted to university by bus.","h":[[2,13]]},{"id":"4a3043","x":"assignment","m":"과제","ko":"저는 과제가 많았습니다.","en":"I had a lot of assignments.","h":[[2,5],[15,26]]},{"id":"886e18","x":"tuition fee","m":"학비","ko":"대학교 등록금이 비쌌습니다.","en":"The university tuition fee was expensive.","h":[[15,26]]},{"id":"137cdd","x":"get good / poor grades","m":"좋은/나쁜 성적을 받다","ko":"저는 기말고사에서 좋은 성적을 받았습니다.","en":"I got good grades on the final exam.","h":[[2,17]]},{"id":"061208","x":"grades increase / decrease","m":"성적이 오르다/떨어지다","ko":"성적이 많이 떨어졌습니다.","en":"My grades decreased a lot.","h":[[3,19]]},{"id":"79e8c7","x":"scholarship","m":"장학금","ko":"그는 전액 장학금을 받았습니다.","en":"He received a full-time scholarship.","h":[[24,35]]},{"id":"63c673","x":"work part-time","m":"아르바이트를 하다","ko":"저는 학기 동안 아르바이트를 했습니다.","en":"I worked part-time during the semesters.","h":[[2,18]]},{"id":"6d0397","x":"join a club","m":"동아리에 가입하다","ko":"저는 농구 동아리에 가입했습니다.","en":"I joined a basketball club.","h":[[2,10],[22,26]]},{"id":"2ab120","x":"study abroad","m":"해외에서 공부하다","ko":"그는 영국에서 유학을 했습니다.","en":"He studied abroad in England.","h":[[3,17]]},{"id":"0fd894","x":"register for A","m":"A에 등록하다","ko":"저는 외국어 학원에 등록했습니다.","en":"I registered for a language school.","h":[[2,16]]},{"id":"b938e7","x":"earn a certificate","m":"자격증을 따다","ko":"그녀는 다양한 자격증을 땄습니다.","en":"She earned various certificates.","h":[[4,10],[19,31]]}]},{"id":"tech","part":"PART 4","name":"기술 · 인터넷","cards":[{"id":"26cc4d","x":"anytime, anywhere","m":"언제 어디서나","ko":"우리는 언제 어디서나 정보를 검색할 수 있습니다.","en":"We can search for information anytime, anywhere.","h":[[30,37],[39,47]]},{"id":"3b91ca","x":"regardless of A","m":"A에 상관없이","ko":"우리는 장소에 상관없이 온라인 쇼핑을 할 수 있습니다.","en":"We can shop online regardless of location.","h":[[19,32]]},{"id":"959a8d","x":"on our smartphones","m":"스마트폰으로","ko":"저는 스마트폰으로 호텔을 예약했습니다.","en":"I booked a hotel on my smartphone.","h":[[17,33]]},{"id":"690f8e","x":"using our smartphones","m":"스마트폰을 사용해서","ko":"저는 스마트폰을 사용해서 은행 업무를 봅니다.","en":"I do banking using my smartphone.","h":[[13,32]]},{"id":"4e3497","x":"pay with a smartphone","m":"스마트폰으로 결제하다","ko":"우리는 매장에서 스마트폰으로 결제할 수 있습니다.","en":"We can pay with a smartphone at stores.","h":[[7,28]]},{"id":"0260fe","x":"save time","m":"시간을 절약하다","ko":"우리는 최신 기술을 사용함으로써 시간을 절약할 수 있습니다.","en":"We can save time by using the latest technology.","h":[[7,16]]},{"id":"b0b0da","x":"in real time","m":"실시간으로","ko":"우리는 실시간으로 교통정보를 확인할 수 있습니다.","en":"We can check traffic information in real time.","h":[[33,45]]},{"id":"026906","x":"in advance","m":"미리, 사전에","ko":"저는 미리 좌석을 예약할 수 있었습니다.","en":"I was able to reserve a seat in advance.","h":[[29,39]]},{"id":"64980e","x":"browse the internet","m":"인터넷을 검색하다","ko":"저는 쉬는 시간에 인터넷을 검색합니다.","en":"I browse the internet during my break.","h":[[2,21]]},{"id":"7c01f0","x":"work from home","m":"재택 근무하다","ko":"우리 회사에서는 직원들이 정기적으로 재택근무를 합니다.","en":"In our company, employees work from home regularly.","h":[[26,40]]},{"id":"7dd8eb","x":"AI program","m":"인공지능 프로그램","ko":"많은 학생들이 효율적으로 공부하기 위해 AI 프로그램을 사용합니다.","en":"Many students use AI programs to study efficiently.","h":[[18,29]]},{"id":"159a26","x":"live online class","m":"라이브 온라인 수업","ko":"학생들은 라이브 온라인 수업에서 질문할 수 있습니다.","en":"Students can ask questions in live online classes.","h":[[30,49]]},{"id":"42986b","x":"improve the quality of life","m":"삶의 질을 높이다","ko":"스마트 기기는 삶의 질을 높일 수 있습니다.","en":"Smart devices can improve the quality of life.","h":[[18,45]]},{"id":"8c1249","x":"replace A","m":"A를 대체하다","ko":"인공지능이 인간을 빠르게 대체하고 있습니다.","en":"AI is replacing humans quickly.","h":[[6,15]]},{"id":"c9561d","x":"use social media","m":"소셜 미디어를 사용하다","ko":"많은 기업들이 제품을 홍보하기 위해 소셜 미디어를 사용합니다.","en":"Many businesses use social media to promote products.","h":[[16,32]]},{"id":"1c07d2","x":"electric cars","m":"전기자동차","ko":"요즘은 전기차 충전소를 찾기가 쉽습니다.","en":"It is easy to find charging stations for electric cars these days.","h":[[41,54]]}]},{"id":"shop","part":"PART 5","name":"쇼핑","cards":[{"id":"d70b2e","x":"get a discount","m":"할인을 받다","ko":"저는 20% 할인을 받았습니다.","en":"I got a 20% discount.","h":[[2,7],[12,20]]},{"id":"f5af92","x":"offer a discount","m":"할인을 하다","ko":"그들은 더 큰 할인을 제공해야 합니다.","en":"They should offer a bigger discount.","h":[[12,19],[27,35]]},{"id":"8cac58","x":"at a low / reasonable price","m":"저렴한/합리적인 가격에","ko":"그들은 합리적인 가격에 화장품을 판매합니다.","en":"They sell cosmetics at a reasonable price.","h":[[20,41]]},{"id":"e2640d","x":"membership points","m":"적립금","ko":"저는 적립금을 많이 받았습니다.","en":"I earned a lot of membership points.","h":[[18,35]]},{"id":"a91d24","x":"compare A","m":"A를 비교하다","ko":"다양한 브랜드를 비교하기 편리합니다.","en":"It is convenient to compare various brands.","h":[[20,27]]},{"id":"cba058","x":"promotional event","m":"판촉 행사","ko":"그들은 다양한 판촉 행사를 진행했습니다.","en":"They held various promotional events.","h":[[18,36]]},{"id":"22a497","x":"shipping service","m":"배송 서비스","ko":"그들은 무료 배송 서비스를 제공합니다.","en":"They offer free shipping service.","h":[[16,32]]},{"id":"3da506","x":"customer service","m":"고객 서비스","ko":"직원들이 훌륭한 고객 서비스를 제공했습니다.","en":"The staff provided excellent customer service.","h":[[29,45]]},{"id":"d2fbb2","x":"local store","m":"동네 매장","ko":"저는 주로 동네 서점에서 책을 구입합니다.","en":"I usually buy books at a local bookstore.","h":[[25,40]]},{"id":"712220","x":"try on A","m":"A를 입어보다","ko":"저는 직접 옷을 입어볼 수 있습니다.","en":"I can try on clothes in person.","h":[[6,12]]},{"id":"daf5cb","x":"exchange A for B","m":"A를 B로 교환하다","ko":"저는 그것을 새 제품으로 교환했습니다.","en":"I exchanged it for a new product.","h":[[2,11],[15,18]]},{"id":"e8da92","x":"get a refund for A","m":"A를 환불받다","ko":"저는 그 책을 환불 받았습니다.","en":"I got a refund for the book.","h":[[2,18]]},{"id":"b24f20","x":"return A","m":"A를 반품하다","ko":"저는 그 티셔츠를 반품했습니다.","en":"I returned the t-shirt.","h":[[2,10]]},{"id":"feafd4","x":"in one place","m":"한 장소에서","ko":"저는 한 장소에서 쇼핑할 수 있습니다.","en":"I can shop in one place.","h":[[11,23]]},{"id":"8d1905","x":"sold out","m":"품절된","ko":"그 가방은 항상 품절이었습니다.","en":"The bag was always sold out.","h":[[19,27]]},{"id":"717367","x":"wait in line","m":"줄을 서서 기다리다","ko":"저는 한 시간 정도 줄을 서서 기다렸습니다.","en":"I waited in line for about an hour.","h":[[2,16]]},{"id":"d9f6cb","x":"online advertisement","m":"온라인 광고","ko":"온라인 광고에는 허위 정보가 많습니다.","en":"There is a lot of false information in online advertisements.","h":[[39,60]]},{"id":"810a59","x":"afford","m":"경제적·시간적 여유가 있다","ko":"저는 그 가방을 구매할 여유가 없었습니다.","en":"I could not afford the bag.","h":[[12,18]]}]},{"id":"house","part":"PART 5","name":"주거","cards":[{"id":"c7e0ad","x":"downtown","m":"도심, 시내 중심가","ko":"도심지에서는 대중교통을 이용하기 편리합니다.","en":"It is convenient to use public transportation in the downtown area.","h":[[53,61]]},{"id":"20de65","x":"countryside","m":"시골","ko":"시골에서는 의료 서비스를 받기가 어렵습니다.","en":"It is difficult to get medical services in the countryside.","h":[[47,58]]},{"id":"33c7d2","x":"in the suburbs","m":"도시 외곽에","ko":"새 사무실은 도시 외곽에 위치해 있었습니다.","en":"The new office was located in the suburbs.","h":[[27,41]]},{"id":"aebe99","x":"neighbors","m":"이웃 사람","ko":"요즘에는 많은 사람들이 이웃들과 말을 하지 않습니다.","en":"These days, many people don't talk to their neighbors.","h":[[44,53]]},{"id":"a0e3ed","x":"neighborhood","m":"주변 지역, 동네","ko":"우리 동네에 큰 공원이 있습니다.","en":"There is a large park in my neighborhood.","h":[[28,40]]},{"id":"8538a4","x":"apartment complex","m":"아파트 단지","ko":"그 아파트 단지에는 다양한 편의시설이 있었습니다.","en":"There were various amenities in the apartment complex.","h":[[36,53]]},{"id":"aac347","x":"studio apartment","m":"원룸 아파트","ko":"저는 원룸 아파트에 살았었습니다.","en":"I used to live in a studio apartment.","h":[[20,36]]},{"id":"ab9152","x":"single-family home","m":"단독주택","ko":"한국에는 단독주택이 많지 않습니다.","en":"There are not many single-family houses in Korea.","h":[[19,39]]},{"id":"549924","x":"monthly rent","m":"월세","ko":"월세와 공과금이 너무 비쌌습니다.","en":"The monthly rent and utility bills were too expensive.","h":[[4,16]]},{"id":"5012b7","x":"remodel house","m":"집을 리모델링하다","ko":"저는 집을 리모델링하는 데 많은 돈을 썼습니다.","en":"I spent a lot of money on remodeling the house.","h":[[26,36],[41,46]]},{"id":"6c1549","x":"be close to A","m":"A에 가까운","ko":"저희 집은 사무실에서 가깝습니다.","en":"My house is close to my office.","h":[[9,20]]},{"id":"c99415","x":"suffer from A","m":"A로부터 고생하다","ko":"저는 층간소음으로 고생했습니다.","en":"I suffered from the noise upstairs.","h":[[2,15]]}]},{"id":"trend","part":"PART 5","name":"트렌드","cards":[{"id":"c9f7ef","x":"nowadays","m":"요즘","ko":"요즘 많은 사람들이 디지털 지갑을 사용합니다.","en":"Many people use digital wallets nowadays.","h":[[32,40]]},{"id":"f92ec7","x":"anymore","m":"더 이상","ko":"많은 아이들이 더 이상 밖에서 놀지 않습니다.","en":"Many children don't play outside anymore.","h":[[33,40]]},{"id":"ff5d64","x":"used to V","m":"과거에 ~하곤 했다","ko":"저는 수업 시간에 손으로 필기를 하곤 했습니다.","en":"I used to take notes by hand in class.","h":[[2,9]]},{"id":"2db3c6","x":"prefer A over B","m":"A를 B보다 선호하다","ko":"젊은 사람들은 TV보다 스트리밍 서비스를 선호합니다.","en":"Young people prefer streaming services over TV.","h":[[13,19],[39,43]]},{"id":"d1b68b","x":"gain popularity","m":"인기를 얻다","ko":"친환경 제품이 인기를 얻고 있습니다.","en":"Eco-friendly products are gaining popularity.","h":[[26,44]]},{"id":"c1c3b4","x":"lose popularity","m":"인기를 잃다","ko":"종이 책들이 젊은 사람들 사이에서 인기를 잃고 있습니다.","en":"Paper books are losing popularity among young people.","h":[[16,33]]},{"id":"e5fc0e","x":"grow fast","m":"빠르게 성장하다","ko":"전기차 시장이 한국에서 빠르게 성장하고 있습니다.","en":"The electric car market is growing fast in Korea.","h":[[27,39]]},{"id":"1ce0e8","x":"slow down","m":"둔화되다","ko":"한국의 출산율이 둔화되고 있습니다.","en":"The birth rate is slowing down in Korea.","h":[[18,30]]},{"id":"df371a","x":"become trendy","m":"유행하다","ko":"집에서 요리하는 것이 다시 유행하고 있습니다.","en":"Cooking at home is becoming trendy again.","h":[[19,34]]},{"id":"44b77d","x":"more and more people","m":"점점 더 많은 사람들","ko":"점점 더 많은 사람들이 자신의 건강에 관심을 가지고 있습니다.","en":"More and more people are taking an interest in their health.","h":[[0,20]]},{"id":"01f59a","x":"instead of A","m":"A 대신에","ko":"많은 사람들이 패키지여행에 참여하는 대신 자유여행을 합니다.","en":"Many people travel independently instead of joining package tours.","h":[[33,43]]},{"id":"eb0371","x":"The number of people -ing is increasing","m":"~하는 사람들의 수가 늘어나고 있다","ko":"혼자 사는 사람들의 수가 늘어나고 있습니다.","en":"The number of people living alone is increasing.","h":[[0,20],[34,47]]}]},{"id":"travel","part":"PART 5","name":"여행","cards":[{"id":"2002bc","x":"go on a trip","m":"여행을 가다","ko":"저는 태국으로 여행을 갔습니다.","en":"I went on a trip to Thailand.","h":[[2,16]]},{"id":"de5693","x":"go on a package tour","m":"패키지 여행을 가다","ko":"저는 중국으로 패키지 여행을 갔습니다.","en":"I went on a package tour to China.","h":[[2,24]]},{"id":"9c8384","x":"go on a vacation","m":"휴가를 가다","ko":"그는 스페인으로 휴가를 갔습니다.","en":"He went on a vacation to Spain.","h":[[3,21]]},{"id":"6a2926","x":"take a guided tour","m":"가이드 투어를 하다","ko":"저는 파리에서 가이드 투어를 했습니다.","en":"I took a guided tour in Paris.","h":[[2,20]]},{"id":"7b7035","x":"travel abroad","m":"해외여행을 하다","ko":"저는 일 년에 한 번 정도 해외여행을 합니다.","en":"I travel abroad about once a year.","h":[[2,15]]},{"id":"6c404a","x":"travel guide book","m":"여행 가이드북","ko":"우리는 더 이상 여행 가이드북이 필요하지 않습니다.","en":"We don't need travel guidebooks anymore.","h":[[14,31]]},{"id":"f51a78","x":"get to A","m":"A에 도착하다","ko":"저는 목적지에 빨리 도착할 수 있습니다.","en":"I can get to my destination quickly.","h":[[6,12]]},{"id":"b5b89f","x":"get lost","m":"길을 잃다","ko":"저는 자주 길을 잃었습니다.","en":"I got lost often.","h":[[2,10]]},{"id":"ed21fb","x":"find a way","m":"길을 찾다","ko":"저는 길을 찾기 위해 스마트폰을 사용합니다.","en":"I use a smartphone to find a way.","h":[[22,32]]},{"id":"2e9e02","x":"tourist attraction","m":"관광지","ko":"저는 짧은 시간 동안 많은 관광지를 방문했습니다.","en":"I visited many tourist attractions in a short time.","h":[[15,34]]},{"id":"ed5d08","x":"view","m":"경치","ko":"우리는 아름다운 야경을 즐길 수 있습니다.","en":"We can enjoy a beautiful night view.","h":[[31,35]]},{"id":"cd35b5","x":"local","m":"현지인","ko":"저는 많은 현지인들을 만났습니다.","en":"I met a lot of locals.","h":[[15,21]]},{"id":"04256d","x":"local food","m":"현지 음식","ko":"저는 다양한 현지 음식을 즐겼습니다.","en":"I enjoyed a variety of local foods.","h":[[23,34]]},{"id":"fbe543","x":"exotic","m":"이국적인 / 이색적인","ko":"그 도시는 매우 이국적이었습니다.","en":"The city was very exotic.","h":[[18,24]]},{"id":"99a315","x":"the cost of living","m":"물가","ko":"물가가 너무 비쌌습니다.","en":"The cost of living was too high.","h":[[0,18]]},{"id":"e06f27","x":"travel expenses","m":"여행 경비","ko":"저는 여행 경비를 절약할 수 있었습니다.","en":"I was able to save money on travel expenses.","h":[[28,43]]}]},{"id":"env","part":"PART 5","name":"환경","cards":[{"id":"36d715","x":"environmental pollution","m":"환경 오염","ko":"저는 환경 오염에 별로 관심이 없었습니다.","en":"I wasn't very interested in environmental pollution.","h":[[28,51]]},{"id":"82a85f","x":"eco-friendly products / reusable bag","m":"친환경 제품 / 재사용 장바구니","ko":"저는 재사용 장바구니 같은 친환경 제품을 사용합니다.","en":"I use eco-friendly products such as a reusable bag.","h":[[6,27],[38,50]]},{"id":"1cfbfb","x":"energy-efficient","m":"에너지 효율적인","ko":"그 이후로, 저는 보통 에너지 효율이 좋은 제품을 삽니다.","en":"Since then, I usually buy energy-efficient products.","h":[[26,42]]},{"id":"7c780b","x":"recycle","m":"재활용하다","ko":"저는 재활용하는 습관을 들일 수 있었습니다.","en":"I was able to develop a habit of recycling.","h":[[33,42]]},{"id":"edd35d","x":"reduce pollution / electric car","m":"오염을 줄이다 / 전기차","ko":"우리는 전기차를 이용함으로써 대기 오염을 줄일 수 있습니다.","en":"We can reduce air pollution by using electric cars.","h":[[7,13],[18,27],[37,50]]},{"id":"34611f","x":"raise awareness / environmental issue","m":"인식을 높이다 / 환경 문제","ko":"우리는 환경 문제에 대한 인식을 높일 수 있습니다.","en":"We can raise awareness of environmental issues.","h":[[7,22],[26,46]]},{"id":"382a92","x":"disposable products","m":"일회용품","ko":"우리는 일회용품을 더 적게 사용해야 합니다.","en":"We should use fewer disposable products.","h":[[20,39]]},{"id":"a7aade","x":"protect the environment","m":"환경을 보호하다","ko":"우리는 환경을 보호하는 법을 배웠습니다.","en":"We learned how to protect the environment.","h":[[18,41]]},{"id":"1228a1","x":"reduce waste","m":"쓰레기를 줄이다","ko":"그렇게 함으로써, 우리는 쓰레기를 줄일 수 있습니다.","en":"By doing so, we can reduce waste.","h":[[20,32]]},{"id":"6c279d","x":"water pollution / become a serious issue","m":"수질 오염 / 심각한 문제가 되다","ko":"수질 오염은 요즘 점점 심각한 문제가 되고 있습니다.","en":"Water pollution is becoming a serious issue nowadays.","h":[[0,15],[19,43]]},{"id":"8fd5ed","x":"be polluted","m":"오염되다","ko":"그 강은 심하게 오염되어 있었습니다.","en":"The river was heavily polluted.","h":[[10,13],[22,30]]},{"id":"cae576","x":"seriousness","m":"심각성","ko":"그들은 환경오염의 심각성을 깨달을 수 있습니다.","en":"They can realize the seriousness of environmental pollution.","h":[[21,32]]},{"id":"8ba3fe","x":"keep A clean","m":"A를 깨끗하게 유지하다","ko":"우리는 아파트 단지를 깨끗하게 유지할 수 있었습니다.","en":"We were able to keep our apartment complex clean.","h":[[16,20],[43,48]]}]}];
+const PARTS = {"PART 1":"기본 동사","PART 2":"형용사·부사","PART 3":"핵심 구문","PART 4":"직장·학교·기술","PART 5":"쇼핑·주거·트렌드·여행·환경"};
+const ALL = new Map();              // id -> 대표 카드 (같은 문장은 진도를 공유)
+SECS.forEach(s => s.cards.forEach(c => { c.sec = s; if (!ALL.has(c.id)) ALL.set(c.id, c); }));
+const TOTAL = ALL.size;
+const uniq = a => { const s = new Set(); return a.filter(c => !s.has(c.id) && s.add(c.id)); };
+
+/* ───────── 저장 ───────── */
+const KEY = "mn-speaking-v1";
+const DEF = {goal:20, order:"seq", sec:3, auto:1, rate:.95, voice:"", dir:"ko", gap:3, rep:2, look:"paper", st:0};
+const IV = [0,1,3,7,14,30,60];      // 상자별 복습 간격(일)
+const blank = () => ({v:1, c:{}, s:{}, d:{}, set:{...DEF}, r:0});
+let S = load();
+function load(){
+  try { const o = JSON.parse(localStorage.getItem(KEY)); if (valid(o)) return {...blank(), ...o, set:{...DEF, ...o.set}}; } catch(e){}
+  return blank();
+}
+function valid(o){ return !!o && o.v === 1 && typeof o.c === "object" && typeof o.s === "object" && typeof o.d === "object" && !!o.c && !!o.s && !!o.d; }
+function save(){
+  try { localStorage.setItem(KEY, JSON.stringify(S)); } catch(e){ }
+  cloudSave();
+}
+const ROLL = 4*3600e3;              // 하루 기준은 새벽 4시
+function dayNo(t = Date.now()){ const d = new Date(t - ROLL); return Math.floor(Date.UTC(d.getFullYear(), d.getMonth(), d.getDate())/864e5); }
+const C = id => S.c[id];            // [상자, 복습일, 틀린횟수, 시각]
+const isDue = id => C(id) && C(id)[1] <= dayNo();
+const known = id => C(id) && C(id)[0] >= 3;
+const starred = id => !!(S.s[id] && S.s[id][0]);
+const weak = id => C(id) && C(id)[2] > 0 && C(id)[0] < 3;
+function merge(a, b){
+  const r = Math.max(a.r||0, b.r||0), o = blank(); o.r = r;
+  for (const x of [a, b]) {
+    for (const k in x.c) if (Array.isArray(x.c[k]) && x.c[k][3] >= r && (!o.c[k] || x.c[k][3] > o.c[k][3])) o.c[k] = x.c[k];
+    for (const k in x.s) if (Array.isArray(x.s[k]) && x.s[k][1] >= r && (!o.s[k] || x.s[k][1] > o.s[k][1])) o.s[k] = x.s[k];
+    if ((x.r||0) === r) for (const k in x.d) { const p = o.d[k] || [0,0], q = x.d[k]; o.d[k] = [Math.max(p[0], +q[0]||0), Math.max(p[1], +q[1]||0)]; }
+  }
+  const A = {...DEF, ...a.set}, B = {...DEF, ...b.set};
+  o.set = (B.st||0) > (A.st||0) ? B : A;
+  return o;
+}
+
+/* 계정 동기화: claude.ai 에서 열었을 때만. 그 밖에서는 기기에만 저장 */
+let cloud = null, cloudT = 0, cloudBusy = false, cloudAgain = false;
+async function cloudInit(){
+  if (!window.claude || !window.claude.use) return;
+  try {
+    const [db, user] = await Promise.all([window.claude.use("db"), window.claude.use("user")]);
+    if (!db || !user) return;
+    const id = await user.id(); if (!id) return;
+    const ref = db.collection("data/users/" + id).doc("progress");
+    const snap = await ref.get();
+    const raw = snap.exists && snap.data();
+    if (raw && raw.json) { const o = JSON.parse(raw.json); if (valid(o)) { S = merge(S, o); try { localStorage.setItem(KEY, JSON.stringify(S)); } catch(e){} applyLook(); if (!sess && !L.on) render(); } }
+    cloud = ref; cloudSave();
+  } catch(e){ }
+}
+function cloudSave(){ if (!cloud) return; clearTimeout(cloudT); cloudT = setTimeout(cloudPush, 2500); }
+async function cloudPush(){
+  if (!cloud) return;
+  if (cloudBusy) { cloudAgain = true; return; }
+  cloudBusy = true;
+  try { await cloud.set({json: JSON.stringify(S)}); } catch(e){ }
+  cloudBusy = false;
+  if (cloudAgain) { cloudAgain = false; cloudSave(); }
+}
+async function cloudPull(){
+  if (!cloud || sess || L.on) return;
+  try { const n = await cloud.get(), raw = n.exists && n.data(); if (raw && raw.json) { const o = JSON.parse(raw.json); if (valid(o)) { S = merge(S, o); save(); applyLook(); if (!sess && !L.on) render(); } } } catch(e){ }
+}
+document.addEventListener("visibilitychange", () => { if (document.hidden) { clearTimeout(cloudT); cloudPush(); } else cloudPull(); });
+
+/* ───────── 소리 ───────── */
+const TTS = "speechSynthesis" in window && "SpeechSynthesisUtterance" in window ? window.speechSynthesis : null;
+let voices = [];
+function readVoices(){ if (TTS) try { voices = TTS.getVoices() || []; } catch(e){} }
+readVoices(); if (TTS) try { TTS.addEventListener("voiceschanged", readVoices); } catch(e){}
+const enVoices = () => voices.filter(v => /^en[-_]/i.test(v.lang));
+function pick(lang){
+  if (lang === "en") { const L2 = enVoices(); return L2.find(v => v.voiceURI === S.set.voice) || L2.find(v => /^en[-_]US/i.test(v.lang) && /google|natural|siri|samantha|aria|jenny/i.test(v.name)) || L2.find(v => /^en[-_]US/i.test(v.lang)) || L2[0]; }
+  return voices.find(v => /^ko/i.test(v.lang));
+}
+let say = 0;
+function hush(){ say++; if (TTS) try { TTS.cancel(); } catch(e){} }
+function speak(text, lang, done){
+  hush(); const my = say; let fin = false;
+  const end = () => { if (fin) return; fin = true; clearTimeout(wd); if (my === say && done) done(); };
+  // 일부 휴대폰은 종료 신호를 주지 않으므로 시간으로도 넘긴다
+  const wd = setTimeout(end, 2500 + text.length * 130 / S.set.rate);
+  if (!TTS) return;
+  const u = new SpeechSynthesisUtterance(text.replace(/\(.*?\)/g, ""));
+  u.lang = lang === "en" ? "en-US" : "ko-KR";
+  const v = pick(lang); if (v) u.voice = v;
+  u.rate = lang === "en" ? S.set.rate : 1.05;
+  u.onend = end; u.onerror = end;
+  window.__u = u;                    // 가비지 컬렉션으로 onend 가 사라지는 현상 방지
+  setTimeout(() => { if (my === say) try { TTS.resume(); TTS.speak(u); } catch(e){ end(); } }, 60);
+}
+
+/* ───────── 화면 도우미 ───────── */
+const app = document.getElementById("app");
+function h(tag, props, ...kids){
+  const e = document.createElement(tag);
+  for (const k in props || {}) {
+    const v = props[k]; if (v == null || v === false) continue;
+    if (k === "cls") e.className = v; else if (k.startsWith("on")) e.addEventListener(k.slice(2), v);
+    else if (k === "value" || k === "disabled" || k === "checked") e[k] = v; else e.setAttribute(k, v);
+  }
+  for (const c of kids.flat(Infinity)) if (c != null && c !== false) e.append(c.nodeType ? c : document.createTextNode(String(c)));
+  return e;
+}
+const ICON = {
+  home:"M4 6h13a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H4zM8 6V3h13v12M8 11h7M8 15h4", ear:"M4 14v-2a8 8 0 0 1 16 0v2M4 14h3v6H5a1 1 0 0 1-1-1zM20 14h-3v6h2a1 1 0 0 0 1-1z",
+  list:"M8 6h12M8 12h12M8 18h12M4 6h.01M4 12h.01M4 18h.01", log:"M5 20V10M12 20V4M19 20v-7", x:"M6 6l12 12M18 6L6 18", undo:"M9 7L4 12l5 5M4 12h10a6 6 0 0 1 6 6",
+  star:"M12 3.5l2.6 5.4 5.9.8-4.3 4.1 1 5.9-5.2-2.8-5.2 2.8 1-5.9-4.3-4.1 5.9-.8z", snd:"M4 9v6h4l5 4V5L8 9zM16.5 9a4 4 0 0 1 0 6M19 6.5a8 8 0 0 1 0 11",
+  back:"M15 5l-7 7 7 7", prev:"M18 6l-9 6 9 6zM6 6v12", next:"M6 6l9 6-9 6zM18 6v12", play:"M8 5l11 7-11 7z", pause:"M8 5v14M16 5v14", go:"M9 5l7 7-7 7", ox:"M6 6l12 12M18 6L6 18", tri:"M12 4.5L20.5 19.5H3.5z", o:"M12 3.5c5 0 8.6 3.6 8.5 8.6-.1 5-3.8 8.5-8.7 8.4-4.9-.1-8.4-3.7-8.3-8.6C3.600 7 7.200 3.500 12.600 3.600"
+};
+function ic(n, on){ const s = document.createElementNS("http://www.w3.org/2000/svg","svg"); s.setAttribute("viewBox","0 0 24 24"); s.setAttribute("class","i"+(on?" on":"")); s.setAttribute("aria-hidden","true"); const p = document.createElementNS(s.namespaceURI,"path"); p.setAttribute("d",ICON[n]); s.append(p); return s; }
+function marked(c){ const out = []; let p = 0; for (const [a,b] of c.h) { out.push(c.en.slice(p,a), h("mark",{},c.en.slice(a,b))); p = b; } out.push(c.en.slice(p)); return out; }
+function toast(t){ document.querySelectorAll(".toast").forEach(e => e.remove()); const e = h("div",{cls:"toast",role:"status"},t); document.body.append(e); setTimeout(() => e.remove(), 2200); }
+function seg(opts, cur, fn, label){ return h("div",{cls:"seg",role:"group","aria-label":label}, opts.map(([v,t]) => h("button",{"aria-pressed":String(v===cur),onclick:() => fn(v)},h("span",{},t)))); }
+function applyLook(){ document.documentElement.setAttribute("data-look", S.set.look); }
+function setOpt(k, v){ S.set[k] = v; S.set.st = Date.now(); save(); applyLook(); render(); }
+function starBtn(c, after){ const on = starred(c.id); return h("button",{cls:"ib star","aria-label":"별표","aria-pressed":String(on),onclick:e => { e.stopPropagation(); S.s[c.id] = [starred(c.id)?0:1, Date.now()]; save(); const n = starBtn(c, after); e.currentTarget.replaceWith(n); if (after) after(); }}, ic("star",on)); }
+const sndBtn = c => h("button",{cls:"ib","aria-label":"발음 듣기",onclick:e => { e.stopPropagation(); if (!TTS) toast("이 화면에서는 소리를 낼 수 없어요. Chrome이나 Safari에서 열어 주세요."); speak(c.en,"en"); }}, ic("snd"));
+function shuffle(a){ a = a.slice(); for (let i = a.length-1; i > 0; i--) { const j = Math.floor(Math.random()*(i+1)); [a[i],a[j]] = [a[j],a[i]]; } return a; }
+
+let tab = "home", openSec = null, veil = true, query = "", sess = null;
+function go(t){ tab = t; openSec = null; if (t !== "ear") stopListen(); hush(); render(); }
+function render(){
+  if (sess) return renderStudy();
+  const keep = app.querySelector("main"), y = keep && keep.dataset.k === tab+openSec ? keep.scrollTop : 0;
+  const body = {home:viewHome, ear:viewEar, list:openSec ? viewSec : viewList, log:viewLog}[tab]();
+  const m = h("main",{cls:"wrap","data-k":tab+openSec}, body);
+  app.replaceChildren(m, h("nav",{"aria-label":"메뉴"}, [["home","오늘"],["ear","듣기"],["list","단원"],["log","기록"]].map(([k,t]) => h("button",{"aria-current":tab===k?"page":null,onclick:() => go(k)}, h("span",{},t)))));
+  m.scrollTop = y;
+}
+
+/* ───────── 오늘 ───────── */
+function plan(extra = 0){
+  const due = [...ALL.values()].filter(c => isDue(c.id));
+  const fresh0 = [...ALL.values()].filter(c => !C(c.id));
+  const left = extra || Math.max(0, S.set.goal - ((S.d[dayNo()]||[0])[0]));
+  return {due, fresh:(S.set.order === "mix" ? shuffle(fresh0) : fresh0).slice(0, left), rest:fresh0.length};
+}
+function mixQueue(due, fresh){   // 복습 사이사이에 새 카드를 섞는다
+  due = shuffle(due); const out = [], n = due.length + fresh.length; let i = 0, j = 0;
+  for (let k = 0; k < n; k++) { if (j < fresh.length && (i >= due.length || j/fresh.length <= i/due.length)) out.push(fresh[j++]); else out.push(due[i++]); }
+  return out;
+}
+function streak(){ let d = dayNo(), n = 0; if (!S.d[d]) d--; while (S.d[d]) { n++; d--; } return n; }
+const holes = () => h("div",{cls:"holes"},h("i",{}),h("i",{}));
+const lvl = id => known(id) ? "l2" : C(id) ? "l1" : "";
+function boxes(list){ return h("div",{cls:"grid"}, list.map(c => h("i",{cls:lvl(c.id)}))); }
+let queue = null;                 // 홈에 보이는 첫 카드와 실제 시작 카드를 맞춘다
+function viewHome(){
+  const p = plan(), n = p.due.length + p.fresh.length, today = (S.d[dayNo()]||[0,0])[1], A = [...ALL.values()];
+  const kn = A.filter(c => known(c.id)).length, wk = A.filter(c => weak(c.id)), st = A.filter(c => starred(c.id)), seen = A.filter(c => C(c.id));
+  const min = Math.max(1, Math.round(n*14/60)), dt = new Date(Date.now()-ROLL);
+  queue = n ? mixQueue(p.due,p.fresh) : p.rest ? plan(10).fresh : null;
+  const c = queue && queue[0], name = n ? "오늘 학습" : "추가 학습";
+  const parts = [p.due.length && `복습 ${p.due.length}개`, p.fresh.length && `새 문장 ${p.fresh.length}개`].filter(Boolean).join(", ");
+  const head = n ? (today ? `${parts} 남았어요` : `오늘은 ${parts}`) : p.rest ? "오늘 몫을 다 했어요" : "모든 문장을 한 번 이상 봤어요";
+  const run = () => begin(queue,name);
+  return [
+    h("div",{cls:"hello"}, h("p",{cls:"num"},`${dt.getMonth()+1}월 ${dt.getDate()}일 ${"일월화수목금토"[dt.getDay()]}요일${streak() > 1 ? ` · ${streak()}일째` : ""}`),
+      h("h1",{},head), h("p",{},n ? `${min}분쯤 걸려요` : p.rest ? "더 하고 싶으면 새 문장 10개를 미리 볼 수 있어요" : "복습할 때가 되면 여기에 다시 나타나요")),
+    c && h("div",{cls:"start"}, h("button",{cls:"sheet deck",onclick:run}, holes(), h("div",{cls:"in"}, h("span",{cls:"lab"},c.sec.name), h("span",{cls:S.set.dir === "ko" ? "ko" : "en"},S.set.dir === "ko" ? c.ko : S.set.dir === "en" ? c.en : "잘 듣고 뜻을 떠올려 보세요"))),
+      h("button",{cls:"btn p",id:"start",onclick:run}, n ? (today ? "이어서 하기" : "시작하기") : "10개 더 하기")),
+    h("section",{}, h("h2",{},"카드 앞면"), seg([["ko","한국어"],["en","영어"],["ear","소리만"]], S.set.dir, v => setOpt("dir",v), "카드 앞면")),
+    h("section",{}, h("h2",{},"잠깐 짬이 날 때"), h("div",{cls:"rows num"},
+      [["자주 막히는 문장",wk.length+"개",wk.length,() => begin(shuffle(wk).slice(0,20),"막히는 문장")],["별표한 문장",st.length+"개",st.length,() => begin(shuffle(st).slice(0,30),"별표한 문장")],["아무거나 열 장","",1,() => begin(shuffle(seen.length >= 10 ? seen : A).slice(0,10),"아무거나 열 장")]]
+        .map(([t,d,ok,f]) => h("button",{cls:"row",disabled:!ok,onclick:f}, h("span",{cls:"g"},t), h("span",{cls:"d"},d), ic("go"))))),
+    h("section",{cls:"boxes num"}, h("div",{cls:"top"}, h("h1",{style:"font-size:20px"},"암기 체크"), h("span",{},`${kn} / ${TOTAL}`)),
+      h("div",{cls:"key"}, h("span",{},h("i",{}),"아직"), h("span",{},h("i",{cls:"l1"}),"외우는 중"), h("span",{},h("i",{cls:"l2"}),"외움")),
+      Object.keys(PARTS).map(k => { const cs = uniq(SECS.filter(s => s.part===k).flatMap(s => s.cards)); return h("button",{onclick:() => go("list"),"aria-label":`${PARTS[k]} 단원 보기`}, h("div",{cls:"cap"},h("span",{},PARTS[k]),h("span",{},`${cs.filter(c => known(c.id)).length} / ${cs.length}`)), boxes(cs)); }))
+  ];
+}
+
+/* ───────── 학습 ───────── */
+function begin(q, name){
+  q = uniq(q); if (!q.length) return;
+  stopListen();
+  sess = {q, i:0, name, total:q.length, done:0, res:{b:0,m:0,g:0}, undo:[], again:new Set(), missed:[]};
+  if (location.hash !== "#study") location.hash = "study";
+  newCard();
+}
+function quit(){ if (!sess) return; clearTimers(); hush(); sess = null; if (location.hash === "#study") history.back(); render(); }
+addEventListener("hashchange", () => { if (location.hash !== "#study" && sess) { clearTimers(); hush(); sess = null; render(); } });
+let tmr = 0;
+function clearTimers(){ clearTimeout(tmr); }
+function newCard(){ clearTimers(); hush(); Object.assign(sess,{flip:false,hint:0,late:false,noTimer:false}); render(); }
+function skeleton(en){ return en.replace(/[A-Za-zé']+/g, w => w.length < 2 ? w : w[0] + "_".repeat(w.length-1)); }
+function nextBox(c, g){   // -> [상자, 며칠 뒤]
+  const s = C(c.id), b = s ? s[0] : -1, notDue = s && s[1] > dayNo();
+  if (g === "b") return [0,0];
+  if (notDue) return [b, s[1]-dayNo()];           // 미리 연습한 것은 일정을 당기거나 늘리지 않음
+  if (g === "m") { const nb = Math.max(1,b); return [nb, Math.max(1, Math.ceil(IV[nb]/2))]; }
+  const nb = b < 0 ? 2 : Math.min(6, b+1); return [nb, IV[nb]];
+}
+const when = n => n === 0 ? "잠시 후" : n === 1 ? "내일" : n + "일 뒤";
+function grade(g){
+  if (!sess || !sess.flip) return;
+  const c = sess.q[sess.i], s = C(c.id), dn = dayNo(), day = S.d[dn] || [0,0];
+  sess.undo.push({i:sess.i, q:sess.q.slice(), c:s && s.slice(), id:c.id, day:S.d[dn] && day.slice(), dn, done:sess.done, res:{...sess.res}, again:new Set(sess.again), missed:sess.missed.slice()});
+  const [b,n] = nextBox(c,g);
+  S.c[c.id] = [b, dn+n, (s?s[2]:0) + (g==="b"?1:0), Date.now()];
+  S.d[dn] = [day[0] + (s?0:1), day[1]+1];
+  sess.res[g]++;
+  if (g === "b") { sess.q.splice(Math.min(sess.q.length, sess.i+5),0,c); if (!sess.missed.includes(c)) sess.missed.push(c); }
+  else if (g === "m" && !sess.again.has(c.id) && (!s || s[0] <= 1)) { sess.again.add(c.id); sess.q.splice(Math.min(sess.q.length, sess.i+9),0,c); }
+  sess.i++; save();
+  if (navigator.vibrate) try { navigator.vibrate(8); } catch(e){}
+  newCard();
+}
+function undo(){
+  const u = sess.undo.pop(); if (!u) return;
+  if (u.c) S.c[u.id] = [u.c[0],u.c[1],u.c[2],Date.now()]; else delete S.c[u.id];
+  if (u.day) S.d[u.dn] = u.day; else delete S.d[u.dn];
+  Object.assign(sess,{i:u.i,q:u.q,res:u.res,again:u.again,missed:u.missed}); save(); newCard();
+}
+function flip(){
+  if (!sess || sess.flip || sess.i >= sess.q.length) return;
+  clearTimers(); sess.flip = true; renderStudy();
+  if (S.set.auto || S.set.dir === "ear") speak(sess.q[sess.i].en,"en");
+}
+function renderStudy(){
+  clearTimers();
+  if (sess.i >= sess.q.length) return renderDone();
+  const c = sess.q[sess.i], d = S.set.dir, f = sess.flip, left = sess.q.length - sess.i;
+  const expr = () => h("div",{cls:"expr"}, h("b",{},c.x), h("span",{},c.m));
+  const maxHint = d === "en" ? 1 : 2, timed = !f && d === "ko" && S.set.sec > 0;
+  const bar = h("i",{}), tm = timed && !sess.noTimer ? h("div",{cls:"tm"},bar) : null;
+  let body;
+  if (!f) {
+    if (d === "ko") body = [h("p",{cls:"ko"},c.ko), tm, sess.hint >= 1 && h("div",{cls:"expr"},h("b",{},c.x),h("span",{},c.m)), sess.hint >= 2 && h("p",{cls:"hint"},skeleton(c.en)), h("p",{cls:"late",hidden:sess.late?null:""},"")];
+    else if (d === "en") body = [h("p",{cls:"en"},c.en), sess.hint >= 1 && expr()];
+    else body = [h("p",{cls:"ko"},"잘 듣고 뜻을 떠올려 보세요"), sess.hint >= 1 && h("p",{cls:"hint"},skeleton(c.en)), sess.hint >= 2 && h("p",{cls:"en"},c.en)];
+  } else body = [h("p",{cls:"ko small"},c.ko), h("p",{cls:"en",lang:"en"},marked(c)), expr()];
+  const face = h("div",{cls:"face",tabindex:"0",role:"button","aria-label":f?"정답":"눌러서 정답 보기"},
+    holes(),
+    h("div",{cls:"hd"}, h("span",{cls:"lab"}, c.sec.name), (f || d !== "ko") && sndBtn(c), starBtn(c)),
+    h("div",{cls:"bd"}, h("div",{},body)),
+    h("span",{cls:"tag g"},ic("o")), h("span",{cls:"tag b"},ic("ox")));
+  const iv = g => when(nextBox(c,g)[1]);
+  const acts = f
+    ? h("div",{cls:"acts a"}, h("button",{cls:"gr b",onclick:() => grade("b")},ic("ox"),"다시",h("span",{},iv("b"))), h("button",{cls:"gr m",onclick:() => grade("m")},ic("tri"),"애매함",h("span",{},iv("m"))), h("button",{cls:"gr g",onclick:() => grade("g")},ic("o"),"바로 나옴",h("span",{},iv("g"))))
+    : h("div",{cls:"acts q"}, h("button",{cls:"btn s",disabled:sess.hint>=maxHint,onclick:() => { sess.hint++; sess.noTimer = true; renderStudy(); }},"힌트"), h("button",{cls:"btn p",onclick:flip},"정답 보기"));
+  app.replaceChildren(h("div",{cls:"study wrap"},
+    h("div",{cls:"sbar"}, h("button",{cls:"ib","aria-label":"그만하기",onclick:quit},ic("x")), h("span",{cls:"num"},`${left}장 남음`), h("button",{cls:"ib","aria-label":"되돌리기",disabled:!sess.undo.length,onclick:undo},ic("undo"))),
+    h("div",{cls:"stack"},face), acts));
+  if (timed && !sess.late && !sess.noTimer) {
+    const ms = S.set.sec*1000;
+    if (bar.animate) bar.animate([{transform:"scaleX(1)"},{transform:"scaleX(0)"}],{duration:ms,fill:"forwards"});
+    tmr = setTimeout(() => { sess.late = true; const l = face.querySelector(".late"); if (l) { l.textContent = `${S.set.sec}초가 지났어요. 그래도 소리 내어 말해 보세요`; l.hidden = false; } }, ms);
+  } else if (timed) bar.style.width = "0";
+  const lt = face.querySelector(".late"); if (lt) { lt.textContent = `${S.set.sec}초가 지났어요. 그래도 소리 내어 말해 보세요`; if (!timed) lt.hidden = true; }
+  if (!f && d === "ear" && !sess.hint) speak(c.en,"en");
+  swipe(face);
+}
+function swipe(el){
+  let x0 = 0, y0 = 0, dx = 0, on = false, moved = false;
+  const tg = el.querySelector(".tag.g"), tb = el.querySelector(".tag.b");
+  el.addEventListener("pointerdown", e => { if (e.target.closest("button")) return; on = true; moved = false; x0 = e.clientX; y0 = e.clientY; dx = 0; });
+  el.addEventListener("pointermove", e => {
+    if (!on) return; dx = e.clientX-x0;
+    if (Math.abs(dx) > 8 || Math.abs(e.clientY-y0) > 8) moved = true;
+    if (!sess || !sess.flip || Math.abs(dx) < 12) return;
+    el.style.transform = `translateX(${dx}px) rotate(${dx/40}deg)`;
+    tg.style.opacity = dx > 30 ? Math.min(1,dx/100) : 0; tb.style.opacity = dx < -30 ? Math.min(1,-dx/100) : 0;
+  });
+  const end = cancel => () => {
+    if (!on) return; on = false; el.style.transform = ""; tg.style.opacity = tb.style.opacity = 0;
+    if (cancel || !sess) return;
+    if (sess.flip) { if (dx > 90) grade("g"); else if (dx < -90) grade("b"); }
+    else if (!moved) flip();
+  };
+  el.addEventListener("pointerup", end(false)); el.addEventListener("pointercancel", end(true)); el.addEventListener("pointerleave", end(true));
+}
+addEventListener("keydown", e => {
+  if (!sess || e.target.closest("input,textarea,select") || sess.i >= sess.q.length) return;
+  if ((e.key === " " || e.key === "Enter") && !sess.flip && !e.target.closest("button")) { e.preventDefault(); flip(); }
+  else if (sess.flip && "123".includes(e.key) && e.key.length === 1) grade(["b","m","g"][+e.key-1]);
+});
+function renderDone(){
+  const r = sess.res, ms = sess.missed, n = r.b+r.m+r.g, p = plan();
+  const more = p.due.length + p.fresh.length;
+  app.replaceChildren(h("div",{cls:"study wrap"}, h("div",{cls:"done"},
+    h("h1",{},`${sess.name}, 다 했어요`),
+    h("div",{cls:"marks num"}, h("span",{style:"color:var(--good)"},ic("o"),r.g), h("span",{style:"color:var(--mid)"},ic("tri"),r.m), h("span",{style:"color:var(--bad)"},ic("ox"),r.b)),
+    ms.length ? h("section",{}, h("h2",{},"막힌 문장"), h("div",{cls:"rows",style:"max-height:40vh;overflow:auto"}, ms.map(c => h("div",{cls:"item"}, h("div",{cls:"g"}, h("span",{cls:"e"},marked(c)), h("span",{cls:"x"},c.ko)), sndBtn(c))))) : null,
+    h("div",{style:"display:grid;gap:10px"},
+      ms.length ? h("button",{cls:"btn s",onclick:() => begin(shuffle(ms),"막힌 문장")},`막힌 ${ms.length}문장 다시`) : null,
+      more ? h("button",{cls:"btn s",onclick:() => begin(mixQueue(p.due,p.fresh),"오늘 학습")},`오늘 남은 ${more}장`) : null,
+      h("button",{cls:"btn p",onclick:quit},"마치기")))));
+}
+
+/* ───────── 듣기 ───────── */
+const L = {src:"today", list:[], i:0, on:false, ph:"", t:0, wl:null};
+function srcCards(k){
+  const A = [...ALL.values()];
+  if (k === "today") { const p = plan(), t0 = A.filter(c => C(c.id) && dayNo(C(c.id)[3]) === dayNo()); const x = uniq([...p.due,...t0,...p.fresh]); return x.length ? x : A; }
+  if (k === "weak") return A.filter(c => weak(c.id));
+  if (k === "star") return A.filter(c => starred(c.id));
+  if (k === "all") return A;
+  if (PARTS[k]) return uniq(SECS.filter(s => s.part === k).flatMap(s => s.cards));
+  const s = SECS.find(s => s.id === k); return s ? uniq(s.cards) : A;
+}
+function loadSrc(k){ stopListen(); L.src = k; L.list = srcCards(k); L.i = 0; }
+function stopListen(){ L.on = false; L.ph = ""; clearTimeout(L.t); hush(); if (L.wl) { try { L.wl.release(); } catch(e){} L.wl = null; } }
+async function playListen(){
+  if (!L.list.length) return;
+  L.on = true; step(0); paintEar();
+  try { if (navigator.wakeLock && !L.wl) L.wl = await navigator.wakeLock.request("screen"); if (!L.on && L.wl) { L.wl.release(); L.wl = null; } } catch(e){}
+}
+function step(k){   // 0 한국어 → 1 말하는 시간 → 2.. 영어 반복 → 다음
+  if (!L.on) return; clearTimeout(L.t);
+  const c = L.list[L.i], rep = S.set.rep;
+  if (k === 0) { L.ph = "ko"; paintEar(); speak(c.ko,"ko",() => step(1)); }
+  else if (k === 1) { L.ph = "gap"; paintEar(); L.t = setTimeout(() => step(2), S.set.gap*1000); }
+  else if (k < 2+rep) { L.ph = "en"; paintEar(); speak(c.en,"en",() => { L.t = setTimeout(() => step(k+1), 700); }); }
+  else { L.i = (L.i+1) % L.list.length; step(0); }
+}
+function jump(n){ const on = L.on; clearTimeout(L.t); hush(); L.i = (L.i+n+L.list.length) % L.list.length; if (on) step(0); else { L.ph = ""; paintEar(); } }
+function paintEar(){ const el = document.getElementById("earcard"); if (el) { el.replaceWith(earCard()); const b = document.getElementById("playb"); b.replaceChildren(ic(L.on?"pause":"play",!L.on)); b.setAttribute("aria-label",L.on?"멈춤":"재생"); } }
+function earCard(){
+  const c = L.list[L.i];
+  if (!c) return h("div",{cls:"sheet deck",id:"earcard"}, holes(), h("div",{cls:"in"}, h("p",{cls:"ko"},"아직 모인 문장이 없어요"), h("p",{cls:"note"},"학습하면서 별표를 누르거나 ‘다시’로 표시한 문장이 여기에 모입니다.")));
+  const show = L.ph === "en" || !L.on;
+  return h("div",{cls:"sheet deck",id:"earcard"}, holes(), h("div",{cls:"in"},
+    h("p",{cls:"phase"}, {ko:"들어 보세요",gap:"지금 영어로 말하세요",en:"정답"}[L.ph] || ""),
+    h("p",{cls:"ko"},c.ko), h("p",{cls:"en",lang:"en",style:show?"":"visibility:hidden"},marked(c)),
+    h("div",{cls:"foot"}, h("span",{cls:"note num"},`${L.i+1} / ${L.list.length}`), starBtn(c))));
+}
+function viewEar(){
+  if (!L.list.length && L.src === "today") L.list = srcCards("today");
+  return h("div",{cls:"lis"},
+    h("div",{cls:"top"}, h("h1",{},"듣고 말하기")),
+    !TTS && h("p",{cls:"warn"},"이 화면에서는 소리를 낼 수 없습니다. 휴대폰의 Chrome 또는 Safari에서 열어 주세요."),
+    h("select",{id:"src","aria-label":"들을 문장",onchange:e => { loadSrc(e.target.value); render(); }},
+      [["today","오늘 볼 문장"],["weak","자주 막히는 문장"],["star","별표한 문장"],["all","전체"]].map(([v,t]) => h("option",{value:v},t)),
+      h("optgroup",{label:"파트"}, Object.keys(PARTS).map(k => h("option",{value:k},PARTS[k]))),
+      h("optgroup",{label:"단원"}, SECS.map(s => h("option",{value:s.id},s.name)))),
+    earCard(),
+    h("div",{cls:"ctl"}, h("button",{"aria-label":"이전",onclick:() => L.list.length && jump(-1)},ic("prev")), h("button",{cls:"play",id:"playb","aria-label":L.on?"멈춤":"재생",onclick:() => { if (L.on) { stopListen(); paintEar(); } else playListen(); }},ic(L.on?"pause":"play",!L.on)), h("button",{"aria-label":"다음",onclick:() => L.list.length && jump(1)},ic("next"))),
+    h("div",{}, h("div",{cls:"opt"},h("span",{},"말하는 시간"),seg([[2,"2초"],[3,"3초"],[5,"5초"],[7,"7초"]],S.set.gap,v => setOpt("gap",v),"말하는 시간")),
+      h("div",{cls:"opt"},h("span",{},"영어 반복"),seg([[1,"1번"],[2,"2번"],[3,"3번"]],S.set.rep,v => setOpt("rep",v),"영어 반복")),
+      h("div",{cls:"opt"},h("span",{},"순서"),h("button",{cls:"btn s sm",onclick:() => { const on = L.on; clearTimeout(L.t); hush(); L.list = shuffle(L.list); L.i = 0; if (on) step(0); else paintEar(); toast("순서를 섞었어요"); }},"섞기")),
+      h("p",{cls:"note",style:"padding-top:10px"},"재생 중에는 화면이 꺼지지 않습니다. 화면을 직접 잠그면 소리가 멈춥니다.")));
+}
+
+/* ───────── 단원 ───────── */
+function viewList(){
+  const box = h("div",{});
+  const fill = () => {
+    const q = query.trim().toLowerCase();
+    if (q) { const r = uniq(SECS.flatMap(s => s.cards).filter(c => (c.en+" "+c.ko+" "+c.x+" "+c.m).toLowerCase().includes(q))); box.replaceChildren(h("p",{cls:"note",style:"padding-top:14px"},`${r.length}개 찾음`), ...r.slice(0,80).map(c => itemRow(c,false))); return; }
+    let last = ""; box.replaceChildren(h("div",{cls:"rows"}, SECS.map(s => { const cs = uniq(s.cards), k = cs.filter(c => known(c.id)).length, out = []; if (s.part !== last) { last = s.part; out.push(h("div",{cls:"part"},`${s.part} · ${PARTS[s.part]}`)); }
+      out.push(h("button",{cls:"row",onclick:() => { openSec = s.id; render(); app.querySelector("main").scrollTop = 0; }}, h("span",{cls:"g"},s.name), h("span",{cls:"d num"},`${k}/${cs.length}`), ic("go"))); return out; })));
+  };
+  fill();
+  return [h("div",{cls:"top"},h("h1",{},"단원"),h("span",{cls:"num"},`${SECS.length}개 단원`)), h("input",{type:"search",id:"q",placeholder:"한국어나 영어로 찾기","aria-label":"문장 찾기",value:query,oninput:e => { query = e.target.value; fill(); }}), box];
+}
+function itemRow(c, hide){
+  const l = known(c.id) ? " l2" : C(c.id) ? " l1" : "";
+  const e = h("span",{cls:"e"+(hide?" veil":""),lang:"en"},marked(c));
+  return h("div",{cls:"item"}, h("i",{cls:"dot"+l,title:known(c.id)?"외움":C(c.id)?"학습 중":"아직 안 봄"}),
+    h("button",{cls:"g",onclick:() => { if (hide) e.classList.toggle("veil"); if (!e.classList.contains("veil")) speak(c.en,"en"); }}, h("span",{cls:"k"},c.ko), e, h("span",{cls:"x"},`${c.x} · ${c.m}`)), sndBtn(c), starBtn(c));
+}
+function viewSec(){
+  const s = SECS.find(s => s.id === openSec), cs = uniq(s.cards), k = cs.filter(c => known(c.id)).length;
+  return [h("div",{cls:"head2"}, h("button",{cls:"ib","aria-label":"단원 목록",onclick:() => { openSec = null; hush(); render(); }},ic("back")), h("h1",{},s.name), h("span",{cls:"note num"},`${k}/${cs.length} 외움`)),
+    h("div",{cls:"pair"}, h("button",{cls:"btn p",onclick:() => begin(shuffle(cs),s.name)},"카드 학습"), h("button",{cls:"btn s",onclick:() => { loadSrc(s.id); tab = "ear"; openSec = null; render(); document.getElementById("src").value = s.id; playListen(); }},"이어 듣기")),
+    seg([[true,"영어 가리기"],[false,"모두 보기"]],veil,v => { veil = v; render(); },"영어 표시"),
+    h("div",{}, s.cards.map(c => itemRow(c,veil)))];
+}
+
+/* ───────── 기록·설정 ───────── */
+let armed = 0;
+function viewLog(){
+  const dn = dayNo(), A = [...ALL.keys()], kn = A.filter(known).length, ln = A.filter(id => C(id)).length-kn;
+  const tot = Object.values(S.d).reduce((a,b) => a+b[1],0);
+  const dayLabel = n => new Date(n*864e5).getUTCDate();
+  const io = h("textarea",{id:"io","aria-label":"백업 코드",placeholder:"다른 기기에서 복사한 백업 코드를 붙여 넣으세요"});
+  return [h("div",{cls:"top"},h("h1",{},"기록"),h("span",{cls:"num"},streak() ? `${streak()}일 연속` : "")),
+    h("section",{}, h("h2",{},"최근 14일"), h("div",{cls:"days num"}, Array.from({length:14},(_,i) => dn-13+i).map(n => h("div",{cls:S.d[n]?"on":"",title:S.d[n]?`${S.d[n][1]}장`:"쉼"},dayLabel(n))))),
+    h("p",{cls:"num"},`${kn}문장을 외웠고 ${ln}문장을 외우는 중이에요. 지금까지 카드를 ${tot}번 넘겼습니다.`),
+    h("section",{}, h("h2",{},"설정"),
+      h("div",{cls:"opt"},h("span",{},"화면"),seg([["paper","종이"],["night","밤"],["auto","휴대폰 따라"]],S.set.look,v => setOpt("look",v),"화면")),
+      h("div",{cls:"opt"},h("span",{},"하루 새 문장"),seg([[10,"10"],[20,"20"],[30,"30"],[50,"50"]],S.set.goal,v => setOpt("goal",v),"하루 새 문장")),
+      h("div",{cls:"opt"},h("span",{},"새 문장 순서"),seg([["seq","책 순서"],["mix","섞어서"]],S.set.order,v => setOpt("order",v),"새 문장 순서")),
+      h("div",{cls:"opt"},h("span",{},"말하기 제한 시간"),seg([[0,"없음"],[3,"3초"],[5,"5초"],[8,"8초"]],S.set.sec,v => setOpt("sec",v),"제한 시간")),
+      h("div",{cls:"opt"},h("span",{},"정답 자동 발음"),seg([[1,"켜기"],[0,"끄기"]],S.set.auto,v => setOpt("auto",v),"자동 발음")),
+      h("div",{cls:"opt"},h("span",{},"발음 속도"),seg([[.75,"느리게"],[.95,"보통"],[1.15,"빠르게"]],S.set.rate,v => { setOpt("rate",v); speak("I can get to my destination quickly.","en"); },"발음 속도")),
+      enVoices().length > 1 && h("div",{cls:"opt"},h("label",{for:"voice"},"영어 목소리"),h("select",{id:"voice",onchange:e => { setOpt("voice",e.target.value); speak("I can get to my destination quickly.","en"); }},h("option",{value:""},"자동"),enVoices().map(v => { const o = h("option",{value:v.voiceURI},`${v.name.replace(/^Microsoft |^Google /,"")} (${v.lang})`); if (v.voiceURI === S.set.voice) o.selected = true; return o; })))),
+    h("section",{}, h("h2",{},"외운 정도를 정하는 방식"), h("p",{cls:"note"},"‘바로 나옴’을 누를 때마다 다음 복습이 3일, 7일, 14일, 30일, 60일 뒤로 늦춰집니다. 7일 뒤 복습까지 올라간 문장을 ‘외움’으로 셉니다. ‘다시’를 누르면 처음부터 쌓습니다.")),
+    h("section",{}, h("h2",{},"진도 옮기기"), h("p",{cls:"note",style:"margin-bottom:10px"}, cloud ? "Claude 계정에 자동으로 저장되고 있습니다. 다른 기기에서 같은 계정으로 열면 이어집니다." : "진도는 이 휴대폰에 저장됩니다. 기기를 바꿀 때는 코드를 복사해 옮기세요."), io,
+      h("div",{cls:"pair",style:"margin-top:10px"}, h("button",{cls:"btn s sm",onclick:async () => { const t = JSON.stringify(S); io.value = t; try { await navigator.clipboard.writeText(t); toast("백업 코드를 복사했어요"); } catch(e){ io.select(); toast("코드를 길게 눌러 복사하세요"); } }},"코드 복사"),
+        h("button",{cls:"btn s sm",onclick:() => { try { const o = JSON.parse(io.value); if (!valid(o)) throw 0; S = merge(S,o); save(); render(); toast("진도를 합쳤어요"); } catch(e){ toast("백업 코드가 아닙니다. 전체를 복사했는지 확인하세요."); } }},"코드 불러오기"))),
+    h("section",{}, h("button",{cls:"btn s sm",style:"width:100%;color:var(--bad)",onclick:() => { if (Date.now()-armed > 4000) { armed = Date.now(); toast("한 번 더 누르면 모든 진도가 지워집니다"); return; } const set = S.set; S = blank(); S.set = set; S.r = Date.now(); armed = 0; save(); render(); toast("진도를 지웠어요"); }},"진도 모두 지우기"))];
+}
+
+if (location.hash === "#study") { try { history.replaceState(null,"",location.pathname+location.search); } catch(e){} }
+L.list = srcCards("today");
+applyLook();
+render();
+cloudInit();
+if (!window.claude && navigator.storage && navigator.storage.persist) navigator.storage.persist().catch(() => {});
+if (window.__PWA && navigator.serviceWorker) navigator.serviceWorker.register("sw.js").then(async () => {
+  await navigator.serviceWorker.ready;
+  // 오프라인용: 앱에 나오는 모든 글자의 서체 조각을 미리 받아 둔다
+  const flag = "mn-font-v1"; if (localStorage.getItem(flag)) return;
+  const txt = [...new Set(document.documentElement.textContent)].join("");
+  await Promise.all([document.fonts.load('16px "Gowun Dodum"',txt), document.fonts.load('16px "Nunito"',txt), document.fonts.load('700 16px "Nunito"',txt)]);
+  const css = document.querySelector('link[href*="fonts.googleapis"]').href, c = await caches.open("font");
+  const cr = await fetch(css), used = performance.getEntriesByType("resource").map(e => e.name).filter(u => u.startsWith("https://fonts.gstatic.com/"));
+  await c.put(css, cr); await Promise.all(used.map(async u => c.put(u, await fetch(u))));
+  if (used.length) localStorage.setItem(flag,"1");
+}).catch(() => {});
+</script>
+</body></html>
