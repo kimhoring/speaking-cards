@@ -48,7 +48,7 @@ public class MainActivity extends Activity {
     private ListenService.Watch watch;
     private Speaker.NoVoice noVoice;
     private Updater.Done upDone;
-    private final Runnable watchdog = () -> { up.rollback(); load(); };
+    private final Runnable watchdog = () -> { up.rollback(); openPage(); };
 
     @SuppressLint({"SetJavaScriptEnabled", "AddJavascriptInterface"})
     @Override protected void onCreate(Bundle b) {
@@ -105,13 +105,13 @@ public class MainActivity extends Activity {
         });
         watch = (i, ph, on) -> js("window.__listen&&__listen(" + i + ",'" + ph + "'," + on + ")");
         ListenService.watch = watch;
-        load();
+        openPage();
         upDone = (st, manual) -> { if (manual || "ready".equals(st) || "shell".equals(st)) js("window.__upd&&__upd('" + st + "')"); };
         up.listener = upDone;
         up.check(shell(), false);
     }
 
-    private void load() {
+    private void openPage() {
         main.removeCallbacks(watchdog);
         if (up.onTrial()) main.postDelayed(watchdog, 15000);
         // 번호를 붙여 항상 새로 읽게 한다. 주소(출처)가 같아 저장된 진도는 그대로다
@@ -222,7 +222,7 @@ public class MainActivity extends Activity {
         @JavascriptInterface public void listenJump(int n) { main.post(() -> ListenService.send(MainActivity.this, "jump", n)); }
         @JavascriptInterface public void listenStop() { main.post(() -> ListenService.send(MainActivity.this, "stop", 0)); }
         @JavascriptInterface public void check() { up.check(shell(), true); }
-        @JavascriptInterface public void apply() { main.post(() -> { if (web != null && up.promote()) load(); }); }
+        @JavascriptInterface public void apply() { main.post(() -> { if (web != null && up.promote()) openPage(); }); }
         @JavascriptInterface public void ready() { main.post(() -> { main.removeCallbacks(watchdog); up.confirm(); Log.i("MN", "ready active=" + up.active()); if (up.hasNext()) js("window.__upd&&__upd('ready')"); }); }
     }
 }

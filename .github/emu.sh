@@ -4,8 +4,9 @@ set -u
 P=io.github.kimhoring.speakingcards; A=$P/.MainActivity
 mkdir -p out; FAIL=0
 adb(){ timeout 60 "$ANDROID_HOME/platform-tools/adb" "$@"; }
-shot(){ adb exec-out screencap -p > out/$1.png; }
-js(){ adb shell "am start -n $A --es js '$1'" >/dev/null 2>&1; sleep 2; }
+alive(){ adb get-state >/dev/null 2>&1 || { echo "가상 휴대폰이 꺼짐 ($1)"; exit 9; }; }
+shot(){ alive $1; adb exec-out screencap -p > out/$1.png; }
+js(){ alive js; adb shell "am start -n $A --es js '$1'" >/dev/null 2>&1; sleep 2; }
 ok(){ if adb logcat -d -s MN:* | grep -qE "$2"; then echo "PASS $1"; else echo "FAIL $1"; FAIL=1; fi; }
 no(){ if adb logcat -d -s MN:* AndroidRuntime:E | grep -qE "$2"; then echo "FAIL $1"; FAIL=1; else echo "PASS $1"; fi; }
 keep(){ adb logcat -d -s MN:* AndroidRuntime:E >> out/log.txt; }
