@@ -3,16 +3,16 @@ Q|Which of the following is the best way to motivate employees at work?|직장�
 O|Providing regular long vacations|정기적으로 긴 휴가를 제공하기
 O|Creating a staff lounge|직원 휴게 공간 만들기
 O|Offering opportunities for skill development|기술 개발 기회 제공하기
-I|기술 개발 기회 제공|성장한다고 느껴 의욕이 생김|회사의 무료 강의로 배워 좋은 인사 평가를 받음
+I|기술 개발 기회 제공|실력을 향상시킬 수 있음|회사의 무료 강의로 배워 승진함
 1|저는 기술 개발 기회를 제공하는 것이 직장에서 직원들에게 동기를 부여하는 가장 좋은 방법이라고 생각합니다.|I think / offering opportunities for skill development / is the best way / to motivate employees at work.|저는 생각합니다 / 기술 개발 기회를 제공하는 것이 / 가장 좋은 방법이라고 / 직장에서 직원들에게 동기를 부여하는
-2|왜냐하면 직원들이 직장에서 성장하고 있다고 느낄 수 있기 때문입니다.|That's because / employees can feel / that they are growing / at work.|왜냐하면 ~이기 때문입니다 / 직원들이 느낄 수 있습니다 / 자신이 성장하고 있다고 / 직장에서
+2|왜냐하면 직원들이 직장에서 실력을 향상시킬 수 있기 때문입니다.|That's because / employees can improve their skills / at work.|왜냐하면 ~이기 때문입니다 / 직원들이 실력을 향상시킬 수 있습니다 / 직장에서
 3|그래서 그들은 더 열심히 일하고 더 쉽게 승진할 수 있습니다.|So, / they can work harder / and get promoted / more easily.|그래서 / 그들은 더 열심히 일할 수 있습니다 / 그리고 승진할 수 있습니다 / 더 쉽게
 4|작년에 저희 회사는 모든 직원에게 무료 온라인 강의를 제공했습니다.|Last year, / my company offered / free online courses / to all employees.|작년에 / 저희 회사는 제공했습니다 / 무료 온라인 강의를 / 모든 직원에게
-5|저는 데이터 분석 수업을 들었고, 새로 배운 기술을 팀 프로젝트에 사용했습니다.|I took a class / on data analysis, / and I used my new skills / in a team project.|저는 수업을 들었습니다 / 데이터 분석에 관한 / 그리고 새로 배운 기술을 사용했습니다 / 팀 프로젝트에
-6|그 결과, 저는 프로젝트를 제시간에 마치고 훌륭한 인사 평가를 받을 수 있었습니다.|As a result, / I was able to finish the project in time / and receive / an excellent performance evaluation.|그 결과 / 저는 프로젝트를 제시간에 마칠 수 있었습니다 / 그리고 받을 수 있었습니다 / 훌륭한 인사 평가를
+5|저는 컴퓨터 수업을 듣고 새로 배운 기술을 직장에서 사용했습니다.|I took a computer class / and used my new skills / at work.|저는 컴퓨터 수업을 들었습니다 / 그리고 새로 배운 기술을 사용했습니다 / 직장에서
+6|그 결과, 저는 일을 더 쉽게 마치고 승진할 수 있었습니다.|As a result, / I was able to finish my work more easily / and get promoted.|그 결과 / 저는 일을 더 쉽게 마칠 수 있었습니다 / 그리고 승진할 수 있었습니다
 K|skill development|기술 개발
 K|get promoted|승진하다
-K|performance evaluation|인사 평가
+K|improve their skills|실력을 향상시키다
 # q02|직장 생활|직장 상사의 필수 역량|긍정적 사례
 Q|Which of the following skills do you think is the most important for a workplace supervisor? Why?|다음 중 직장 상사가 갖춰야 할 가장 중요한 역량은 무엇이라고 생각하나요? 그리고 그 이유는 무엇인가요?
 O|Creativity|창의력
@@ -37,13 +37,13 @@ I|반대|사람마다 일정과 생활 방식이 다름|유연 근무제 회사�
 # q04|직장 생활|직장 동료와 협업|긍정적 사례
 Q|Do you agree or disagree with the following statement?|다음 의견에 동의하나요, 아니면 반대하나요?
 S|It is more productive to work with coworkers who have similar personalities.|비슷한 성격을 가진 동료들과 함께 일하는 것이 더 생산적이다.
-I|동의|서로 편하게 의사소통함|성격이 비슷한 동료와 팀 프로젝트를 일찍 끝냄
+I|동의|서로 편하게 의사소통함|나와 비슷한 동료와 팀 프로젝트를 일찍 끝냄
 1|저는 비슷한 성격을 가진 동료들과 함께 일하는 것이 더 생산적이라는 데 동의합니다.|I agree / that it is more productive / to work with coworkers / who have similar personalities.|저는 동의합니다 / 더 생산적이라는 데 / 동료들과 함께 일하는 것이 / 비슷한 성격을 가진
 2|왜냐하면 서로 더 편하게 의사소통할 수 있기 때문입니다.|That's because / they can communicate / more comfortably / with each other.|왜냐하면 ~이기 때문입니다 / 그들은 의사소통할 수 있습니다 / 더 편하게 / 서로
 3|그래서 결정을 내리고 일을 제시간에 끝내기가 더 쉽습니다.|So, / it is easier / to make decisions / and finish work in time.|그래서 / 더 쉽습니다 / 결정을 내리는 것이 / 그리고 일을 제시간에 끝내는 것이
-4|작년에 저는 저처럼 조용하고 꼼꼼한 동료 두 명과 팀 프로젝트를 했습니다.|Last year, / I did a team project / with two coworkers / who were quiet and careful / like me.|작년에 / 저는 팀 프로젝트를 했습니다 / 동료 두 명과 / 조용하고 꼼꼼한 / 저처럼
-5|우리는 잘 지냈고, 회의 때마다 자유롭게 의견을 나눴습니다.|We got along well, / and we freely shared our opinions / during every meeting.|우리는 잘 지냈습니다 / 그리고 자유롭게 의견을 나눴습니다 / 모든 회의에서
-6|그 결과, 우리는 프로젝트를 일찍 끝내고 상사에게 좋은 피드백을 받을 수 있었습니다.|As a result, / we were able to finish the project early / and get good feedback / from our boss.|그 결과 / 우리는 프로젝트를 일찍 끝낼 수 있었습니다 / 그리고 좋은 피드백을 받을 수 있었습니다 / 상사에게
+4|작년에 저는 저와 비슷한 동료들과 팀 프로젝트를 했습니다.|Last year, / I did a team project / with coworkers / who were like me.|작년에 / 저는 팀 프로젝트를 했습니다 / 동료들과 / 저와 비슷한
+5|우리는 잘 지냈고 자유롭게 의견을 나눴습니다.|We got along well / and shared our opinions freely.|우리는 잘 지냈습니다 / 그리고 자유롭게 의견을 나눴습니다
+6|그 결과, 우리는 프로젝트를 일찍 끝낼 수 있었습니다.|As a result, / we were able to finish the project / early.|그 결과 / 우리는 프로젝트를 끝낼 수 있었습니다 / 일찍
 K|make decisions|결정을 내리다
 K|finish work in time|일을 제시간에 끝내다
 K|get along well|잘 지내다
@@ -57,7 +57,7 @@ I|현장 교육 참여|바로 질문하고 피드백을 받음|회사 교육에�
 2|왜냐하면 바로 질문하고 피드백을 받을 수 있기 때문입니다.|That's because / we can ask questions / and get feedback / right away.|왜냐하면 ~이기 때문입니다 / 우리는 질문할 수 있습니다 / 그리고 피드백을 받을 수 있습니다 / 바로
 3|그래서 짧은 시간에 실용적인 기술을 배우기가 더 쉽습니다.|So, / it is easier / to learn practical skills / in a short time.|그래서 / 더 쉽습니다 / 실용적인 기술을 배우는 것이 / 짧은 시간에
 4|작년에 저는 회사에서 이틀 동안의 교육 프로그램에 참여했습니다.|Last year, / I attended / a two-day training program / at my company.|작년에 / 저는 참여했습니다 / 이틀 동안의 교육 프로그램에 / 회사에서
-5|강사가 새 컴퓨터 프로그램의 사용법을 보여 주었고, 저는 수업 중에 여러 번 연습했습니다.|The trainer showed us / how to use a new computer program, / and I practiced it / many times in class.|강사가 우리에게 보여 주었습니다 / 새 컴퓨터 프로그램의 사용법을 / 그리고 저는 그것을 연습했습니다 / 수업 중에 여러 번
+5|저는 새 프로그램의 사용법을 배우고 여러 번 연습했습니다.|I learned / how to use a new program / and practiced it many times.|저는 배웠습니다 / 새 프로그램의 사용법을 / 그리고 그것을 여러 번 연습했습니다
 6|그 결과, 저는 직장에서 그 프로그램을 자신 있게 사용할 수 있었습니다.|As a result, / I was able to use the program / confidently / at work.|그 결과 / 저는 그 프로그램을 사용할 수 있었습니다 / 자신 있게 / 직장에서
 K|ask questions|질문하다
 K|practical skills|실용적인 기술
@@ -65,25 +65,25 @@ K|in a short time|짧은 시간에
 # q06|교육|아이들의 교우 관계 변화|과거와 현재의 비교
 Q|Do you agree or disagree with the following statement?|다음 의견에 동의하나요, 아니면 반대하나요?
 S|It is easier for young children to make friends now than in the past.|오늘날 아이들이 친구를 사귀는 것이 과거보다 더 쉬워졌다.
-I|동의|스마트폰으로 언제 어디서나 소통함|과거에는 학교와 동네뿐, 지금은 온라인 동아리와 영상통화
+I|동의|스마트폰으로 언제 어디서나 소통함|과거에는 학교에서만, 지금은 온라인에서 친구를 만남
 1|저는 오늘날 아이들이 친구를 사귀는 것이 과거보다 더 쉬워졌다는 데 동의합니다.|I agree / that it is easier / for young children to make friends now / than in the past.|저는 동의합니다 / 더 쉽다는 데 / 오늘날 아이들이 친구를 사귀는 것이 / 과거보다
 2|왜냐하면 아이들이 스마트폰을 사용해 언제 어디서나 다른 사람들과 소통할 수 있기 때문입니다.|That's because / children can communicate with others / anytime, anywhere / using their smartphones.|왜냐하면 ~이기 때문입니다 / 아이들이 다른 사람들과 소통할 수 있습니다 / 언제 어디서나 / 스마트폰을 사용해서
 3|그래서 관심사가 비슷한 친구를 많이 만날 수 있습니다.|So, / they can meet many friends / who have similar interests.|그래서 / 그들은 많은 친구를 만날 수 있습니다 / 비슷한 관심사를 가진
-4|과거에는 아이들이 보통 학교나 동네에서만 친구를 사귀었습니다.|In the past, / children usually made friends / only at school / or in their neighborhood.|과거에는 / 아이들이 보통 친구를 사귀었습니다 / 학교에서만 / 또는 동네에서만
-5|다른 지역의 아이들을 만나기는 어려웠습니다. 하지만 요즘에는 온라인 동아리에 가입하고 영상통화로 새 친구들과 이야기합니다.|It was hard / to meet children / from other areas. / However, these days, / they join online clubs / and talk with new friends / through video calls.|어려웠습니다 / 아이들을 만나는 것이 / 다른 지역의 / 하지만 요즘에는 / 온라인 동아리에 가입합니다 / 그리고 새 친구들과 이야기합니다 / 영상통화로
+4|과거에는 아이들이 학교에서만 친구를 사귀었습니다.|In the past, / children made friends / only at school.|과거에는 / 아이들이 친구를 사귀었습니다 / 학교에서만
+5|많은 친구를 만나기는 어려웠습니다. 하지만 요즘에는 아이들이 온라인에서 새 친구들을 만날 수 있습니다.|It was hard / to meet many friends. / However, these days, / they can meet new friends online.|어려웠습니다 / 많은 친구를 만나는 것이 / 하지만 요즘에는 / 그들은 온라인에서 새 친구들을 만날 수 있습니다
 6|그 결과, 그들은 더 쉽게 많은 친구를 사귈 수 있습니다.|As a result, / they can make many friends / more easily.|그 결과 / 그들은 많은 친구를 사귈 수 있습니다 / 더 쉽게
 K|anytime, anywhere|언제 어디서나
 K|similar interests|비슷한 관심사
-K|video calls|영상통화
+K|make many friends|많은 친구를 사귀다
 # q07|교육|체험 학습 장소 선택하기|긍정적 사례
 Q|If a school organizes a field trip for students during the school day, which option would be more beneficial: visiting a local company or touring a history museum?|학교에서 정규 수업 시간에 학생들과 견학을 간다면, 지역 기업을 방문하는 것과 역사 박물관을 관람하는 것 중 어느 것이 더 유익할까요?
-I|지역 기업 방문|실제 직업을 직접 배움|고등학생 때 식품 회사 견학으로 전공을 쉽게 정함
+I|지역 기업 방문|실제 직업을 직접 배움|고등학교 때 기업 견학으로 전공을 쉽게 정함
 1|저는 지역 기업을 방문하는 것이 학생들에게 더 유익할 것이라고 생각합니다.|I think / visiting a local company / would be more beneficial / for students.|저는 생각합니다 / 지역 기업을 방문하는 것이 / 더 유익할 것이라고 / 학생들에게
 2|왜냐하면 학생들이 실제 직업에 대해 직접 배울 수 있기 때문입니다.|That's because / students can learn / about real jobs / in person.|왜냐하면 ~이기 때문입니다 / 학생들이 배울 수 있습니다 / 실제 직업에 대해 / 직접
 3|그래서 자신의 적성을 발견하고 진로를 선택하기가 더 쉽습니다.|So, / it is easier for them / to find their aptitude / and choose a career path.|그래서 / 그들에게 더 쉽습니다 / 자신의 적성을 발견하는 것이 / 그리고 진로를 선택하는 것이
-4|제가 고등학생이었을 때, 저는 지역 식품 회사로 현장 학습을 갔습니다.|When I was in high school, / I went on a field trip / to a local food company.|제가 고등학생이었을 때 / 저는 현장 학습을 갔습니다 / 지역 식품 회사로
-5|저는 직원들이 신제품을 어떻게 홍보하는지 배웠고, 그들의 일에 대해 많은 질문을 했습니다.|I learned / how the workers promoted new products, / and I asked them many questions / about their jobs.|저는 배웠습니다 / 직원들이 신제품을 어떻게 홍보하는지 / 그리고 그들에게 많은 질문을 했습니다 / 그들의 일에 대해
-6|그 결과, 저는 마케팅에 관심이 생겼고 전공을 쉽게 선택할 수 있었습니다.|As a result, / I became interested in marketing / and was able to choose my major easily.|그 결과 / 저는 마케팅에 관심이 생겼습니다 / 그리고 전공을 쉽게 선택할 수 있었습니다
+4|고등학교 때 저는 지역 기업으로 현장 학습을 갔습니다.|In high school, / I went on a field trip / to a local company.|고등학교 때 / 저는 현장 학습을 갔습니다 / 지역 기업으로
+5|저는 직원들을 만나 그들의 일에 대해 많은 질문을 했습니다.|I met the workers / and asked many questions / about their jobs.|저는 직원들을 만났습니다 / 그리고 많은 질문을 했습니다 / 그들의 일에 대해
+6|그 결과, 저는 전공을 쉽게 선택할 수 있었습니다.|As a result, / I was able to choose my major / easily.|그 결과 / 저는 전공을 선택할 수 있었습니다 / 쉽게
 K|find their aptitude|적성을 발견하다
 K|choose a career path|진로를 선택하다
 K|go on a field trip|현장 학습을 가다
@@ -92,15 +92,15 @@ Q|In your city, which of the following options is the most necessary to help you
 O|Hiring more teachers|교사 추가 채용
 O|Using the latest technology in class|수업 중 최신 기술 활용
 O|Reducing the number of subjects|과목 수 줄이기
-I|수업 중 최신 기술 활용|영상과 스마트 기기로 집중이 쉬움|여동생 학교의 태블릿 수업으로 성적이 오름
-1|저는 수업 중에 최신 기술을 활용하는 것이 학생들의 학습 향상을 위해 가장 필요하다고 생각합니다.|I think / using the latest technology in class / is the most necessary option / to help young students / improve their studies.|저는 생각합니다 / 수업 중에 최신 기술을 활용하는 것이 / 가장 필요한 방법이라고 / 학생들을 돕기 위해 / 학습을 향상하도록
-2|왜냐하면 영상과 스마트 기기가 있으면 학생들이 공부에 더 쉽게 집중할 수 있기 때문입니다.|That's because / students can focus on their studies / more easily / with videos and smart devices.|왜냐하면 ~이기 때문입니다 / 학생들이 공부에 집중할 수 있습니다 / 더 쉽게 / 영상과 스마트 기기로
+I|수업 중 최신 기술 활용|공부에 더 쉽게 집중함|여동생이 태블릿 수업으로 성적이 오름
+1|저는 수업 중에 최신 기술을 활용하는 것이 가장 필요하다고 생각합니다.|I think / using the latest technology in class / is the most necessary.|저는 생각합니다 / 수업 중에 최신 기술을 활용하는 것이 / 가장 필요하다고
+2|왜냐하면 학생들이 공부에 더 쉽게 집중할 수 있기 때문입니다.|That's because / students can focus on their studies / more easily.|왜냐하면 ~이기 때문입니다 / 학생들이 공부에 집중할 수 있습니다 / 더 쉽게
 3|그래서 어려운 과목을 더 잘 이해할 수 있습니다.|So, / they can understand / difficult subjects / better.|그래서 / 그들은 이해할 수 있습니다 / 어려운 과목을 / 더 잘
-4|작년에 제 여동생의 학교는 과학 수업에서 태블릿 PC를 사용하기 시작했습니다.|Last year, / my younger sister's school / started using tablet PCs / in science class.|작년에 / 제 여동생의 학교는 / 태블릿 PC를 사용하기 시작했습니다 / 과학 수업에서
-5|그녀는 3D 영상을 보고 화면으로 실험을 해서 수업 시간에 지루해하지 않았습니다.|She watched 3D videos / and did experiments on the screen, / so she was not bored / during class.|그녀는 3D 영상을 봤습니다 / 그리고 화면으로 실험을 했습니다 / 그래서 지루하지 않았습니다 / 수업 시간에
+4|작년에 제 여동생은 과학 수업에서 태블릿 PC를 사용했습니다.|Last year, / my younger sister used a tablet PC / in science class.|작년에 / 제 여동생은 태블릿 PC를 사용했습니다 / 과학 수업에서
+5|그녀는 재미있는 영상을 봐서 수업 시간에 지루해하지 않았습니다.|She watched fun videos, / so she was not bored / in class.|그녀는 재미있는 영상을 봤습니다 / 그래서 지루하지 않았습니다 / 수업 시간에
 6|그 결과, 그녀는 기말고사에서 좋은 성적을 받을 수 있었습니다.|As a result, / she was able to get good grades / on her final exam.|그 결과 / 그녀는 좋은 성적을 받을 수 있었습니다 / 기말고사에서
 K|focus on their studies|공부에 집중하다
-K|do experiments|실험을 하다
+K|the latest technology|최신 기술
 K|get good grades|좋은 성적을 받다
 # q09|교육|인턴십 경험의 필요성|긍정적 사례
 Q|Do you agree or disagree with the following statement?|다음 의견에 동의하나요, 아니면 반대하나요?
@@ -117,23 +117,23 @@ I|새로운 기술 배우기|학기 중에는 배울 시간이 부족함|방학�
 1|저는 새로운 기술을 배우는 것이 대학생들이 긴 방학을 보내는 가장 좋은 방법이라고 생각합니다.|I think / learning new skills / is the best way / for university students / to spend their long vacations.|저는 생각합니다 / 새로운 기술을 배우는 것이 / 가장 좋은 방법이라고 / 대학생들이 / 긴 방학을 보내는
 2|왜냐하면 학기 중에는 새로운 기술을 배울 시간이 충분하지 않기 때문입니다.|That's because / they don't have enough time / to learn new skills / during the semester.|왜냐하면 ~이기 때문입니다 / 그들은 시간이 충분하지 않습니다 / 새로운 기술을 배울 / 학기 중에는
 3|그래서 방학 동안 미래의 직업을 준비할 수 있습니다.|So, / they can prepare / for their future jobs / during the vacation.|그래서 / 그들은 준비할 수 있습니다 / 미래의 직업을 / 방학 동안
-4|2년 전에 저는 여름 방학 동안 영상 편집 온라인 강의를 들었습니다.|Two years ago, / I took an online class / on video editing / during my summer vacation.|2년 전에 / 저는 온라인 강의를 들었습니다 / 영상 편집에 관한 / 여름 방학 동안
-5|저는 매일 두 시간씩 공부하고 포트폴리오에 넣을 저만의 영상을 만들었습니다.|I studied for two hours every day / and made my own videos / for my portfolio.|저는 매일 두 시간씩 공부했습니다 / 그리고 저만의 영상을 만들었습니다 / 포트폴리오에 넣을
-6|그 결과, 저는 미디어 회사에서 아르바이트를 구할 수 있었습니다.|As a result, / I was able to get a part-time job / at a media company.|그 결과 / 저는 아르바이트를 구할 수 있었습니다 / 미디어 회사에서
+4|2년 전에 저는 여름 방학 동안 온라인 강의를 들었습니다.|Two years ago, / I took an online class / during my summer vacation.|2년 전에 / 저는 온라인 강의를 들었습니다 / 여름 방학 동안
+5|저는 영상 편집을 배우고 매일 연습했습니다.|I learned video editing / and practiced it every day.|저는 영상 편집을 배웠습니다 / 그리고 그것을 매일 연습했습니다
+6|그 결과, 저는 좋은 아르바이트를 구할 수 있었습니다.|As a result, / I was able to get / a good part-time job.|그 결과 / 저는 구할 수 있었습니다 / 좋은 아르바이트를
 K|have enough time|시간이 충분하다
 K|take an online class|온라인 강의를 듣다
-K|get a part-time job|아르바이트를 구하다
+K|practice every day|매일 연습하다
 # q11|인터넷과 기술|인터넷이 산업에 미친 영향|과거와 현재의 비교
 Q|The internet has changed many industries over the years. In your opinion, which of the following has been the most affected by the internet?|인터넷은 수십 년에 걸쳐 많은 산업을 변화시켜 왔습니다. 당신의 의견으로는 다음 중 무엇이 인터넷의 영향을 가장 많이 받았다고 생각하나요?
 O|The travel industry|여행 산업
 O|The publishing industry|출판 산업
 O|The music industry|음악 산업
-I|음악 산업|스트리밍으로 언제 어디서나 들음|과거에는 음반 가게, 지금은 스마트폰으로 몇 분 만에
+I|음악 산업|스트리밍으로 언제 어디서나 들음|과거에는 음반 가게에 감, 지금은 몇 분 만에 찾음
 1|저는 음악 산업이 인터넷의 영향을 가장 많이 받았다고 생각합니다.|I think / the music industry / has been the most affected / by the internet.|저는 생각합니다 / 음악 산업이 / 영향을 가장 많이 받았다고 / 인터넷에 의해
 2|왜냐하면 스트리밍 서비스로 언제 어디서나 음악을 들을 수 있기 때문입니다.|That's because / we can listen to music / anytime, anywhere / through streaming services.|왜냐하면 ~이기 때문입니다 / 우리는 음악을 들을 수 있습니다 / 언제 어디서나 / 스트리밍 서비스로
 3|그래서 CD를 직접 살 필요가 없습니다.|So, / we don't have to / buy CDs in person.|그래서 / 우리는 ~할 필요가 없습니다 / CD를 직접 사는 것
 4|과거에는 많은 사람들이 CD를 사기 위해 음반 가게에 가야 했습니다.|In the past, / many people had to go / to music stores / to buy CDs.|과거에는 / 많은 사람들이 가야 했습니다 / 음반 가게에 / CD를 사기 위해
-5|CD는 비쌌고 좋은 노래를 찾는 데 시간이 많이 걸렸습니다. 하지만 요즘에는 스마트폰으로 단 몇 분 만에 새 노래를 찾습니다.|CDs were expensive, / and it took a lot of time / to find good songs. / However, these days, / people find new songs / in just a few minutes / on their smartphones.|CD는 비쌌습니다 / 그리고 시간이 많이 걸렸습니다 / 좋은 노래를 찾는 데 / 하지만 요즘에는 / 사람들이 새 노래를 찾습니다 / 단 몇 분 만에 / 스마트폰으로
+5|그들은 시간과 돈을 많이 썼습니다. 하지만 요즘에는 사람들이 단 몇 분 만에 노래를 찾습니다.|They spent a lot of time and money. / However, these days, / people find songs / in just a few minutes.|그들은 시간과 돈을 많이 썼습니다 / 하지만 요즘에는 / 사람들이 노래를 찾습니다 / 단 몇 분 만에
 6|그 결과, 그들은 적은 비용으로 다양한 음악을 즐길 수 있습니다.|As a result, / they can enjoy / various kinds of music / at a low cost.|그 결과 / 그들은 즐길 수 있습니다 / 다양한 종류의 음악을 / 적은 비용으로
 K|streaming services|스트리밍 서비스
 K|in just a few minutes|단 몇 분 만에
@@ -141,25 +141,25 @@ K|at a low cost|적은 비용으로
 # q12|인터넷과 기술|기술 발전과 공공 서비스의 변화|긍정적 사례
 Q|Do you agree or disagree with the following statement?|다음 의견에 동의하나요, 아니면 반대하나요?
 S|Technological advancements will improve the quality of public libraries.|기술 발전은 공공 도서관의 질적 수준을 높일 것이다.
-I|동의|스마트폰으로 더 편리하게 책을 빌림|동네 도서관 앱으로 미리 예약해 줄을 서지 않음
+I|동의|스마트폰으로 더 편리하게 책을 빌림|도서관 앱으로 미리 예약해 시간을 절약함
 1|저는 기술 발전이 공공 도서관의 질적 수준을 높일 것이라는 데 동의합니다.|I agree / that technological advancements will improve / the quality of public libraries.|저는 동의합니다 / 기술 발전이 높일 것이라는 데 / 공공 도서관의 질적 수준을
 2|왜냐하면 사람들이 스마트폰을 사용해 더 편리하게 책을 빌릴 수 있기 때문입니다.|That's because / people can borrow books / more conveniently / using their smartphones.|왜냐하면 ~이기 때문입니다 / 사람들이 책을 빌릴 수 있습니다 / 더 편리하게 / 스마트폰을 사용해서
 3|그래서 시간을 절약하고 더 많은 책을 무료로 읽을 수 있습니다.|So, / they can save time / and read more books / for free.|그래서 / 그들은 시간을 절약할 수 있습니다 / 그리고 더 많은 책을 읽을 수 있습니다 / 무료로
-4|약 6개월 전에 우리 동네 도서관은 새로운 모바일 앱을 도입했습니다.|About six months ago, / my local library / introduced a new mobile app.|약 6개월 전에 / 우리 동네 도서관은 / 새로운 모바일 앱을 도입했습니다
-5|저는 실시간으로 책을 검색하고 미리 예약해서 줄을 서서 기다릴 필요가 없었습니다.|I searched for books in real time / and reserved them in advance, / so I didn't have to / wait in line.|저는 실시간으로 책을 검색했습니다 / 그리고 미리 예약했습니다 / 그래서 저는 ~할 필요가 없었습니다 / 줄을 서서 기다리는 것
-6|그 결과, 저는 더 많은 책을 읽고 도서관을 더 자주 이용할 수 있었습니다.|As a result, / I was able to read more books / and use the library more often.|그 결과 / 저는 더 많은 책을 읽을 수 있었습니다 / 그리고 도서관을 더 자주 이용할 수 있었습니다
-K|in real time|실시간으로
+4|약 6개월 전에 저는 새로운 도서관 앱을 사용했습니다.|About six months ago, / I used a new library app.|약 6개월 전에 / 저는 새로운 도서관 앱을 사용했습니다
+5|저는 책을 미리 예약해서 줄을 서서 기다릴 필요가 없었습니다.|I reserved books in advance, / so I didn't have to / wait in line.|저는 책을 미리 예약했습니다 / 그래서 저는 ~할 필요가 없었습니다 / 줄을 서서 기다리는 것
+6|그 결과, 저는 시간을 절약하고 더 많은 책을 읽을 수 있었습니다.|As a result, / I was able to save time / and read more books.|그 결과 / 저는 시간을 절약할 수 있었습니다 / 그리고 더 많은 책을 읽을 수 있었습니다
+K|save time|시간을 절약하다
 K|in advance|미리
 K|wait in line|줄을 서서 기다리다
 # q13|인터넷과 기술|기술 발전이 예술 산업에 미친 영향|과거와 현재의 비교
 Q|Do you agree or disagree with the following statement?|다음 의견에 동의하나요, 아니면 반대하나요?
 S|Technological advancements have made it easier for musicians to achieve success.|기술 발전은 음악가들이 성공을 이루는 것을 더 쉽게 만들어 주었다.
-I|동의|소셜 미디어에서 무료로 홍보함|과거에는 홍보비가 많이 듦, 지금은 영상으로 전 세계 팬을 만남
+I|동의|소셜 미디어에서 무료로 홍보함|과거에는 홍보비가 많이 듦, 지금은 온라인으로 전 세계 팬을 만남
 1|저는 기술 발전이 음악가들이 성공하는 것을 더 쉽게 만들어 주었다는 데 동의합니다.|I agree / that technological advancements have made it easier / for musicians / to achieve success.|저는 동의합니다 / 기술 발전이 더 쉽게 만들어 주었다는 데 / 음악가들이 / 성공을 이루는 것을
 2|왜냐하면 음악가들이 소셜 미디어에서 무료로 자신의 음악을 홍보할 수 있기 때문입니다.|That's because / musicians can promote their music / on social media / for free.|왜냐하면 ~이기 때문입니다 / 음악가들이 자신의 음악을 홍보할 수 있습니다 / 소셜 미디어에서 / 무료로
-3|그래서 그들은 대형 회사 없이도 인기를 얻을 수 있습니다.|So, / they can become popular / without a large company.|그래서 / 그들은 인기를 얻을 수 있습니다 / 대형 회사 없이도
-4|과거에는 음악가들이 노래를 홍보하기 위해 많은 돈을 써야 했습니다.|In the past, / musicians had to spend / a lot of money / to promote their songs.|과거에는 / 음악가들이 써야 했습니다 / 많은 돈을 / 노래를 홍보하기 위해
-5|TV나 라디오에 나오기가 어려웠습니다. 하지만 요즘에는 많은 음악가들이 영상을 올리고 전 세계의 팬들을 만납니다.|It was difficult / to appear on TV or the radio. / However, these days, / many musicians upload their videos / and meet fans / all over the world.|어려웠습니다 / TV나 라디오에 나오는 것이 / 하지만 요즘에는 / 많은 음악가들이 영상을 올립니다 / 그리고 팬들을 만납니다 / 전 세계의
+3|그래서 그들은 더 쉽게 많은 팬을 만날 수 있습니다.|So, / they can meet many fans / more easily.|그래서 / 그들은 많은 팬을 만날 수 있습니다 / 더 쉽게
+4|과거에는 음악가들이 음악을 홍보하기 위해 많은 돈을 써야 했습니다.|In the past, / musicians had to spend / a lot of money / to promote their music.|과거에는 / 음악가들이 써야 했습니다 / 많은 돈을 / 음악을 홍보하기 위해
+5|많은 팬을 만나기는 어려웠습니다. 하지만 요즘에는 온라인에서 전 세계의 팬들을 만날 수 있습니다.|It was hard / to meet many fans. / However, these days, / they can meet fans all over the world / online.|어려웠습니다 / 많은 팬을 만나는 것이 / 하지만 요즘에는 / 그들은 전 세계의 팬들을 만날 수 있습니다 / 온라인에서
 6|그 결과, 그들은 더 쉽게 인기를 얻고 돈을 벌 수 있습니다.|As a result, / they can gain popularity / and make money / more easily.|그 결과 / 그들은 인기를 얻을 수 있습니다 / 그리고 돈을 벌 수 있습니다 / 더 쉽게
 K|promote their music|음악을 홍보하다
 K|gain popularity|인기를 얻다
@@ -167,11 +167,11 @@ K|make money|돈을 벌다
 # q14|인터넷과 기술|미래의 인터넷 사용 시간 변화|과거와 현재의 비교
 Q|Do you agree or disagree with the following statement?|다음 의견에 동의하나요, 아니면 반대하나요?
 S|In the future, people will spend less time on the internet.|미래에는 사람들이 인터넷을 사용하는 시간이 줄어들 것이다.
-I|반대|일상의 거의 모든 일에 인터넷을 씀|과거에는 하루 한 시간, 지금은 하루 종일 온라인
+I|반대|일상의 거의 모든 일에 인터넷을 씀|과거에는 집에서 하루 한 시간, 지금은 하루 종일 온라인
 1|저는 미래에 사람들이 인터넷을 사용하는 시간이 줄어들 것이라는 데 반대합니다.|I disagree / that people will spend less time / on the internet / in the future.|저는 반대합니다 / 사람들이 시간을 덜 쓸 것이라는 데 / 인터넷에 / 미래에
 2|왜냐하면 우리는 일상생활의 거의 모든 일에 인터넷을 사용하기 때문입니다.|That's because / we use the internet / for almost everything / in our daily lives.|왜냐하면 ~이기 때문입니다 / 우리는 인터넷을 사용합니다 / 거의 모든 일에 / 일상생활에서
 3|그래서 인터넷 없이 사는 것은 어렵습니다.|So, / it is difficult / to live without the internet.|그래서 / 어렵습니다 / 인터넷 없이 사는 것이
-4|과거에는 사람들이 보통 집에서 컴퓨터로만 인터넷을 사용했습니다.|In the past, / people usually used the internet / only on a computer / at home.|과거에는 / 사람들이 보통 인터넷을 사용했습니다 / 컴퓨터로만 / 집에서
+4|과거에는 사람들이 집에서만 인터넷을 사용했습니다.|In the past, / people used the internet / only at home.|과거에는 / 사람들이 인터넷을 사용했습니다 / 집에서만
 5|그들은 하루에 한 시간 정도 인터넷을 썼습니다. 하지만 요즘에는 사람들이 하루 종일 온라인으로 일하고 쇼핑하고 공부합니다.|They spent / about an hour a day / on the internet. / However, these days, / people work, shop, and study online / all day.|그들은 썼습니다 / 하루에 한 시간 정도를 / 인터넷에 / 하지만 요즘에는 / 사람들이 온라인으로 일하고 쇼핑하고 공부합니다 / 하루 종일
 6|그 결과, 미래에는 사람들에게 인터넷이 훨씬 더 필요해질 것입니다.|As a result, / they will need the internet / even more / in the future.|그 결과 / 그들은 인터넷이 필요할 것입니다 / 훨씬 더 / 미래에
 K|in our daily lives|일상생활에서
@@ -186,12 +186,12 @@ I|동의|오래 쓰면 공부에 집중하기 어려움|남동생이 제한 없�
 # q16|주거|도시의 녹지 공간 변화|과거와 현재의 비교
 Q|Do you agree or disagree with the following statement?|다음 의견에 동의하나요, 아니면 반대하나요?
 S|In the future, there will be fewer green spaces in cities, such as gardens and parks.|미래에는 정원이나 공원과 같은 녹지 공간이 도시에서 점점 줄어들 것이다.
-I|반대|건강과 환경에 대한 관심이 커짐|과거에는 동네에 공원이 없었음, 지금은 큰 공원에서 운동함
+I|반대|건강과 환경에 대한 관심이 커짐|과거에는 동네에 공원이 없었음, 지금은 집 근처에 큰 공원이 있음
 1|저는 미래에 도시의 녹지 공간이 줄어들 것이라는 데 반대합니다.|I disagree / that there will be fewer green spaces / in cities / in the future.|저는 반대합니다 / 녹지 공간이 줄어들 것이라는 데 / 도시에 / 미래에
 2|왜냐하면 점점 더 많은 사람들이 건강과 환경에 관심을 가지고 있기 때문입니다.|That's because / more and more people / are interested in / their health and the environment.|왜냐하면 ~이기 때문입니다 / 점점 더 많은 사람들이 / 관심을 가지고 있습니다 / 건강과 환경에
 3|그래서 도시는 더 많은 공원과 정원을 만들어야 합니다.|So, / cities need to build / more parks and gardens.|그래서 / 도시는 만들어야 합니다 / 더 많은 공원과 정원을
 4|과거에는 우리 동네에 공원이 없었습니다.|In the past, / there was no park / in my neighborhood.|과거에는 / 공원이 없었습니다 / 우리 동네에
-5|사람들은 산책을 하려면 멀리 가야 했습니다. 하지만 요즘에는 집 근처에 큰 공원이 있고, 많은 사람들이 매일 저녁 그곳에서 운동합니다.|People had to go far away / to take a walk. / However, these days, / there is a large park near my house, / and many people exercise there / every evening.|사람들은 멀리 가야 했습니다 / 산책을 하려면 / 하지만 요즘에는 / 집 근처에 큰 공원이 있습니다 / 그리고 많은 사람들이 그곳에서 운동합니다 / 매일 저녁
+5|사람들은 산책을 하려면 멀리 가야 했습니다. 하지만 요즘에는 우리 집 근처에 큰 공원이 있습니다.|People had to go far away / to take a walk. / However, these days, / there is a large park / near my house.|사람들은 멀리 가야 했습니다 / 산책을 하려면 / 하지만 요즘에는 / 큰 공원이 있습니다 / 우리 집 근처에
 6|그 결과, 그들은 더 쉽게 스트레스를 해소하고 건강을 유지할 수 있습니다.|As a result, / they can relieve stress / and stay healthy / more easily.|그 결과 / 그들은 스트레스를 해소할 수 있습니다 / 그리고 건강을 유지할 수 있습니다 / 더 쉽게
 K|more and more people|점점 더 많은 사람들
 K|take a walk|산책을 하다
@@ -204,15 +204,15 @@ I|번화한 도시|병원 같은 편리한 시설이 많음|삼촌이 은퇴 뒤
 # q18|주거|현재 사회의 이웃 관계|과거와 현재의 비교
 Q|Do you agree or disagree with the following statement?|다음 의견에 동의하나요, 아니면 반대하나요?
 S|People are closer to their neighbors now than they were in the past.|오늘날 사람들은 과거보다 이웃과 더 가깝게 지낸다.
-I|반대|너무 바빠 이웃과 이야기하지 못함|과거에는 함께 저녁을 먹음, 지금은 늦게 와서 집에만 있음
+I|반대|너무 바빠 이웃과 이야기하지 못함|과거에는 함께 저녁을 먹음, 지금은 일 때문에 너무 바쁨
 1|저는 오늘날 사람들이 과거보다 이웃과 더 가깝게 지낸다는 데 반대합니다.|I disagree / that people are closer to their neighbors now / than they were in the past.|저는 반대합니다 / 오늘날 사람들이 이웃과 더 가깝게 지낸다는 데 / 과거보다
 2|왜냐하면 요즘에는 사람들이 너무 바빠서 이웃과 이야기할 수 없기 때문입니다.|That's because / people are too busy / to talk to their neighbors / these days.|왜냐하면 ~이기 때문입니다 / 사람들이 너무 바쁩니다 / 이웃과 이야기하기에는 / 요즘
 3|그래서 많은 사람들이 옆집에 누가 사는지조차 모릅니다.|So, / many people don't even know / who lives next door.|그래서 / 많은 사람들이 알지도 못합니다 / 옆집에 누가 사는지
 4|과거에는 사람들이 자주 이웃들과 저녁을 먹었습니다.|In the past, / people often had dinner / with their neighbors.|과거에는 / 사람들이 자주 저녁을 먹었습니다 / 이웃들과
-5|그들은 서로 돕고 아이들을 함께 돌봤습니다. 하지만 요즘에는 사람들이 집에 늦게 오고 아파트 안에만 머뭅니다.|They helped each other / and took care of their children together. / However, these days, / people come home late / and just stay in their apartments.|그들은 서로 도왔습니다 / 그리고 아이들을 함께 돌봤습니다 / 하지만 요즘에는 / 사람들이 집에 늦게 옵니다 / 그리고 아파트 안에만 머뭅니다
+5|그들은 서로 많이 도왔습니다. 하지만 요즘에는 사람들이 일 때문에 너무 바쁩니다.|They helped each other / a lot. / However, these days, / people are too busy / with work.|그들은 서로 도왔습니다 / 많이 / 하지만 요즘에는 / 사람들이 너무 바쁩니다 / 일 때문에
 6|그 결과, 요즘에는 이웃과 친하게 지내기가 어렵습니다.|As a result, / it is difficult / to get along with neighbors / nowadays.|그 결과 / 어렵습니다 / 이웃과 친하게 지내는 것이 / 요즘
 K|talk to their neighbors|이웃과 이야기하다
-K|take care of|~을 돌보다
+K|help each other|서로 돕다
 K|get along with|~와 친하게 지내다
 # q19|쇼핑|과거와 현재의 쇼핑 시간 비교|과거와 현재의 비교
 Q|Do you agree or disagree with the following statement?|다음 의견에 동의하나요, 아니면 반대하나요?
@@ -225,39 +225,39 @@ Q|If you could increase your income by ten percent, in which of the following ar
 O|Housing|주거비
 O|Transportation|교통비
 O|Food|식비
-I|주거비|사무실과 가까운 곳에 살고 싶음|외곽 원룸에서 출근 두 시간과 소음으로 피곤했음
+I|주거비|사무실과 가까운 곳에 살고 싶음|외곽 원룸에서 출근에 두 시간이 걸려 피곤했음
 1|만약 제 소득이 10% 늘어난다면, 저는 주거비 지출을 가장 많이 늘릴 것입니다.|If my income increased by ten percent, / I would increase my spending / on housing / the most.|만약 제 소득이 10% 늘어난다면 / 저는 지출을 늘릴 것입니다 / 주거비에 / 가장 많이
 2|왜냐하면 저는 사무실에서 더 가까운 곳에 살고 싶기 때문입니다.|That's because / I want to live / closer to my office.|왜냐하면 ~이기 때문입니다 / 저는 살고 싶습니다 / 사무실에서 더 가까운 곳에
 3|그래서 출퇴근 시간을 절약하고 집에서 더 쉴 수 있습니다.|So, / I can save time on commuting / and rest more / at home.|그래서 / 저는 출퇴근 시간을 절약할 수 있습니다 / 그리고 더 쉴 수 있습니다 / 집에서
 4|작년에 저는 도시 외곽의 원룸 아파트에 살았습니다.|Last year, / I lived in a studio apartment / in the suburbs.|작년에 / 저는 원룸 아파트에 살았습니다 / 도시 외곽의
-5|출근하는 데 두 시간 정도 걸렸고, 매일 밤 층간 소음으로 고생했습니다.|It took about two hours / to go to work, / and I suffered from the noise upstairs / every night.|두 시간 정도 걸렸습니다 / 출근하는 데 / 그리고 저는 층간 소음으로 고생했습니다 / 매일 밤
+5|매일 출근하는 데 두 시간 정도 걸렸습니다.|It took about two hours / to go to work / every day.|두 시간 정도 걸렸습니다 / 출근하는 데 / 매일
 6|그 결과, 저는 항상 피곤했고 일에 집중할 수 없었습니다.|As a result, / I was always tired / and could not focus on my work.|그 결과 / 저는 항상 피곤했습니다 / 그리고 일에 집중할 수 없었습니다
 K|save time on commuting|출퇴근 시간을 절약하다
 K|studio apartment|원룸 아파트
-K|suffer from the noise|소음으로 고생하다
+K|take about two hours|두 시간 정도 걸리다
 # q21|쇼핑|디지털 결제 방식의 장점|긍정적 사례
 Q|What are the advantages of using digital payment methods when shopping?|쇼핑할 때 디지털 결제 방식을 사용하는 장점은 무엇인가요?
 I|장점이 여러 가지 있음|빠르게 결제하고 할인을 받음|지갑 없이 쇼핑하며 시간과 돈을 절약함
-1|저는 쇼핑할 때 디지털 결제 방식을 사용하면 여러 장점이 있다고 생각합니다.|I think / there are several advantages / of using digital payment methods / when shopping.|저는 생각합니다 / 여러 장점이 있다고 / 디지털 결제 방식을 사용하는 것의 / 쇼핑할 때
+1|저는 디지털 결제 방식을 사용하면 많은 장점이 있다고 생각합니다.|I think / there are many advantages / of using digital payment methods.|저는 생각합니다 / 많은 장점이 있다고 / 디지털 결제 방식을 사용하는 것의
 2|왜냐하면 스마트폰으로 빠르게 결제하고 할인을 받을 수 있기 때문입니다.|That's because / we can pay quickly / and get discounts / with a smartphone.|왜냐하면 ~이기 때문입니다 / 우리는 빠르게 결제할 수 있습니다 / 그리고 할인을 받을 수 있습니다 / 스마트폰으로
 3|그래서 현금이나 카드를 들고 다닐 필요가 없습니다.|So, / we don't have to / carry cash or cards.|그래서 / 우리는 ~할 필요가 없습니다 / 현금이나 카드를 들고 다니는 것
 4|지난달에 저는 지갑 없이 백화점에 쇼핑하러 갔습니다.|Last month, / I went shopping / at a department store / without my wallet.|지난달에 / 저는 쇼핑하러 갔습니다 / 백화점에 / 지갑 없이
-5|저는 단 몇 초 만에 스마트폰으로 결제했고, 셔츠를 10% 할인받았습니다.|I paid with my smartphone / in just a few seconds, / and I got a 10% discount / on a shirt.|저는 스마트폰으로 결제했습니다 / 단 몇 초 만에 / 그리고 10% 할인을 받았습니다 / 셔츠에
+5|저는 스마트폰으로 결제하고 10% 할인을 받았습니다.|I paid with my smartphone / and got a 10% discount.|저는 스마트폰으로 결제했습니다 / 그리고 10% 할인을 받았습니다
 6|그 결과, 저는 시간과 돈을 모두 절약할 수 있었습니다.|As a result, / I was able to save / both time and money.|그 결과 / 저는 절약할 수 있었습니다 / 시간과 돈을 모두
 K|get discounts|할인을 받다
 K|carry cash|현금을 들고 다니다
 K|save both time and money|시간과 돈을 모두 절약하다
 # q22|여행과 휴가|현대 여행과 스트레스|과거와 현재의 비교
 Q|Do you think there are more stressful aspects of traveling today than traveling in the past?|오늘날의 여행이 과거의 여행보다 더 스트레스를 주는 요소가 많다고 생각하나요?
-I|그렇게 생각하지 않음|스마트폰으로 여행 정보를 쉽게 얻음|과거에는 종이 지도로 길을 잃음, 지금은 지도 앱과 예약
+I|그렇게 생각하지 않음|스마트폰으로 여행 정보를 쉽게 얻음|과거에는 종이 지도로 길을 잃음, 지금은 스마트폰으로 찾음
 1|저는 오늘날의 여행이 과거보다 스트레스를 주는 요소가 더 많다고 생각하지 않습니다.|I don't think / there are more stressful aspects / of traveling today / than in the past.|저는 생각하지 않습니다 / 스트레스를 주는 요소가 더 많다고 / 오늘날의 여행에 / 과거보다
 2|왜냐하면 스마트폰을 사용해 여행 정보를 쉽게 얻을 수 있기 때문입니다.|That's because / we can get travel information easily / using our smartphones.|왜냐하면 ~이기 때문입니다 / 우리는 여행 정보를 쉽게 얻을 수 있습니다 / 스마트폰을 사용해서
 3|그래서 더 편안하게 여행할 수 있습니다.|So, / we can travel / more comfortably.|그래서 / 우리는 여행할 수 있습니다 / 더 편안하게
-4|과거에는 사람들이 무거운 가이드북과 종이 지도를 들고 다녀야 했습니다.|In the past, / people had to carry / heavy guidebooks and paper maps.|과거에는 / 사람들이 들고 다녀야 했습니다 / 무거운 가이드북과 종이 지도를
-5|그들은 자주 길을 잃고 많은 시간을 낭비했습니다. 하지만 요즘에는 사람들이 지도 앱으로 길을 찾고 호텔을 미리 예약합니다.|They often got lost / and wasted a lot of time. / However, these days, / people find their way with a map app / and book hotels in advance.|그들은 자주 길을 잃었습니다 / 그리고 많은 시간을 낭비했습니다 / 하지만 요즘에는 / 사람들이 지도 앱으로 길을 찾습니다 / 그리고 호텔을 미리 예약합니다
+4|과거에는 사람들이 종이 지도를 사용해야 했습니다.|In the past, / people had to use / paper maps.|과거에는 / 사람들이 사용해야 했습니다 / 종이 지도를
+5|그들은 자주 길을 잃었습니다. 하지만 요즘에는 사람들이 스마트폰으로 쉽게 길을 찾습니다.|They often got lost. / However, these days, / people find their way easily / with a smartphone.|그들은 자주 길을 잃었습니다 / 하지만 요즘에는 / 사람들이 쉽게 길을 찾습니다 / 스마트폰으로
 6|그 결과, 그들은 스트레스 없이 여행을 즐길 수 있습니다.|As a result, / they can enjoy their trips / without stress.|그 결과 / 그들은 여행을 즐길 수 있습니다 / 스트레스 없이
 K|get lost|길을 잃다
-K|in advance|미리
+K|find their way|길을 찾다
 K|without stress|스트레스 없이
 # q23|여행과 휴가|가이드를 동반한 여행|부정적 사례
 Q|Do you prefer taking a guided tour or traveling on your own when you visit a new place? Why or why not?|새로운 장소를 방문할 때 가이드 투어를 하는 것과 자유롭게 여행하는 것 중 어느 것을 선호하시나요? 그 이유는 무엇인가요?
@@ -273,9 +273,9 @@ I|현지 주민과 대화|현지 음식과 전통 문화를 잘 앎|태국에서
 1|저는 현지 주민과 대화하는 것이 현지 문화를 체험하는 가장 좋은 방법이라고 생각합니다.|I think / talking to local residents / is the best way / to experience the local culture.|저는 생각합니다 / 현지 주민과 대화하는 것이 / 가장 좋은 방법이라고 / 현지 문화를 체험하는
 2|왜냐하면 그들은 현지 음식과 전통 문화에 대해 많이 알고 있기 때문입니다.|That's because / they know a lot / about local food / and traditional culture.|왜냐하면 ~이기 때문입니다 / 그들은 많이 알고 있습니다 / 현지 음식에 대해 / 그리고 전통 문화에 대해
 3|그래서 여행 가이드북에 없는 것들을 배울 수 있습니다.|So, / we can learn things / that are not in travel guidebooks.|그래서 / 우리는 것들을 배울 수 있습니다 / 여행 가이드북에 없는
-4|2년 전에 저는 친구와 함께 태국으로 여행을 갔습니다.|Two years ago, / I went on a trip / to Thailand / with my friend.|2년 전에 / 저는 여행을 갔습니다 / 태국으로 / 친구와 함께
-5|우리는 카페에서 친절한 현지인을 만났고, 그녀는 우리를 전통 시장에 데려가 주었습니다.|We met a friendly local / at a café, / and she took us / to a traditional market.|우리는 친절한 현지인을 만났습니다 / 카페에서 / 그리고 그녀는 우리를 데려갔습니다 / 전통 시장에
-6|그 결과, 우리는 다양한 현지 음식을 즐기고 그들의 문화를 체험할 수 있었습니다.|As a result, / we were able to enjoy various local foods / and experience their culture.|그 결과 / 우리는 다양한 현지 음식을 즐길 수 있었습니다 / 그리고 그들의 문화를 체험할 수 있었습니다
+4|2년 전에 저는 태국으로 여행을 갔습니다.|Two years ago, / I went on a trip / to Thailand.|2년 전에 / 저는 여행을 갔습니다 / 태국으로
+5|저는 현지인을 만났고, 그녀는 저를 전통 시장에 데려가 주었습니다.|I met a local, / and she took me / to a traditional market.|저는 현지인을 만났습니다 / 그리고 그녀는 저를 데려갔습니다 / 전통 시장에
+6|그 결과, 저는 다양한 현지 음식을 즐길 수 있었습니다.|As a result, / I was able to enjoy / various local foods.|그 결과 / 저는 즐길 수 있었습니다 / 다양한 현지 음식을
 K|traditional culture|전통 문화
 K|go on a trip|여행을 가다
 K|local foods|현지 음식
