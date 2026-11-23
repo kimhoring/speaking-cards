@@ -13,7 +13,9 @@ import android.content.pm.ServiceInfo;
 import android.graphics.drawable.Icon;
 import android.media.AudioAttributes;
 import android.media.AudioFocusRequest;
+import android.media.AudioFormat;
 import android.media.AudioManager;
+import android.media.AudioTrack;
 import android.media.MediaMetadata;
 import android.media.session.MediaSession;
 import android.media.session.PlaybackState;
@@ -44,6 +46,7 @@ public class ListenService extends Service {
     private AudioManager am;
     private AudioFocusRequest focus;
     private int gen;
+    private AudioTrack silence;
     private final BroadcastReceiver noisy = new BroadcastReceiver() {
         @Override public void onReceive(Context c, Intent i) { pause(); }
     };
@@ -79,6 +82,16 @@ public class ListenService extends Service {
             @Override public void onStop() { quit(); }
         }, main);
         session.setActive(true);
+        // 음성은 TTS 앱이 내므로, 무음을 함께 틀어야 시스템이 이어폰 버튼을 이 앱에 보낸다
+        try {
+            byte[] zero = new byte[16000 * 2];
+            silence = new AudioTrack.Builder()
+                    .setAudioAttributes(new AudioAttributes.Builder().setUsage(AudioAttributes.USAGE_MEDIA).setContentType(AudioAttributes.CONTENT_TYPE_SPEECH).build())
+                    .setAudioFormat(new AudioFormat.Builder().setSampleRate(16000).setEncoding(AudioFormat.ENCODING_PCM_16BIT).setChannelMask(AudioFormat.CHANNEL_OUT_MONO).build())
+                    .setTransferMode(AudioTrack.MODE_STATIC).setBufferSizeInBytes(zero.length).build();
+            silence.write(zero, 0, zero.length);
+            silence.setLoopPoints(0, zero.length / 2, -1);
+        } catch (RuntimeException e) { Log.w("MN", "무음 트랙 실패", e); silence = null; }
         registerReceiver(noisy, new IntentFilter(AudioManager.ACTION_AUDIO_BECOMING_NOISY));
     }
 
@@ -104,6 +117,7 @@ public class ListenService extends Service {
         am.requestAudioFocus(focus);
         lock.acquire(4 * 3600 * 1000L);
         playing = true;
+        mute(true);
         step(0);
     }
 
@@ -111,6 +125,7 @@ public class ListenService extends Service {
         if (!playing) return;
         cut();
         playing = false;
+        mute(false);
         phase = "";
         if (lock.isHeld()) lock.release();
         tell();
@@ -123,6 +138,11 @@ public class ListenService extends Service {
         tell();
         stopForeground(STOP_FOREGROUND_REMOVE);
         stopSelf();
+    }
+
+    private void mute(boolean on) {
+        if (silence == null) return;
+        try { if (on) silence.play(); else silence.pause(); } catch (IllegalStateException e) { Log.w("MN", "무음 트랙 " + e); }
     }
 
     private void jump(int n) {
@@ -218,6 +238,7 @@ public class ListenService extends Service {
         am.abandonAudioFocusRequest(focus);
         unregisterReceiver(noisy);
         session.release();
+        if (silence != null) silence.release();
         live = null;
     }
 }

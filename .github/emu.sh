@@ -70,6 +70,7 @@ js 'go("ear");playListen()'; sleep 4; shot 6_listen
 adb shell dumpsys notification --noredact | grep -q "$P.*channel=listen" && echo "PASS 재생 알림" || { echo "FAIL 재생 알림"; FAIL=1; }
 adb shell input keyevent SLEEP; sleep 45
 ok "화면 끈 채 다음 문장으로" "listen [1-9][0-9]* ko true"
+adb shell dumpsys media_session | grep -iE "media button session is|speakingcards" | head -5
 adb shell cmd media_session dispatch pause; sleep 3
 ok "이어폰 버튼으로 멈춤" "listen [0-9]+ +false"
 no "오류 없음" "FATAL EXCEPTION|js ERROR"
