@@ -25,6 +25,18 @@ jobs:
           BUILD_TIME=$(git log -1 --format=%ct) python src/build.py
           mkdir -p android/app/src/main/assets/www
           cp -r app/index.html app/version.json app/fonts android/app/src/main/assets/www/
+      - name: 서명 빌드
+        env:
+          KS_PASS: ${{ secrets.KEYSTORE_PASS }}
+          KS_B64: ${{ secrets.KEYSTORE_B64 }}
+        run: |
+          export KS_FILE=$RUNNER_TEMP/app.p12
+          echo "$KS_B64" | base64 -d > "$KS_FILE"
+          cd android && gradle --no-daemon -q :app:assembleRelease
+          rm "$KS_FILE"
+          cp app/build/outputs/apk/release/app-release.apk ../speaking-cards.apk
+          $ANDROID_HOME/build-tools/$(ls $ANDROID_HOME/build-tools | sort -V | tail -1)/apksigner verify --print-certs ../speaking-cards.apk | head -2
+          ls -la ../speaking-cards.apk
       - name: 시험용 빌드 (옛 내용을 넣어 내부 업데이트를 시험)
         run: |
           cd android/app/src/main/assets/www
@@ -58,8 +70,20 @@ jobs:
           target: google_apis
           arch: x86_64
           profile: pixel_6
+          ram-size: 4096M
+          emulator-options: -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none -camera-front none
           disable-animations: true
           script: bash .github/emu.sh
       - if: always()
         uses: actions/upload-artifact@v4
         with: { name: emulator, path: out }
+  release:
+    needs: [build, emulator]
+    runs-on: ubuntu-latest
+    permissions: { contents: write }
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/download-artifact@v4
+        with: { name: apk }
+      - env: { GH_TOKEN: "${{ github.token }}" }
+        run: gh release create "v1.$GITHUB_RUN_NUMBER" speaking-cards.apk --title "3초 만능문장 v1.$GITHUB_RUN_NUMBER" --notes "안드로이드 8.0 이상" --latest

@@ -61,9 +61,9 @@ h2{font-size:15px;color:var(--sub);margin-bottom:8px}
 /* 종이 카드: 겹친 낱장 + 링 구멍 두 개 */
 .sheet{position:relative;background:var(--card);border-radius:8px;box-shadow:var(--shade)}
 .sheet::before{content:"";position:absolute;inset:0;border-radius:8px;background:var(--under);box-shadow:0 1px 3px rgba(92,70,40,.12);transform:rotate(1.3deg);z-index:-1}
-.holes{display:flex;justify-content:center;gap:64px;padding-top:14px;flex:none}
+.holes{display:flex;width:100%;justify-content:center;gap:64px;padding-top:14px;flex:none}
 .holes i{width:13px;height:13px;border-radius:50%;background:var(--hole);box-shadow:inset 0 1px 2px rgba(60,42,18,.28)}
-.deck{display:flex;flex-direction:column;width:100%;text-align:left}
+.deck{display:flex;flex-direction:column;align-items:stretch;width:100%;text-align:left}
 .deck .in{display:flex;flex-direction:column;gap:14px;padding:20px 24px 24px}
 .deck .lab{font-size:15px;color:var(--sub)}
 .start{display:flex;flex-direction:column;gap:18px}
