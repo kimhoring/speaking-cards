@@ -5,8 +5,8 @@ const STEP = [
   ["입장", "찬성·반대·선택을 먼저 밝힙니다", ["I agree / disagree that ~", "I think ~", "I prefer ~"]],
   ["이유", "입장을 뒷받침하는 핵심 이유 한 가지", ["That's because ~"]],
   ["추가", "이유에 따른 장점이나 결과. 시간이 없으면 생략해도 됩니다", ["So, we can ~", "So, it is easier to ~"]],
-  ["도입", "경험한 때와 곳, 또는 과거 상황", ["Last year, I ~", "About six months ago, ~", "In the past, ~"]],
-  ["전개", "구체적인 상황을 한두 문장으로. 경험은 과거 시제로 말합니다", ["과거 시제로 묘사", "However, these days, ~"]],
+  ["도입", "경험한 때와 곳, 또는 과거 상황", ["Last year, I ~", "When I was in high school, I ~", "In the past, ~"]],
+  ["전개", "짧은 두 문장으로 나눠 말합니다. 경험은 과거 시제로 말합니다", ["~. Also, ~", "So, ~. However, these days, ~"]],
   ["결과", "예시가 어떻게 끝났는지로 마무리합니다", ["As a result, I was able to ~", "As a result, they can ~"]]
 ];
 const MODES = [
@@ -96,9 +96,10 @@ function p5Model(){
 function p5Tmpl(){
   return [head5("6단계 답변 틀", () => open5(p5.t)),
     h("div",{cls:"paper"}, STEP.map(([n, d, ex], i) => lineEl(i, ex.map(e => h("p",{cls:"en5"},e)), h("p",{cls:"note"},d)))),
-    h("section",{}, h("h2",{},"점수를 가르는 세 가지"), h("div",{cls:"tips"},
+    h("section",{}, h("h2",{},"점수를 가르는 네 가지"), h("div",{cls:"tips"},
       h("p",{},"이유에서 꺼낸 핵심 낱말을 추가, 전개, 결과까지 끊기지 않게 이어 갑니다."),
       h("p",{},"내 경험은 과거 시제(worked, was able to), 지금 상황은 현재 시제(can, save)로 말합니다."),
+      h("p",{},"결과에서는 추가 문장이나 질문에서 쓴 말을 다시 씁니다. 앞뒤가 맞고 외우기도 쉽습니다."),
       h("p",{},"시간이 모자라면 추가 문장을 건너뛰고 전개는 한 문장만 정확히 말합니다.")))];
 }
 function p5Mine(){

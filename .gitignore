@@ -9,3 +9,6 @@ src/static/fonts/
 android/app/src/main/assets/
 android/**/build/
 android/.gradle/
+/책 답안 사진/
+*.jpg
+*.jpeg
