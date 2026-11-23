@@ -8,7 +8,7 @@ H = os.path.dirname(os.path.abspath(__file__))
 IRR = {
     "took": "take", "taken": "take", "taking": "take", "got": "get", "did": "do", "went": "go",
     "made": "make", "had": "have", "has": "have", "having": "have", "met": "meet", "lost": "lose",
-    "losing": "lose", "is": "be", "am": "be", "are": "be", "was": "be", "were": "be", "i'm": "be",
+    "losing": "lose", "setting": "set", "is": "be", "am": "be", "are": "be", "was": "be", "were": "be", "i'm": "be",
     "an": "a", "my": "the", "your": "the", "our": "the", "their": "the", "using": "use",
 }
 SMALL = {"a", "the", "to", "of", "in", "on", "for", "with", "at", "be", "from", "and"}

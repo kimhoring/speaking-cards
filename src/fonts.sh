@@ -9,7 +9,7 @@ curl -fsSL -o /tmp/f/g.ttf "$G/gowundodum/GowunDodum-Regular.ttf"
 curl -fsSL -o /tmp/f/n.ttf "$G/nunito/Nunito%5Bwght%5D.ttf"
 python - <<'PY'
 ks = "".join(bytes((a, b)).decode("euc-kr") for a in range(0xB0, 0xC9) for b in range(0xA1, 0xFF))
-page = "".join(open(f, encoding="utf8").read() for f in ("cards.txt", "app.html"))
+page = "".join(open(f, encoding="utf8").read() for f in ("cards.txt", "app.html", "part5.txt", "part5.js"))
 open("/tmp/f/t.txt", "w", encoding="utf8").write("".join(sorted(set(ks + page + "".join(map(chr, range(0x20, 0x7F))) + "‘’“”·…×○△✕☐"))))
 PY
 pyftsubset /tmp/f/g.ttf --text-file=/tmp/f/t.txt --flavor=woff2 --layout-features='*' --output-file=static/fonts/gowun.woff2

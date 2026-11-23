@@ -6,6 +6,7 @@ import shutil
 import time
 
 import build_data
+import build_part5
 
 H = os.path.dirname(os.path.abspath(__file__))
 R = os.path.dirname(H)
@@ -25,6 +26,7 @@ def wr(p, s):
 build_data.main()
 n = int(os.environ.get("BUILD_TIME") or time.time())
 page = rd(os.path.join(H, "app.html")).replace("/*__CSS__*/", rd(os.path.join(H, "style.css")))
+page = page.replace("/*__PART5__*/", rd(os.path.join(H, "part5.js"))).replace("/*__P5DATA__*/[]", json.dumps(build_part5.main(), ensure_ascii=False, separators=(",", ":")))
 page = page.replace("/*__DATA__*/[]", rd(os.path.join(H, "cards.json"))).replace("/*__BUILD__*/0", str(n))
 GF = '<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gowun+Dodum&family=Nunito:wght@400;700&display=swap">'
 LF = (
