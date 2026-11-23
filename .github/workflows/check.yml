@@ -1,0 +1,15 @@
+name: 강세 사전 대조
+on:
+  push:
+    branches: [main]
+    paths: ["src/stress.txt", "src/check_stress.py"]
+  workflow_dispatch:
+permissions: { contents: read }
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: { python-version: "3.12" }
+      - run: pip install -q "cmudict==1.0.32" && python src/check_stress.py
