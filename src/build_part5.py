@@ -3,6 +3,7 @@ import copy
 import os
 import re
 
+import build_read
 from build_data import find
 
 H = os.path.dirname(os.path.abspath(__file__))
@@ -79,6 +80,7 @@ def main():
                 else:
                     mg.append([a, b])
             s["h"] = mg
+            s["r"] = build_read.pack(s["en"], [c[0] for c in s["ch"]])
     return topics
 
 

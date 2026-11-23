@@ -77,6 +77,9 @@ function p5Topic(){
     h("section",{}, h("h2",{}, t.steps ? "순서대로 하면 60초 답변이 됩니다" : "연습"), h("div",{cls:"rows"}, modes.map(([k, n, d]) => h("button",{cls:"row mode",disabled:!t.steps && !p.q,onclick:() => run5(t.id, k)},
       h("i",{cls:"tick"+(p.done[k]?" l2":"")}), h("span",{cls:"g"}, n, h("span",{cls:"x5"}, k === "rl" ? `질문만 보고 ${S.set.prep}초 준비, 60초 답변` : d)), ic("go"))),
       wk.length ? h("button",{cls:"row mode",onclick:() => run5(t.id,"st",wk)}, h("i",{cls:"mk b"},ic("ox")), h("span",{cls:"g"},"막힌 문장만", h("span",{cls:"x5"},`${wk.map(i => STEP[i][0]).join(", ")} 다시 영작`)), ic("go")) : null)),
+    t.steps && h("section",{}, h("h2",{},"소리 연습"), h("div",{cls:"rows"},
+      h("button",{cls:"row",onclick:() => runRead("rd", p5read(t), "따라 읽기", t.id)}, h("span",{cls:"g"},"따라 읽기", h("span",{cls:"x5"},"끊어 읽을 곳과 강세를 보며 따라 말합니다")), ic("go")),
+      h("button",{cls:"row",onclick:() => runRead("qz", p5read(t), "맞히기", t.id)}, h("span",{cls:"g"},"끊기·강세 맞히기", h("span",{cls:"x5"},"어디서 쉬고 어디에 힘줄지 먼저 골라 봅니다")), ic("go")))),
     h("section",{}, h("div",{cls:"rows"},
       t.steps && h("button",{cls:"row",onclick:() => open5(t.id,"model")}, h("span",{cls:"g"},"모범 답안 읽기"), ic("go")),
       t.steps && h("button",{cls:"row",onclick:() => { loadSrc("p5-"+t.id); tab = "ear"; p5 = null; render(); document.getElementById("src").value = "p5-"+t.id; playListen(); }}, h("span",{cls:"g"},"이어 듣기"), ic("go")),
@@ -135,7 +138,7 @@ function screen5(bar, body, acts, onTap){
   const cur = paper.querySelector(".cur"); if (cur) paper.scrollTop = Math.max(0, cur.offsetTop - paper.clientHeight*0.28);
   return paper;
 }
-function draw5(){ ({ch:drawCh, st:drawSt, fl:drawFl, rl:drawRl})[run.mode](); }
+function draw5(){ ({ch:drawCh, st:drawSt, fl:drawFl, rl:drawRl, rd:drawRd, qz:drawQz})[run.mode](); }
 function past(upto, cur){ const t = topic(run.id); return run.sub ? [] : run.list.slice(0, upto).filter((x, k, a) => x !== cur && a.indexOf(x) === k).map(i => h("div",{cls:"ln past"}, h("span",{cls:"lb"},STEP[i][0]), h("div",{cls:"tx"}, h("p",{cls:"en5",lang:"en"},t.steps[i].en)))); }
 
 // 1. 끊어서 영작

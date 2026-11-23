@@ -7,6 +7,7 @@ import time
 
 import build_data
 import build_part5
+import build_read
 
 H = os.path.dirname(os.path.abspath(__file__))
 R = os.path.dirname(H)
@@ -27,11 +28,12 @@ build_data.main()
 n = int(os.environ.get("BUILD_TIME") or time.time())
 page = rd(os.path.join(H, "app.html")).replace("/*__CSS__*/", rd(os.path.join(H, "style.css")))
 page = page.replace("/*__PART5__*/", rd(os.path.join(H, "part5.js"))).replace("/*__P5DATA__*/[]", json.dumps(build_part5.main(), ensure_ascii=False, separators=(",", ":")))
+page = page.replace("/*__READ__*/", rd(os.path.join(H, "read.js"))).replace("/*__SY__*/{}", json.dumps({**build_read.USED, **{w: build_read.SY[w][:2] for w in ("information", "interesting") if w in build_read.SY}}, ensure_ascii=False, separators=(",", ":")))
 page = page.replace("/*__DATA__*/[]", rd(os.path.join(H, "cards.json"))).replace("/*__BUILD__*/0", str(n))
 GF = '<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gowun+Dodum&family=Nunito:wght@400;700&display=swap">'
 LF = (
     '<style>@font-face{font-family:"Gowun Dodum";src:url(fonts/gowun.woff2) format("woff2");font-display:swap}'
-    '@font-face{font-family:"Nunito";src:url(fonts/nunito.woff2) format("woff2");font-weight:400 700;font-display:swap}</style>'
+    '@font-face{font-family:"Nunito";src:url(fonts/nunito.woff2) format("woff2");font-weight:200 1000;font-display:swap}</style>'
 )
 wr(os.path.join(R, "dist", "artifact.html"), page.replace("<!--FONT-->", GF))
 head = (

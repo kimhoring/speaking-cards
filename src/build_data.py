@@ -4,6 +4,8 @@ import os
 import re
 import zlib
 
+import build_read
+
 H = os.path.dirname(os.path.abspath(__file__))
 IRR = {
     "took": "take", "taken": "take", "taking": "take", "got": "get", "did": "do", "went": "go",
@@ -142,7 +144,7 @@ def main():
                 mg.append([s, e])
         if not mg:
             miss.append((x, en))
-        c = {"id": key, "x": x, "m": m, "ko": ko, "en": en, "h": mg}
+        c = {"id": key, "x": x, "m": m, "ko": ko, "en": en, "h": mg, "r": build_read.pack(en)}
         sec["cards"].append(c)
         cards.setdefault(key, c)
     json.dump(secs, open(os.path.join(H, "cards.json"), "w", encoding="utf8"), ensure_ascii=False, separators=(",", ":"))

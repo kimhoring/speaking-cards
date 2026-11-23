@@ -15,7 +15,7 @@ STRONG = {"however", "also", "these", "fewer"}
 COMPOUND = """video call|video calls|team project|cram school|music stores|department store|department stores|job interview|job seekers|sports center|fitness centers
 library app|customer service|business trip|business trips|lunch break|science class|computer class|tablet pc|training program|video editing|apartment complex|shopping list|shopping mall
 exercise equipment|exercise videos|study habits|streaming services|travel information|travel expenses|travel guidebooks|smartphone apps|marketing company|food company|education company
-bicycle riders|school grades|exam grades|time limit|time limits|membership points|birth rate|art gallery|basketball club|language school|field trip|high school|career path|bank loan|job information
+bicycle riders|school grades|exam grades|time limit|time limits|membership points|birth rate|art gallery|basketball club|language school|field trip|high school|skill development|social network|career path|bank loan|job information
 utility bills|traffic information|eating habits|school uniform|performance evaluation|working hours|credit card|grocery shopping|charging stations|housework|air pollution|water pollution
 package tour|package tours|volunteer work|team manager|it company|ai program|ai programs|phone call|city center|work experience|work system|employee benefits|night view|social media|job market""".replace("\n", "|").split("|")
 COMPOUND = {c for c in COMPOUND if " " in c} - {"social media", "night view", "work system", "city center"}
@@ -67,8 +67,8 @@ def load_stress():
             cut = dst.index("-")
             a, b, i, n = sy[src]
             sy[dst] = (a + (a >= cut), b + (a >= cut), i, n)
-    sy["full-time"] = (5, 9, 1, 2)
-    sy["well-known"] = (5, 10, 1, 2)
+    sy["full-time"] = (0, 4, 0, 2)
+    sy["well-known"] = (0, 4, 0, 2)
     sy["part-time"] = (0, 4, 0, 2)
     sy["t-shirt"] = (0, 1, 0, 2)
     return sy
@@ -225,3 +225,18 @@ def show(en, r):
             t = w[: s[0]] + w[s[0]:s[1]].upper() + w[s[1]:] if s else w.upper()
         out.append(("*" if r["s"][i] == 2 else "") + t + ("~" if i in r["l"] else ""))
     return " ".join(out)
+
+
+USED = {}
+
+
+def pack(en, hint_chunks=None):
+    """앱에 담을 모양. 강세를 모르는 여러 음절 낱말이 나오면 멈춘다."""
+    r = read(en, hint_chunks)
+    for w, _, _ in words(en):
+        x = w.lower()
+        if x in SY:
+            USED[x] = SY[x][:2]
+        elif len(re.findall(r"[aeiouyé]+", re.sub(r"(?<=[^aeiou])es?$|ed$|'s$", "", x))) > 1 and not re.match(r"^(they|you|your|says?)$", x):
+            raise SystemExit(f"stress.txt 에 없는 낱말: {w} ({en})")
+    return {"b": r["b"], "s": "".join(map(str, r["s"])), "l": r["l"]}
