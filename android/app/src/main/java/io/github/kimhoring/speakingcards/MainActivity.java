@@ -47,6 +47,7 @@ public class MainActivity extends Activity {
     private SharedPreferences prefs;
     private ListenService.Watch watch;
     private Speaker.NoVoice noVoice;
+    private Updater.Done upDone;
     private final Runnable watchdog = () -> { up.rollback(); load(); };
 
     @SuppressLint({"SetJavaScriptEnabled", "AddJavascriptInterface"})
@@ -105,7 +106,9 @@ public class MainActivity extends Activity {
         watch = (i, ph, on) -> js("window.__listen&&__listen(" + i + ",'" + ph + "'," + on + ")");
         ListenService.watch = watch;
         load();
-        up.check(shell(), st -> { if ("ready".equals(st) || "shell".equals(st)) js("window.__upd&&__upd('" + st + "')"); });
+        upDone = (st, manual) -> { if (manual || "ready".equals(st) || "shell".equals(st)) js("window.__upd&&__upd('" + st + "')"); };
+        up.listener = upDone;
+        up.check(shell(), false);
     }
 
     private void load() {
@@ -163,6 +166,7 @@ public class MainActivity extends Activity {
         Log.i("MN", "onDestroy " + hashCode() + " changing=" + isChangingConfigurations() + " " + Integer.toHexString(getChangingConfigurations()));
         if (!isChangingConfigurations()) ListenService.send(this, "stop", 0);
         if (watch == ListenService.watch) ListenService.watch = null;
+        if (upDone == up.listener) up.listener = null;
         if (noVoice == speaker.noVoice) speaker.noVoice = null;
         main.removeCallbacksAndMessages(null);
         root.removeAllViews();
@@ -217,7 +221,7 @@ public class MainActivity extends Activity {
         }
         @JavascriptInterface public void listenJump(int n) { main.post(() -> ListenService.send(MainActivity.this, "jump", n)); }
         @JavascriptInterface public void listenStop() { main.post(() -> ListenService.send(MainActivity.this, "stop", 0)); }
-        @JavascriptInterface public void check() { up.check(shell(), st -> js("window.__upd&&__upd('" + st + "')")); }
+        @JavascriptInterface public void check() { up.check(shell(), true); }
         @JavascriptInterface public void apply() { main.post(() -> { if (web != null && up.promote()) load(); }); }
         @JavascriptInterface public void ready() { main.post(() -> { main.removeCallbacks(watchdog); up.confirm(); Log.i("MN", "ready active=" + up.active()); if (up.hasNext()) js("window.__upd&&__upd('ready')"); }); }
     }

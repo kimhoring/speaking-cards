@@ -103,16 +103,22 @@ final class Updater {
         Log.w("MN", "OTA rollback " + bad);
     }
 
-    interface Done { void on(String state); }
+    interface Done { void on(String state, boolean manual); }
 
-    void check(int shell, Done cb) {
-        synchronized (this) { if (busy) { Log.i("MN", "OTA busy"); return; } busy = true; }
+    /** 지금 떠 있는 화면. 화면이 다시 만들어지면 새 화면이 이어받는다. */
+    volatile Done listener;
+    private boolean asked;
+
+    void check(int shell, boolean manual) {
+        synchronized (this) { asked |= manual; if (busy) return; busy = true; }
         new Thread(() -> {
             String r;
             try { r = run(shell); } catch (Exception e) { Log.w("MN", "업데이트 확인 실패 " + e); r = "fail"; }
-            synchronized (this) { busy = false; }
+            boolean m;
+            synchronized (this) { busy = false; m = asked; asked = false; }
             Log.i("MN", "OTA check " + r + " active=" + active());
-            cb.on(r);
+            Done l = listener;
+            if (l != null) l.on(r, m);
         }, "ota").start();
     }
 

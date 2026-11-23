@@ -10,7 +10,7 @@ ok(){ if adb logcat -d -s MN:* | grep -qE "$2"; then echo "PASS $1"; else echo "
 no(){ if adb logcat -d -s MN:* AndroidRuntime:E | grep -qE "$2"; then echo "FAIL $1"; FAIL=1; else echo "PASS $1"; fi; }
 keep(){ adb logcat -d -s MN:* AndroidRuntime:E >> out/log.txt; }
 
-timeout 900 "$ANDROID_HOME/platform-tools/adb" logcat -v time MN:I AndroidRuntime:E chromium:W cr_:W ActivityManager:W DEBUG:I *:S > out/full.txt 2>&1 &
+timeout 900 "$ANDROID_HOME/platform-tools/adb" logcat -v time MN:I AndroidRuntime:E ActivityManager:E DEBUG:I lowmemorykiller:I Zygote:W *:S > out/full.txt 2>&1 &
 
 # 1) 배포용 APK 가 설치되고 뜨는지
 adb logcat -c
@@ -42,14 +42,14 @@ ok "뒤로 가기로 학습 종료" 'result.*back.*false.*home'
 keep
 
 # 4) 인터넷 없이 다시 켜기
-adb shell svc wifi disable; adb shell svc data disable; sleep 3
+adb shell cmd connectivity airplane-mode enable; sleep 3
 adb shell am force-stop $P; adb logcat -c
 adb shell am start -W -n $A; sleep 10
 js 'JSON.stringify(["offline",Object.keys(S.c).length,BUILD>1000,document.fonts.check("16px Nunito")])'
 ok "오프라인에서 진도·새 내용 유지" 'result.*offline.*,2,true,true'
 shot 4_offline
 js 'go("log");app.querySelector("main").scrollTop=9999'; shot 5_settings
-adb shell svc wifi enable; adb shell svc data enable
+adb shell cmd connectivity airplane-mode disable; sleep 5
 
 # 5) 깨진 업데이트를 받으면 스스로 되돌리는지: 현재 묶음을 고장 내고 시험 상태로 표시
 N=$(adb shell run-as $P ls files/bundles | tr -dc '0-9\n' | head -1)
@@ -69,7 +69,7 @@ js 'go("ear");playListen()'; sleep 4; shot 6_listen
 adb shell dumpsys notification --noredact | grep -q "$P.*channel=listen" && echo "PASS 재생 알림" || { echo "FAIL 재생 알림"; FAIL=1; }
 adb shell input keyevent SLEEP; sleep 45
 ok "화면 끈 채 다음 문장으로" "listen [1-9][0-9]* ko true"
-adb shell input keyevent 127; sleep 3
+adb shell cmd media_session dispatch pause; sleep 3
 ok "이어폰 버튼으로 멈춤" "listen [0-9]+ +false"
 no "오류 없음" "FATAL EXCEPTION|js ERROR"
 keep
