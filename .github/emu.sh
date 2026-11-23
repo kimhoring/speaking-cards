@@ -40,7 +40,7 @@ ok "진도 기록" 'result.*seen.*,2\]'
 adb shell input keyevent BACK; sleep 2
 js 'JSON.stringify(["back",!!sess,tab])'
 ok "뒤로 가기로 학습 종료" 'result.*back.*false.*home'
-keep
+keep; adb shell dumpsys activity exit-info $P > out/exit_$(date +%s).txt
 
 # 4) 인터넷 없이 다시 켜기
 adb shell cmd connectivity airplane-mode enable; sleep 3
@@ -61,7 +61,7 @@ ok "고장 난 업데이트 되돌림" "OTA rollback $N"
 ok "되돌린 뒤 정상 실행" "ready active=1000"
 js 'JSON.stringify(["kept",Object.keys(S.c).length])'
 ok "되돌려도 진도 유지" 'result.*kept.*,2\]'
-keep
+keep; adb shell dumpsys activity exit-info $P > out/exit_$(date +%s).txt
 
 # 6) 듣기: 화면을 꺼도 계속되는지
 adb shell pm grant $P android.permission.POST_NOTIFICATIONS
@@ -74,5 +74,5 @@ adb shell dumpsys media_session | grep -iE "media button session is|speakingcard
 adb shell cmd media_session dispatch pause; sleep 3
 ok "이어폰 버튼으로 멈춤" "listen [0-9]+ +false"
 no "오류 없음" "FATAL EXCEPTION|js ERROR"
-keep
+keep; adb shell dumpsys activity exit-info $P > out/exit_$(date +%s).txt
 exit $FAIL
