@@ -10,6 +10,8 @@ ok(){ if adb logcat -d -s MN:* | grep -qE "$2"; then echo "PASS $1"; else echo "
 no(){ if adb logcat -d -s MN:* AndroidRuntime:E | grep -qE "$2"; then echo "FAIL $1"; FAIL=1; else echo "PASS $1"; fi; }
 keep(){ adb logcat -d -s MN:* AndroidRuntime:E >> out/log.txt; }
 
+timeout 900 "$ANDROID_HOME/platform-tools/adb" logcat -v time MN:I AndroidRuntime:E chromium:W cr_:W ActivityManager:W DEBUG:I *:S > out/full.txt 2>&1 &
+
 # 1) 배포용 APK 가 설치되고 뜨는지
 adb logcat -c
 adb install -r speaking-cards.apk || exit 1

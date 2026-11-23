@@ -21,6 +21,7 @@ import android.view.ViewGroup;
 import android.view.WindowInsets;
 import android.webkit.ConsoleMessage;
 import android.webkit.JavascriptInterface;
+import android.webkit.RenderProcessGoneDetail;
 import android.webkit.WebChromeClient;
 import android.webkit.WebResourceRequest;
 import android.webkit.WebResourceResponse;
@@ -44,15 +45,19 @@ public class MainActivity extends Activity {
     private Updater up;
     private Speaker speaker;
     private SharedPreferences prefs;
-    private final Runnable watchdog = () -> { up.rollback(); web.loadUrl(HOME); };
+    private ListenService.Watch watch;
+    private Speaker.NoVoice noVoice;
+    private final Runnable watchdog = () -> { up.rollback(); load(); };
 
     @SuppressLint({"SetJavaScriptEnabled", "AddJavascriptInterface"})
     @Override protected void onCreate(Bundle b) {
         super.onCreate(b);
         prefs = getSharedPreferences("progress", MODE_PRIVATE);
-        up = new Updater(this);
+        up = Updater.get(this);
+        Log.i("MN", "onCreate " + hashCode() + " restored=" + (b != null));
         speaker = Speaker.get(this);
-        speaker.noVoice = l -> js("window.__noVoice&&__noVoice('" + l + "')");
+        noVoice = l -> js("window.__noVoice&&__noVoice('" + l + "')");
+        speaker.noVoice = noVoice;
         root = new FrameLayout(this);
         root.setBackgroundColor(getColor(R.color.paper));
         web = new WebView(this);
@@ -81,6 +86,12 @@ public class MainActivity extends Activity {
             @Override public WebResourceResponse shouldInterceptRequest(WebView v, WebResourceRequest r) {
                 return HOST.equals(r.getUrl().getHost()) ? serve(r.getUrl().getPath()) : none();
             }
+            @Override public void onPageFinished(WebView v, String url) { Log.i("MN", "page " + url); }
+            @Override public boolean onRenderProcessGone(WebView v, RenderProcessGoneDetail d) {
+                Log.w("MN", "renderer gone crash=" + d.didCrash());
+                main.post(MainActivity.this::recreate);
+                return true;
+            }
             @Override public boolean shouldOverrideUrlLoading(WebView v, WebResourceRequest r) {
                 return !HOST.equals(r.getUrl().getHost());
             }
@@ -91,7 +102,8 @@ public class MainActivity extends Activity {
                 return true;
             }
         });
-        ListenService.watch = (i, ph, on) -> js("window.__listen&&__listen(" + i + ",'" + ph + "'," + on + ")");
+        watch = (i, ph, on) -> js("window.__listen&&__listen(" + i + ",'" + ph + "'," + on + ")");
+        ListenService.watch = watch;
         load();
         up.check(shell(), st -> { if ("ready".equals(st) || "shell".equals(st)) js("window.__upd&&__upd('" + st + "')"); });
     }
@@ -99,7 +111,9 @@ public class MainActivity extends Activity {
     private void load() {
         main.removeCallbacks(watchdog);
         if (up.onTrial()) main.postDelayed(watchdog, 15000);
-        web.loadUrl(HOME);
+        // 번호를 붙여 항상 새로 읽게 한다. 주소(출처)가 같아 저장된 진도는 그대로다
+        Log.i("MN", "load " + up.active());
+        web.loadUrl(HOME + "?n=" + up.active());
     }
 
     private int shell() {
@@ -146,9 +160,10 @@ public class MainActivity extends Activity {
     }
 
     @Override protected void onDestroy() {
-        ListenService.send(this, "stop", 0);
-        ListenService.watch = null;
-        speaker.noVoice = null;
+        Log.i("MN", "onDestroy " + hashCode() + " changing=" + isChangingConfigurations() + " " + Integer.toHexString(getChangingConfigurations()));
+        if (!isChangingConfigurations()) ListenService.send(this, "stop", 0);
+        if (watch == ListenService.watch) ListenService.watch = null;
+        if (noVoice == speaker.noVoice) speaker.noVoice = null;
         main.removeCallbacksAndMessages(null);
         root.removeAllViews();
         web.destroy();
@@ -203,7 +218,7 @@ public class MainActivity extends Activity {
         @JavascriptInterface public void listenJump(int n) { main.post(() -> ListenService.send(MainActivity.this, "jump", n)); }
         @JavascriptInterface public void listenStop() { main.post(() -> ListenService.send(MainActivity.this, "stop", 0)); }
         @JavascriptInterface public void check() { up.check(shell(), st -> js("window.__upd&&__upd('" + st + "')")); }
-        @JavascriptInterface public void apply() { main.post(() -> { if (up.promote()) load(); }); }
-        @JavascriptInterface public void ready() { main.post(() -> { main.removeCallbacks(watchdog); up.confirm(); Log.i("MN", "ready active=" + up.active()); }); }
+        @JavascriptInterface public void apply() { main.post(() -> { if (web != null && up.promote()) load(); }); }
+        @JavascriptInterface public void ready() { main.post(() -> { main.removeCallbacks(watchdog); up.confirm(); Log.i("MN", "ready active=" + up.active()); if (up.hasNext()) js("window.__upd&&__upd('ready')"); }); }
     }
 }

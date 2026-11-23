@@ -32,7 +32,16 @@ final class Updater {
     private final long builtin;
     private boolean busy;
 
-    Updater(Context c) {
+    private static Updater inst;
+    /** 화면이 다시 만들어져도 업데이트는 프로세스에 하나만 둔다. */
+    static synchronized Updater get(Context c) {
+        if (inst == null) inst = new Updater(c);
+        return inst;
+    }
+
+    synchronized boolean hasNext() { return p.getLong("next", 0) > active(); }
+
+    private Updater(Context c) {
         this.c = c.getApplicationContext();
         p = this.c.getSharedPreferences("bundle", Context.MODE_PRIVATE);
         root = new File(this.c.getFilesDir(), "bundles");
@@ -97,7 +106,7 @@ final class Updater {
     interface Done { void on(String state); }
 
     void check(int shell, Done cb) {
-        synchronized (this) { if (busy) return; busy = true; }
+        synchronized (this) { if (busy) { Log.i("MN", "OTA busy"); return; } busy = true; }
         new Thread(() -> {
             String r;
             try { r = run(shell); } catch (Exception e) { Log.w("MN", "업데이트 확인 실패 " + e); r = "fail"; }
