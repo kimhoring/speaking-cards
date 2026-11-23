@@ -13,6 +13,9 @@ keep(){ adb logcat -d -s MN:* AndroidRuntime:E >> out/log.txt; }
 
 timeout 900 "$ANDROID_HOME/platform-tools/adb" logcat -v time MN:I AndroidRuntime:E ActivityManager:E DEBUG:I lowmemorykiller:I Zygote:W *:S > out/full.txt 2>&1 &
 
+# 부팅 직후 Play 서비스가 재시작하며 앱을 닫으므로 가라앉기를 기다린다
+sleep 150
+
 # 1) 배포용 APK 가 설치되고 뜨는지
 adb logcat -c
 adb install -r speaking-cards.apk || exit 1
