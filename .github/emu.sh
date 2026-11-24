@@ -1,5 +1,8 @@
 #!/bin/bash
-# 가상 휴대폰 시험: 설치 → 실행 → 내부 업데이트 → 학습 → 오프라인 재실행 → 화면 끈 채 듣기
+# 가상 휴대폰 시험
+#   core  설치 → 내부 업데이트 → 학습 → 오프라인 → 되돌리기 → 회전·태블릿 화면 (소리 없이)
+#   sound 발음 → 화면 끈 채 듣기 (가상 기기가 음성 재생 중 자주 꺼져서 따로 돌린다)
+PART=$1
 set -u
 P=io.github.kimhoring.speakingcards; A=$P/.MainActivity
 mkdir -p out; FAIL=0
@@ -15,6 +18,33 @@ timeout 900 "$ANDROID_HOME/platform-tools/adb" logcat -v time MN:I AndroidRuntim
 
 # 부팅 직후 Play 서비스가 재시작하며 앱을 닫으므로 가라앉기를 기다린다
 sleep 150
+
+# 듣기 시험: 내용이 자리 잡은 뒤 시작
+if [ "$PART" = sound ]; then
+adb logcat -c
+adb install -r test.apk || exit 1
+adb shell am start -W -n $A; sleep 25
+ok "새 내용 정상 확인" "OTA confirmed 1[0-9]{9}"
+js 'document.getElementById("start").click()'; sleep 1
+js 'flip()'; sleep 4
+ok "발음 시작" "speak start"
+adb shell input keyevent BACK; sleep 2
+keep
+# 6) 듣기: 화면을 꺼도 계속되는지
+adb shell pm grant $P android.permission.POST_NOTIFICATIONS
+adb logcat -c
+js 'go("ear");playListen()'; sleep 4; shot 6_listen
+adb shell dumpsys notification --noredact | grep -q "$P.*channel=listen" && echo "PASS 재생 알림" || { echo "FAIL 재생 알림"; FAIL=1; }
+adb shell input keyevent SLEEP; sleep 45
+ok "화면 끈 채 다음 문장으로" "listen [1-9][0-9]* ko true"
+adb shell dumpsys media_session | grep -iE "media button session is|speakingcards" | head -5
+adb shell cmd media_session dispatch pause; sleep 3
+ok "이어폰 버튼으로 멈춤" "listen [0-9]+ +false"
+no "오류 없음" "FATAL EXCEPTION|js ERROR"
+keep; adb shell dumpsys activity exit-info $P > out/exit_$(date +%s).txt
+
+exit $FAIL
+fi
 
 # 1) 배포용 APK 가 설치되고 뜨는지
 adb logcat -c
@@ -34,9 +64,8 @@ ok "새 내용 적용" "OTA applied"
 ok "새 내용 정상 확인" "OTA confirmed 1[0-9]{9}"
 
 # 3) 학습과 진도 저장
-js 'document.getElementById("start").click()'; sleep 1; shot 2_card
+js 'S.set.auto=0;document.getElementById("start").click()'; sleep 1; shot 2_card
 js 'flip()'; sleep 3; shot 3_answer
-ok "발음 시작" "speak start"
 js 'grade("g");flip();grade("b")'
 js 'JSON.stringify(["seen",Object.keys(S.c).length])'
 ok "진도 기록" 'result.*seen.*,2\]'
@@ -64,19 +93,6 @@ ok "고장 난 업데이트 되돌림" "OTA rollback $N"
 ok "되돌린 뒤 정상 실행" "ready active=1000"
 js 'JSON.stringify(["kept",Object.keys(S.c).length])'
 ok "되돌려도 진도 유지" 'result.*kept.*,2\]'
-keep; adb shell dumpsys activity exit-info $P > out/exit_$(date +%s).txt
-
-# 6) 듣기: 화면을 꺼도 계속되는지
-adb shell pm grant $P android.permission.POST_NOTIFICATIONS
-adb logcat -c
-js 'go("ear");playListen()'; sleep 4; shot 6_listen
-adb shell dumpsys notification --noredact | grep -q "$P.*channel=listen" && echo "PASS 재생 알림" || { echo "FAIL 재생 알림"; FAIL=1; }
-adb shell input keyevent SLEEP; sleep 45
-ok "화면 끈 채 다음 문장으로" "listen [1-9][0-9]* ko true"
-adb shell dumpsys media_session | grep -iE "media button session is|speakingcards" | head -5
-adb shell cmd media_session dispatch pause; sleep 3
-ok "이어폰 버튼으로 멈춤" "listen [0-9]+ +false"
-no "오류 없음" "FATAL EXCEPTION|js ERROR"
 keep; adb shell dumpsys activity exit-info $P > out/exit_$(date +%s).txt
 
 # 7) 휴대폰은 돌려도 세로, 태블릿 크기에서는 가로 두 쪽 화면

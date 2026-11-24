@@ -56,7 +56,10 @@ jobs:
   emulator:
     needs: build
     runs-on: ubuntu-latest
-    timeout-minutes: 30
+    timeout-minutes: 35
+    strategy:
+      fail-fast: false
+      matrix: { part: [core, sound] }
     steps:
       - uses: actions/checkout@v4
       - uses: actions/download-artifact@v4
@@ -75,7 +78,7 @@ jobs:
           ram-size: 4096M
           emulator-options: -no-window -gpu swiftshader -noaudio -no-boot-anim -camera-back none -camera-front none
           disable-animations: true
-          script: bash .github/emu.sh
+          script: bash .github/emu.sh ${{ matrix.part }}
       - if: steps.emu1.outcome == 'failure'
         uses: reactivecircus/android-emulator-runner@v2
         with:
@@ -86,10 +89,10 @@ jobs:
           ram-size: 4096M
           emulator-options: -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none -camera-front none
           disable-animations: true
-          script: bash .github/emu.sh
+          script: bash .github/emu.sh ${{ matrix.part }}
       - if: always()
         uses: actions/upload-artifact@v4
-        with: { name: emulator, path: out }
+        with: { name: "emulator-${{ matrix.part }}", path: out }
   release:
     needs: [build, emulator]
     runs-on: ubuntu-latest
