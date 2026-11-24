@@ -261,8 +261,8 @@ K|find their way|길을 찾다
 K|without stress|스트레스 없이
 # q23|여행과 휴가|가이드를 동반한 여행|부정적 사례
 Q|Do you prefer taking a guided tour or traveling on your own when you visit a new place? Why or why not?|새로운 장소를 방문할 때 가이드 투어를 하는 것과 자유롭게 여행하는 것 중 어느 것을 선호하시나요? 그 이유는 무엇인가요?
-I|자유 여행|나만의 일정을 짤 수 있음|유럽 가이드 투어가 너무 빡빡해서 즐기지 못함
-1|저는 새로운 장소를 방문할 때 자유롭게 여행하는 것을 선호합니다.|I prefer / traveling on my own / when I visit a new place.|저는 선호합니다 / 자유롭게 여행하는 것을 / 새로운 장소를 방문할 때
+I|자유 여행|가고 싶은 곳에 가고 서두르지 않아도 됨|파리 가이드 투어에서 계속 서두르느라 즐기지 못함
+1|저는 새로운 장소를 방문할 때 혼자 자유롭게 여행하는 것을 선호합니다.|I prefer / traveling on my own / when I visit a new place.|저는 선호합니다 / 혼자 자유롭게 여행하는 것을 / 새로운 장소를 방문할 때
 =|6
 # q24|여행과 휴가|해외 여행 시 현지 문화 체험 방법|긍정적 사례
 Q|When traveling abroad, what do you think is the best way to experience the local culture?|해외 여행을 할 때, 현지 문화를 체험하는 가장 좋은 방법은 무엇이라고 생각하나요?

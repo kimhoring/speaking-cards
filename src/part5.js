@@ -73,7 +73,7 @@ function p5Topic(){
   const modes = t.steps ? MODES : MODES.slice(3);
   const shown = idea === t.id;
   return [head5(t.name, toList), ask5(t),
-    t.base && h("p",{cls:"note"},`기본 답안 ‘${topic(t.base).name}’과 같은 흐름입니다. 입장 문장만 다르니 외운 답변을 그대로 쓰세요.`),
+    t.base && h("p",{cls:"note"},`기본 답안 ‘${topic(t.base).name}’과 같은 흐름입니다. ${t.steps[0].en === topic(t.base).steps[0].en ? "입장 문장까지 같으니" : "입장 문장만 다르니"} 외운 답변을 그대로 쓰세요.`),
     t.i.length ? h("section",{}, h("h2",{},"먼저 우리말로 구상해 보세요"), shown ? h("div",{cls:"idea"}, ["입장","이유","예시"].map((n, k) => h("p",{}, h("span",{},n), t.i[k]))) : h("button",{cls:"btn s sm",style:"width:100%",onclick:() => { idea = t.id; render(); }},"답변 아이디어 보기")) : null,
     h("section",{}, h("h2",{}, t.steps ? "순서대로 하면 60초 답변이 됩니다" : "연습"), h("div",{cls:"rows"}, modes.map(([k, n, d]) => h("button",{cls:"row mode",disabled:!t.steps && !p.q,onclick:() => run5(t.id, k)},
       h("i",{cls:"tick"+(p.done[k]?" l2":"")}), h("span",{cls:"g"}, n, h("span",{cls:"x5"}, k === "rl" ? `질문만 보고 ${S.set.prep}초 준비, 60초 답변` : d)), ic("go"))),
