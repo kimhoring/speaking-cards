@@ -12,7 +12,7 @@ and or but so because if than when while who which what how some any i'm it's th
 NEG = {"not", "don't", "didn't", "can't", "couldn't", "wasn't", "won't", "isn't", "no", "never"}
 STRONG = {"however", "also", "these", "fewer"}
 # 앞 낱말에 힘을 주는 겹낱말
-COMPOUND = """video call|video calls|team project|cram school|music stores|department store|department stores|job interview|job seekers|sports center|fitness centers
+COMPOUND = """video call|video calls|team project|cram school|music stores|department store|department stores|job interview|job seekers|sports center|sports centers|fitness centers
 library app|customer service|business trip|business trips|lunch break|science class|computer class|tablet pc|training program|video editing|apartment complex|shopping list|shopping mall
 exercise equipment|exercise videos|study habits|streaming services|travel information|travel expenses|travel guidebooks|smartphone apps|marketing company|food company|education company
 bicycle riders|school grades|exam grades|time limit|time limits|membership points|birth rate|art gallery|basketball club|language school|field trip|high school|skill development|social network|career path|bank loan|job information
