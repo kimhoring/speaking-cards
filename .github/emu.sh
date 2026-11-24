@@ -78,4 +78,20 @@ adb shell cmd media_session dispatch pause; sleep 3
 ok "이어폰 버튼으로 멈춤" "listen [0-9]+ +false"
 no "오류 없음" "FATAL EXCEPTION|js ERROR"
 keep; adb shell dumpsys activity exit-info $P > out/exit_$(date +%s).txt
+
+# 7) 휴대폰은 돌려도 세로, 태블릿 크기에서는 가로 두 쪽 화면
+adb shell input keyevent WAKEUP; adb shell wm dismiss-keyguard
+adb shell settings put system accelerometer_rotation 0; adb shell settings put system user_rotation 1; sleep 4
+adb logcat -c
+js 'JSON.stringify(["phone",innerWidth<innerHeight,wide])'
+ok "휴대폰은 세로 유지" 'result.*phone.*,true,false'
+adb shell wm size 1600x2560; adb shell wm density 320; sleep 8
+adb shell settings put system user_rotation 1; sleep 4
+js 'go("home");JSON.stringify(["tablet",innerWidth,innerHeight,wide,document.querySelectorAll(".pane").length])'
+ok "태블릿 가로 두 쪽" 'result.*tablet.*,true,2\]'
+shot 7_tablet
+js 'document.getElementById("start").click();flip();document.querySelectorAll(".pg").length'
+sleep 2; shot 8_tablet_card
+no "태블릿 오류 없음" "FATAL EXCEPTION|js ERROR"
+keep
 exit $FAIL

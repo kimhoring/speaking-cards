@@ -52,7 +52,7 @@ wr(os.path.join(A, "robots.txt"), "User-agent: *\nDisallow: /\n")
 icons = [{"src": "icon-%d.png" % k, "sizes": "%dx%d" % (k, k), "type": "image/png"} for k in (192, 512)]
 icons.append({**icons[1], "purpose": "maskable"})
 man = {"name": "3초 만능문장", "short_name": "3초 만능문장", "lang": "ko", "id": "./", "start_url": "./", "scope": "./", "display": "standalone",
-       "orientation": "portrait", "background_color": "#ece2d0", "theme_color": "#ece2d0", "icons": icons}
+       "orientation": "any", "background_color": "#ece2d0", "theme_color": "#ece2d0", "icons": icons}
 wr(os.path.join(A, "manifest.webmanifest"), json.dumps(man, ensure_ascii=False))
 fd = os.path.join(A, "fonts")
 fonts = ["fonts/" + f for f in sorted(os.listdir(fd)) if f.endswith(".woff2")] if os.path.isdir(fd) else []

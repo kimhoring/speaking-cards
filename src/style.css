@@ -267,5 +267,59 @@ u.miss{text-decoration:underline;text-decoration-color:var(--bad);text-decoratio
 .gd li{padding-left:14px;border-left:3px solid var(--mark)}
 .wl{display:flex;flex-wrap:wrap;gap:8px}
 .wb{min-height:44px;padding:6px 12px;border-radius:8px;background:var(--card);font-size:18px}
-@media (max-height:600px){.ko{font-size:21px}.en{font-size:22px}.face .bd{padding-block:0 12px}.gr,.acts .btn{min-height:62px}.study{gap:10px}}
+.rl5>div{display:flex;flex-direction:column;gap:20px}
+/* 태블릿 세로 */
+.mid main,.mid nav{zoom:1.1}
+.mid #app{max-width:720px}
+.mid .wrap{padding-left:36px;padding-right:36px}
+.mid .ko{font-size:29px}.mid .en{font-size:32px}.mid .ko.small{font-size:20px}
+.mid .big5{font-size:32px}.mid .qw{font-size:23px}
+.mid .ln.cur .en5,.mid .chk .en5{font-size:22px}.mid .chk.now .k{font-size:24px}
+/* 태블릿 가로: 왼쪽 메뉴 + 펼친 두 쪽 */
+.wide #app{flex-direction:row;max-width:1400px}
+.wide nav{order:-1;flex-direction:column;justify-content:center;gap:6px;width:92px;flex:none;border-top:0;border-right:1px solid var(--line);padding:8px 0 8px env(safe-area-inset-left,0px)}
+.wide nav button{flex:none;min-height:64px;font-size:16px}
+.wide main.two{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,6fr);grid-template-rows:minmax(0,1fr);gap:0;padding:0;overflow:hidden}
+.pane{min-height:0;overflow-y:auto;padding:26px 30px 36px;display:flex;flex-direction:column;gap:28px;scrollbar-width:none}
+.pane::-webkit-scrollbar{display:none}
+.pane+.pane{border-left:1px solid var(--line)}
+.pane.root>.head2{margin-left:0}.pane.root>.head2>.ib{display:none}
+.pane>.sheet,.pane>.start{isolation:isolate}
+.wide .row[aria-current="true"]{background:linear-gradient(90deg,var(--mark) 0 4px,transparent 4px);padding-left:14px;color:var(--ink)}
+.wide .pane .deck{min-height:0}
+.wide .pane #earcard{flex:1;min-height:260px}
+.wide .pane #earcard .in{flex:1;justify-content:center}
+.wide .pair{grid-template-columns:repeat(auto-fit,minmax(124px,1fr))}
+.wide .days div{aspect-ratio:auto;min-height:44px}
+.wide .study{width:100%;max-width:1240px;margin:0 auto;padding-inline:30px}
+.wide .done{width:100%;max-width:680px;margin:auto}
+.wide .acts{width:100%}
+.wide .acts .btn,.wide .gr{min-height:66px}
+.wide .acts.q{grid-template-columns:1fr 1fr}
+.wide .face.spread{flex-direction:row}
+.pg{flex:1;min-width:0;display:flex;flex-direction:column}
+.spread .pg .hd{padding:8px 14px 0 34px}
+.spread .pg .bd{padding:4px 40px 34px 34px}
+.spread .ko{font-size:clamp(26px,2.5vw,34px)}
+.spread .en{font-size:clamp(27px,2.6vw,36px)}
+.rings{flex:none;width:30px;display:flex;flex-direction:column;align-items:center;justify-content:space-evenly;background:linear-gradient(90deg,transparent,var(--under) 45%,var(--line) 50%,var(--under) 55%,transparent)}
+.rings i{width:13px;height:13px;border-radius:50%;background:var(--hole);box-shadow:inset 0 1px 2px rgba(60,42,18,.28)}
+.wait{color:var(--sub);font-size:17px;text-align:center}
+.two5{flex:1;min-height:0;display:grid;grid-template-columns:minmax(260px,5fr) 8fr;grid-template-rows:minmax(0,1fr);gap:30px}
+.two5 aside{overflow-y:auto;display:flex;flex-direction:column;gap:22px;padding-top:6px;scrollbar-width:none}
+.ol5{display:flex;flex-direction:column;gap:2px;border-top:1px solid var(--line);padding-top:14px}
+.ol5 p{color:var(--sub);padding:4px 0 4px 14px;border-left:3px solid transparent}
+.ol5 p[aria-current]{color:var(--ink);border-color:var(--pri)}
+.wide .paper.run{padding-inline:18px 34px}
+.wide .paper.run .ko{font-size:27px}.wide .paper.run .en{font-size:29px}.wide .paper.run .ko.small{font-size:19px}
+.wide .ln.cur .en5,.wide .chk .en5{font-size:22px}.wide .chk.now .k{font-size:24px}
+.wide .mid5{width:100%;max-width:980px;margin-inline:auto}
+.wide .paper.run .big5{font-size:34px}.wide .qw{font-size:24px;padding-inline:9px}
+.wide .qs{gap:10px 6px}
+.wide .rl5{display:grid;grid-template-columns:3fr 2fr;gap:48px;align-items:start}
+.wide .rl5 .q{font-size:25px}.wide .rl5 .opts5 li{font-size:20px}.wide .cd .big{font-size:92px}
+.wide .toast{bottom:40px}
+@media (max-height:640px){.two5 .ol5{display:none}}
+@media (min-width:1100px){.wide .pane,.wide nav{zoom:1.12}}
+@media (max-height:600px){:where(html:not(.wide)) .ko{font-size:21px}:where(html:not(.wide)) .en{font-size:22px}.face .bd{padding-block:0 12px}.gr,.acts .btn{min-height:62px}.study{gap:10px}}
 @media (prefers-reduced-motion:reduce){*{transition:none!important}}

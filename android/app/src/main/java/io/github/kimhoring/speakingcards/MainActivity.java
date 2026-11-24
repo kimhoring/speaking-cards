@@ -7,8 +7,10 @@ import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.ActivityInfo;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
+import android.content.res.Configuration;
 import android.graphics.Color;
 import android.graphics.Insets;
 import android.os.Build;
@@ -53,6 +55,7 @@ public class MainActivity extends Activity {
     @SuppressLint({"SetJavaScriptEnabled", "AddJavascriptInterface"})
     @Override protected void onCreate(Bundle b) {
         super.onCreate(b);
+        turn(getResources().getConfiguration());
         prefs = getSharedPreferences("progress", MODE_PRIVATE);
         up = Updater.get(this);
         Log.i("MN", "onCreate " + hashCode() + " restored=" + (b != null));
@@ -109,6 +112,17 @@ public class MainActivity extends Activity {
         upDone = (st, manual) -> { if (manual || "ready".equals(st) || "shell".equals(st)) js("window.__upd&&__upd('" + st + "')"); };
         up.listener = upDone;
         up.check(shell(), false);
+    }
+
+    /** 태블릿(과 펼친 폴드)은 가로·세로 모두, 휴대폰은 세로만 */
+    private void turn(Configuration c) {
+        int o = c.smallestScreenWidthDp >= 580 ? ActivityInfo.SCREEN_ORIENTATION_FULL_USER : ActivityInfo.SCREEN_ORIENTATION_PORTRAIT;
+        if (getRequestedOrientation() != o) setRequestedOrientation(o);
+    }
+
+    @Override public void onConfigurationChanged(Configuration c) {
+        super.onConfigurationChanged(c);
+        turn(c);
     }
 
     private void openPage() {

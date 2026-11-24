@@ -40,11 +40,12 @@ const qText = t => [t.q || peek(t.id).q, t.s && t.s[0], ...t.o.map(o => o[0] + "
 
 /* 목록·주제 화면 */
 let p5 = null;   // {t, v}
-function open5(t, v = "topic"){ p5 = {t, v}; hush(); render(); app.querySelector("main").scrollTop = 0; }
-function viewP5(){
-  if (p5) return {topic:p5Topic, model:p5Model, mine:p5Mine, tmpl:p5Tmpl}[p5.v]();
+function open5(t, v = "topic"){ p5 = {t, v}; if (wide && t !== "x") S.set.p5g = topic(t).g; hush(); render(); app.querySelector("main").scrollTop = 0; }
+const p5View = () => ({topic:p5Topic, model:p5Model, mine:p5Mine, tmpl:p5Tmpl})[p5.v]();
+const viewP5 = () => p5 ? p5View() : p5List();
+function p5List(){
   const g = S.set.p5g, nx = next5(g), list = P5.filter(t => t.g === g), dn = list.filter(t => peek(t.id).done.st).length;
-  const row = t => h("button",{cls:"row",onclick:() => open5(t.id)}, h("span",{cls:"g"}, t.name, h("span",{cls:"x5"}, g === "base" ? `${t.area} · ${t.type}` : t.base ? `${t.type} · 기본 답안 활용` : t.type)), minis(t.id), ic("go"));
+  const row = t => h("button",{cls:"row","aria-current":wide && p5.t === t.id ? "true" : null,onclick:() => open5(t.id)}, h("span",{cls:"g"}, t.name, h("span",{cls:"x5"}, g === "base" ? `${t.area} · ${t.type}` : t.base ? `${t.type} · 기본 답안 활용` : t.type)), minis(t.id), ic("go"));
   return [
     h("div",{cls:"hello"}, h("h1",{},"파트 5 의견 말하기"), h("p",{},"한글을 보고 영작하며 60초 답변을 완성합니다")),
     seg([["base","기본 답안 6"],["q","빈출 질문 24"]], g, v => setOpt("p5g",v), "문제 모음"),
@@ -131,12 +132,17 @@ function exit5(){ if (!run) return; stop5(); run = null; awake5(false); if (loca
 function bar5(label, right){
   return h("div",{cls:"sbar"}, h("button",{cls:"ib","aria-label":"그만하기",onclick:exit5},ic("x")), h("span",{cls:"num"},label), right || h("span",{cls:"ib"}));
 }
-function qBtn(){ return h("button",{cls:"ib q5","aria-label":"질문 보기","aria-pressed":String(run.q),onclick:() => { run.q = !run.q; draw5(); }},"질문"); }
+function qBtn(){ return wide ? null : h("button",{cls:"ib q5","aria-label":"질문 보기","aria-pressed":String(run.q),onclick:() => { run.q = !run.q; draw5(); }},"질문"); }
 function screen5(bar, body, acts, onTap){
   const paper = h("div",{cls:"paper run"+(onTap?" tap":""),onclick:e => { if (onTap && !e.target.closest("button,textarea,a")) onTap(); }}, body);
-  app.replaceChildren(h("div",{cls:"study wrap"}, bar, run.q && h("div",{cls:"qbox"}, ask5(topic(run.id))), paper, acts));
+  const side = wide && run.mode in {ch:1,st:1,fl:1,rl:1} && !paper.querySelector(".mid5");
+  app.replaceChildren(h("div",{cls:"study wrap"}, bar, !wide && run.q && h("div",{cls:"qbox"}, ask5(topic(run.id))), side ? h("div",{cls:"two5"}, side5(), paper) : paper, acts));
   const cur = paper.querySelector(".cur"); if (cur) paper.scrollTop = Math.max(0, cur.offsetTop - paper.clientHeight*0.28);
   return paper;
+}
+function side5(){   // 넓은 화면: 질문과 지금 단계를 왼쪽에 계속 보여 준다
+  const t = topic(run.id), cur = run.ph === "rev" || run.fin ? -1 : run.list[run.i];
+  return h("aside",{}, ask5(t), h("div",{cls:"ol5"}, STEP.map(([n, d], i) => h("p",{"aria-current":i === cur ? "step" : null}, h("span",{},n), i === cur && h("span",{cls:"x5"},d)))));
 }
 function draw5(){ ({ch:drawCh, st:drawSt, fl:drawFl, rl:drawRl, rd:drawRd, qz:drawQz})[run.mode](); }
 function past(upto, cur){ const t = topic(run.id); return run.sub ? [] : run.list.slice(0, upto).filter((x, k, a) => x !== cur && a.indexOf(x) === k).map(i => h("div",{cls:"ln past"}, h("span",{cls:"lb"},STEP[i][0]), h("div",{cls:"tx"}, h("p",{cls:"en5",lang:"en"},t.steps[i].en)))); }
@@ -230,7 +236,7 @@ function drawRl(){
   const ck = h("b",{cls:"big num"}, String(len)), fill = h("i",{});
   const nextPh = () => { stop5(); if (prep) run.ph = "ans"; else { run.ph = "rev"; done5(run.id,"rl"); } run.tm = false; draw5(); };
   screen5(bar5(prep ? "준비 시간" : "답변 시간", qBtnTmpl()),
-    [h("div",{cls:"mid5"}, h("p",{cls:"en5 q",lang:"en"},t.q || p.q), t.s && h("p",{cls:"en5 q stm",lang:"en"},t.s[0]), opts5(t), h("div",{cls:"cd"}, ck, h("span",{},"초"), h("div",{cls:"tm"},fill)), run.tm && h("div",{cls:"tmpl5"}, STEP.map(([n,,ex], k) => h("p",{}, h("span",{},n), k || t.s || /agree or disagree/.test(t.q) ? ex[0] : /prefer/.test(t.q) ? ex[2] : ex[1]))))],
+    [h("div",{cls:"mid5 rl5"}, h("div",{}, h("p",{cls:"en5 q",lang:"en"},t.q || p.q), t.s && h("p",{cls:"en5 q stm",lang:"en"},t.s[0]), opts5(t)), h("div",{}, h("div",{cls:"cd"}, ck, h("span",{},"초"), h("div",{cls:"tm"},fill)), run.tm && h("div",{cls:"tmpl5"}, STEP.map(([n,,ex], k) => h("p",{}, h("span",{},n), k || t.s || /agree or disagree/.test(t.q) ? ex[0] : /prefer/.test(t.q) ? ex[2] : ex[1])))))],
     h("div",{cls:"acts one"}, h("button",{cls:"btn "+(prep?"s":"p"),onclick:nextPh}, prep ? "바로 답변하기" : "답변 끝")));
   const start = () => {
     if (!run || run.mode !== "rl" || run.ph !== (prep?"prep":"ans")) return;
