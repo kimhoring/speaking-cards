@@ -34,14 +34,15 @@ K|grades dropped|성적이 떨어졌다
 # 4|주거 환경|은퇴 후 대도시 vs. 조용한 시골|긍정적 사례
 Q|Some people want to live in a big city after retiring, while others prefer a quiet rural town. Which do you prefer and why?|어떤 사람들은 은퇴 후 대도시에서 살기를 원하는 반면, 다른 사람들은 조용한 시골 마을을 선호합니다. 당신은 어느 쪽을 선호하며 그 이유는 무엇인가요?
 1|저는 은퇴 후에 대도시에서 사는 것을 선호합니다.|I prefer / living in a big city / after retiring.|저는 선호합니다 / 대도시에서 사는 것을 / 은퇴 후에
-2|왜냐하면 병원이나 문화센터 같은 편리한 시설이 많기 때문입니다.|That's because / there are many convenient facilities / like hospitals and cultural centers.|왜냐하면 ~이기 때문입니다 / 편리한 시설이 많이 있습니다 / 병원이나 문화센터 같은
-3|그래서 은퇴한 사람들이 더 쉽게 건강하고 활기차게 지낼 수 있습니다.|So, / retired people can stay / healthy and active / more easily.|그래서 / 은퇴한 사람들이 지낼 수 있습니다 / 건강하고 활기차게 / 더 쉽게
-4|2년 전에 저희 삼촌은 은퇴하시고 서울로 이사하셨습니다.|Two years ago, / my uncle retired / and moved to Seoul.|2년 전에 / 저희 삼촌은 은퇴하셨습니다 / 그리고 서울로 이사하셨습니다
-5|그는 매일 아침 스포츠센터에 수영하러 갑니다. 또한, 주말에는 문화센터에 갑니다.|He goes swimming / at a sports center / every morning. / Also, he goes to a cultural center / on weekends.|그는 수영하러 갑니다 / 스포츠센터에 / 매일 아침 / 또한, 문화센터에 갑니다 / 주말에는
-6|그 결과, 그는 건강하고 활기찬 삶을 살고 있습니다.|As a result, / he is living / a healthy and active life.|그 결과 / 그는 살고 있습니다 / 건강하고 활기찬 삶을
+2|왜냐하면 병원이나 스포츠센터 같은 편리한 시설이 많기 때문입니다.|That's because / there are many convenient facilities / such as hospitals and sports centers.|왜냐하면 ~이기 때문입니다 / 편리한 시설이 많이 있습니다 / 병원이나 스포츠센터 같은
+3|그래서 은퇴한 사람들이 더 편안하게 살 수 있습니다.|So, / retired people can live / more comfortably.|그래서 / 은퇴한 사람들이 살 수 있습니다 / 더 편안하게
+4|예를 들어, 약 2년 전에 저희 아버지는 은퇴하시고 서울로 이사하셨습니다.|For example, / about two years ago, / my father retired / and moved to Seoul.|예를 들어 / 약 2년 전에 / 저희 아버지는 은퇴하셨습니다 / 그리고 서울로 이사하셨습니다
+5|아버지는 매일 아침 스포츠센터에 수영하러 가시고, 필요할 때마다 병원에 가실 수 있습니다.|He goes swimming / at a sports center / every morning, / and he can visit a hospital / whenever he needs to.|그는 수영하러 갑니다 / 스포츠센터에 / 매일 아침 / 그리고 그는 병원에 갈 수 있습니다 / 필요할 때마다
+6|그 결과, 아버지는 건강하고 편안한 삶을 살고 계십니다.|As a result, / he is living / a healthy and comfortable life.|그 결과 / 그는 살고 있습니다 / 건강하고 편안한 삶을
 K|convenient facilities|편리한 시설
-K|stay healthy and active|건강하고 활기차게 지내다
+K|live more comfortably|더 편안하게 살다
 K|go swimming|수영하러 가다
+K|whenever he needs to|필요할 때마다
 # 5|쇼핑|과거와 현재의 쇼핑 시간 비교|과거와 현재의 비교
 Q|Do you agree or disagree that people spend less time shopping today compared to the past?|오늘날 사람들이 과거에 비해 쇼핑에 시간을 덜 쓴다는 의견에 동의하나요, 반대하나요?
 1|저는 오늘날 사람들이 과거보다 쇼핑에 시간을 덜 쓴다는 데 동의합니다.|I agree / that people spend less time shopping / today / compared to the past.|저는 동의합니다 / 사람들이 쇼핑에 시간을 덜 쓴다는 데 / 오늘날 / 과거에 비해

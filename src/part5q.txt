@@ -198,7 +198,7 @@ K|take a walk|산책을 하다
 K|relieve stress|스트레스를 해소하다
 # q17|주거|은퇴 후 거주지 선택|긍정적 사례
 Q|Some people prefer to live in a busy city after retiring from work, while others want to live in a quiet countryside town. Which do you prefer and why?|어떤 사람들은 은퇴 후 번화한 도시에서 살기를 선호하는 반면, 다른 사람들은 조용한 시골 마을에서 살기를 원합니다. 당신은 어느 것을 선호하며, 그 이유는 무엇인가요?
-I|번화한 도시|병원 같은 편리한 시설이 많음|삼촌이 은퇴 뒤 서울에서 건강하게 지냄
+I|번화한 도시|병원과 스포츠센터 같은 편리한 시설이 많음|아버지가 은퇴 뒤 서울에서 건강하고 편안하게 지내심
 1|저는 은퇴 후에 번화한 도시에서 사는 것을 선호합니다.|I prefer / living in a busy city / after retiring from work.|저는 선호합니다 / 번화한 도시에서 사는 것을 / 은퇴 후에
 =|4
 # q18|주거|현재 사회의 이웃 관계|과거와 현재의 비교
