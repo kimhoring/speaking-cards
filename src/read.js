@@ -93,7 +93,7 @@ function drawQz(){
     [h("div",{cls:"mid5"}, h("p",{cls:"phase"}, run.show ? `${right.size}곳 중 ${hit}곳을 맞혔어요` : cut ? `쉬어 읽을 곳 바로 앞 낱말을 누르세요 (${right.size}곳)` : `가장 힘줘 읽을 낱말을 누르세요 (${right.size}개)`),
       h("div",{cls:"qs",lang:"en"},tok), h("p",{cls:"ko small"},s.ko),
       run.show && h("div",{cls:"expr"}, h("p",{cls:"en5",lang:"en"},reading(s.en, s.r)), h("span",{},why(s, cut)), LEG()))],
-    h("div",{cls:"acts q"}, h("button",{cls:"btn s",onclick:() => speak(s.en,"en",null,.8)},"들어 보기"), run.show ? h("button",{cls:"btn p",onclick:next}, cut ? "강세 맞히기" : run.i+1 < run.sents.length ? "다음 문장" : "마치기") : h("button",{cls:"btn p",disabled:!run.pick.size,onclick:check},"확인")));
+    h("div",{cls:"acts q"}, h("button",{cls:"btn s",onclick:() => speak(s.en,"en",null,.8)},"들어 보기"), run.show ? h("button",{cls:"btn p",onclick:next}, cut ? "강세 맞히기" : run.i+1 < run.sents.length ? "다음 문장" : "마치기") : h("button",{cls:"btn p",onclick:check}, run.pick.size ? "확인" : "정답 보기")));
 }
 function why(s, cut){
   const ws = words(s.en);
