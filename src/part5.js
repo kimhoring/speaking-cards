@@ -137,6 +137,7 @@ function screen5(bar, body, acts, onTap){
   const paper = h("div",{cls:"paper run"+(onTap?" tap":""),onclick:e => { if (onTap && !e.target.closest("button,textarea,a")) onTap(); }}, body);
   const side = wide && run.mode in {ch:1,st:1,fl:1,rl:1} && !paper.querySelector(".mid5");
   app.replaceChildren(h("div",{cls:"study wrap"}, bar, !wide && run.q && h("div",{cls:"qbox"}, ask5(topic(run.id))), side ? h("div",{cls:"two5"}, side5(), paper) : paper, acts));
+  nameKeys();
   const cur = paper.querySelector(".cur"); if (cur) paper.scrollTop = Math.max(0, cur.offsetTop - paper.clientHeight*0.28);
   return paper;
 }
@@ -184,7 +185,7 @@ function drawSt(){
   if (!f) body = [h("p",{cls:"ko"},s.ko),
     run.hint >= 1 && h("div",{cls:"expr"}, h("span",{},STEP[i][1]), (s.k.length ? s.k.map(([x, m]) => h("span",{}, h("b",{},x), ` ${m}`)) : null), i !== 4 && h("b",{}, starter5(s.en))),
     run.hint >= 2 && h("p",{cls:"hint"},skeleton(s.en)),
-    wr && h("textarea",{id:"w5",cls:"wr",rows:"3",lang:"en",autocapitalize:"sentences",autocorrect:"off",spellcheck:"false",placeholder:"영어로 써 보세요","aria-label":"영작",value:run.typed,oninput:e => { run.typed = e.target.value; }})];
+    wr && h("textarea",{id:"w5",cls:"wr",rows:"3",lang:"en",autocapitalize:"sentences",autocorrect:"off",spellcheck:"false",placeholder:fine() ? "영어로 쓰고 Enter를 누르세요" : "영어로 써 보세요","aria-label":"영작",value:run.typed,oninput:e => { run.typed = e.target.value; }})];
   else {
     const d = wr && run.typed.trim() ? diff5(run.typed, s.en) : null;
     body = [h("p",{cls:"ko small"},s.ko), h("p",{cls:"en",lang:"en"}, d ? d.el : marked(s)),
@@ -202,6 +203,7 @@ function drawSt(){
     f ? h("div",{cls:"acts a"}, h("button",{cls:"gr b",onclick:() => g5("b")},ic("ox"),"다시"), h("button",{cls:"gr m",onclick:() => g5("m")},ic("tri"),"애매함"), h("button",{cls:"gr g",onclick:() => g5("g")},ic("o"),"바로 나옴"))
       : h("div",{cls:"acts q"}, h("button",{cls:"btn s",disabled:run.hint >= 2,onclick:() => { run.hint++; draw5(); }},"힌트"), h("button",{cls:"btn p",onclick:reveal}, wr ? "답 확인" : "영어 보기")),
     !f && !wr ? reveal : null);
+  const w = document.getElementById("w5"); if (w && fine()) { w.focus(); w.setSelectionRange(w.value.length, w.value.length); }
 }
 function starter5(en){ const m = en.match(/^(I (?:dis)?agree that|I prefer|I don't think|I think|That's because|So,|If my income[^,]*,|When I was[^,]*,|[A-Z][a-z]+(?: [a-z]+){0,3},)/); return m ? m[0] + " ~" : en.split(" ").slice(0,2).join(" ") + " ~"; }
 

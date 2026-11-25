@@ -284,7 +284,7 @@ u.miss{text-decoration:underline;text-decoration-color:var(--bad);text-decoratio
 .pane::-webkit-scrollbar{display:none}
 .pane+.pane{border-left:1px solid var(--line)}
 .pane.root>.head2{margin-left:0}.pane.root>.head2>.ib{display:none}
-.pane>.sheet,.pane>.start{isolation:isolate}
+.pane{isolation:isolate}
 .wide .row[aria-current="true"]{background:linear-gradient(90deg,var(--mark) 0 4px,transparent 4px);padding-left:14px;color:var(--ink)}
 .wide .pane .deck{min-height:0}
 .wide .pane #earcard{flex:1;min-height:260px}
@@ -306,7 +306,7 @@ u.miss{text-decoration:underline;text-decoration-color:var(--bad);text-decoratio
 .rings i{width:13px;height:13px;border-radius:50%;background:var(--hole);box-shadow:inset 0 1px 2px rgba(60,42,18,.28)}
 .wait{color:var(--sub);font-size:17px;text-align:center}
 .two5{flex:1;min-height:0;display:grid;grid-template-columns:minmax(260px,5fr) 8fr;grid-template-rows:minmax(0,1fr);gap:30px}
-.two5 aside{overflow-y:auto;display:flex;flex-direction:column;gap:22px;padding-top:6px;scrollbar-width:none}
+.two5 aside{overflow-y:auto;display:flex;flex-direction:column;gap:22px;padding:6px 12px 0 0;scrollbar-width:none}
 .ol5{display:flex;flex-direction:column;gap:2px;border-top:1px solid var(--line);padding-top:14px}
 .ol5 p{color:var(--sub);padding:4px 0 4px 14px;border-left:3px solid transparent}
 .ol5 p[aria-current]{color:var(--ink);border-color:var(--pri)}
@@ -321,5 +321,22 @@ u.miss{text-decoration:underline;text-decoration-color:var(--bad);text-decoratio
 .wide .toast{bottom:40px}
 @media (max-height:640px){.two5 .ol5{display:none}}
 @media (min-width:1100px){.wide .pane,.wide nav{zoom:1.12}}
+@media (min-width:1700px){.wide #app{max-width:1620px}.wide .pane,.wide nav{zoom:1.22}.wide .study{max-width:1480px}}
 @media (max-height:600px){:where(html:not(.wide)) .ko{font-size:21px}:where(html:not(.wide)) .en{font-size:22px}.face .bd{padding-block:0 12px}.gr,.acts .btn{min-height:62px}.study{gap:10px}}
+/* 노트북: 마우스와 자판 */
+.fine main,.fine .pane,.fine .paper.run,.fine .two5 aside,.fine .face .bd{scrollbar-width:thin;scrollbar-color:var(--box) transparent}
+.fine nav button:hover,.fine .seg button:hover,.fine .ib:not(:disabled):hover,.fine .pk:hover{color:var(--ink)}
+.fine .row:not(:disabled):hover .g,.fine .boxes button:hover .cap{text-decoration:underline;text-decoration-color:var(--mark);text-decoration-thickness:3px;text-underline-offset:5px}
+.fine .row:not(:disabled):hover .x5{text-decoration:none;display:inline-block;width:100%}
+.fine .btn:not(:disabled):hover,.fine .gr:hover,.fine .wb:hover,.fine .ctl .play:hover{filter:brightness(.96)}
+.fine .qw:not(:disabled):hover{background:var(--under)}.fine .qw.sel:not(:disabled):hover{background:var(--mark)}
+.fine .paper .en5[lang]:not(.q){cursor:pointer}
+kbd,.fine .acts [data-key]::after{font:400 13px/1 var(--ui);border:1px solid currentColor;border-radius:5px;padding:4px 7px}
+.fine .acts [data-key]::after{content:attr(data-key);opacity:.6}
+.fine .acts .gr[data-key]{position:relative}
+.fine .acts .gr[data-key]::after{position:absolute;right:12px;top:12px}
+.keys>div{padding-bottom:14px}
+.keys p{margin-bottom:6px}
+.keys dl{margin:0;display:grid;grid-template-columns:112px minmax(0,1fr);gap:8px 12px;align-items:center}
+.keys dt{display:flex;gap:4px}.keys dd{margin:0;color:var(--sub)}
 @media (prefers-reduced-motion:reduce){*{transition:none!important}}

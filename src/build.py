@@ -29,6 +29,7 @@ n = int(os.environ.get("BUILD_TIME") or time.time())
 page = rd(os.path.join(H, "app.html")).replace("/*__CSS__*/", rd(os.path.join(H, "style.css")))
 page = page.replace("/*__PART5__*/", rd(os.path.join(H, "part5.js"))).replace("/*__P5DATA__*/[]", json.dumps(build_part5.main(), ensure_ascii=False, separators=(",", ":")))
 page = page.replace("/*__READ__*/", rd(os.path.join(H, "read.js"))).replace("/*__SY__*/{}", json.dumps({**build_read.USED, **{w: build_read.SY[w][:2] for w in ("information", "interesting") if w in build_read.SY}}, ensure_ascii=False, separators=(",", ":")))
+page = page.replace("/*__KEYS__*/", rd(os.path.join(H, "keys.js")))
 page = page.replace("/*__DATA__*/[]", rd(os.path.join(H, "cards.json"))).replace("/*__BUILD__*/0", str(n))
 GF = '<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gowun+Dodum&family=Nunito:wght@400;700&display=swap">'
 LF = (
@@ -67,7 +68,7 @@ wr(os.path.join(A, "version.json"), json.dumps({"n": n, "min": MIN_SHELL, "files
 v = hashlib.sha1(full.encode()).hexdigest()[:8]
 SW = """const V = "mn-%s";
 const F = %s;
-self.addEventListener("install", e => e.waitUntil(caches.open(V).then(c => c.addAll(F)).then(() => self.skipWaiting())));
+self.addEventListener("install", e => e.waitUntil(caches.open(V).then(c => c.addAll(F.map(u => new Request(u, {cache: "reload"})))).then(() => self.skipWaiting())));
 self.addEventListener("activate", e => e.waitUntil(caches.keys().then(k => Promise.all(k.filter(x => x !== V).map(x => caches.delete(x)))).then(() => self.clients.claim())));
 self.addEventListener("fetch", e => {
   if (e.request.method !== "GET" || e.request.url.includes("version.json")) return;

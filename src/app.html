@@ -280,7 +280,7 @@ function renderStudy(){
   } else body = [h("p",{cls:"ko small"},c.ko), h("p",{cls:"en",lang:"en"},marked(c)), expr()];
   const two = wide && [
     f ? [d === "en" ? h("p",{cls:"en",lang:"en"},marked(c)) : h("p",{cls:"ko"},c.ko)] : body,
-    f ? [d === "en" ? h("p",{cls:"ko"},c.ko) : h("p",{cls:"en",lang:"en"},marked(c)), expr()] : [h("p",{cls:"wait"},"소리 내어 말한 다음 눌러서 확인하세요")]];
+    f ? [d === "en" ? h("p",{cls:"ko"},c.ko) : h("p",{cls:"en",lang:"en"},marked(c)), expr()] : [h("p",{cls:"wait"},fine() ? "소리 내어 말한 다음 Space를 눌러 확인하세요" : "소리 내어 말한 다음 눌러서 확인하세요")]];
   const page = (hd, bd) => h("div",{cls:"pg"}, h("div",{cls:"hd"},hd), h("div",{cls:"bd"}, h("div",{},bd)));
   const face = h("div",{cls:"face"+(wide?" spread":""),tabindex:"0",role:"button","aria-label":f?"정답":"눌러서 정답 보기"},
     two ? [page([h("span",{cls:"lab"}, c.sec.name), !f && d !== "ko" && sndBtn(c)], two[0]), h("div",{cls:"rings"},h("i",{}),h("i",{}),h("i",{}),h("i",{})), page([h("span",{cls:"lab"}), f && sndBtn(c), starBtn(c)], two[1])]
@@ -295,6 +295,7 @@ function renderStudy(){
   app.replaceChildren(h("div",{cls:"study wrap"},
     h("div",{cls:"sbar"}, h("button",{cls:"ib","aria-label":"그만하기",onclick:quit},ic("x")), h("span",{cls:"num"},`${left}장 남음`), h("button",{cls:"ib","aria-label":"되돌리기",disabled:!sess.undo.length,onclick:undo},ic("undo"))),
     h("div",{cls:"stack"},face), acts));
+  nameKeys();
   if (timed && !sess.late && !sess.noTimer) {
     const ms = S.set.sec*1000;
     if (bar.animate) bar.animate([{transform:"scaleX(1)"},{transform:"scaleX(0)"}],{duration:ms,fill:"forwards"});
@@ -323,11 +324,6 @@ function swipe(el){
   };
   el.addEventListener("pointerup", end(false)); el.addEventListener("pointercancel", end(true)); el.addEventListener("pointerleave", end(true));
 }
-addEventListener("keydown", e => {
-  if (!sess || e.target.closest("input,textarea,select") || sess.i >= sess.q.length) return;
-  if ((e.key === " " || e.key === "Enter") && !sess.flip && !e.target.closest("button")) { e.preventDefault(); flip(); }
-  else if (sess.flip && "123".includes(e.key) && e.key.length === 1) grade(["b","m","g"][+e.key-1]);
-});
 function renderDone(){
   const r = sess.res, ms = sess.missed, n = r.b+r.m+r.g, p = plan();
   const more = p.due.length + p.fresh.length;
@@ -339,11 +335,14 @@ function renderDone(){
       ms.length ? h("button",{cls:"btn s",onclick:() => begin(shuffle(ms),"막힌 문장")},`막힌 ${ms.length}문장 다시`) : null,
       more ? h("button",{cls:"btn s",onclick:() => begin(mixQueue(p.due,p.fresh),"오늘 학습")},`오늘 남은 ${more}장`) : null,
       h("button",{cls:"btn p",onclick:quit},"마치기")))));
+  nameKeys();
 }
 
 /*__PART5__*/
 
 /*__READ__*/
+
+/*__KEYS__*/
 
 /* ───────── 듣기 ───────── */
 const L = {src:"today", list:[], i:0, on:false, ph:"", t:0, wl:null};
@@ -394,7 +393,7 @@ function viewEar(){
   if (!L.list.length && L.src === "today") L.list = srcCards("today");
   return h("div",{cls:"lis"},
     h("div",{cls:"top"}, h("h1",{},"듣고 말하기")),
-    !TTS && !N && h("p",{cls:"warn"},"이 화면에서는 소리를 낼 수 없습니다. 휴대폰이나 태블릿의 Chrome 또는 Safari에서 열어 주세요."),
+    !TTS && !N && h("p",{cls:"warn"},"이 화면에서는 소리를 낼 수 없습니다. Chrome, Edge, Safari에서 열어 주세요."),
     h("select",{id:"src","aria-label":"들을 문장",onchange:e => { loadSrc(e.target.value); render(); }},
       [["today","오늘 볼 문장"],["weak","자주 막히는 문장"],["star","별표한 문장"],["all","전체"]].map(([v,t]) => h("option",{value:v},t)),
       h("optgroup",{label:"파트 5 기본 답안"}, [["p5","기본 답안 모두"], ...P5.filter(t => t.g === "base").map(t => ["p5-"+t.id, t.name])].map(([v,t]) => h("option",{value:v},t))),
@@ -456,9 +455,10 @@ function viewLog(){
       h("div",{cls:"opt"},h("span",{},"발음 속도"),seg([[.75,"느리게"],[.95,"보통"],[1.15,"빠르게"]],S.set.rate,v => { setOpt("rate",v); speak("I can get to my destination quickly.","en"); },"발음 속도")),
       enVoices().length > 1 && h("div",{cls:"opt"},h("label",{for:"voice"},"영어 목소리"),h("select",{id:"voice",onchange:e => { setOpt("voice",e.target.value); speak("I can get to my destination quickly.","en"); }},h("option",{value:""},"자동"),enVoices().map(v => { const o = h("option",{value:v.voiceURI},`${v.name.replace(/^Microsoft |^Google /,"")} (${v.lang})`); if (v.voiceURI === S.set.voice) o.selected = true; return o; })))),
     h("section",{}, h("h2",{},"외운 정도를 정하는 방식"), h("p",{cls:"note"},"‘바로 나옴’을 누를 때마다 다음 복습이 3일, 7일, 14일, 30일, 60일 뒤로 늦춰집니다. 7일 뒤 복습까지 올라간 문장을 ‘외움’으로 셉니다. ‘다시’를 누르면 처음부터 쌓습니다.")),
-    h("section",{}, h("h2",{},"진도 옮기기"), h("p",{cls:"note",style:"margin-bottom:10px"}, cloud ? "Claude 계정에 자동으로 저장되고 있습니다. 다른 기기에서 같은 계정으로 열면 이어집니다." : N ? "진도는 이 기기에 저장됩니다. 다른 휴대폰이나 태블릿, 웹 버전에서 공부했다면 그쪽에서 코드를 복사해 여기에 붙여 넣으세요." : "진도는 이 기기에 저장됩니다. 기기를 바꿀 때는 코드를 복사해 옮기세요."), io,
+    h("section",{}, h("h2",{},"진도 옮기기"), h("p",{cls:"note",style:"margin-bottom:10px"}, cloud ? "Claude 계정에 자동으로 저장되고 있습니다. 다른 기기에서 같은 계정으로 열면 이어집니다." : N ? "진도는 이 기기에 저장됩니다. 다른 휴대폰이나 태블릿, 웹 버전에서 공부했다면 그쪽에서 코드를 복사해 여기에 붙여 넣으세요." : "진도는 이 브라우저에 저장됩니다. 휴대폰 앱과 이으려면 한쪽에서 코드를 복사해 다른 쪽에 붙여 넣으세요. 양쪽 진도가 합쳐집니다."), io,
       h("div",{cls:"pair",style:"margin-top:10px"}, h("button",{cls:"btn s sm",onclick:async () => { const t = JSON.stringify(S); io.value = t; try { if (N) N.copy(t); else await navigator.clipboard.writeText(t); toast("백업 코드를 복사했어요"); } catch(e){ io.select(); toast("코드를 길게 눌러 복사하세요"); } }},"코드 복사"),
         h("button",{cls:"btn s sm",onclick:() => { try { const o = JSON.parse(io.value); if (!valid(o)) throw 0; S = merge(S,o); save(); render(); toast("진도를 합쳤어요"); } catch(e){ toast("백업 코드가 아닙니다. 전체를 복사했는지 확인하세요."); } }},"코드 불러오기"))),
+    fine() && keyHelp(),
     N && h("section",{}, h("h2",{},"업데이트"), h("p",{cls:"note",style:"margin-bottom:10px"},"앱을 켤 때마다 새 문장과 화면을 알아서 받아 옵니다."), h("button",{cls:"btn s sm",style:"width:100%",onclick:() => { toast("확인하는 중이에요"); N.check(); }},"지금 확인")),
     BUILD ? h("p",{cls:"note num"},`내용 버전 ${verText()} · ${TOTAL}문장`) : null,
     h("section",{}, h("button",{cls:"btn s sm",style:"width:100%;color:var(--bad)",onclick:() => { if (Date.now()-armed > 4000) { armed = Date.now(); toast("한 번 더 누르면 모든 진도가 지워집니다"); return; } const set = S.set; S = blank(); S.set = set; S.r = Date.now(); armed = 0; save(); render(); toast("진도를 지웠어요"); }},"진도 모두 지우기"))];
@@ -466,7 +466,7 @@ function viewLog(){
 
 /* ───────── 앱: 내부 업데이트·뒤로 가기 ───────── */
 let patch = false;
-function applyPatch(){ if (patch && N && !sess && !run && !L.on && !(p5 && p5.v === "mine")) { patch = false; toast("새 내용으로 바꾸는 중이에요"); setTimeout(() => N.apply(), 900); } }
+function applyPatch(){ if (patch && !sess && !run && !L.on && !(p5 && p5.v === "mine")) { patch = false; toast("새 내용으로 바꾸는 중이에요"); setTimeout(() => N ? N.apply() : location.reload(), 900); } }
 window.__upd = st => {
   if (st === "ready") { patch = true; applyPatch(); }
   else if (st === "latest") toast("이미 최신 내용이에요");
@@ -484,12 +484,17 @@ window.__back = () => {
 if (location.hash === "#study") { try { history.replaceState(null,"",location.pathname+location.search); } catch(e){} }
 L.list = srcCards("today");
 fit();
+pointerLook();
 applyLook();
 // 설치한 웹 앱은 작은 화면에서만 세로로 고정한다
 if (window.__PWA && !N && Math.min(screen.width, screen.height) < 500) try { screen.orientation.lock("portrait").catch(() => {}); } catch(e){}
 render();
 cloudInit();
 if (!window.claude && navigator.storage && navigator.storage.persist) navigator.storage.persist().catch(() => {});
-if (window.__PWA && !N && navigator.serviceWorker) navigator.serviceWorker.register("sw.js").catch(() => {});
+if (window.__PWA && !N && navigator.serviceWorker) {
+  // 새 내용이 올라오면 공부 중이 아닐 때 화면을 새로 연다
+  if (navigator.serviceWorker.controller) navigator.serviceWorker.addEventListener("controllerchange", () => { patch = true; applyPatch(); });
+  navigator.serviceWorker.register("sw.js").then(r => document.addEventListener("visibilitychange", () => { if (!document.hidden) r.update().catch(() => {}); })).catch(() => {});
+}
 if (N) N.ready();
 </script>
