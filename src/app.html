@@ -88,8 +88,10 @@ document.addEventListener("visibilitychange", () => { if (document.hidden) { cle
 const TTS = N ? null : "speechSynthesis" in window && "SpeechSynthesisUtterance" in window ? window.speechSynthesis : null;
 let voices = [];
 function readVoices(){ if (TTS) try { voices = TTS.getVoices() || []; } catch(e){} }
-readVoices(); if (TTS) try { TTS.addEventListener("voiceschanged", readVoices); } catch(e){}
+readVoices(); if (TTS) try { TTS.addEventListener("voiceschanged", () => { const was = noEn(); readVoices(); if (was !== noEn() && !sess && !run && !L.on && !(p5 && p5.v === "mine")) render(); }); } catch(e){}
 const enVoices = () => voices.filter(v => /^en[-_]/i.test(v.lang));
+const noEn = () => !!TTS && fine() && voices.length > 0 && !enVoices().length;   // 한국어 윈도우의 일부 브라우저
+const noEnNote = () => noEn() && h("p",{cls:"warn"},"이 브라우저에는 영어 목소리가 없어 발음이 어색하거나 들리지 않을 수 있어요. 같은 주소를 Edge나 Chrome으로 열어 주세요.");
 function pick(lang){
   if (lang === "en") { const L2 = enVoices(); return L2.find(v => v.voiceURI === S.set.voice) || L2.find(v => /^en[-_]US/i.test(v.lang) && /google|natural|siri|samantha|aria|jenny/i.test(v.name)) || L2.find(v => /^en[-_]US/i.test(v.lang)) || L2[0]; }
   return voices.find(v => /^ko/i.test(v.lang));
@@ -205,7 +207,7 @@ function viewHome(){
   const run = () => begin(queue,name);
   return [
     h("div",{cls:"hello"}, h("p",{cls:"num"},`${dt.getMonth()+1}월 ${dt.getDate()}일 ${"일월화수목금토"[dt.getDay()]}요일${streak() > 1 ? ` · ${streak()}일째` : ""}`),
-      h("h1",{},head), h("p",{},n ? `${min}분쯤 걸려요` : p.rest ? "더 하고 싶으면 새 문장 10개를 미리 볼 수 있어요" : "복습할 때가 되면 여기에 다시 나타나요")),
+      h("h1",{},head), h("p",{},n ? `${min}분쯤 걸려요` : p.rest ? "더 하고 싶으면 새 문장 10개를 미리 볼 수 있어요" : "복습할 때가 되면 여기에 다시 나타나요"), noEnNote()),
     c && h("div",{cls:"start"}, h("button",{cls:"sheet deck",onclick:run}, holes(), h("div",{cls:"in"}, h("span",{cls:"lab"},c.sec.name), h("span",{cls:S.set.dir === "ko" ? "ko" : "en"},S.set.dir === "ko" ? c.ko : S.set.dir === "en" ? c.en : "잘 듣고 뜻을 떠올려 보세요"))),
       h("button",{cls:"btn p",id:"start",onclick:run}, n ? (today ? "이어서 하기" : "시작하기") : "10개 더 하기")),
     h("section",{}, h("h2",{},"카드 앞면"), seg([["ko","한국어"],["en","영어"],["ear","소리만"]], S.set.dir, v => setOpt("dir",v), "카드 앞면")),
@@ -394,6 +396,7 @@ function viewEar(){
   return h("div",{cls:"lis"},
     h("div",{cls:"top"}, h("h1",{},"듣고 말하기")),
     !TTS && !N && h("p",{cls:"warn"},"이 화면에서는 소리를 낼 수 없습니다. Chrome, Edge, Safari에서 열어 주세요."),
+    noEnNote(),
     h("select",{id:"src","aria-label":"들을 문장",onchange:e => { loadSrc(e.target.value); render(); }},
       [["today","오늘 볼 문장"],["weak","자주 막히는 문장"],["star","별표한 문장"],["all","전체"]].map(([v,t]) => h("option",{value:v},t)),
       h("optgroup",{label:"파트 5 기본 답안"}, [["p5","기본 답안 모두"], ...P5.filter(t => t.g === "base").map(t => ["p5-"+t.id, t.name])].map(([v,t]) => h("option",{value:v},t))),

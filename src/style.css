@@ -48,7 +48,7 @@ svg.i.on{fill:currentColor}
 .top span{color:var(--sub);font-size:15px}
 .hello{display:flex;flex-direction:column;gap:2px}
 .hello h1{font-size:25px;line-height:1.45;text-wrap:balance}
-.hello p{color:var(--sub);font-size:15px}
+.hello p{color:var(--sub);font-size:15px}.hello .warn{color:var(--mid);margin-top:12px}
 .btn{display:flex;align-items:center;justify-content:center;gap:8px;min-height:54px;padding:8px 18px;border-radius:10px;font-size:17px}
 .btn.p{background:var(--pri);color:var(--on-pri)}
 .btn.s{background:var(--sunk);color:var(--ink)}
