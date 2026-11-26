@@ -57,12 +57,12 @@ K|in just a few minutes|단 몇 분 만에
 # 6|여행과 휴가|가이드 투어 vs. 자유 여행|부정적 사례
 Q|When visiting a new destination, do you prefer joining a guided tour or traveling independently? Why?|새로운 여행지를 방문할 때 가이드 투어에 참여하는 것과 자유 여행 중 어느 쪽을 선호하나요? 그 이유는 무엇인가요?
 1|저는 새로운 장소를 방문할 때 혼자 자유롭게 여행하는 것을 선호합니다.|I prefer / traveling on my own / when I visit a new place.|저는 선호합니다 / 혼자 자유롭게 여행하는 것을 / 새로운 장소를 방문할 때
-2|왜냐하면 가고 싶은 곳은 어디든 갈 수 있고, 서두르지 않아도 되기 때문입니다.|That's because / I can go / anywhere I want, / and I don't have to hurry.|왜냐하면 ~이기 때문입니다 / 저는 갈 수 있습니다 / 제가 원하는 어디든 / 그리고 서두르지 않아도 됩니다
+2|왜냐하면 제가 원하는 곳은 어디든 갈 수 있기 때문입니다.|That's because / I can go / anywhere I want.|왜냐하면 ~이기 때문입니다 / 저는 갈 수 있습니다 / 제가 원하는 곳은 어디든
 3|그래서 더 편안하게 여행할 수 있습니다.|So, / I can travel / more comfortably.|그래서 / 저는 여행할 수 있습니다 / 더 편안하게
-4|예를 들어, 약 2년 전에 저는 파리에서 가이드 투어를 했습니다.|For example, / about two years ago, / I took a guided tour / in Paris.|예를 들어 / 약 2년 전에 / 저는 가이드 투어를 했습니다 / 파리에서
-5|우리는 하루에 다섯 곳을 방문해야 해서 항상 서둘러야 했습니다. 또한, 저는 사진을 많이 찍지 못했습니다.|We had to visit five places / in one day, / so we always had to hurry. / Also, I couldn't take / many pictures.|우리는 다섯 곳을 방문해야 했습니다 / 하루에 / 그래서 항상 서둘러야 했습니다 / 또한, 저는 찍지 못했습니다 / 사진을 많이
-6|그 결과, 저는 매우 피곤했고 여행을 즐기지 못했습니다.|As a result, / I was very tired / and could not enjoy the trip.|그 결과 / 저는 매우 피곤했습니다 / 그리고 여행을 즐기지 못했습니다
+4|2년 전에 저는 파리에서 가이드 투어를 했습니다.|Two years ago, / I took a guided tour / in Paris.|2년 전에 / 저는 가이드 투어를 했습니다 / 파리에서
+5|우리는 하루 종일 가이드를 따라다녀야 했습니다. 그래서 원하는 곳은 어디에도 갈 수 없었습니다.|We had to follow the guide / all day. / So, we could not go / anywhere we wanted.|우리는 가이드를 따라다녀야 했습니다 / 하루 종일 / 그래서 우리는 갈 수 없었습니다 / 원하는 곳 어디에도
+6|그 결과, 저는 항상 피곤했고 여행을 즐기지 못했습니다.|As a result, / I was always tired / and could not enjoy the trip.|그 결과 / 저는 항상 피곤했습니다 / 그리고 여행을 즐기지 못했습니다
 K|travel on my own|혼자 자유롭게 여행하다
 K|anywhere I want|원하는 곳은 어디든
-K|don't have to hurry|서두르지 않아도 되다
 K|take a guided tour|가이드 투어를 하다
+K|follow the guide|가이드를 따라다니다
