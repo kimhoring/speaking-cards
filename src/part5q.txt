@@ -279,3 +279,79 @@ I|현지 주민과 대화|현지 음식과 전통 문화를 잘 앎|태국에서
 K|traditional culture|전통 문화
 K|go on a trip|여행을 가다
 K|local foods|현지 음식
+# q25|교육|학교 내 전자 기기 사용 금지|부정적 사례
+Q|Do you agree or disagree with the following statement?|다음 의견에 동의하나요, 아니면 반대하나요?
+S|Schools should prohibit students from using electronic devices, such as smartphones or laptops, at school.|학교는 학생들이 학교에서 스마트폰이나 노트북 같은 전자 기기를 사용하지 못하게 해야 한다.
+I|동의|수업 중 스마트폰을 쓰면 공부에 집중하지 못함|고등학교 때 수업 중 스마트폰을 쓰다가 성적이 떨어짐
+1|저는 학교가 학생들의 전자 기기 사용을 금지해야 한다는 데 동의합니다.|I agree / that schools should prohibit students / from using electronic devices / at school.|저는 동의합니다 / 학교가 학생들을 금지해야 한다는 데 / 전자 기기를 사용하는 것을 / 학교에서
+2|왜냐하면 수업 중에 스마트폰을 쓰면 학생들이 공부에 집중할 수 없기 때문입니다.|That's because / students can't focus on their studies / if they use smartphones in class.|왜냐하면 ~이기 때문입니다 / 학생들이 공부에 집중할 수 없습니다 / 수업 중에 스마트폰을 쓰면
+3|그래서 전자 기기를 금지하면 좋은 공부 습관을 기르는 데 도움이 됩니다.|So, / banning electronic devices / helps them / build good study habits.|그래서 / 전자 기기를 금지하는 것은 / 그들을 돕습니다 / 좋은 공부 습관을 기르도록
+4|고등학교 때 저는 수업 중에 스마트폰을 자주 썼습니다.|When I was in high school, / I often used my smartphone / in class.|고등학교 때 / 저는 스마트폰을 자주 썼습니다 / 수업 중에
+5|저는 게임을 하고 친구들과 채팅을 했습니다. 그래서 선생님 말씀을 들을 수 없었습니다.|I played games / and chatted with my friends. / So, I could not listen / to my teacher.|저는 게임을 했습니다 / 그리고 친구들과 채팅을 했습니다 / 그래서 들을 수 없었습니다 / 선생님 말씀을
+6|그 결과, 저는 공부에 집중하지 못했고 성적이 많이 떨어졌습니다.|As a result, / I could not focus on my studies, / and my grades dropped a lot.|그 결과 / 저는 공부에 집중하지 못했습니다 / 그리고 성적이 많이 떨어졌습니다
+K|electronic devices|전자 기기
+K|focus on their studies|공부에 집중하다
+K|grades dropped|성적이 떨어졌다
+# q26|인터넷과 기술|인터넷과 젊은 세대의 관심사|과거와 현재의 비교
+Q|Do you agree or disagree with the following statement?|다음 의견에 동의하나요, 아니면 반대하나요?
+S|The internet has made young people interested in a wider range of topics than before.|인터넷 덕분에 젊은 사람들이 예전보다 더 다양한 주제에 관심을 갖게 되었다.
+I|동의|인터넷에서 무엇이든 쉽게 정보를 찾음|과거에는 책과 신문으로만 배움, 지금은 여러 주제의 영상을 봄
+1|저는 인터넷 덕분에 젊은 사람들이 예전보다 더 다양한 주제에 관심을 갖게 되었다는 데 동의합니다.|I agree / that the internet has made young people interested / in a wider range of topics / than before.|저는 동의합니다 / 인터넷이 젊은 사람들이 관심을 갖게 만들었다는 데 / 더 다양한 주제에 / 예전보다
+2|왜냐하면 온라인에서 무엇이든 쉽게 정보를 찾을 수 있기 때문입니다.|That's because / they can easily find information / about anything online.|왜냐하면 ~이기 때문입니다 / 그들은 쉽게 정보를 찾을 수 있습니다 / 무엇이든 온라인에서
+3|그래서 여러 가지 다양한 주제에 대해 배울 수 있습니다.|So, / they can learn / about many different topics.|그래서 / 그들은 배울 수 있습니다 / 여러 가지 다양한 주제에 대해
+4|과거에는 사람들이 정보를 얻으려면 책이나 신문을 읽어야 했습니다.|In the past, / people had to read books or newspapers / to get information.|과거에는 / 사람들이 책이나 신문을 읽어야 했습니다 / 정보를 얻으려면
+5|그래서 몇 가지 주제만 배울 수 있었습니다. 하지만 요즘에는 젊은 사람들이 여러 주제의 영상을 봅니다.|So, they could only learn / about a few topics. / However, these days, / young people watch videos / about many topics.|그래서 그들은 배울 수 있을 뿐이었습니다 / 몇 가지 주제에 대해서만 / 하지만 요즘에는 / 젊은 사람들이 영상을 봅니다 / 여러 주제에 대한
+6|그 결과, 그들은 예전보다 더 다양한 주제에 관심이 있습니다.|As a result, / they are interested / in a wider range of topics / than before.|그 결과 / 그들은 관심이 있습니다 / 더 다양한 주제에 / 예전보다
+K|a wider range of topics|더 다양한 주제
+K|find information|정보를 찾다
+K|many different topics|여러 가지 다양한 주제
+# q27|교육|학생들의 환경 교육 방법|긍정적 사례
+Q|Which of the following do you think is a more effective way to educate students about the environment?|다음 중 학생들에게 환경에 대해 교육하는 더 효과적인 방법은 무엇이라고 생각하나요?
+O|Watching videos|영상 보기
+O|Reading news articles|뉴스 기사 읽기
+I|영상 보기|더 재미있고 이해하기 쉬움|남동생이 수업에서 플라스틱 영상을 보고 플라스틱을 덜 쓰게 됨
+1|저는 영상을 보는 것이 학생들에게 환경에 대해 교육하는 더 효과적인 방법이라고 생각합니다.|I think / watching videos / is a more effective way / to educate students about the environment.|저는 생각합니다 / 영상을 보는 것이 / 더 효과적인 방법이라고 / 학생들에게 환경에 대해 교육하는
+2|왜냐하면 영상이 더 재미있고 이해하기 쉽기 때문입니다.|That's because / videos are more interesting / and easier to understand.|왜냐하면 ~이기 때문입니다 / 영상이 더 재미있습니다 / 그리고 이해하기 더 쉽습니다
+3|그래서 학생들이 배운 내용을 더 쉽게 기억할 수 있습니다.|So, / students can remember / what they learned / more easily.|그래서 / 학생들이 기억할 수 있습니다 / 배운 것을 / 더 쉽게
+4|작년에 제 남동생은 수업 시간에 플라스틱 쓰레기에 관한 영상을 봤습니다.|Last year, / my younger brother watched a video / about plastic waste / in class.|작년에 / 제 남동생은 영상을 봤습니다 / 플라스틱 쓰레기에 관한 / 수업 시간에
+5|그는 바다 동물들이 비닐봉지를 먹는 것을 봤습니다. 그래서 그는 매우 놀랐습니다.|He saw sea animals / eating plastic bags. / So, he was very surprised.|그는 바다 동물들을 봤습니다 / 비닐봉지를 먹는 것을 / 그래서 그는 매우 놀랐습니다
+6|그 결과, 그는 일상생활에서 플라스틱을 덜 쓰기 시작했습니다.|As a result, / he started to use less plastic / in his daily life.|그 결과 / 그는 플라스틱을 덜 쓰기 시작했습니다 / 일상생활에서
+K|educate students about the environment|학생들에게 환경에 대해 교육하다
+K|easier to understand|이해하기 더 쉬운
+K|use less plastic|플라스틱을 덜 쓰다
+# q28|쇼핑|광고에 대한 신뢰 변화|과거와 현재의 비교
+Q|Do you agree that people trust advertisements less today than they did in the past?|오늘날 사람들이 과거보다 광고를 덜 믿는다는 데 동의하나요?
+I|동의|실제 고객의 후기를 쉽게 읽음|과거에는 TV 광고만 믿고 샀음, 지금은 온라인 후기를 먼저 읽음
+1|저는 오늘날 사람들이 과거보다 광고를 덜 믿는다는 데 동의합니다.|I agree / that people trust advertisements less today / than they did in the past.|저는 동의합니다 / 오늘날 사람들이 광고를 덜 믿는다는 데 / 과거보다
+2|왜냐하면 온라인에서 실제 고객의 후기를 쉽게 읽을 수 있기 때문입니다.|That's because / they can easily read reviews / from real customers / online.|왜냐하면 ~이기 때문입니다 / 그들은 후기를 쉽게 읽을 수 있습니다 / 실제 고객들의 / 온라인에서
+3|그래서 광고가 사실인지 쉽게 확인할 수 있습니다.|So, / they can easily check / if advertisements are true.|그래서 / 그들은 쉽게 확인할 수 있습니다 / 광고가 사실인지
+4|과거에는 사람들이 물건을 살 때 TV 광고를 믿어야 했습니다.|In the past, / people had to trust TV advertisements / when they bought products.|과거에는 / 사람들이 TV 광고를 믿어야 했습니다 / 물건을 살 때
+5|그래서 그들은 자주 나쁜 물건을 샀습니다. 하지만 요즘에는 사람들이 무언가를 사기 전에 온라인 후기를 읽습니다.|So, they often bought bad products. / However, these days, / people read online reviews / before buying something.|그래서 그들은 자주 나쁜 물건을 샀습니다 / 하지만 요즘에는 / 사람들이 온라인 후기를 읽습니다 / 무언가를 사기 전에
+6|그 결과, 그들은 예전보다 광고를 덜 믿습니다.|As a result, / they trust advertisements less / than before.|그 결과 / 그들은 광고를 덜 믿습니다 / 예전보다
+K|trust advertisements|광고를 믿다
+K|real customers|실제 고객
+K|online reviews|온라인 후기
+# q29|직장 생활|스타트업 vs 오래된 회사|긍정적 사례
+Q|If the salary were the same, would you prefer to work for a startup or a company that has been in operation for a long time?|급여가 같다면, 스타트업과 오랫동안 운영되어 온 회사 중 어느 곳에서 일하고 싶나요?
+I|오래된 회사|신입 사원 교육 제도가 잘 되어 있음|친구가 오래된 회사에서 교육을 받고 업무에 빠르게 적응함
+1|저는 오랫동안 운영되어 온 회사에서 일하는 것을 선호합니다.|I would prefer to work / for a company / that has been in operation / for a long time.|저는 일하는 것을 선호합니다 / 회사에서 / 운영되어 온 / 오랫동안
+2|왜냐하면 그런 회사는 신입 사원을 위한 좋은 교육 제도가 있기 때문입니다.|That's because / it has a good training system / for new employees.|왜냐하면 ~이기 때문입니다 / 그 회사는 좋은 교육 제도가 있습니다 / 신입 사원을 위한
+3|그래서 신입 사원들이 일을 더 쉽게 배울 수 있습니다.|So, / new employees can learn their work / more easily.|그래서 / 신입 사원들이 일을 배울 수 있습니다 / 더 쉽게
+4|작년에 제 친구는 역사가 오래된 큰 회사에서 일하기 시작했습니다.|Last year, / my friend started working / at a large company / with a long history.|작년에 / 제 친구는 일하기 시작했습니다 / 큰 회사에서 / 역사가 오래된
+5|그는 석 달 동안 교육 과정을 들었습니다. 또한, 경험 많은 동료들에게 배웠습니다.|He took training courses / for three months. / Also, he learned / from experienced coworkers.|그는 교육 과정을 들었습니다 / 석 달 동안 / 또한, 그는 배웠습니다 / 경험 많은 동료들에게
+6|그 결과, 그는 업무에 빠르게 적응할 수 있었습니다.|As a result, / he was able to adapt to his work / quickly.|그 결과 / 그는 업무에 적응할 수 있었습니다 / 빠르게
+K|in operation|운영 중인
+K|training system|교육 제도
+K|experienced coworkers|경험 많은 동료들
+# q30|여가 생활|녹음된 음악 감상의 장점|긍정적 사례
+Q|What are the advantages of listening to recorded music instead of attending a live concert?|라이브 콘서트에 가는 대신 녹음된 음악을 듣는 것의 장점은 무엇인가요?
+I|장점이 여러 가지 있음|언제 어디서나 음악을 들음|콘서트 표가 비싸서 지하철에서 새 앨범을 들으며 돈을 아낌
+1|저는 라이브 콘서트에 가는 대신 녹음된 음악을 들으면 많은 장점이 있다고 생각합니다.|I think / there are many advantages / of listening to recorded music / instead of attending a live concert.|저는 생각합니다 / 많은 장점이 있다고 / 녹음된 음악을 듣는 것의 / 라이브 콘서트에 가는 대신
+2|왜냐하면 언제 어디서나 음악을 들을 수 있기 때문입니다.|That's because / we can listen to music / anytime, anywhere.|왜냐하면 ~이기 때문입니다 / 우리는 음악을 들을 수 있습니다 / 언제 어디서나
+3|그래서 비싼 콘서트 표를 살 필요가 없습니다.|So, / we don't have to buy / expensive concert tickets.|그래서 / 우리는 살 필요가 없습니다 / 비싼 콘서트 표를
+4|지난달에 제가 가장 좋아하는 가수가 서울에서 콘서트를 했습니다.|Last month, / my favorite singer / had a concert in Seoul.|지난달에 / 제가 가장 좋아하는 가수가 / 서울에서 콘서트를 했습니다
+5|표가 너무 비쌌습니다. 그래서 저는 매일 지하철에서 그의 새 앨범을 들었습니다.|The tickets were too expensive. / So, I listened to his new album / on the subway / every day.|표가 너무 비쌌습니다 / 그래서 저는 그의 새 앨범을 들었습니다 / 지하철에서 / 매일
+6|그 결과, 저는 그의 음악을 즐기면서 돈도 절약할 수 있었습니다.|As a result, / I was able to enjoy his music / and save money.|그 결과 / 저는 그의 음악을 즐길 수 있었습니다 / 그리고 돈을 절약할 수 있었습니다
+K|recorded music|녹음된 음악
+K|anytime, anywhere|언제 어디서나
+K|concert tickets|콘서트 표

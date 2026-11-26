@@ -48,10 +48,10 @@ function p5List(){
   const row = t => h("button",{cls:"row","aria-current":wide && p5.t === t.id ? "true" : null,onclick:() => open5(t.id)}, h("span",{cls:"g"}, t.name, h("span",{cls:"x5"}, g === "base" ? `${t.area} · ${t.type}` : t.base ? `${t.type} · 기본 답안 활용` : t.type)), minis(t.id), ic("go"));
   return [
     h("div",{cls:"hello"}, h("h1",{},"파트 5 의견 말하기"), h("p",{},"한글을 보고 영작하며 60초 답변을 완성합니다")),
-    seg([["base","기본 답안 6"],["q","빈출 질문 24"]], g, v => setOpt("p5g",v), "문제 모음"),
+    seg([["base","기본 답안 6"],["q",`빈출 질문 ${P5.filter(t => t.g === "q").length}`]], g, v => setOpt("p5g",v), "문제 모음"),
     h("div",{cls:"start"}, h("button",{cls:"sheet deck",onclick:() => open5(nx.id)}, holes(), h("div",{cls:"in"}, h("span",{cls:"lab"},`이어서 할 주제 · ${nx.area}`), h("span",{cls:"ko"},nx.name))),
       h("button",{cls:"btn p",onclick:() => open5(nx.id)},"이 주제 연습하기")),
-    g === "q" && h("section",{}, h("div",{cls:"rows"}, h("button",{cls:"row",onclick:() => { const r = shuffle(list)[0]; p5 = {t:r.id, v:"topic"}; run5(r.id,"rl"); }}, h("span",{cls:"g"},"아무 질문이나 실전", h("span",{cls:"x5"},"24문항 중 하나가 시험처럼 나옵니다")), ic("go")))),
+    g === "q" && h("section",{}, h("div",{cls:"rows"}, h("button",{cls:"row",onclick:() => { const r = shuffle(list)[0]; p5 = {t:r.id, v:"topic"}; run5(r.id,"rl"); }}, h("span",{cls:"g"},"아무 질문이나 실전", h("span",{cls:"x5"},`${list.length}문항 중 하나가 시험처럼 나옵니다`)), ic("go")))),
     g === "base" ? h("section",{}, h("h2",{},"주제"), h("div",{cls:"rows"}, list.map(row),
       h("button",{cls:"row",onclick:() => open5("x")}, h("span",{cls:"g"}, peek("x").q || FREE.name, h("span",{cls:"x5"},"질문과 답변을 직접 써서 연습")), ic("go"))))
       : h("section",{}, h("p",{cls:"note num"},`영작을 마친 질문 ${dn} / ${list.length}`), [...new Set(list.map(t => t.area))].map(a => h("div",{cls:"rows"}, h("div",{cls:"part"},a), list.filter(t => t.area === a).map(row)))),
