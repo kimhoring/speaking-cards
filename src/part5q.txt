@@ -282,14 +282,15 @@ K|local foods|현지 음식
 # q25|교육|학교 내 전자 기기 사용 금지|부정적 사례
 Q|Do you agree or disagree with the following statement?|다음 의견에 동의하나요, 아니면 반대하나요?
 S|Schools should prohibit students from using electronic devices, such as smartphones or laptops, at school.|학교는 학생들이 학교에서 스마트폰이나 노트북 같은 전자 기기를 사용하지 못하게 해야 한다.
-I|동의|수업 중 스마트폰을 쓰면 공부에 집중하지 못함|고등학교 때 수업 중 스마트폰을 쓰다가 성적이 떨어짐
+I|동의|전자 기기가 주의를 흐트러뜨려 공부에 집중하기 어려움|고등학교 때 수업 중 스마트폰을 쓰다가 성적이 떨어짐
 1|저는 학교가 학생들의 전자 기기 사용을 금지해야 한다는 데 동의합니다.|I agree / that schools should prohibit students / from using electronic devices / at school.|저는 동의합니다 / 학교가 학생들을 금지해야 한다는 데 / 전자 기기를 사용하는 것을 / 학교에서
-2|왜냐하면 수업 중에 스마트폰을 쓰면 학생들이 공부에 집중할 수 없기 때문입니다.|That's because / students can't focus on their studies / if they use smartphones in class.|왜냐하면 ~이기 때문입니다 / 학생들이 공부에 집중할 수 없습니다 / 수업 중에 스마트폰을 쓰면
+2|왜냐하면 전자 기기는 학생들의 주의를 흐트러뜨려서 공부에 집중하기 어렵기 때문입니다.|That's because / electronic devices distract students, / so it is hard for them / to focus on their studies.|왜냐하면 ~이기 때문입니다 / 전자 기기는 학생들의 주의를 흐트러뜨립니다 / 그래서 그들은 어렵습니다 / 공부에 집중하기가
 3|그래서 전자 기기를 금지하면 좋은 공부 습관을 기르는 데 도움이 됩니다.|So, / banning electronic devices / helps them / build good study habits.|그래서 / 전자 기기를 금지하는 것은 / 그들을 돕습니다 / 좋은 공부 습관을 기르도록
 4|고등학교 때 저는 수업 중에 스마트폰을 자주 썼습니다.|When I was in high school, / I often used my smartphone / in class.|고등학교 때 / 저는 스마트폰을 자주 썼습니다 / 수업 중에
 5|저는 게임을 하고 친구들과 채팅을 했습니다. 그래서 선생님 말씀을 들을 수 없었습니다.|I played games / and chatted with my friends. / So, I could not listen / to my teacher.|저는 게임을 했습니다 / 그리고 친구들과 채팅을 했습니다 / 그래서 들을 수 없었습니다 / 선생님 말씀을
 6|그 결과, 저는 공부에 집중하지 못했고 성적이 많이 떨어졌습니다.|As a result, / I could not focus on my studies, / and my grades dropped a lot.|그 결과 / 저는 공부에 집중하지 못했습니다 / 그리고 성적이 많이 떨어졌습니다
 K|electronic devices|전자 기기
+K|distract students|학생들의 주의를 흐트러뜨리다
 K|focus on their studies|공부에 집중하다
 K|grades dropped|성적이 떨어졌다
 # q26|인터넷과 기술|인터넷과 젊은 세대의 관심사|과거와 현재의 비교
