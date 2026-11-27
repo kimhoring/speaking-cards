@@ -31,7 +31,7 @@ K|adapt to my work|업무에 적응하다
 # q03|직장 생활|고정 근무 시간 vs 유연 근무 시간|긍정적 사례
 Q|Do you agree or disagree with the following statement?|다음 의견에 동의하나요, 아니면 반대하나요?
 S|All employees should start and finish their workdays at the same time.|모든 직원은 같은 시간에 출근하고 퇴근해야 한다.
-I|반대|사람마다 일정과 생활 방식이 다름|유연 근무제 회사에서 일찍 출근해 스트레스를 덜 받음
+I|반대|사람마다 일정과 생활 방식이 다름|유연 근무제 회사에서 일찍 출근해 집중이 잘됨
 1|저는 모든 직원이 같은 시간에 출근하고 퇴근해야 한다는 데 반대합니다.|I disagree / that all employees should start and finish their workdays / at the same time.|저는 반대합니다 / 모든 직원이 출근하고 퇴근해야 한다는 데 / 같은 시간에
 =|1
 # q04|직장 생활|직장 동료와 협업|긍정적 사례
@@ -58,7 +58,7 @@ I|온라인 강의 수강|언제 어디서나 배움|엑셀 강의를 반복해�
 3|그래서 시간을 더 효율적으로 사용할 수 있습니다.|So, / we can use our time / more efficiently.|그래서 / 우리는 시간을 사용할 수 있습니다 / 더 효율적으로
 4|작년에 저는 엑셀을 배우기 위해 온라인 강의를 들었습니다.|Last year, / I took an online course / to learn Excel.|작년에 / 저는 온라인 강의를 들었습니다 / 엑셀을 배우기 위해
 5|저는 퇴근 후에 집에서 공부했습니다. 또한, 영상을 반복해서 봤습니다.|I studied at home / after work. / Also, I watched the videos / repeatedly.|저는 집에서 공부했습니다 / 퇴근 후에 / 또한, 영상을 봤습니다 / 반복해서
-6|그 결과, 저는 직장에서 엑셀을 자신 있게 쓰고 보고서를 더 빨리 만들 수 있었습니다.|As a result, / I was able to use Excel confidently / and make reports faster / at work.|그 결과 / 저는 엑셀을 자신 있게 쓸 수 있었습니다 / 그리고 보고서를 더 빨리 만들 수 있었습니다 / 직장에서
+6|그 결과, 저는 시간을 절약하고 직장에서 엑셀을 자신 있게 사용할 수 있었습니다.|As a result, / I was able to save time / and use Excel confidently / at work.|그 결과 / 저는 시간을 절약할 수 있었습니다 / 그리고 엑셀을 자신 있게 사용할 수 있었습니다 / 직장에서
 K|anytime, anywhere|언제 어디서나
 K|use our time|시간을 사용하다
 K|take an online course|온라인 강의를 듣다
@@ -77,13 +77,13 @@ K|have difficulty|어려움을 겪다
 K|after school|방과 후에
 # q07|교육|체험 학습 장소 선택하기|긍정적 사례
 Q|If a school organizes a field trip for students during the school day, which option would be more beneficial: visiting a local company or touring a history museum?|학교에서 정규 수업 시간에 학생들과 견학을 간다면, 지역 기업을 방문하는 것과 역사 박물관을 관람하는 것 중 어느 것이 더 유익할까요?
-I|지역 기업 방문|실제 직업을 직접 배움|고등학교 때 건설 회사 견학으로 건축에 관심이 생겨 전공으로 정함
+I|지역 기업 방문|실제 직업을 직접 배움|고등학교 때 기업 견학으로 적성을 찾고 전공을 정함
 1|저는 지역 기업을 방문하는 것이 학생들에게 더 유익할 것이라고 생각합니다.|I think / visiting a local company / would be more beneficial / for students.|저는 생각합니다 / 지역 기업을 방문하는 것이 / 더 유익할 것이라고 / 학생들에게
 2|왜냐하면 학생들이 실제 직업에 대해 직접 배울 수 있기 때문입니다.|That's because / students can learn / about real jobs / in person.|왜냐하면 ~이기 때문입니다 / 학생들이 배울 수 있습니다 / 실제 직업에 대해 / 직접
 3|그래서 자신의 적성을 발견하고 진로를 선택하기가 더 쉽습니다.|So, / it is easier for them / to find their aptitude / and choose a career path.|그래서 / 그들에게 더 쉽습니다 / 자신의 적성을 발견하는 것이 / 그리고 진로를 선택하는 것이
-4|고등학교 때 저는 지역 건설 회사로 견학을 갔습니다.|In high school, / I went on a field trip / to a local construction company.|고등학교 때 / 저는 견학을 갔습니다 / 지역 건설 회사로
+4|고등학교 때 저는 지역 기업으로 현장 학습을 갔습니다.|In high school, / I went on a field trip / to a local company.|고등학교 때 / 저는 현장 학습을 갔습니다 / 지역 기업으로
 5|저는 직원들을 만나 많은 질문을 했습니다. 또한, 다양한 직업에 대해 배웠습니다.|I met the workers / and asked many questions. / Also, I learned / about various jobs.|저는 직원들을 만났습니다 / 그리고 많은 질문을 했습니다 / 또한, 배웠습니다 / 다양한 직업에 대해
-6|그 결과, 저는 건축에 관심이 생겼고 건축을 전공으로 선택했습니다.|As a result, / I became interested in architecture / and chose it as my major.|그 결과 / 저는 건축에 관심이 생겼습니다 / 그리고 그것을 전공으로 선택했습니다
+6|그 결과, 저는 전공을 쉽게 정할 수 있었습니다.|As a result, / I was able to choose my major / easily.|그 결과 / 저는 전공을 정할 수 있었습니다 / 쉽게
 K|find their aptitude|적성을 발견하다
 K|choose a career path|진로를 선택하다
 K|go on a field trip|현장 학습을 가다
@@ -98,14 +98,14 @@ I|과목 수 줄이기|공부할 과목이 너무 많음|고등학교 때 열 �
 3|그래서 각 과목에 집중하기가 어렵습니다.|So, / it is difficult / to focus on each subject.|그래서 / 어렵습니다 / 각 과목에 집중하는 것이
 4|제가 고등학생이었을 때, 저는 열 과목 넘게 공부해야 했습니다.|When I was in high school, / I had to study / more than ten subjects.|제가 고등학생이었을 때 / 저는 공부해야 했습니다 / 열 과목 넘게
 5|저는 입시 학원에서 밤늦게까지 공부했습니다. 또한, 시험 전에 많은 스트레스를 받았습니다.|I studied at a cram school / until late at night. / Also, I was under a lot of stress / before exams.|저는 입시 학원에서 공부했습니다 / 밤늦게까지 / 또한, 많은 스트레스를 받았습니다 / 시험 전에
-6|그 결과, 저는 항상 피곤했고 학교생활을 즐기지 못했습니다.|As a result, / I was always tired / and could not enjoy my school life.|그 결과 / 저는 항상 피곤했습니다 / 그리고 학교생활을 즐기지 못했습니다
+6|그 결과, 저는 항상 피곤했고 공부에 집중할 수 없었습니다.|As a result, / I was always tired / and could not focus on my studies.|그 결과 / 저는 항상 피곤했습니다 / 그리고 공부에 집중할 수 없었습니다
 K|under a lot of stress|많은 스트레스를 받는
 K|cram school|입시 학원
-K|focus on each subject|각 과목에 집중하다
+K|focus on my studies|공부에 집중하다
 # q09|교육|인턴십 경험의 필요성|긍정적 사례
 Q|Do you agree or disagree with the following statement?|다음 의견에 동의하나요, 아니면 반대하나요?
 S|Universities should require students to complete an internship before graduation.|대학교는 학생들이 졸업 전에 인턴십을 하도록 요구해야 한다.
-I|동의|실제 업무 경험을 쌓음|친구가 인턴십 뒤 졸업 직후 그 회사에서 일자리 제안을 받음
+I|동의|실제 업무 경험을 쌓음|친구가 인턴십 뒤 졸업 직후 좋은 직장을 구함
 1|저는 대학교가 학생들에게 졸업 전에 인턴십을 하도록 요구해야 한다는 데 동의합니다.|I agree / that universities should require students / to complete an internship / before graduation.|저는 동의합니다 / 대학교가 학생들에게 요구해야 한다는 데 / 인턴십을 마치도록 / 졸업 전에
 =|2
 # q10|교육|대학생들의 방학 시간 활용|긍정적 사례
@@ -180,7 +180,7 @@ K|spend more time|더 많은 시간을 쓰다
 # q15|인터넷과 기술|자녀의 소셜 미디어 사용 제한|부정적 사례
 Q|Do you agree or disagree with the following statement?|다음 의견에 동의하나요, 아니면 반대하나요?
 S|Parents should set limits on their children's social media use.|부모는 자녀들의 소셜 미디어 사용에 제한을 두어야 한다.
-I|동의|오래 쓰면 공부에 집중하기 어려움|남동생이 제한 없이 쓰다가 성적이 떨어져 부모님이 시간 제한을 둠
+I|동의|오래 쓰면 공부에 집중하기 어려움|남동생이 제한 없이 쓰다가 성적이 떨어짐
 1|저는 부모가 자녀들의 소셜 미디어 사용에 제한을 두어야 한다는 데 동의합니다.|I agree / that parents should set limits / on their children's social media use.|저는 동의합니다 / 부모가 제한을 두어야 한다는 데 / 자녀들의 소셜 미디어 사용에
 =|3
 # q16|주거|도시의 녹지 공간 변화|과거와 현재의 비교
@@ -198,18 +198,18 @@ K|take a walk|산책을 하다
 K|relieve stress|스트레스를 해소하다
 # q17|주거|은퇴 후 거주지 선택|긍정적 사례
 Q|Some people prefer to live in a busy city after retiring from work, while others want to live in a quiet countryside town. Which do you prefer and why?|어떤 사람들은 은퇴 후 번화한 도시에서 살기를 선호하는 반면, 다른 사람들은 조용한 시골 마을에서 살기를 원합니다. 당신은 어느 것을 선호하며, 그 이유는 무엇인가요?
-I|번화한 도시|병원과 스포츠센터 같은 편리한 시설이 많음|아버지가 은퇴 뒤 서울에서 예전보다 건강하고 행복하게 지내심
+I|번화한 도시|병원과 스포츠센터 같은 편리한 시설이 많음|아버지가 은퇴 뒤 서울에서 건강하고 편안하게 지내심
 1|저는 은퇴 후에 번화한 도시에서 사는 것을 선호합니다.|I prefer / living in a busy city / after retiring from work.|저는 선호합니다 / 번화한 도시에서 사는 것을 / 은퇴 후에
 =|4
 # q18|주거|현재 사회의 이웃 관계|과거와 현재의 비교
 Q|Do you agree or disagree with the following statement?|다음 의견에 동의하나요, 아니면 반대하나요?
 S|People are closer to their neighbors now than they were in the past.|오늘날 사람들은 과거보다 이웃과 더 가깝게 지낸다.
-I|반대|너무 바빠 이웃과 이야기하지 못함|과거에는 함께 저녁을 먹음, 지금은 엘리베이터에서 인사만 함
+I|반대|너무 바빠 이웃과 이야기하지 못함|과거에는 함께 저녁을 먹음, 지금은 이야기하지 않음
 1|저는 오늘날 사람들이 과거보다 이웃과 더 가깝게 지낸다는 데 반대합니다.|I disagree / that people are closer to their neighbors now / than they were in the past.|저는 반대합니다 / 오늘날 사람들이 이웃과 더 가깝게 지낸다는 데 / 과거보다
 2|왜냐하면 요즘에는 사람들이 너무 바빠서 이웃과 이야기할 수 없기 때문입니다.|That's because / people are too busy / to talk to their neighbors / these days.|왜냐하면 ~이기 때문입니다 / 사람들이 너무 바쁩니다 / 이웃과 이야기하기에는 / 요즘
 3|그래서 많은 사람들이 옆집에 누가 사는지조차 모릅니다.|So, / many people don't even know / who lives next door.|그래서 / 많은 사람들이 알지도 못합니다 / 옆집에 누가 사는지
 4|과거에는 사람들이 자주 이웃들과 저녁을 먹었습니다.|In the past, / people often had dinner / with their neighbors.|과거에는 / 사람들이 자주 저녁을 먹었습니다 / 이웃들과
-5|그래서 그들은 매우 친했습니다. 하지만 요즘에는 사람들이 엘리베이터에서 인사만 합니다.|So, they were very close. / However, these days, / people just say hello / in the elevator.|그래서 그들은 매우 친했습니다 / 하지만 요즘에는 / 사람들이 인사만 합니다 / 엘리베이터에서
+5|그래서 그들은 매우 가까웠습니다. 하지만 요즘에는 사람들이 이웃과 이야기하지 않습니다.|So, they were very close. / However, these days, / people don't talk / to their neighbors.|그래서 그들은 매우 가까웠습니다 / 하지만 요즘에는 / 사람들이 이야기하지 않습니다 / 이웃과
 6|그 결과, 요즘에는 이웃과 친하게 지내기가 어렵습니다.|As a result, / it is difficult / to get along with neighbors / nowadays.|그 결과 / 어렵습니다 / 이웃과 친하게 지내는 것이 / 요즘
 K|talk to their neighbors|이웃과 이야기하다
 K|have dinner|저녁을 먹다
@@ -217,7 +217,7 @@ K|get along with|~와 친하게 지내다
 # q19|쇼핑|과거와 현재의 쇼핑 시간 비교|과거와 현재의 비교
 Q|Do you agree or disagree with the following statement?|다음 의견에 동의하나요, 아니면 반대하나요?
 S|Shopping takes less time nowadays than it did in the past.|오늘날 쇼핑은 과거보다 시간이 덜 걸립니다.
-I|동의|스마트폰으로 쉽게 삼|과거에는 매장에 가야 했음, 지금은 몇 분 만에 주문하고 가족과 시간을 보냄
+I|동의|스마트폰으로 쉽게 삼|과거에는 매장에 가야 했음, 지금은 몇 분 만에 주문함
 1|저는 오늘날 쇼핑이 과거보다 시간이 덜 걸린다는 데 동의합니다.|I agree / that shopping takes less time nowadays / than it did in the past.|저는 동의합니다 / 오늘날 쇼핑이 시간이 덜 걸린다는 데 / 과거보다
 =|5
 # q20|쇼핑|소득 증가 시 최대 지출 분야|부정적 사례
@@ -288,7 +288,7 @@ I|동의|수업 중 스마트폰을 쓰면 공부에 집중하지 못함|고등�
 3|그래서 전자 기기를 금지하면 좋은 공부 습관을 기르는 데 도움이 됩니다.|So, / banning electronic devices / helps them / build good study habits.|그래서 / 전자 기기를 금지하는 것은 / 그들을 돕습니다 / 좋은 공부 습관을 기르도록
 4|고등학교 때 저는 수업 중에 스마트폰을 자주 썼습니다.|When I was in high school, / I often used my smartphone / in class.|고등학교 때 / 저는 스마트폰을 자주 썼습니다 / 수업 중에
 5|저는 게임을 하고 친구들과 채팅을 했습니다. 그래서 선생님 말씀을 들을 수 없었습니다.|I played games / and chatted with my friends. / So, I could not listen / to my teacher.|저는 게임을 했습니다 / 그리고 친구들과 채팅을 했습니다 / 그래서 들을 수 없었습니다 / 선생님 말씀을
-6|그 결과, 제 성적이 많이 떨어졌고 선생님께서 저를 걱정하셨습니다.|As a result, / my grades dropped a lot, / and my teacher was worried / about me.|그 결과 / 제 성적이 많이 떨어졌습니다 / 그리고 선생님께서 걱정하셨습니다 / 저에 대해
+6|그 결과, 저는 공부에 집중하지 못했고 성적이 많이 떨어졌습니다.|As a result, / I could not focus on my studies, / and my grades dropped a lot.|그 결과 / 저는 공부에 집중하지 못했습니다 / 그리고 성적이 많이 떨어졌습니다
 K|electronic devices|전자 기기
 K|focus on their studies|공부에 집중하다
 K|grades dropped|성적이 떨어졌다
