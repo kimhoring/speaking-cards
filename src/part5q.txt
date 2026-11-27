@@ -295,16 +295,16 @@ K|grades dropped|성적이 떨어졌다
 # q26|인터넷과 기술|인터넷과 젊은 세대의 관심사|과거와 현재의 비교
 Q|Do you agree or disagree with the following statement?|다음 의견에 동의하나요, 아니면 반대하나요?
 S|The internet has made young people interested in a wider range of topics than before.|인터넷 덕분에 젊은 사람들이 예전보다 더 다양한 주제에 관심을 갖게 되었다.
-I|동의|인터넷에서 무엇이든 쉽게 정보를 찾음|과거에는 책과 신문으로만 배움, 지금은 여러 주제의 영상을 봄
+I|동의|인터넷에서 무엇이든 쉽게 정보를 찾음|과거에는 책과 신문으로 몇 가지 주제만 배움, 지금은 영상으로 새 주제에 쉽게 흥미를 가짐
 1|저는 인터넷 덕분에 젊은 사람들이 예전보다 더 다양한 주제에 관심을 갖게 되었다는 데 동의합니다.|I agree / that the internet has made young people interested / in a wider range of topics / than before.|저는 동의합니다 / 인터넷이 젊은 사람들이 관심을 갖게 만들었다는 데 / 더 다양한 주제에 / 예전보다
 2|왜냐하면 온라인에서 무엇이든 쉽게 정보를 찾을 수 있기 때문입니다.|That's because / they can easily find information / about anything online.|왜냐하면 ~이기 때문입니다 / 그들은 쉽게 정보를 찾을 수 있습니다 / 무엇이든 온라인에서
 3|그래서 여러 가지 다양한 주제에 대해 배울 수 있습니다.|So, / they can learn / about many different topics.|그래서 / 그들은 배울 수 있습니다 / 여러 가지 다양한 주제에 대해
 4|과거에는 사람들이 정보를 얻으려면 책이나 신문을 읽어야 했습니다.|In the past, / people had to read books or newspapers / to get information.|과거에는 / 사람들이 책이나 신문을 읽어야 했습니다 / 정보를 얻으려면
 5|그래서 몇 가지 주제만 배울 수 있었습니다. 하지만 요즘에는 젊은 사람들이 여러 주제의 영상을 봅니다.|So, they could only learn / about a few topics. / However, these days, / young people watch videos / about many topics.|그래서 그들은 배울 수 있을 뿐이었습니다 / 몇 가지 주제에 대해서만 / 하지만 요즘에는 / 젊은 사람들이 영상을 봅니다 / 여러 주제에 대한
-6|그 결과, 그들은 예전보다 더 다양한 주제에 관심이 있습니다.|As a result, / they are interested / in a wider range of topics / than before.|그 결과 / 그들은 관심이 있습니다 / 더 다양한 주제에 / 예전보다
+6|그 결과, 그들은 새로운 주제에 쉽게 흥미를 가질 수 있습니다.|As a result, / they can easily get interested / in new topics.|그 결과 / 그들은 쉽게 흥미를 가질 수 있습니다 / 새로운 주제에
 K|a wider range of topics|더 다양한 주제
 K|find information|정보를 찾다
-K|many different topics|여러 가지 다양한 주제
+K|get interested in|~에 흥미를 갖다
 # q27|교육|학생들의 환경 교육 방법|긍정적 사례
 Q|Which of the following do you think is a more effective way to educate students about the environment?|다음 중 학생들에게 환경에 대해 교육하는 더 효과적인 방법은 무엇이라고 생각하나요?
 O|Watching videos|영상 보기
