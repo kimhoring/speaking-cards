@@ -17,7 +17,7 @@ library app|customer service|business trip|business trips|lunch break|science cl
 exercise equipment|exercise videos|study habits|streaming services|travel information|travel expenses|travel guidebooks|smartphone apps|marketing company|food company|education company
 bicycle riders|school grades|exam grades|time limit|time limits|membership points|birth rate|art gallery|basketball club|language school|field trip|high school|skill development|social network|career path|bank loan|job information
 utility bills|traffic information|eating habits|school uniform|performance evaluation|working hours|credit card|grocery shopping|charging stations|housework|air pollution|water pollution
-package tour|package tours|volunteer work|team manager|it company|ai program|ai programs|phone call|city center|work experience|work system|employee benefits|night view|social media|job market""".replace("\n", "|").split("|")
+package tour|package tours|volunteer work|team manager|team member|it company|ai program|ai programs|phone call|city center|work experience|work system|employee benefits|night view|social media|job market""".replace("\n", "|").split("|")
 COMPOUND = {c for c in COMPOUND if " " in c} - {"social media", "night view", "work system", "city center"}
 
 # 이 낱말 앞에서는 끊을 수 있다
