@@ -370,3 +370,18 @@ I|좋은 성격|업무 능력은 배울 수 있지만 성격은 바꾸기 어려
 K|a good personality|좋은 성격
 K|hard to change|바꾸기 어려운
 K|make mistakes|실수하다
+# q32|여행과 휴가|해외 여행 시 문화 배우는 방법|긍정적 사례
+Q|When traveling abroad, what do you think is the best way to learn about a country's culture?|해외 여행을 할 때, 그 나라의 문화를 배우는 가장 좋은 방법은 무엇이라고 생각하나요?
+O|Asking local residents|현지 주민에게 물어보기
+O|Reading travel blogs|여행 블로그 읽기
+O|Joining a local tour|현지 투어에 참여하기
+I|현지 주민에게 물어보기|현지 주민이 자기 문화를 가장 잘 앎|작년 혼자 간 일본 전통 식당에서 현지 여성이 먹는 법과 식사 예절을 알려 줌
+1|저는 현지 주민에게 물어보는 것이 그 나라의 문화를 배우는 가장 좋은 방법이라고 생각합니다.|I think / asking local residents / is the best way / to learn about a country's culture.|저는 생각합니다 / 현지 주민에게 물어보는 것이 / 가장 좋은 방법이라고 / 그 나라의 문화를 배우는
+2|왜냐하면 현지 주민들이 자기 문화를 가장 잘 알기 때문입니다.|That's because / local residents know / their own culture best.|왜냐하면 ~이기 때문입니다 / 현지 주민들은 압니다 / 자기 문화를 가장 잘
+3|그래서 실제적이고 유용한 정보를 얻을 수 있습니다.|So, / we can get / real and useful information.|그래서 / 우리는 얻을 수 있습니다 / 실제적이고 유용한 정보를
+4|작년에 저는 혼자서 일본의 전통 식당에 갔습니다.|Last year, / I went to a traditional restaurant / in Japan / on my own.|작년에 / 저는 전통 식당에 갔습니다 / 일본에 있는 / 혼자서
+5|친절한 현지 여성이 음식을 제대로 먹는 법을 알려 주었습니다. 또한, 그녀는 일본의 식사 예절에 대해 이야기해 주었습니다.|A kind local woman / showed me how to eat the dishes / correctly. / Also, she told me / about Japanese table manners.|친절한 현지 여성이 / 저에게 음식을 먹는 법을 알려 주었습니다 / 제대로 / 또한, 그녀는 저에게 이야기해 주었습니다 / 일본의 식사 예절에 대해
+6|그 결과, 저는 일본 문화에 대해 많이 배울 수 있었습니다.|As a result, / I was able to learn a lot / about Japanese culture.|그 결과 / 저는 많이 배울 수 있었습니다 / 일본 문화에 대해
+K|local residents|현지 주민
+K|table manners|식사 예절
+K|learn about a culture|문화에 대해 배우다
