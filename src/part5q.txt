@@ -313,9 +313,9 @@ O|Reading news articles|뉴스 기사 읽기
 I|영상 보기|더 재미있고 이해하기 쉬움|남동생이 수업에서 플라스틱 영상을 보고 플라스틱을 덜 쓰게 됨
 1|저는 영상을 보는 것이 학생들에게 환경에 대해 교육하는 더 효과적인 방법이라고 생각합니다.|I think / watching videos / is a more effective way / to educate students about the environment.|저는 생각합니다 / 영상을 보는 것이 / 더 효과적인 방법이라고 / 학생들에게 환경에 대해 교육하는
 2|왜냐하면 영상이 더 재미있고 이해하기 쉽기 때문입니다.|That's because / videos are more interesting / and easier to understand.|왜냐하면 ~이기 때문입니다 / 영상이 더 재미있습니다 / 그리고 이해하기 더 쉽습니다
-3|그래서 학생들이 배운 내용을 더 쉽게 기억할 수 있습니다.|So, / students can remember / what they learned / more easily.|그래서 / 학생들이 기억할 수 있습니다 / 배운 것을 / 더 쉽게
+3|그래서 학생들이 수업 내용을 더 쉽게 기억할 수 있습니다.|So, / students can remember / the lesson / more easily.|그래서 / 학생들이 기억할 수 있습니다 / 수업 내용을 / 더 쉽게
 4|작년에 제 남동생은 수업 시간에 플라스틱 쓰레기에 관한 영상을 봤습니다.|Last year, / my younger brother watched a video / about plastic waste / in class.|작년에 / 제 남동생은 영상을 봤습니다 / 플라스틱 쓰레기에 관한 / 수업 시간에
-5|그는 바다 동물들이 비닐봉지를 먹는 것을 봤습니다. 그래서 그는 매우 놀랐습니다.|He saw sea animals / eating plastic bags. / So, he was very surprised.|그는 바다 동물들을 봤습니다 / 비닐봉지를 먹는 것을 / 그래서 그는 매우 놀랐습니다
+5|영상에서 바다 동물들이 비닐봉지를 먹고 있었습니다. 그래서 그는 매우 충격을 받았습니다.|In the video, / sea animals were eating plastic bags. / So, he was very shocked.|영상에서 / 바다 동물들이 비닐봉지를 먹고 있었습니다 / 그래서 그는 매우 충격을 받았습니다
 6|그 결과, 그는 일상생활에서 플라스틱을 덜 쓰기 시작했습니다.|As a result, / he started to use less plastic / in his daily life.|그 결과 / 그는 플라스틱을 덜 쓰기 시작했습니다 / 일상생활에서
 K|educate students about the environment|학생들에게 환경에 대해 교육하다
 K|easier to understand|이해하기 더 쉬운
