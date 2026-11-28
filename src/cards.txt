@@ -422,3 +422,51 @@ water pollution / become a serious issue|수질 오염 / 심각한 문제가 되
 be polluted|오염되다|그 강은 심하게 오염되어 있었습니다.|The river was heavily polluted.
 seriousness|심각성|그들은 환경오염의 심각성을 깨달을 수 있습니다.|They can realize the seriousness of environmental pollution.
 keep A clean|A를 깨끗하게 유지하다|우리는 아파트 단지를 깨끗하게 유지할 수 있었습니다.|We were able to keep our apartment complex clean.
+# pos|토익 파트 2|사진 속 위치
+On the left side of the picture|사진 왼쪽에|사진 왼쪽에는 한 여자가 자전거를 타고 있습니다.|On the left side of the picture, a woman is riding a bike.
+On the right side of the picture|사진 오른쪽에|사진 오른쪽에는 두 사람이 벤치에 앉아 있습니다.|On the right side of the picture, two people are sitting on a bench.
+In the middle of the picture|사진 가운데에|사진 가운데에는 한 남자가 휴대폰을 보고 있습니다.|In the middle of the picture, a man is looking at his phone.
+In the foreground|사진 앞쪽에|사진 앞쪽에는 자전거 몇 대가 세워져 있습니다.|In the foreground, some bikes are parked.
+In the background|사진 뒤쪽에|뒤쪽에는 높은 건물들이 보입니다.|In the background, I can see some tall buildings.
+At the top of the picture|사진 위쪽에|사진 위쪽에는 푸른 하늘이 보입니다.|At the top of the picture, I can see a clear blue sky.
+At the bottom of the picture|사진 아래쪽에|사진 아래쪽에는 상자 몇 개가 바닥에 놓여 있습니다.|At the bottom of the picture, some boxes are on the floor.
+next to A|A 옆에|그녀 옆에는 한 남자가 서 있습니다.|Next to her, a man is standing.
+in front of A|A 앞에|사람들이 가게 앞에 줄을 서 있습니다.|People are standing in line in front of a store.
+This picture was taken at A|이 사진은 A에서 찍혔다|이 사진은 강가에서 찍힌 것 같습니다.|I think this picture was taken at a riverside.
+# wear|토익 파트 2|옷차림과 동작
+wear a checkered shirt|체크무늬 셔츠를 입다|그는 체크무늬 셔츠를 입고 있습니다.|He is wearing a checkered shirt.
+wear a striped T-shirt|줄무늬 티셔츠를 입다|그녀는 줄무늬 티셔츠를 입고 있습니다.|She is wearing a striped T-shirt.
+wear a suit|정장을 입다|그 남자는 검은색 정장을 입고 있습니다.|The man is wearing a black suit.
+wear an apron|앞치마를 두르다|한 직원이 앞치마를 두르고 있습니다.|A worker is wearing an apron.
+wear glasses / a cap|안경을 쓰다 / 모자를 쓰다|그는 안경을 쓰고 있습니다.|He is wearing glasses.
+carry a backpack|배낭을 메다|그녀는 배낭을 메고 있습니다.|She is carrying a backpack.
+hold A|A를 들다|그녀는 손에 커피 한 잔을 들고 있습니다.|She is holding a cup of coffee in her hand.
+look at A|A를 보다|그들은 모니터를 보고 있습니다.|They are looking at a monitor.
+push a cart|카트를 밀다|한 여자가 쇼핑 카트를 밀고 있습니다.|A woman is pushing a shopping cart.
+# place|토익 파트 2|사진 속 장소
+riverside|강가|사람들이 강가를 따라 걷고 있습니다.|People are walking along the riverside.
+crosswalk|횡단보도|몇몇 사람들이 횡단보도를 건너고 있습니다.|Some people are crossing a crosswalk.
+sidewalk|인도|한 남자가 인도를 걷고 있습니다.|A man is walking on the sidewalk.
+street market|길거리 시장|이 사진은 길거리 시장에서 찍힌 것 같습니다.|I think this picture was taken at a street market.
+construction site|공사 현장|작업자들이 공사 현장에서 일하고 있습니다.|Workers are working at a construction site.
+grocery store|식료품점|한 여자가 식료품점에서 장을 보고 있습니다.|A woman is shopping at a grocery store.
+bus stop|버스 정류장|몇몇 사람들이 버스 정류장에서 기다리고 있습니다.|Some people are waiting at a bus stop.
+parking lot|주차장|주차장에 차가 많이 있습니다.|There are many cars in the parking lot.
+# info|토익 파트 4|일정·안내 표현
+There will be A|A가 있을 예정이다|오전 10시에 회의가 있을 예정입니다.|There will be a meeting at 10 A.M.
+will be conducted by A|A가 진행할 예정이다|발표는 김 씨가 진행할 예정입니다.|The presentation will be conducted by Ms. Kim.
+be scheduled for A|A로 예정되어 있다|워크숍은 오후 2시로 예정되어 있습니다.|The workshop is scheduled for 2 P.M.
+will be held in A|A에서 열릴 예정이다|세미나는 201호에서 열릴 예정입니다.|The seminar will be held in Room 201.
+has been canceled|취소되었다|오후 3시 세션은 취소되었습니다.|The 3 P.M. session has been canceled.
+has been moved to A|A로 변경되었다|회의는 금요일로 변경되었습니다.|The meeting has been moved to Friday.
+After that|그다음에|그다음에는 점심시간이 있을 예정입니다.|After that, there will be a lunch break.
+registration fee|등록비|등록비는 50달러입니다.|The registration fee is 50 dollars.
+be open from A to B|A부터 B까지 운영하다|도서관은 오전 9시부터 오후 6시까지 운영합니다.|The library is open from 9 A.M. to 6 P.M.
+# apply|토익 파트 4|지원자 정보 표현
+applicant|지원자|첫 번째 지원자는 제니 박입니다.|The first applicant is Jenny Park.
+apply for A|A에 지원하다|그녀는 마케팅 매니저 자리에 지원했습니다.|She applied for the marketing manager position.
+have A years of experience|A년 경력이 있다|그녀는 마케팅 분야에서 5년 경력이 있습니다.|She has five years of experience in marketing.
+major in A|A를 전공하다|그는 대학에서 건축을 전공했습니다.|He majored in architecture in college.
+work as A|A로 일하다|그는 3년 동안 디자이너로 일했습니다.|He worked as a designer for three years.
+be suitable for A|A에 적합하다|그녀는 이 자리에 적합하다고 생각합니다.|I think she is suitable for this position.
+have a certificate in A|A 자격증이 있다|그녀는 회계 자격증을 가지고 있습니다.|She has a certificate in accounting.

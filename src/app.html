@@ -6,7 +6,7 @@
 <script>
 "use strict";
 const SECS = /*__DATA__*/[];
-const PARTS = {"PART 1":"기본 동사","PART 2":"형용사·부사","PART 3":"핵심 구문","PART 4":"직장·학교·기술","PART 5":"쇼핑·주거·트렌드·여행·환경"};
+const PARTS = {"PART 1":"기본 동사","PART 2":"형용사·부사","PART 3":"핵심 구문","PART 4":"직장·학교·기술","PART 5":"쇼핑·주거·트렌드·여행·환경","토익 파트 2":"사진 묘사","토익 파트 4":"표 보고 답하기"};
 const ALL = new Map();              // id -> 대표 카드 (같은 문장은 진도를 공유)
 SECS.forEach(s => s.cards.forEach(c => { c.sec = s; if (!ALL.has(c.id)) ALL.set(c.id, c); }));
 const TOTAL = ALL.size;
