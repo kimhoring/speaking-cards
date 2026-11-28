@@ -411,3 +411,16 @@ I|반대|교사들은 이미 수업으로 바빠 수업 준비를 제대로 못�
 K|be required to|~하도록 의무화되다
 K|prepare their lessons|수업을 준비하다
 K|quit the club|동아리를 그만두다
+# q35|쇼핑|재미있는 광고와 제품 판매|긍정적 사례
+Q|Do you agree or disagree with the following statement?|다음 의견에 동의하나요, 아니면 반대하나요?
+S|Creating entertaining advertisements has a positive effect on product sales.|재미있는 광고를 만드는 것은 제품 판매에 긍정적인 영향을 미친다.
+I|동의|재미있는 광고는 오래 기억에 남아 물건을 살 때 먼저 떠오름|작년 유튜브에서 웃긴 과자 광고를 여러 번 보고 친구들에게 공유, 그 과자를 사 먹었고 과자도 인기를 얻음
+1|저는 재미있는 광고를 만드는 것이 제품 판매에 긍정적인 영향을 미친다는 데 동의합니다.|I agree / that creating entertaining advertisements / has a positive effect / on product sales.|저는 동의합니다 / 재미있는 광고를 만드는 것이 / 긍정적인 영향을 미친다는 데 / 제품 판매에
+2|왜냐하면 사람들은 웃긴 광고를 오랫동안 기억하기 때문입니다.|That's because / people remember funny advertisements / for a long time.|왜냐하면 ~이기 때문입니다 / 사람들은 웃긴 광고를 기억합니다 / 오랫동안
+3|그래서 쇼핑하러 가면 그 제품을 가장 먼저 떠올립니다.|So, / when they go shopping, / they think of those products / first.|그래서 / 쇼핑하러 가면 / 그들은 그 제품을 떠올립니다 / 가장 먼저
+4|작년에 저는 유튜브에서 웃긴 과자 광고를 봤습니다.|Last year, / I saw a funny commercial / for a snack / on YouTube.|작년에 / 저는 웃긴 광고를 봤습니다 / 과자의 / 유튜브에서
+5|그 광고가 너무 웃겨서 여러 번 봤습니다. 또한, 친구들에게 공유했습니다.|It was so funny / that I watched it / many times. / Also, I shared it / with my friends.|그것은 너무 웃겼습니다 / 그래서 저는 그것을 봤습니다 / 여러 번 / 또한, 저는 그것을 공유했습니다 / 친구들에게
+6|그 결과, 저는 편의점에서 그 과자를 샀고, 그 과자는 아주 인기가 많아졌습니다.|As a result, / I bought the snack / at a convenience store, / and it became very popular.|그 결과 / 저는 그 과자를 샀습니다 / 편의점에서 / 그리고 그것은 아주 인기가 많아졌습니다
+K|has a positive effect on|~에 긍정적인 영향을 미치다
+K|think of|~을 떠올리다
+K|so funny that|너무 웃겨서 ~하다
