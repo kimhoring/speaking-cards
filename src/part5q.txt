@@ -385,3 +385,16 @@ I|현지 주민에게 물어보기|현지 주민이 자기 문화를 가장 잘 
 K|local residents|현지 주민
 K|table manners|식사 예절
 K|learn about a culture|문화에 대해 배우다
+# q33|교육|어려운 목표로 스스로에게 도전하기|긍정적 사례
+Q|Do you agree or disagree with the following statement?|다음 의견에 동의하나요, 아니면 반대하나요?
+S|Students should challenge themselves by setting goals that are difficult to achieve.|학생들은 이루기 어려운 목표를 세워 스스로에게 도전해야 한다.
+I|동의|큰 도전에 맞설 때 더 빨리 성장함|한국사 시험 1급 목표를 세우고 3개월 동안 매일 공부해 이루고 자신감이 생김
+1|저는 학생들이 어려운 목표를 세워 스스로에게 도전해야 한다는 데 동의합니다.|I agree / that students should challenge themselves / by setting difficult goals.|저는 동의합니다 / 학생들이 스스로에게 도전해야 한다는 데 / 어려운 목표를 세움으로써
+2|왜냐하면 학생들은 큰 도전에 맞설 때 더 빨리 성장할 수 있기 때문입니다.|That's because / students can grow faster / when they face a big challenge.|왜냐하면 ~이기 때문입니다 / 학생들은 더 빨리 성장할 수 있습니다 / 큰 도전에 맞설 때
+3|그래서 실패하더라도 그 경험에서 많은 것을 배울 수 있습니다.|So, / even if they fail, / they can learn a lot / from the experience.|그래서 / 실패하더라도 / 그들은 많은 것을 배울 수 있습니다 / 그 경험에서
+4|2년 전에 저는 한국사 시험에서 1급을 받겠다는 목표를 세웠습니다.|Two years ago, / I set a goal / to get level 1 / on the Korean History Test.|2년 전에 / 저는 목표를 세웠습니다 / 1급을 받겠다는 / 한국사 시험에서
+5|외울 것이 많아서 정말 힘들었습니다. 하지만 저는 3개월 동안 매일 공부했습니다.|It was really hard / because I had to memorize a lot. / But I studied every day / for three months.|정말 힘들었습니다 / 많이 외워야 했기 때문에 / 하지만 저는 매일 공부했습니다 / 3개월 동안
+6|그 결과, 저는 목표를 이루었고 더 자신감이 생겼습니다.|As a result, / I achieved my goal / and became more confident.|그 결과 / 저는 목표를 이루었습니다 / 그리고 더 자신감이 생겼습니다
+K|challenge themselves|스스로에게 도전하다
+K|even if they fail|실패하더라도
+K|achieve a goal|목표를 이루다
