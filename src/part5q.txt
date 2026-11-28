@@ -237,16 +237,16 @@ K|studio apartment|원룸 아파트
 K|suffer from|~로 고생하다
 # q21|쇼핑|디지털 결제 방식의 장점|긍정적 사례
 Q|What are the advantages of using digital payment methods when shopping?|쇼핑할 때 디지털 결제 방식을 사용하는 장점은 무엇인가요?
-I|장점이 여러 가지 있음|빠르게 결제하고 할인을 받음|지갑 없이 쇼핑하며 시간과 돈을 절약함
-1|저는 디지털 결제 방식을 사용하면 많은 장점이 있다고 생각합니다.|I think / there are many advantages / of using digital payment methods.|저는 생각합니다 / 많은 장점이 있다고 / 디지털 결제 방식을 사용하는 것의
-2|왜냐하면 스마트폰으로 빠르게 결제하고 할인을 받을 수 있기 때문입니다.|That's because / we can pay quickly / and get discounts / with a smartphone.|왜냐하면 ~이기 때문입니다 / 우리는 빠르게 결제할 수 있습니다 / 그리고 할인을 받을 수 있습니다 / 스마트폰으로
-3|그래서 현금이나 카드를 들고 다닐 필요가 없습니다.|So, / we don't have to / carry cash or cards.|그래서 / 우리는 ~할 필요가 없습니다 / 현금이나 카드를 들고 다니는 것
-4|지난달에 저는 지갑 없이 백화점에 쇼핑하러 갔습니다.|Last month, / I went shopping / at a department store / without my wallet.|지난달에 / 저는 쇼핑하러 갔습니다 / 백화점에 / 지갑 없이
-5|저는 단 몇 초 만에 스마트폰으로 결제했습니다. 또한, 10% 할인을 받았습니다.|I paid with my smartphone / in just a few seconds. / Also, I got a 10% discount.|저는 스마트폰으로 결제했습니다 / 단 몇 초 만에 / 또한, 10% 할인을 받았습니다
-6|그 결과, 저는 시간과 돈을 모두 절약할 수 있었습니다.|As a result, / I was able to save / both time and money.|그 결과 / 저는 절약할 수 있었습니다 / 시간과 돈을 모두
-K|get discounts|할인을 받다
-K|carry cash|현금을 들고 다니다
-K|save both time and money|시간과 돈을 모두 절약하다
+I|장점이 두 가지 있음|빠르게 결제하고 지출을 쉽게 확인함|결제 앱 지출 내역으로 커피값이 많은 걸 알고 줄여 돈을 아낌
+1|저는 디지털 결제 방식을 사용하는 데 두 가지 주요 장점이 있다고 생각합니다.|I think / there are two main advantages / of using digital payment methods.|저는 생각합니다 / 두 가지 주요 장점이 있다고 / 디지털 결제 방식을 사용하는 것의
+2|첫째, 스마트폰 하나로 빠르게 결제할 수 있습니다.|First, / we can pay quickly / with just a smartphone.|첫째 / 우리는 빠르게 결제할 수 있습니다 / 스마트폰 하나로
+3|둘째, 돈을 얼마나 쓰는지 쉽게 확인할 수 있습니다.|Second, / we can easily check / how much money we spend.|둘째 / 우리는 쉽게 확인할 수 있습니다 / 돈을 얼마나 쓰는지
+4|작년에 저는 스마트폰으로 결제 앱을 쓰기 시작했습니다.|Last year, / I started using a payment app / on my smartphone.|작년에 / 저는 결제 앱을 쓰기 시작했습니다 / 제 스마트폰으로
+5|앱은 제 지출 내역을 모두 보여 주었습니다. 그래서 커피에 돈을 너무 많이 쓴다는 것을 알게 되었습니다.|It showed / all my spending history. / So, I found out / that I spent too much money / on coffee.|그것은 보여 주었습니다 / 제 지출 내역을 모두 / 그래서 알게 되었습니다 / 제가 돈을 너무 많이 썼다는 것을 / 커피에
+6|그 결과, 저는 커피를 덜 마시기 시작했고 돈을 많이 절약했습니다.|As a result, / I started drinking less coffee / and saved a lot of money.|그 결과 / 저는 커피를 덜 마시기 시작했습니다 / 그리고 돈을 많이 절약했습니다
+K|two main advantages|두 가지 주요 장점
+K|how much money we spend|돈을 얼마나 쓰는지
+K|spending history|지출 내역
 # q22|여행과 휴가|현대 여행과 스트레스|과거와 현재의 비교
 Q|Do you think there are more stressful aspects of traveling today than traveling in the past?|오늘날의 여행이 과거의 여행보다 더 스트레스를 주는 요소가 많다고 생각하나요?
 I|그렇게 생각하지 않음|스마트폰으로 여행 정보를 쉽게 얻음|과거에는 종이 지도로 길을 잃음, 지금은 스마트폰으로 찾음
