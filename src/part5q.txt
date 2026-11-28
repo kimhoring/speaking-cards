@@ -398,3 +398,16 @@ I|동의|큰 도전에 맞설 때 더 빨리 성장함|한국사 시험 1급 목
 K|challenge themselves|스스로에게 도전하다
 K|even if they fail|실패하더라도
 K|achieve a goal|목표를 이루다
+# q34|교육|모든 교사의 동아리·방과 후 활동 지도 의무화|부정적 사례
+Q|Do you agree or disagree with the following statement?|다음 의견에 동의하나요, 아니면 반대하나요?
+S|Every school teacher should be required to guide a club or an after-school activity.|모든 학교 교사는 동아리나 방과 후 활동을 지도하도록 의무화되어야 한다.
+I|반대|교사들은 이미 수업으로 바빠 수업 준비를 제대로 못하게 됨|고등학교 때 축구를 잘 모르는 수학 선생님이 축구부를 맡아 동아리가 지루했고 수업도 덜 재미있어짐
+1|저는 모든 학교 교사가 동아리나 방과 후 활동을 지도하도록 의무화되어야 한다는 데 반대합니다.|I disagree / that every school teacher should be required / to guide a club / or an after-school activity.|저는 반대합니다 / 모든 학교 교사가 의무화되어야 한다는 데 / 동아리를 지도하도록 / 또는 방과 후 활동을
+2|왜냐하면 교사들은 이미 수업으로 매우 바쁘기 때문입니다.|That's because / teachers are already very busy / with their classes.|왜냐하면 ~이기 때문입니다 / 교사들은 이미 매우 바쁩니다 / 수업으로
+3|그래서 일이 더 많아지면 수업 준비를 잘할 수 없습니다.|So, / if they have more work, / they can't prepare their lessons / well.|그래서 / 일이 더 많아지면 / 그들은 수업을 준비할 수 없습니다 / 잘
+4|고등학교 때 저희 수학 선생님은 축구부를 지도해야 했습니다.|When I was in high school, / my math teacher had to guide / the soccer club.|고등학교 때 / 저희 수학 선생님은 지도해야 했습니다 / 축구부를
+5|선생님은 축구를 잘 몰라서 동아리가 지루했습니다. 또한, 수업 시간에 피곤해 보이셨습니다.|He didn't know much about soccer, / so the club was boring. / Also, he looked tired / in class.|그는 축구를 잘 몰랐습니다 / 그래서 동아리가 지루했습니다 / 또한, 그는 피곤해 보였습니다 / 수업 시간에
+6|그 결과, 많은 학생들이 동아리를 그만두었고 선생님의 수업은 덜 재미있어졌습니다.|As a result, / many students quit the club, / and his classes became / less interesting.|그 결과 / 많은 학생들이 동아리를 그만두었습니다 / 그리고 그의 수업은 ~해졌습니다 / 덜 재미있게
+K|be required to|~하도록 의무화되다
+K|prepare their lessons|수업을 준비하다
+K|quit the club|동아리를 그만두다

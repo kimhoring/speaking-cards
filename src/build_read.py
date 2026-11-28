@@ -62,7 +62,7 @@ def load_stress():
             a = sum(len(p) for p in parts[: hit[0]])
             sy[full] = (a, a + len(parts[hit[0]]), hit[0], len(parts))
     # 붙임표가 든 낱말
-    for src, dst in (("ecofriendly", "eco-friendly"), ("energyefficient", "energy-efficient"), ("oldlooking", "old-looking"), ("selfcontrol", "self-control"), ("singlefamily", "single-family"), ("startup", "start-up")):
+    for src, dst in (("afterschool", "after-school"), ("ecofriendly", "eco-friendly"), ("energyefficient", "energy-efficient"), ("oldlooking", "old-looking"), ("selfcontrol", "self-control"), ("singlefamily", "single-family"), ("startup", "start-up")):
         if src in sy:
             cut = dst.index("-")
             a, b, i, n = sy[src]
