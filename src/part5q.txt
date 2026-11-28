@@ -436,3 +436,31 @@ I|찬성|학생들은 일상에서 실용적인 기술이 필요해 졸업 후 �
 K|practical skills|실용적인 기술
 K|live on their own|스스로 살아가다
 K|make a budget|예산을 세우다
+# q37|교육|학생과 자주 소통하는 교사|긍정적 사례
+Q|Do you agree or disagree with the following statement?|다음 의견에 동의하나요, 아니면 반대하나요?
+S|The best teachers are the ones who communicate frequently with their students.|가장 좋은 교사는 학생들과 자주 소통하는 교사이다.
+I|동의|학생들이 편하게 질문할 수 있어 수업을 더 잘 이해함|고등학교 영어 선생님이 방과 후 학생 한 명 한 명과 이야기하고 질문에 친절히 답해 줘 질문을 더 하게 되고 성적이 오름
+1|저는 가장 좋은 교사는 학생들과 자주 소통하는 교사라는 데 동의합니다.|I agree / that the best teachers / are the ones who communicate frequently / with their students.|저는 동의합니다 / 가장 좋은 교사는 / 자주 소통하는 교사라는 데 / 학생들과
+2|왜냐하면 학생들이 선생님에게 편하게 질문할 수 있기 때문입니다.|That's because / students feel comfortable / asking their teachers questions.|왜냐하면 ~이기 때문입니다 / 학생들은 편하게 느낍니다 / 선생님에게 질문하는 것을
+3|그래서 수업을 더 잘 이해할 수 있습니다.|So, / they can understand the lessons / better.|그래서 / 그들은 수업을 이해할 수 있습니다 / 더 잘
+4|고등학교 때 저희 영어 선생님은 방과 후에 학생 한 명 한 명과 이야기를 나누셨습니다.|When I was in high school, / my English teacher talked / with each student / after class.|고등학교 때 / 저희 영어 선생님은 이야기를 나눴습니다 / 학생 한 명 한 명과 / 방과 후에
+5|선생님은 학교생활의 고민을 물어봐 주셨습니다. 또한, 우리 질문에 친절하게 답해 주셨습니다.|She asked about our problems / at school. / Also, she answered our questions / kindly.|그녀는 우리의 고민을 물어봤습니다 / 학교생활의 / 또한, 그녀는 우리 질문에 답했습니다 / 친절하게
+6|그 결과, 저는 수업 시간에 질문을 더 많이 했고 영어 성적이 많이 올랐습니다.|As a result, / I asked more questions / in class, / and my English grades improved / a lot.|그 결과 / 저는 질문을 더 많이 했습니다 / 수업 시간에 / 그리고 제 영어 성적이 올랐습니다 / 많이
+K|communicate frequently with|~와 자주 소통하다
+K|feel comfortable|편하게 느끼다
+K|grades improved|성적이 오르다
+# q38|직장 생활|직무 기술을 배우는 가장 효율적인 방법|긍정적 사례
+Q|People often want to learn new skills which are helpful in the workplace. What is the most efficient way to learn a new skill for a job? Choose one of the options below and provide specific reasons or examples to support your opinion.|사람들은 종종 직장에서 도움이 되는 새로운 기술을 배우고 싶어 합니다. 직무에 필요한 새 기술을 배우는 가장 효율적인 방법은 무엇인가요? 아래 선택지 중 하나를 골라 구체적인 이유나 예시를 들어 의견을 말하세요.
+O|Taking a class at a vocational school|직업 학교에서 수업 듣기
+O|Reading a book about the subject|그 분야에 관한 책 읽기
+O|Participating in training at work|직장에서 교육에 참여하기
+I|직장 교육 참여|실제로 필요한 기술을 배워 바로 쓸 수 있음|작년 카페 아르바이트 때 매니저에게 일주일 교육을 받고 실제 손님을 상대하며 연습해 빨리 혼자 일하게 됨
+1|저는 직장에서 교육에 참여하는 것이 직무에 필요한 새 기술을 배우는 가장 효율적인 방법이라고 생각합니다.|I think / participating in training at work / is the most efficient way / to learn a new skill for a job.|저는 생각합니다 / 직장에서 교육에 참여하는 것이 / 가장 효율적인 방법이라고 / 직무에 필요한 새 기술을 배우는
+2|왜냐하면 직원들은 업무에 실제로 필요한 기술을 배울 수 있기 때문입니다.|That's because / employees can learn the skills / they actually need / for their work.|왜냐하면 ~이기 때문입니다 / 직원들은 기술을 배울 수 있습니다 / 그들이 실제로 필요한 / 업무에
+3|그래서 그 기술을 바로 사용할 수 있습니다.|So, / they can use those skills / right away.|그래서 / 그들은 그 기술을 사용할 수 있습니다 / 바로
+4|작년에 저는 카페에서 아르바이트를 했습니다.|Last year, / I worked part-time / at a cafe.|작년에 / 저는 아르바이트를 했습니다 / 카페에서
+5|매니저가 일주일 동안 저를 교육해 주었습니다. 또한, 저는 실제 손님들을 상대하며 연습했습니다.|The manager trained me / for a week. / Also, I practiced / with real customers.|매니저가 저를 교육했습니다 / 일주일 동안 / 또한, 저는 연습했습니다 / 실제 손님들과
+6|그 결과, 저는 빨리 배워서 혼자 일할 수 있게 되었습니다.|As a result, / I learned quickly / and was able to work / on my own.|그 결과 / 저는 빨리 배웠습니다 / 그리고 일할 수 있게 되었습니다 / 혼자서
+K|participate in training|교육에 참여하다
+K|right away|바로
+K|work part-time|아르바이트를 하다
