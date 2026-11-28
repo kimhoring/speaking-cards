@@ -252,6 +252,12 @@ systematically|체계적으로|우리는 체계적으로 일하는 법을 배울
 저는 집에서 요리하는 것을 좋아하지 않습니다.|I don't like cooking at home.
 저는 매운 음식을 먹는 것을 좋아하지 않습니다.|I don't like eating spicy food.
 저는 아침에 공부하는 것을 좋아하지 않습니다.|I don't like studying in the morning.
+# tablet|PART 3|7번 · 새 태블릿에서 가장 중요한 기능
+I think ~ is the most important feature|~가 가장 중요한 기능이라고 생각하다|저는 화면 크기가 저에게 가장 중요한 기능이라고 생각합니다.|I think screen size is the most important feature for me.
+That's because ~|왜냐하면 ~이기 때문이다|왜냐하면 저는 주로 태블릿으로 동영상을 보기 때문입니다.|That's because I mainly watch videos on my tablet.
+So, when ~|그래서 ~하면|그래서 화면이 크면 동영상을 더 즐길 수 있습니다.|So, when the screen is big, I can enjoy videos more.
+Also, ~, so ~|또한, ~해서 ~하다|또한, 자막이 잘 보여서 눈이 피곤하지 않습니다.|Also, I can see the subtitles clearly, so my eyes don't get tired.
+So, I think ~|그래서 ~라고 생각하다|그래서 저는 화면 크기가 가장 중요한 기능이라고 생각합니다.|So, I think screen size is the most important feature.
 # work|PART 4|직장
 look for a job|구직 활동을 하다|저는 1년간 구직 활동을 했습니다.|I looked for a job for a year.
 job seeker|구직자|대부분의 구직자들은 대기업을 선호합니다.|Most job seekers prefer large companies.
