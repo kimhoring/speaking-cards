@@ -424,3 +424,15 @@ I|동의|재미있는 광고는 오래 기억에 남아 물건을 살 때 먼저
 K|has a positive effect on|~에 긍정적인 영향을 미치다
 K|think of|~을 떠올리다
 K|so funny that|너무 웃겨서 ~하다
+# q36|교육|학업 외 생활 기술 수업 제공|긍정적 사례
+Q|Some high schools offer classes on life skills such as cooking, finance, and computer skills. Should schools offer classes that are not strictly academic? Why or why not?|일부 고등학교는 요리, 금융, 컴퓨터 활용 같은 생활 기술 수업을 제공합니다. 학교는 엄밀히 학업과 관련 없는 수업도 제공해야 할까요? 그 이유는 무엇인가요?
+I|찬성|학생들은 일상에서 실용적인 기술이 필요해 졸업 후 스스로 살아가는 데 도움이 됨|고등학교 금융 수업에서 예산 세우기와 저축을 배워 대학에서 혼자 살 때 돈을 잘 관리함
+1|저는 학교가 엄밀히 학업과 관련 없는 수업도 제공해야 한다고 생각합니다.|I think / schools should offer classes / that are not strictly academic.|저는 생각합니다 / 학교가 수업을 제공해야 한다고 / 엄밀히 학업과 관련 없는
+2|왜냐하면 학생들은 일상생활에서 실용적인 기술이 필요하기 때문입니다.|That's because / students need practical skills / in their daily lives.|왜냐하면 ~이기 때문입니다 / 학생들은 실용적인 기술이 필요합니다 / 일상생활에서
+3|그래서 이런 수업은 학생들이 졸업 후 스스로 살아가는 데 도움이 됩니다.|So, / these classes can help them / live on their own / after graduation.|그래서 / 이런 수업은 그들을 도울 수 있습니다 / 스스로 살아가도록 / 졸업 후에
+4|고등학교 때 저는 금융 수업을 들었습니다.|When I was in high school, / I took a finance class.|고등학교 때 / 저는 금융 수업을 들었습니다
+5|저는 예산 세우는 법을 배웠습니다. 또한, 돈을 모으는 법도 배웠습니다.|I learned / how to make a budget. / Also, I learned / how to save money.|저는 배웠습니다 / 예산 세우는 법을 / 또한, 저는 배웠습니다 / 돈을 모으는 법을
+6|그 결과, 대학에서 혼자 살기 시작했을 때 돈을 잘 관리할 수 있었습니다.|As a result, / when I started living alone / in college, / I was able to manage my money / well.|그 결과 / 제가 혼자 살기 시작했을 때 / 대학에서 / 저는 돈을 관리할 수 있었습니다 / 잘
+K|practical skills|실용적인 기술
+K|live on their own|스스로 살아가다
+K|make a budget|예산을 세우다
